@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
-from django.db.models import Model, DateTimeField, SlugField, ForeignKey, PROTECT, TextField, CharField, CASCADE
+from django.db.models import Model, DateTimeField, SlugField, ForeignKey, PROTECT, TextField, CharField, CASCADE, \
+    BooleanField
 from django_resized import ResizedImageField
 
 
@@ -37,3 +38,12 @@ class Comment(Model):
 
     def __str__(self):
         return self.name
+
+
+class Stream(Model):
+    name = CharField(max_length=255)
+    donation = CharField(max_length=20)                     # hayriya uchun mablag`
+    reduce = CharField(max_length=20)                       # narxini kamaytirish uchun mablag`
+    user = ForeignKey('User', CASCADE)                      # oqim yaratgan foydalanuchi
+    product = ForeignKey('apps.base.Product', CASCADE)      # oqim uchun mahsulot
+    is_area = BooleanField(default=False)                   # hududsiz qabul qilish

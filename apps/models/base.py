@@ -1,7 +1,19 @@
+from tkinter import CASCADE
+
 from django.contrib.auth.models import User
 from django.db.models import Model, DateTimeField, SlugField, ForeignKey, PROTECT, TextField
 from django.db.models import CharField
 from django_resized import ResizedImageField
+
+
+class Store(Model):
+    image = ResizedImageField(size=[300, 300], crop=['middle', 'center'], upload_to='shops')
+    name = CharField(max_length=255)
+    short_des = CharField(max_length=255)
+
+    class Meta:
+        verbose_name = "Stores"
+        verbose_name_plural = "Stores"
 
 
 class Product(Model):
@@ -10,6 +22,7 @@ class Product(Model):
     price = CharField(max_length=200)
     created_at = DateTimeField(auto_now_add=True)
     slug = SlugField(max_length=255, unique=True)
+    store = ForeignKey(Store, CASCADE)
 
     class Meta:
         verbose_name = "Product"

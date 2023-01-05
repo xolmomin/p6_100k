@@ -1,5 +1,8 @@
-from django.db.models import Model
+from django.db.models import Model, CharField
+from django_resized import ResizedImageField
 
 
-class Shop(Model):
-    image = 
+class Store(Model):
+    image = ResizedImageField(size=[300, 300], crop=['middle', 'center'], upload_to='shops')
+    name = CharField(max_length=255)
+    short_des = CharField(max_length=255)

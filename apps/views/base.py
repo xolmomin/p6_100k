@@ -1,10 +1,28 @@
-from django.views.generic import TemplateView
+from django.shortcuts import get_object_or_404, redirect
+from django.views.generic import DetailView, FormView
+
+from apps.forms.base import CreateCommentForm
+from apps.models.base import Product, Product, Comment
 
 
-class MainView(TemplateView):
-    template_name = 'apps/index.html'
-from django.views.generic import TemplateView
+class ProductDetailView(FormView, DetailView):
+    template_name = 'apps/product_detail.html'
+    queryset = Product.objects.all()
+    context_object_name = 'post'
+    form_class = CreateCommentForm
 
+    def get(self, request, *args, **kwargs):
+        slug = kwargs.get('slug')
+        product = get_object_or_404(Product, slug=slug)
 
-class MainPageView(TemplateView):
-    template_name = 'apps/main_page.html'
+    def product(self, request, *args, **kwargs):
+        slug = kwargs.get('slug')
+        if 'comment' in request.POST:
+            product = get_object_or_404(Product, slug=slug)
+            data = {
+                'product': product,
+                'text': request.POST.get('message'),
+            }
+            comment = Comment.objects.create(**data)
+            comment.save()
+        return redirect('post_form_detail', slug)

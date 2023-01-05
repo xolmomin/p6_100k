@@ -17,7 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.apps.AppsConfig',
-
+    'apps'
 ]
 
 MIDDLEWARE = [
@@ -85,3 +85,8 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR / 'static/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DJANGORESIZED_DEFAULT_SIZE = [1920, 1080]
+DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'PNG'
+DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'PNG': ".png"}
+DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True

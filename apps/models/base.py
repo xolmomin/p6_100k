@@ -1,8 +1,5 @@
-from tkinter import CASCADE
-
 from django.contrib.auth.models import User
-from django.db.models import Model, DateTimeField, SlugField, ForeignKey, PROTECT, TextField
-from django.db.models import CharField
+from django.db.models import Model, DateTimeField, SlugField, ForeignKey, PROTECT, TextField, CharField, CASCADE
 from django_resized import ResizedImageField
 
 

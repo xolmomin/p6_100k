@@ -32,4 +32,8 @@ github dagi ozgarishlarni oziga ovolish kk - ctrl + t
 
 commit larni yuborish (github) - ctrl + shift + k
 
+1
+2
+3
+4 5 6
 '''

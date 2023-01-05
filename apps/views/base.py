@@ -2,7 +2,15 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, FormView
 
 from apps.forms.base import CreateCommentForm
-from apps.models.base import Product, Product, Comment
+from apps.models.base import Product, Comment
+
+from django.views.generic import TemplateView
+
+
+class MainPageView(TemplateView):
+    queryset = Product.objects.all()
+    template_name = 'apps/main_page.html'
+
 
 
 class ProductDetailView(FormView, DetailView):

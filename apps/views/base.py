@@ -12,7 +12,6 @@ class MainPageView(TemplateView):
     template_name = 'apps/main_page.html'
 
 
-
 class ProductDetailView(FormView, DetailView):
     template_name = 'apps/product_detail.html'
     queryset = Product.objects.all()
@@ -23,7 +22,7 @@ class ProductDetailView(FormView, DetailView):
         slug = kwargs.get('slug')
         product = get_object_or_404(Product, slug=slug)
 
-    def product(self, request, *args, **kwargs):
+    def product(self, request, *args, **kwargs):  # TODO javlon product name wrong
         slug = kwargs.get('slug')
         if 'comment' in request.POST:
             product = get_object_or_404(Product, slug=slug)

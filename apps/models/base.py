@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
-from django.db.models import Model, DateTimeField, SlugField, ForeignKey, PROTECT, TextField, CharField, CASCADE
+from django.db.models import Model, DateTimeField, SlugField, ForeignKey, PROTECT, TextField, CASCADE
+from django.db.models import CharField
 from django_resized import ResizedImageField
 
 
@@ -11,6 +12,9 @@ class Store(Model):
     class Meta:
         verbose_name = "Stores"
         verbose_name_plural = "Stores"
+
+    def __str__(self):
+        return self.name
 
 
 class Product(Model):

@@ -23,3 +23,13 @@ if __name__ == '__main__':
 
 
 print('hello')
+
+
+'''
+ozgarishlarni commit qilish kk - ctrl + k
+
+github dagi ozgarishlarni oziga ovolish kk - ctrl + t
+
+commit larni yuborish (github) - ctrl + shift + k
+
+'''

@@ -20,7 +20,7 @@ class Product(Model):
         verbose_name = "Product"
         verbose_name_plural = "Products"
 
-
+# TODO Javlon Commentni alohida file ga olib ciqib qoying
 class Comment(Model):
     author = ForeignKey(User, PROTECT)
     name = CharField(max_length=255)

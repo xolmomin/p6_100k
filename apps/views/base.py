@@ -5,7 +5,7 @@ from apps.forms.base import CreateCommentForm
 from apps.models.base import Product, Product, Comment
 
 
-class DetailFormPostView(FormView, DetailView):
+class ProductDetailView(FormView, DetailView):
     template_name = 'apps/product_detail.html'
     queryset = Product.objects.all()
     context_object_name = 'post'

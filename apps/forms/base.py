@@ -6,7 +6,7 @@ from apps.models import Comment, User
 class CreateCommentForm(ModelForm):
     class Meta:
         model = Comment
-        exclude = ()
+        fields = ('content', 'author', 'name')
 
 
 class EditProfile(ModelForm):

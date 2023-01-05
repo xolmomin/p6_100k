@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% block content %}
 <html lang="uz">
 <head>
     <meta charset="utf-8"/>
@@ -236,7 +237,7 @@
         <div class="container py-3">
             <div class="row align-items-center">
                 <div class="col my-3 pr-3">
-                    <h1 class="h4 font-weight-bold mb-0">Xamyon joynomoz</h1>
+                    <h1 class="h4 font-weight-bold mb-0">{{ product.title }}</h1>
                 </div>
                 <div class="col-auto my-3 text-right">
                     <strong>
@@ -635,3 +636,4 @@
 </script>
 </body>
 </html>
+{% endblock %}

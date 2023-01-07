@@ -12,13 +12,13 @@
                     <div class="row">
                         {% for category in categories %}
                             <div class="col-md-2 col-4">
-                            <a class="siteCategories--item" href="/explore/35">
-                                <img alt="Elektronika" height="100"
-                                     src="{{ category.image.url }}"
-                                     width="100">
-                                <span> {{ category.title }}  <small>{{ category.product_count }}</small> </span>
-                            </a>
-                        </div>
+                                <a class="siteCategories--item" href="/explore/35">
+                                    <img alt="Elektronika" height="100"
+                                         src="{{ category.image.url }}"
+                                         width="100">
+                                    <span> {{ category.title }}  <small>{{ category.product_count }}</small> </span>
+                                </a>
+                            </div>
                         {% endfor %}
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                                     </div>
                                     <div class="productsList--item--info">
                                         <div class="productsList--item--title">
-                                           {{ product.title|safe }}
+                                            {{ product.title|safe }}
                                         </div>
                                         <div class="productsList--item--price">
                                             <strong class="font-weight-bold">{{ product.price }}</strong>

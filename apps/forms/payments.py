@@ -6,4 +6,4 @@ from apps.models.payments import PaymentHistory
 class PaymentForm(ModelForm):
     class Meta:
         model = PaymentHistory
-        fields = ('user', 'amount', 'card_number')
+        fields = ('amount', 'card_number')

@@ -1,4 +1,5 @@
 from django.db.models import Model, CharField, IntegerField, DateTimeField, SlugField, ForeignKey, CASCADE
+from django.utils.text import slugify
 from django_resized import ResizedImageField
 
 class Category(Model):

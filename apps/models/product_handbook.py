@@ -1,5 +1,6 @@
-from django.db.models import Model, CharField, IntegerField, DateTimeField, SlugField, ForeignKey, CASCADE
-from django_resized import ResizedImageField
+from django.db.models import Model, CharField, SlugField
+from django.utils.text import slugify
+
 
 class Category(Model):
     title = CharField(max_length=255)

@@ -52,7 +52,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'root.wsgi.application'
-AUTH_USER_MODEL = 'apps.User'
 
 DATABASES = {
     'default': {
@@ -61,7 +60,7 @@ DATABASES = {
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
-        'PORT': 5432,
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 

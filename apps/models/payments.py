@@ -5,7 +5,7 @@ from django.db.models import Model, DecimalField, ForeignKey, CharField, TextCho
 
 class PaymentHistory(Model):
     class StatusChoices(TextChoices):
-        PENDING  = 'pending'
+        PENDING = 'pending'
         ACCEPTED = 'accepted'
         CANCELED = 'canceled'
 

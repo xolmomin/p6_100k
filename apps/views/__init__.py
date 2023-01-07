@@ -1,1 +1,2 @@
 from apps.views.base import MainPageView
+from apps.views.market import MarketListView

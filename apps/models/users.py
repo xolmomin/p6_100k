@@ -15,4 +15,4 @@ class User(AbstractUser):
     @property
     def payout(self):
         amount = PaymentHistory.objects.filter(user_id=self.id, status=PaymentHistory.StatusChoices.ACCEPTED)
-        return amount.values_list('amount', flat=True)['amount']
+        return sum(amount.values_list('amount', flat=True))

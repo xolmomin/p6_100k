@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="turbo-visit-control" content="disable"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="shortcut icon" href="{% static 'apps/themes/stock/assets/favicon/favicon.ico' %}" type="image/png">
+    <link rel="stylesheet" href="{% static 'apps/themes/stock/assets/owlcarousel/owl.carousel.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'apps/themes/stock/assets/owlcarousel/owl.theme.default.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'apps/combine/fake_css_1.css' %}"/>
+    <link rel="stylesheet" href="{% static 'apps/combine/fake_css_2.css' %}"/>
+
+    <!-- seo meta tags -->
+    <title>{% block title %}
+        100K
+    {% endblock %}</title>
+    <meta name="description"
+          content="100k.uz - bu eng innavatsion goyalarni o&#039;z ichiga olgan internet do&#039;kon.">
+    <link rel="stylesheet" property="stylesheet" href="{% static 'apps/modules/system/assets/css/framework-extras.css' %}"
+</head>
+<body class="d-flex flex-column max-h-screen">
+    {% include 'apps/parts/top_line.html' %}
+    {% include 'apps/parts/site_header.html' %}
+    {% include 'apps/parts/navbar_collapse.html' %}
+    {% block main %}
+    {% endblock %}
+    {% include 'apps/parts/footer.html' %}
+
+    <script src="https://kit.fontawesome.com/43236b6dfa.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/imask"></script>
+
+    <script src="{% static 'apps/themes/stock/assets/js/bundle.js' %}"></script>
+    <script src="{% static 'apps/themes/stock/assets/lazysizes/lazysizes.min.js' %}"></script>
+    <script src="{% static 'apps/themes/stock/assets/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+    <script src="{% static 'apps/themes/stock/assets/js/custom.js' %}"></script>
+    <script src="{% static 'apps/modules/system/assets/js/framework-extras.js' %}"></script>
+</body>
+</html>

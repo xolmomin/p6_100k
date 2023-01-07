@@ -1,9 +1,11 @@
 from django.db.models import Model, CharField, SlugField
 from django.utils.text import slugify
+from django_resized import ResizedImageField
 
 
 class Category(Model):
     title = CharField(max_length=255)
+    image = ResizedImageField(upload_to='category/')
     slug = SlugField(max_length=255, unique=True)
 
     def save(self, *args, **kwargs):
@@ -22,6 +24,10 @@ class Category(Model):
                 else:
                     self.slug += '-1'
         super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
 
     @property
     def product_count(self):

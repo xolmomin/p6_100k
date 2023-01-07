@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/css/sk-custom.css"/>
 
 
+    <!-- seo meta tags -->
     <title></title>
     <meta name="description" content="">
+
 
 </head>
 <body>
@@ -37,9 +39,9 @@
 
                     <li class="header_navbar_collapse_nav_item">
                         <div class="header_navbar_collapse_nav_item_pad">
-                            <a class="header_navbar_collapse_nav_item_link active" href="{% url 'market' %}">
+                            <a class="header_navbar_collapse_nav_item_link active" href="/admin/market">
                                 <span class="fas fa-store"></span>
-                                <p> {% block title %}{% endblock %} </p>
+                                <p> Market </p>
                             </a>
                         </div>
                     </li>
@@ -132,7 +134,6 @@
 </header>
 
 {% block main %}
-
 {% endblock %}
 <script src="https://kit.fontawesome.com/43236b6dfa.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/imask"></script>
@@ -144,5 +145,53 @@
 <script src="https://100k.uz/themes/stock/assets/js/custom.js"></script>
 <script src="/modules/system/assets/js/framework-extras.js"></script>
 <link rel="stylesheet" property="stylesheet" href="/modules/system/assets/css/framework-extras.css">
+
+<script>
+
+    const user_input = $("#user-input")
+    const search_icon = $('#search-icon')
+    const results = $('#replaceable-content')
+    const endpoint = '/search'
+    const delay_by_in_ms = 700
+    let scheduled_function = false
+    let csrf_token = "321";
+    let ajax_call = function (endpoint, request_parameters) {
+        $.post(endpoint, request_parameters)
+            .done(response => {
+                let posts = response['products']
+                console.log(posts)
+                if (posts) {
+                    let html_content = ``
+                    for (i in posts) {
+                        html_content += `<a class="list-group-item" href="product_detail/shop/${posts[i]['slug']}">
+                                            <img src="${domain}/media/${posts[i]['pic']}" with="50" height="50" alt="Post Image">
+                                        ${posts[i]['title']}</a>`
+                    }
+                    results.html(html_content)
+                }
+            })
+    }
+
+    user_input.on('keyup', function () {
+        let key_val = $(this).val()
+        const request_parameters = {
+            like: key_val, // value of user_input: the HTML element with ID user-input
+            csrfmiddlewaretoken: csrf_token
+        }
+        console.log(request_parameters)
+        // start animating the search icon with the CSS class
+        // if scheduled_function is NOT false, cancel the execution of the function
+        if (key_val === '') {
+            results.addClass('d-none')
+        } else {
+            if (scheduled_function) {
+                clearTimeout(scheduled_function)
+            }
+            results.removeClass('d-none')
+            // setTimeout returns the ID of the function to be executed
+            scheduled_function = setTimeout(ajax_call, delay_by_in_ms, endpoint, request_parameters)
+        }
+    })
+</script>
 </body>
 </html>

@@ -39,12 +39,13 @@ class WithdrawView(UpdateView):
                 form = PaymentForm(data)
                 form.instance.user = user
                 if form.is_valid() and user.balance > amount:
-                    form.save()
+                    payment = form.save()
                     user.balance = user.balance - amount
                     user.save()
                     return JsonResponse({
                         'message': "So'rov muvaffaqiyatli bajarildi, admin javobini kuting!",
-                        'balance': user.balance
+                        'balance': user.balance,
+                        'payment': json.dumps(payment)
                     })
                 else:
                     return JsonResponse({'type': 'error', 'message': "Sizda mablag' yetarli emas!"})

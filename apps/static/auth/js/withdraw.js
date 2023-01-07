@@ -57,9 +57,9 @@ card_withdraw.addEventListener('click', function () {
                 alertMessage.innerHTML = '<div class="alert alert-success alert-dismissible" role="alert"> ' + data.message + '</div>'
                 let table = document.getElementById('table')
                 table.innerHTML = `<tr>
-                                        <td>${amount.value}</td>
-                                        <td>${card_number.value}</td>
-                                        <td>${amount.value}</td>
+                                        <td>${data.payment.created_at}</td>
+                                        <td>${data.payment.card_number}</td>
+                                        <td>${data.payment.amount}</td>
                                         <td><span class="badge badge-warning">Kutilmoqda</span></td>
                                     </tr>` + table.innerHTML
                 amount.value = '';

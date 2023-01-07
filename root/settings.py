@@ -80,7 +80,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-zLANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 

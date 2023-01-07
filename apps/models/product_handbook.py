@@ -1,9 +1,11 @@
 from django.db.models import Model, CharField, SlugField
 from django.utils.text import slugify
+from django_resized import ResizedImageField
 
 
 class Category(Model):
     title = CharField(max_length=255)
+    image = ResizedImageField(upload_to='category/')
     slug = SlugField(max_length=255, unique=True)
 
     def save(self, *args, **kwargs):

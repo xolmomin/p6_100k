@@ -46,7 +46,7 @@
 
             <div class="col-auto">
                 <div class="dropdown px-2">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <a href="{% url 'profile_page' %}" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-globe mr-1"></i>
                         <span> Mening profilim </span>
                     </a>
@@ -55,7 +55,7 @@
                         <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
                            href="/pages/contacts"> Aloqa uchun </a>
                         <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
-                           href="/profile"> Profil </a>
+                           href="{% url 'profile_page' %}"> Profil </a>
 
 
                         <a class="d-none dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
@@ -64,7 +64,7 @@
                         <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
                            href="/shop/favorite"> Mening sevimlilarim </a>
                         <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
-                           href="/profile/settings"> Sozlamalar </a>
+                           href="{% url 'profile_page' %}"> Sozlamalar </a>
 
 
                     </div>

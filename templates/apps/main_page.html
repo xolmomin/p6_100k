@@ -1,4 +1,4 @@
-{% extends 'apps/base.html' %}
+{% extends 'apps/parts/base.html' %}
 
 {% block main %}
 
@@ -12,13 +12,13 @@
                     <div class="row">
                         {% for category in categories %}
                             <div class="col-md-2 col-4">
-                            <a class="siteCategories--item" href="/explore/35">
-                                <img alt="Elektronika" height="100"
-                                     src="{{ category.image.url }}"
-                                     width="100">
-                                <span> {{ category.title }}  <small>{{ category.product_count }}</small> </span>
-                            </a>
-                        </div>
+                                <a class="siteCategories--item" href="/explore/35">
+                                    <img alt="Elektronika" height="100"
+                                         src="{{ category.image.url }}"
+                                         width="100">
+                                    <span> {{ category.title }}  <small>{{ category.product_count }}</small> </span>
+                                </a>
+                            </div>
                         {% endfor %}
                     </div>
                 </div>
@@ -39,14 +39,14 @@
                         {% for product in products %}
                             <div class="col-md-3 col-sm-4 col-6">
                                 <div class="productsList--item">
-                                    <a href="/shop/product/kingyes-sprey" class="productsList--item--link"></a>
+                                    <a href="{% url 'product_detail' product.slug %}" class="productsList--item--link"></a>
                                     <div class="productsList--item--image">
                                         <img src="{{ product.main_picture.url }}"
                                              width="200" height="200" alt="">
                                     </div>
                                     <div class="productsList--item--info">
                                         <div class="productsList--item--title">
-                                           {{ product.title|safe }}
+                                            {{ product.title|safe }}
                                         </div>
                                         <div class="productsList--item--price">
                                             <strong class="font-weight-bold">{{ product.price }}</strong>
@@ -54,7 +54,7 @@
                                             <span class="small">so'm</span>
                                         </div>
                                         <div class="productsList--item--orders">
-                                            buyurtmalar: 1014
+
                                         </div>
                                     </div>
                                 </div>

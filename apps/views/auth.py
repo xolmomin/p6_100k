@@ -4,12 +4,13 @@ from django.http import HttpResponse, JsonResponse
 from django.views.generic import UpdateView
 
 from apps.forms import PaymentForm
+from apps.forms.authform import ProfileForm
 from apps.models import User
 
 
 class WithdrawView(UpdateView):
     template_name = 'apps/auth/withdraw.html'
-    model = User
+    context_object_name = 'user'
     fields = '__all__'
 
     def post(self, request, *args, **kwargs):
@@ -50,6 +51,17 @@ class WithdrawView(UpdateView):
             else:
                 return JsonResponse({'type': 'error', 'message': "Sorov miqdori 50 000 so'mdan kam bo'lmasligi shart!"})
         return super().post(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
+class ProfileView(UpdateView):
+    queryset = User.objects.all()
+    context_object_name = 'profile'
+    form_class = ProfileForm
+    model = User
+    template_name = 'apps/auth/profile.html'
 
     def get_object(self, queryset=None):
         return self.request.user

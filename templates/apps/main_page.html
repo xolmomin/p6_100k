@@ -39,7 +39,7 @@
                         {% for product in products %}
                             <div class="col-md-3 col-sm-4 col-6">
                                 <div class="productsList--item">
-                                    <a href="/shop/product/kingyes-sprey" class="productsList--item--link"></a>
+                                    <a href="{% url 'product_detail' product.slug %}" class="productsList--item--link"></a>
                                     <div class="productsList--item--image">
                                         <img src="{{ product.main_picture.url }}"
                                              width="200" height="200" alt="">
@@ -54,7 +54,7 @@
                                             <span class="small">so'm</span>
                                         </div>
                                         <div class="productsList--item--orders">
-                                            buyurtmalar: 1014
+
                                         </div>
                                     </div>
                                 </div>

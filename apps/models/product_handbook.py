@@ -25,6 +25,10 @@ class Category(Model):
                     self.slug += '-1'
         super().save(*args, **kwargs)
 
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
     @property
     def product_count(self):
         return self.product_set.count()

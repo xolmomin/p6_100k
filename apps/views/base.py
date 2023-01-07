@@ -6,7 +6,7 @@ from django.views.generic import DetailView, FormView, ListView
 from django.views.generic import TemplateView
 
 from apps.forms.base import CreateCommentForm
-from apps.models import Product, Comment, Stream
+from apps.models import Product, Comment, Stream, Category
 
 from django.views.generic import TemplateView
 
@@ -18,6 +18,8 @@ class MainPageView(TemplateView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context['products'] = Product.objects.all()[:6]
+        context['categories'] = Category.objects.all()
+        return context
 
 
 class ProductDetailView(FormView, DetailView):

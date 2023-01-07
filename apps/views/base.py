@@ -13,6 +13,10 @@ class MainPageView(TemplateView):
     queryset = Product.objects.all()
     template_name = 'apps/main_page.html'
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context['products'] = Product.objects.all()[:6]
+
 
 class ProductDetailView(FormView, DetailView):
     template_name = 'apps/product_detail.html'
@@ -33,6 +37,7 @@ def completed(request, *args, **kwargs):
 
     return JsonResponse({'status': 200})
 
+
 # class StreamPageView(LoginRequiredMixin, ListView):
 class StreamPageView(ListView):
     template_name = 'apps/admin/stream.html'
@@ -40,5 +45,3 @@ class StreamPageView(ListView):
     queryset = Stream.objects.all()
     context_object_name = 'streams'
     paginate_by = 9
-
-

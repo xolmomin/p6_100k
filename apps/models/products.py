@@ -35,3 +35,8 @@ class Product(Model):
                 else:
                     self.slug += '-1'
         super().save(*args, **kwargs)
+
+
+class ProductOrders(Model):   # main pagedigi productslada buyurtmalar uchun model
+    product = ForeignKey('apps.Product', CASCADE)  # productga ulangan boladu
+    orders = IntegerField(default=0)        # nechi matta zakaz qilingani

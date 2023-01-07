@@ -1,0 +1,56 @@
+- model: apps.Region
+  pk: 1
+  fields:
+    name: Qoraqalpog'iston
+- model: apps.Region
+  pk: 2
+  fields:
+    name: Xorazm
+- model: apps.Region
+  pk: 3
+  fields:
+    name: Navoiy
+- model: apps.Region
+  pk: 4
+  fields:
+    name: Buxoro
+- model: apps.Region
+  pk: 5
+  fields:
+    name: Samarqand
+- model: apps.Region
+  pk: 6
+  fields:
+    name: Qashqadaryo
+- model: apps.Region
+  pk: 7
+  fields:
+    name: Surxondaryo
+- model: apps.Region
+  pk: 8
+  fields:
+    name: Jizzax
+- model: apps.Region
+  pk: 9
+  fields:
+    name: Sirdaryo
+- model: apps.Region
+  pk: 10
+  fields:
+    name: Toshkent viloyati
+- model: apps.Region
+  pk: 11
+  fields:
+    name: Namangan
+- model: apps.Region
+  pk: 12
+  fields:
+    name: Farg'ona
+- model: apps.Region
+  pk: 13
+  fields:
+    name: Andijon
+- model: apps.Region
+  pk: 14
+  fields:
+    name: Toshkent shahar

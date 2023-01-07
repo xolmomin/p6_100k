@@ -1,13 +1,12 @@
 from django.http import HttpResponse
-from django.views.generic import TemplateView, UpdateView, ListView
+from django.views.generic import UpdateView
 
+from apps.forms import PaymentForm
 from apps.models import User
 
 
 class WithdrawView(UpdateView):
     template_name = 'apps/auth/withdraw.html'
-    context_object_name = 'user'
-    queryset = User.objects.get(id=1)
     model = User
     fields = '__all__'
 
@@ -17,12 +16,14 @@ class WithdrawView(UpdateView):
             amount = int(request.POST.get('amount'))
             if amount < 50:
                 return HttpResponse("Sorov miqdori 50 COIN dan kam bo'lmasligi shart!")
-
             if user.bonus > amount:
                 user.balance = user.balance + (1000 * amount)
                 user.save()
             else:
                 return HttpResponse("Sizda COIN yetarli emas!")
+        if request.POST.get('card_withdraw'):
+            form = PaymentForm(request.POST)
+            form.is_valid()
 
         return super().post(request, *args, **kwargs)
 

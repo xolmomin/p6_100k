@@ -39,7 +39,7 @@ def completed(request, *args, **kwargs):
     return JsonResponse({'status': 200})
 
 
-class StreamPageView(ListView):
+class StreamPageListView(ListView):
     template_name = 'apps/admin/stream.html'
     model = Stream
     queryset = Stream.objects.all()

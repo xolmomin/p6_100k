@@ -9,8 +9,6 @@ from apps.models import User
 class WithdrawView(UpdateView):
     template_name = 'apps/auth/withdraw.html'
     context_object_name = 'user'
-    queryset = User.objects.get(id=1)
-    model = User
     fields = '__all__'
 
     def post(self, request, *args, **kwargs):

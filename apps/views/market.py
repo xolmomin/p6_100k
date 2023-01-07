@@ -4,7 +4,7 @@ from apps.models import Product, Category
 
 
 class MarketListView(ListView):
-    template_name = 'apps/market_page.html'
+    template_name = 'apps/admin/market_page.html'
     model = Product
     paginate_by = 30
     context_object_name = 'products'

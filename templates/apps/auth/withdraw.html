@@ -1,272 +1,123 @@
-<!DOCTYPE html>
-<html lang="uz">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="turbo-visit-control" content="disable"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/owlcarousel/owl.carousel.min.css"/>
-    <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/owlcarousel/owl.theme.default.min.css"/>
-    <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/css/style.bundle.css"/>
-    <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/css/sk-custom.css"/>
+{% extends 'apps/base.html' %}
+{% block main %}
+    <main class="admin-template">
+        <section class="main">
+            <div class="container">
+
+                <br>
+
+                <div class="row">
+                    <div class="col-sm-6 p-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Mening hisobim</h5>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">ID raqamingiz: <strong>{{ user.id }}</strong></h5>
+                                <h5 class="card-title">Asosiy balansda: {{ user.balance }} so'm</h5>
+                                <h5 class="card-title"><img src="https://100k.uz/themes/stock/assets/img/user/coins.png"
+                                                            alt=""> Bonus
+                                    balans: <strong> {{ user.bonus }} COIN </strong></h5>
+                                <h5 class="card-title">Depozit balansda: {{ user.deposit }} so'm</h5>
+                                <h5 class="card-title">To'lab berildi: {{ user.payout }} so'm</h5>
+                            </div>
 
 
-    <!-- seo meta tags -->
-    <title></title>
-    <meta name="description" content="">
+                            <div class="card-footer p-0">
+                                <div class="pos-f-t">
+                                    <div class="collapse" id="navbarToggleExternalContent">
+                                        <div class="bg-dark p-4 pb-0">
+                                            <h5 class="text-white h4"> COIN-larni ayriboshlash </h5>
+                                            <span class="text-white"> Hozirda bitta COIN qiymati - 1,000 bonusga teng.</span>
+                                        </div>
 
-</head>
-<body>
-<header class="header" id="top">
-    <div class="container">
-        <nav class="header_navbar">
+                                        <div class="bg-dark">
+                                            <form action="{% url 'withdraw' %}" method="post" class="card-body pt-0">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <label class="text-white">Hisobingizdagi coinlar soni</label>
+                                                    <input class="form-control" value="{{ user.bonus }}"
+                                                           readonly="true">
+                                                </div>
 
-            <a href="/" class="header_navbar_brand_logo d-none d-md-block ">100k.uz </a>
-            <a href="/admin" class="header_navbar_brand_back d-md-none"> <span class="icon-arrow"></span> </a>
-            <a href="#!" class="header_navbar_brand_name d-md-none"> To&#039;lov </a>
+                                                <div class="form-group">
+                                                    <label class="text-white">Nechta COIN alishtirmoqchisiz?</label>
+                                                    <input name="amount" type="number" class="form-control"
+                                                           placeholder="COIN miqdorini kiriting">
+                                                </div>
+                                                <input type="submit" name="coin_exchange" class="btn btn-primary"
+                                                       value="Tasdiqlash">
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <nav class="navbar navbar-light">
+                                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                                data-target="#navbarToggleExternalContent"
+                                                aria-controls="navbarToggleExternalContent" aria-expanded="false"
+                                                aria-label="Toggle navigation">
+                                            <span class="navbar-toggler-icon"></span>
+                                        </button>
+
+                                        COIN-larni ayriboshlash
+                                    </nav>
+                                </div>
+                            </div>
 
 
-            <div class="header_navbar_collapse">
-                <ul class="header_navbar_collapse_nav">
-
-                    <li class="header_navbar_collapse_nav_item">
-                        <div class="header_navbar_collapse_nav_item_pad">
-                            <a class="header_navbar_collapse_nav_item_link " href="/admin">
-                                <span class="fa fa-tachometer"></span>
-                                <p> Dashboard </p></a>
                         </div>
-                    </li>
-
-                    <li class="header_navbar_collapse_nav_item">
-                        <div class="header_navbar_collapse_nav_item_pad">
-                            <a class="header_navbar_collapse_nav_item_link " href="/admin/market">
-                                <span class="fas fa-store"></span>
-                                <p> Market </p>
-                            </a>
-                        </div>
-                    </li>
-
-                    <li class="header_navbar_collapse_nav_item">
-                        <div class="header_navbar_collapse_nav_item_pad">
-                            <a class="header_navbar_collapse_nav_item_link " href="/admin/streams">
-                                <span class="fa fa-link"></span>
-                                <p> Oqim </p>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="header_navbar_collapse_nav_item">
-                        <div class="header_navbar_collapse_nav_item_pad">
-                            <a class="header_navbar_collapse_nav_item_link " href="/admin/statistics">
-                                <span class="fas fa-chart-line"></span>
-                                <p> Statistika </p>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="header_navbar_collapse_nav_item">
-                        <div class="header_navbar_collapse_nav_item_pad">
-                            <a class="header_navbar_collapse_nav_item_link active" href="/admin/withdraw">
-                                <span class="fas fa-money-bill-alt"></span>
-                                <p> To'lov </p>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-
-            <div class="header_navbar_profile">
-                <div class="d-flex align-items-center dropdown">
-                    <a class="btn nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">
-                        <svg style="height: 35px; width: 35px;" fill="currentColor" viewBox="0 0 20 20"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                                  clip-rule="evenodd"></path>
-                        </svg>
-                    </a>
-
-                    <div class="dropdown-menu dropdown-menu-right header_navbar_lang_menu_dropdown">
-                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="/profile"> Profil </a>
-
-                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="/admin"> Adminlar
-                            uchun </a>
-
-                        <a class="d-none dropdown-item header_navbar_lang_menu_dropdown_item" href="/profile/buy-bonus">
-                            Bonus xarid qilish </a>
-                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="/shop/favorite"> Mening
-                            sevimlilarim </a>
-                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="/profile/settings">
-                            Sozlamalar </a>
-
-
-                        <a onclick='FB.AppEvents.logEvent("logOut")'
-                           class="dropdown-item header_navbar_lang_menu_dropdown_item"
-                           data-request-confirm="Siz rostdan ham akkountingizdan chiqmoqchimisiz?"
-                           data-request="onLogout"
-                           data-request-data="redirect: '/'">
-                            Chiqish
-                        </a>
-
-
-                        <hr class="my-2">
-
-                        <div class="d-flex justify-content-between px-2">
-                            <!-- <a onclick='FB.AppEvents.logEvent("openTg")' href="https://t.me/offical_100k" class="p-2">
-                                <img src="https://image.flaticon.com/icons/svg/2111/2111646.svg" style="width: 20px;" alt="">
-                            </a> -->
-
-                            <a onclick='FB.AppEvents.logEvent("openAndroid")' target="_blank"
-                               href="https://play.google.com/store/apps/details?id=uz.itmaker.stock" class="p-2">
-                                <img src="https://image.flaticon.com/icons/svg/732/732179.svg" style="width: 20px;"
-                                     alt="">
-                            </a>
-
-                            <a onclick='FB.AppEvents.logEvent("openIos")' target="_blank"
-                               href="https://apps.apple.com/ru/app/100k-uz/id1529911106" class="p-2">
-                                <img src="https://image.flaticon.com/icons/svg/831/831276.svg" style="width: 20px;"
-                                     alt="">
-                            </a>
-                        </div>
-
                     </div>
-                </div>
-            </div>
 
-        </nav>
-    </div>
-</header>
+                    <div class="col-sm-6 p-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>To'lovga sorov berish formasi</h5>
+                            </div>
 
-<main class="admin-template">
-    <section class="main">
-        <div class="container">
-
-            <br>
-
-            <div class="row">
-                <div class="col-sm-6 p-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Mening hisobim</h5>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">ID raqamingiz: <strong>{{ user.id }}</strong></h5>
-                            <h5 class="card-title">Asosiy balansda:  so'm</h5>
-                            <h5 class="card-title"><img src="/themes/stock/assets/img/user/coins.png" alt=""> Bonus
-                                balans: <strong> {{ user.bonus }} COIN </strong></h5>
-                            <h5 class="card-title">Depozit balansda: {{ user.deposit }} so'm</h5>
-                            <h5 class="card-title">To'lab berildi: {{ user.payout }} so'm</h5>
-                        </div>
-
-
-                        <div class="card-footer p-0">
-                            <div class="pos-f-t">
-                                <div class="collapse" id="navbarToggleExternalContent">
-                                    <div class="bg-dark p-4 pb-0">
-                                        <h5 class="text-white h4"> COIN-larni ayriboshlash </h5>
-                                        <span class="text-white"> Hozirda bitta COIN qiymati - 1,000 bonusga teng.</span>
-                                    </div>
-
-                                    <div class="bg-dark">
-                                        <form data-request="onWithdrawCoin"
-                                              data-request-success="$(this).find('input').val('')" data-request-flash
-                                              class="card-body pt-0">
-                                            <div class="form-group">
-                                                <label class="text-white">Hisobingizdagi coinlar soni</label>
-                                                <input class="form-control" value="0 COIN" readonly="true">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="text-white">Nechta COIN alishtirmoqchisiz?</label>
-                                                <input name="amount" type="number" class="form-control"
-                                                       placeholder="COIN miqdorini kiriting">
-                                            </div>
-
-                                            <button type="submit" data-attach-loading class="btn btn-primary">
-                                                Tasdiqlash
-                                            </button>
-                                        </form>
-                                    </div>
+                            <form action="{% url 'withdraw' %}" method="post" class="card-body">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label>Karta raqamingizni kiriting</label>
+                                    <input name="card_number" type="text" class="form-control" value=""
+                                           placeholder="Karta raqamingizni kiriting">
                                 </div>
 
-                                <nav class="navbar navbar-light">
-                                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                            data-target="#navbarToggleExternalContent"
-                                            aria-controls="navbarToggleExternalContent" aria-expanded="false"
-                                            aria-label="Toggle navigation">
-                                        <span class="navbar-toggler-icon"></span>
-                                    </button>
+                                <div class="form-group">
+                                    <label>Summani kiriting</label>
+                                    <input name="amount" type="number" class="form-control"
+                                           placeholder="Summani kiriting">
+                                </div>
 
-                                    COIN-larni ayriboshlash
-                                </nav>
-                            </div>
+                                <input type="submit" name="card_withdraw" class="btn btn-primary" value="Tasdiqlash">
+                            </form>
+
                         </div>
-
-
                     </div>
                 </div>
 
-                <div class="col-sm-6 p-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>To'lovga sorov berish formasi</h5>
-                        </div>
+                <br>
+                <br>
 
-                        <form data-request="onWithdraw" data-request-success="$(this).find('input').val('')"
-                              data-request-flash class="card-body">
-                            <div class="form-group">
-                                <label>Karta raqamingizni kiriting</label>
-                                <input name="account" type="text" class="form-control" value=""
-                                       placeholder="Karta raqamingizni kiriting">
-                            </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Sana</th>
+                            <th scope="col">Hisob raqam</th>
+                            <th scope="col">Summa</th>
+                            <th scope="col">Holat</th>
+                        </tr>
+                        </thead>
 
-                            <div class="form-group">
-                                <label>Summani kiriting</label>
-                                <input name="amount" type="number" class="form-control" placeholder="Summani kiriting">
-                            </div>
-
-                            <button type="submit" data-attach-loading class="btn btn-primary"> Tasdiqlash</button>
-                        </form>
-
-                    </div>
+                        <tbody>
+                        <tr class="text-center">
+                            <th colspan="4"> Hozircha sizda pul yechish sorovlari mavjud emas</th>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
+
             </div>
-
-            <br>
-            <br>
-
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Sana</th>
-                        <th scope="col">Hisob raqam</th>
-                        <th scope="col">Summa</th>
-                        <th scope="col">Holat</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <tr class="text-center">
-                        <th colspan="4"> Hozircha sizda pul yechish sorovlari mavjud emas</th>
-
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-    </section>
-</main>
-
-<script src="https://kit.fontawesome.com/43236b6dfa.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/imask"></script>
-
-<script src="https://100k.uz/themes/stock/assets/js/bundle.js"></script>
-<script src="https://100k.uz/themes/stock/assets/lazysizes/lazysizes.min.js"></script>
-<script src="https://100k.uz/themes/stock/assets/owlcarousel/owl.carousel.min.js"></script>
-<script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
-<script src="https://100k.uz/themes/stock/assets/js/custom.js"></script>
-<script src="/modules/system/assets/js/framework-extras.js"></script>
-<link rel="stylesheet" property="stylesheet" href="/modules/system/assets/css/framework-extras.css">
-</body>
-</html>
+        </section>
+    </main>
+{% endblock %}

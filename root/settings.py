@@ -3,7 +3,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-load_dotenv('../.env')
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -52,7 +52,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'root.wsgi.application'
-AUTH_USER_MODEL='apps.User'
+AUTH_USER_MODEL = 'apps.User'
 
 DATABASES = {
     'default': {
@@ -61,7 +61,7 @@ DATABASES = {
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
-        'PORT': 5432,
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
@@ -100,4 +100,3 @@ DJANGORESIZED_DEFAULT_SIZE = [1920, 1080]
 DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'PNG'
 DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'PNG': ".png"}
 DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
-

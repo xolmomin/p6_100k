@@ -1,17 +1,22 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.sites.shortcuts import get_current_site
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, FormView, ListView
-
-from apps.forms.base import CreateCommentForm
-from apps.models import Product, Comment, Stream
-
 from django.views.generic import TemplateView
 
+from apps.forms.base import CreateCommentForm
+from apps.models import Product, Comment, Stream, Category
 
-class MainPageView(TemplateView):
-    queryset = Product.objects.all()
+
+class MainPageView(ListView):
     template_name = 'apps/main_page.html'
+    queryset = Product.objects.all()
+    context_object_name = 'product'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context['categories'] = Category.objects.all()
+        return context
 
 
 class ProductDetailView(FormView, DetailView):
@@ -33,12 +38,17 @@ def completed(request, *args, **kwargs):
 
     return JsonResponse({'status': 200})
 
-# class StreamPageView(LoginRequiredMixin, ListView):
+
 class StreamPageView(ListView):
     template_name = 'apps/admin/stream.html'
     model = Stream
     queryset = Stream.objects.all()
     context_object_name = 'streams'
     paginate_by = 9
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context['url'] = get_current_site(self.request)
+        return context
 
 

@@ -19,4 +19,5 @@ class ProductAdmin(ModelAdmin):
 
 @register(Category)
 class CategoryAdmin(ModelAdmin):
+    exclude = ('slug',)
     list_display = ('id', 'title')

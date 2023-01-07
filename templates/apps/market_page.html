@@ -1,4 +1,4 @@
-{% extends 'apps/base.html' %}
+{% extends 'apps/parts/base.html' %}
 {% load static %}
 {% block title %} Market {% endblock %}
 {% block main %}
@@ -49,10 +49,10 @@
                                class="btn btn-default ">TOP ⭐ </a>
 
                             {% for category in categories %}
-                                <a href="/admin/market/35" class="btn btn-default "> {{ category.title }}
+                                <a href="{% url 'market' %}?category={{ category.slug }}"
+                                   class="btn btn-default "> {{ category.title }}
                                     ({{ category.product_count }}) </a>
                             {% endfor %}
-
                         </div>
                     </div>
                 </div>

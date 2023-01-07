@@ -1,6 +1,4 @@
-from django.db.models import BooleanField, Model, DateTimeField, SlugField, ForeignKey, PROTECT, TextField, CharField, \
-    CASCADE, IntegerField
-from django_resized import ResizedImageField
+from django.db.models import BooleanField, Model, ForeignKey, CharField, CASCADE
 
 
 class Stream(Model):

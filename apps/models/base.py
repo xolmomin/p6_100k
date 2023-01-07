@@ -1,12 +1,12 @@
 from django.db.models import BooleanField, Model, DateTimeField, SlugField, ForeignKey, PROTECT, TextField, CharField, \
-    CASCADE, IntegerField
+    CASCADE, IntegerField, TextChoices
 from django_resized import ResizedImageField
 
 
 class Product(Model):
     title = CharField(max_length=255)
     main_picture = ResizedImageField(size=[500, 300], upload_to='%m')
-    price = IntegerField(max_length=200)
+    price = IntegerField()
     created_at = DateTimeField(auto_now_add=True)
     slug = SlugField(max_length=255, unique=True)
     store = ForeignKey('apps.Store', CASCADE)
@@ -37,3 +37,20 @@ class Stream(Model):
     user = ForeignKey('auth.User', CASCADE)  # oqim yaratgan foydalanuchi
     product = ForeignKey('apps.Product', CASCADE)  # oqim uchun mahsulot
     is_area = BooleanField(default=False)  # hududsiz qabul qilish
+
+
+class Tickets(Model):
+    class SenderTextChoice(TextChoices):
+        XARIDOR = 'customer', 'xaridor'
+        KURYER = 'kuryer', 'kuryer'
+        ADMIN = 'admin', 'admin'
+        SOTUVCHI = 'salesman', 'sotuvchi'
+        BOSHQA = 'other', 'boshqa'
+    class PurposeTextChoice(TextChoices):
+        MUAMMO = 'issue', 'muammo'
+        TAKLIF = 'suggestion', 'taklif'
+    sender = CharField(max_length=55, choices=SenderTextChoice.choices)
+    sender_name = CharField(max_length=255)
+    phone_number = CharField(max_length=20)
+    ticket_purpose = CharField(max_length=55, choices=PurposeTextChoice.choices)
+    message = TextField()

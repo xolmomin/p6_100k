@@ -1,1 +1,1 @@
-from .base import MainView
+from apps.views.base import MainPageView

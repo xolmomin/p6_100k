@@ -15,3 +15,6 @@ class PaymentHistory(Model):
     status = CharField(choices=StatusChoices.choices, default=StatusChoices.PENDING, max_length=10)
     transaction_id = CharField(max_length=255, default=uuid4)
     created_at = DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-created_at',)

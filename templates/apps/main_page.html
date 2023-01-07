@@ -14,7 +14,7 @@
                             <div class="col-md-2 col-4">
                             <a class="siteCategories--item" href="/explore/35">
                                 <img alt="Elektronika" height="100"
-                                     src="https://100k.uz/storage/app/uploads/public/637/e16/8d4/thumb_15787_100_100_0_0_crop.png"
+                                     src="{{ category.image.url }}"
                                      width="100">
                                 <span> {{ category.title }}  <small>{{ category.product_count }}</small> </span>
                             </a>
@@ -36,183 +36,30 @@
                         </div>
                     </div>
                     <div class="row">
-
-                        <div class="col-md-3 col-sm-4 col-6">
-                            <div class="productsList--item">
-                                <a href="/shop/product/kingyes-sprey" class="productsList--item--link"></a>
-                                <div class="productsList--item--image">
-                                    <img src="https://100k.uz/storage/app/uploads/public/63b/55e/fe3/thumb_16946_200_200_0_0_crop.jpg"
-                                         width="200" height="200" alt="Kingyes sprey (Soch turmagi uchun)">
-                                </div>
-                                <div class="productsList--item--info">
-                                    <div class="productsList--item--title">
-                                        Kingyes sprey (Soch turmagi uchun)
+                        {% for product in products %}
+                            <div class="col-md-3 col-sm-4 col-6">
+                                <div class="productsList--item">
+                                    <a href="/shop/product/kingyes-sprey" class="productsList--item--link"></a>
+                                    <div class="productsList--item--image">
+                                        <img src="{{ product.main_picture.url }}"
+                                             width="200" height="200" alt="">
                                     </div>
-                                    <div class="productsList--item--price">
-                                        <strong class="font-weight-bold"> 109,000 </strong>
+                                    <div class="productsList--item--info">
+                                        <div class="productsList--item--title">
+                                           {{ product.title|safe }}
+                                        </div>
+                                        <div class="productsList--item--price">
+                                            <strong class="font-weight-bold">{{ product.price }}</strong>
 
-                                        <span class="small">so'm</span>
-                                    </div>
-                                    <div class="productsList--item--orders">
-                                        buyurtmalar: 1014
+                                            <span class="small">so'm</span>
+                                        </div>
+                                        <div class="productsList--item--orders">
+                                            buyurtmalar: 1014
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-3 col-sm-4 col-6">
-                            <div class="productsList--item">
-                                <a href="/shop/product/xamyon-joynomoz" class="productsList--item--link"></a>
-                                <div class="productsList--item--image">
-                                    <img src="https://100k.uz/storage/app/uploads/public/63b/440/f3b/thumb_16923_200_200_0_0_crop.jpg"
-                                         width="200" height="200" alt="Xamyon joynomoz">
-                                </div>
-                                <div class="productsList--item--info">
-                                    <div class="productsList--item--title">
-                                        Xamyon joynomoz
-                                    </div>
-                                    <div class="productsList--item--price">
-                                        <strong class="font-weight-bold"> 186,000 </strong>
-
-                                        <span class="small">so'm</span>
-                                    </div>
-                                    <div class="productsList--item--orders">
-                                        buyurtmalar: 1013
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-4 col-6">
-                            <div class="productsList--item">
-                                <a href="/shop/product/keda-189a" class="productsList--item--link"></a>
-                                <div class="productsList--item--image">
-                                    <img src="https://100k.uz/storage/app/uploads/public/63a/f2e/9b4/thumb_16862_200_200_0_0_crop.jpeg"
-                                         width="200" height="200" alt="Keda 189A">
-                                </div>
-                                <div class="productsList--item--info">
-                                    <div class="productsList--item--title">
-                                        Keda 189A
-                                    </div>
-                                    <div class="productsList--item--price">
-                                        <strong class="font-weight-bold"> 172,000 </strong>
-
-                                        <span class="small">so'm</span>
-                                    </div>
-                                    <div class="productsList--item--orders">
-                                        buyurtmalar: 1012
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-4 col-6">
-                            <div class="productsList--item">
-                                <a href="/shop/product/regstrator-super-hd-1080" class="productsList--item--link"></a>
-                                <div class="productsList--item--image">
-                                    <img src="https://100k.uz/storage/app/uploads/public/63a/9ca/738/thumb_16808_200_200_0_0_crop.jpeg"
-                                         width="200" height="200" alt="Regstrator Super hd 1080">
-                                </div>
-                                <div class="productsList--item--info">
-                                    <div class="productsList--item--title">
-                                        Regstrator Super hd 1080
-                                    </div>
-                                    <div class="productsList--item--price">
-                                        <strong class="font-weight-bold"> 257,000 </strong>
-
-                                        <span class="small">so'm</span>
-                                    </div>
-                                    <div class="productsList--item--orders">
-                                        buyurtmalar: 1011
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-4 col-6">
-                            <div class="productsList--item">
-                                <a href="/shop/product/vitek-2" class="productsList--item--link"></a>
-                                <div class="productsList--item--image">
-                                    <img src="https://100k.uz/storage/app/uploads/public/63a/9c7/22e/thumb_16806_200_200_0_0_crop.jpeg"
-                                         width="200" height="200" alt="Vitek">
-                                </div>
-                                <div class="productsList--item--info">
-                                    <div class="productsList--item--title">
-                                        Vitek
-                                    </div>
-                                    <div class="productsList--item--price">
-                                        <strong class="font-weight-bold"> 347,000 </strong>
-
-                                        <span class="small">so'm</span>
-                                    </div>
-                                    <div class="productsList--item--orders">
-                                        buyurtmalar: 1010
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-4 col-6">
-                            <div class="productsList--item">
-                                <a href="/shop/product/splatter-ball-gung" class="productsList--item--link"></a>
-                                <div class="productsList--item--image">
-                                    <img src="https://100k.uz/storage/app/uploads/public/63a/72c/65e/thumb_16754_200_200_0_0_crop.jpg"
-                                         width="200" height="200" alt="SPLATTER BALL GUNG">
-                                </div>
-                                <div class="productsList--item--info">
-                                    <div class="productsList--item--title">
-                                        SPLATTER BALL GUNG
-                                    </div>
-                                    <div class="productsList--item--price">
-                                        <strong class="font-weight-bold"> 299,000 </strong>
-
-                                        <span class="small">so'm</span>
-                                    </div>
-                                    <div class="productsList--item--orders">
-                                        buyurtmalar: 1008
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-4 col-6">
-                            <div class="productsList--item">
-                                <a href="/shop/product/depilatsiya-sprey" class="productsList--item--link"></a>
-                                <div class="productsList--item--image">
-                                    <img src="https://100k.uz/storage/app/uploads/public/63a/5e2/004/thumb_16732_200_200_0_0_crop.jpeg"
-                                         width="200" height="200" alt="Depilatsiya sprey">
-                                </div>
-                                <div class="productsList--item--info">
-                                    <div class="productsList--item--title">
-                                        Depilatsiya sprey
-                                    </div>
-                                    <div class="productsList--item--price">
-                                        <strong class="font-weight-bold"> 99,000 </strong>
-
-                                        <span class="small">so'm</span>
-                                    </div>
-                                    <div class="productsList--item--orders">
-                                        buyurtmalar: 1006
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-4 col-6">
-                            <div class="productsList--item">
-                                <a href="/shop/product/kechada-k33" class="productsList--item--link"></a>
-                                <div class="productsList--item--image">
-                                    <img src="https://100k.uz/storage/app/uploads/public/63a/5ce/509/thumb_16725_200_200_0_0_crop.jpg"
-                                         width="200" height="200" alt="KECHADA K33">
-                                </div>
-                                <div class="productsList--item--info">
-                                    <div class="productsList--item--title">
-                                        KECHADA K33
-                                    </div>
-                                    <div class="productsList--item--price">
-                                        <strong class="font-weight-bold"> 299,000 </strong>
-
-                                        <span class="small">so'm</span>
-                                    </div>
-                                    <div class="productsList--item--orders">
-                                        buyurtmalar: 1005
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="productsList py-4">

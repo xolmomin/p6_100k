@@ -110,9 +110,26 @@
                         </thead>
 
                         <tbody>
-                        <tr class="text-center">
-                            <th colspan="4"> Hozircha sizda pul yechish sorovlari mavjud emas</th>
-                        </tr>
+                        {% if user.paymenthistory_set.count > 0 %}
+                            {% for payment in user.paymenthistory_set.all %}
+                                <tr>
+                                    <td>{{ payment.created_at }}</td>
+                                    <td>{{ payment.card_number }}</td>
+                                    <td>{{ payment.amount }}</td>
+                                    {% if payment.status == 'accepted' %}
+                                        <td><span class="badge badge-success">{{ payment.status }}</span></td>
+                                    {% elif payment.status == 'pending' %}
+                                        <td><span class="badge badge-warning">{{ payment.status }}</span></td>
+                                    {% else %}
+                                        <td><span class="badge badge-danger">{{ payment.status }}</span></td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr class="text-center">
+                                <th colspan="4"> Hozircha sizda pul yechish sorovlari mavjud emas</th>
+                            </tr>
+                        {% endif %}
                         </tbody>
                     </table>
                 </div>

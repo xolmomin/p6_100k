@@ -22,7 +22,9 @@
 <body class="d-flex flex-column max-h-screen">
     {% include 'apps/parts/top_line.html' %}
     {% include 'apps/parts/site_header.html' %}
-    {% include 'apps/parts/navbar_collapse.html' %}
+    {% block header %}
+        {% include 'apps/parts/navbar_collapse.html' %}
+    {% endblock %}
     {% block main %}
     {% endblock %}
     {% include 'apps/parts/footer.html' %}

@@ -9,8 +9,8 @@ class MarketListView(ListView):
     paginate_by = 30
     context_object_name = 'products'
 
-    def get_context_object_name(self, object_list):
-        context = super().get_context_object_name(object_list)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
         context['categories'] = Category.objects.all()
         return context
 
@@ -19,5 +19,3 @@ class MarketListView(ListView):
         if category := self.request.GET.get('category'):
             return qs.filter(category__slug=category)
         return qs
-
-

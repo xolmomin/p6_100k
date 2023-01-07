@@ -12,7 +12,6 @@ class MainPageView(TemplateView):
     template_name = 'apps/main_page.html'
 
 
-
 class ProductDetailView(FormView, DetailView):
     template_name = 'apps/product_detail.html'
     queryset = Product.objects.all()

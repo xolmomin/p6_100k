@@ -1,19 +1,22 @@
-from django.contrib import admin
-from django.contrib.admin import ModelAdmin
+from django.contrib.admin import ModelAdmin, register
 
-from apps.models.base import Store, Product
+from apps.models import Store, Product, Category
 
 
-# Register your models here.
-
-@admin.register(Store)
+@register(Store)
 class StoreAdmin(ModelAdmin):
     list_display = ('id', 'name')
 
 
-@admin.register(Product)
+@register(Product)
 class ProductAdmin(ModelAdmin):
     list_display = ('title', 'store_name')
+    exclude = ('slug',)
 
-    def store_name(self, obj: Product):
+    def store_name(self, obj: Product):  # noqa
         return obj.store.name
+
+
+@register(Category)
+class CategoryAdmin(ModelAdmin):
+    list_display = ('id', 'title')

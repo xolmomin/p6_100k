@@ -1,0 +1,146 @@
+{% extends 'apps/base.html' %}
+{% load static %}
+{% block title %} Market {% endblock %}
+{% block main %}
+
+    <main class="admin-template">
+        <section class="main">
+
+            <div class="container">
+                <br>
+                <br>
+                <h3 class="text-center"> Hozirda sotuvda bor <br> mahsulotlar </h3>
+                <br>
+
+
+                <div class="container market-search-form">
+                    <form data-request="onMarketSearch"
+                          data-request-update="'admin/market-products': '#marketProductsList'"
+                          data-request-flash class="input-group mb-0 px-2">
+
+                        <div class="input-group-prepend">
+                            <button class="btn btn-info" style="border: 1px solid #ddd" type="button"
+                                    onclick="$('.market-search-input').val(''); $('.market-search-input').submit()"
+                                    id="button-addon1">X
+                            </button>
+                        </div>
+
+                        <input type="text" class="form-control market-search-input" name="search"
+                               placeholder="Mahsulotlar bo'yicha qidiruv" aria-label="Mahsulotlar bo'yicha qidiruv"
+                               data-request-update="'admin/market-products': '#marketProductsList'"
+                               aria-describedby="button-addon2"
+                               data-request="onMarketSearch"
+                               data-track-input="500"
+                               data-request-flash/>
+
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" data-attach-loading type="submit" id="button-addon2">Izlash
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="header_tab_menu">
+                        <div class="header_menu" style="overflow: auto">
+
+                            <a href="/admin/market?sort=new"
+                               class="btn btn-default ">Yangi 🕒 </a>
+
+                            <a href="/admin/market?sort=orders"
+                               class="btn btn-default ">TOP ⭐ </a>
+
+                            {% for category in categories %}
+                                <a href="/admin/market/35" class="btn btn-default "> {{ category.title }}
+                                    ({{ category.product_count }}) </a>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id="marketProductsList" class="row">
+                    {% for product in products %}
+                        <div class="col-sm-4 p-2">
+                            <div class="card">
+                                <a href="{% url 'product_detail' product.slug %}" target="_blank">
+                                    <img class="card-img-top"
+                                         src="{{ product.main_picture.url }}"
+                                         alt="{{ product.title }}">
+                                </a>
+
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="{% url 'product_detail' product.slug %}"
+                                                              target="_blank">
+                                        {{ product.title }}</a></h5>
+                                    <p class="text-muted"> {{ product.price }} so'm </p>
+                                </div>
+
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">To'lov: <strong>{{ product.bonus }} so'm</strong></li>
+                                    <li class="list-group-item">Sotuvchi: <strong>{{ product.store.name }}</strong></li>
+                                    <li class="list-group-item">Bepul yetkazish: <strong>{% if product.free_delivery %}
+                                        Bor{% else %}Yo'q{% endif %}</strong></li>
+                                    <li class="list-group-item">Zaxirada:
+                                        <strong class="text-danger"> {{ product.reserve }} ta </strong>
+                                    </li>
+
+                                    <li class="list-group-item"> 👉 <a href=""> Reklama posti </a></li>
+                                </ul>
+
+                                <div class="card-body text-center">
+                                    <a href="#" data-request="onCreateStreamModal" data-request-data="'id': 1013"
+                                       data-request-update="'popups/create-product-stream' : '#commonModalContent'"
+                                       data-toggle="modal" data-target="#commonModal" class="btn btn-primary"> Oqim
+                                        yaratish </a>
+
+                                    <a href="/admin/product/1013" class="btn btn-default"> Batafsil </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <div style="text-align: center">
+                    <a class="btn disabled " href=""> ← Oldingi sahifa </a>
+                    <strong> &nbsp;&nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp; </strong>
+                    <a class="btn btn-info" href="https://100k.uz/admin/market?page=2"> Keyingi sahifa → </a>
+                </div>
+                <br>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="commonModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" id="commonModalContent" role="document">
+
+            </div>
+        </div>
+
+
+        <style>
+            .btn.active {
+                color: #fff;
+            }
+
+            .header_menu {
+                padding: 12px;
+            }
+
+            .header_menu .btn-default {
+                border: 1px solid #ddd;
+                border-radius: 20px;
+                padding: 10px;
+                font-size: 15px;
+            }
+
+            .header_menu .btn-default.active, .header_menu .btn-default:hover {
+                background-color: #000;
+            }
+        </style>
+    </main>
+{% endblock %}

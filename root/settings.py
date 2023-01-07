@@ -3,7 +3,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv('../.env')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -52,7 +52,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'root.wsgi.application'
-AUTH_USER_MODEL = 'apps.User'
 
 DATABASES = {
     'default': {

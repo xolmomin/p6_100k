@@ -1,7 +1,6 @@
 from django.urls import path
 
-from apps.views import WithdrawView, MarketListView, MainPageView, ProductDetailView
-from apps.views.base import StreamPageView
+from apps.views import WithdrawView, MarketListView, MainPageView, ProductDetailView, StreamPageView
 
 urlpatterns = [
     path('', MainPageView.as_view(), name='main_page_view'),

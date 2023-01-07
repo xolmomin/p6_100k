@@ -1,7 +1,11 @@
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, TemplateView
 
 from apps.forms.authform import ProfileForm
-from apps.models.users import User
+from apps.models import User
+
+
+class WithdrawView(TemplateView):
+    template_name = 'apps/auth/withdraw.html'
 
 
 class ProfileView(UpdateView):
@@ -12,9 +16,3 @@ class ProfileView(UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
-
-    def form_valid(self, form):
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        return super().form_invalid(form)

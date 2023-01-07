@@ -1,4 +1,4 @@
-from django.db.models import Model, CharField, ForeignKey, CASCADE
+from django.db.models import Model, CharField
 
 
 class Region(Model):

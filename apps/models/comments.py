@@ -2,7 +2,7 @@ from django.db.models import Model, ForeignKey, PROTECT, CharField, TextField
 
 
 class Comment(Model):
-    author = ForeignKey('auth.User', PROTECT)
+    author = ForeignKey('apps.User', PROTECT)
     name = CharField(max_length=255)
     content = TextField()
 

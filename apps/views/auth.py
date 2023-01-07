@@ -45,6 +45,7 @@ class WithdrawView(UpdateView):
 
 
 class ProfileView(UpdateView):
+    queryset = User.objects.all()
     context_object_name = 'profile'
     form_class = ProfileForm
     model = User

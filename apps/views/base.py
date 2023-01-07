@@ -23,7 +23,7 @@ class MainPageView(TemplateView):
 class ProductDetailView(FormView, DetailView):
     template_name = 'apps/product_detail.html'
     queryset = Product.objects.all()
-    context_object_name = 'post'
+    context_object_name = 'product'
     form_class = CreateCommentForm
 
     def get_context_data(self, *, object_list=None, **kwargs):

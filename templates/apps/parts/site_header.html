@@ -1,0 +1,76 @@
+{% load static %}
+<header class="siteHeader">
+    <div class="container">
+        <div class="row align-items-center siteHeader--height">
+            <div class="col-auto col-logo">
+                <a href="/" class="header_navbar_brand_logo">
+                    <img src="{% static 'apps/themes/stock/assets/100k.png' %}" style="height: 30px; object-fit: cover; margin-top: -10px"
+                         alt="100k.uz">
+                </a>
+            </div>
+            <div class="d-none d-md-block col-sm-1"></div>
+            <div class="col col-search">
+                <form data-request="onSearch" data-request-flash
+                      data-request-update="'site/main-search-result': '#mainSearchResult'" class="siteSearch">
+
+                    <input name="search" type="text" placeholder="qidiruv..." autocomplete="off"
+                           data-request="onSearch" data-request-flash data-track-input="500"
+                           data-request-update="'site/main-search-result': '#mainSearchResult'">
+
+                    <button data-attach-loading>
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+                             xmlns:svgjs="http://svgjs.com/svgjs" width="20" height="20" x="0" y="0"
+                             viewBox="0 0 6.3499999 6.3500002" style="enable-background:new 0 0 512 512"
+                             xml:space="preserve">
+            <g>
+                <g xmlns="http://www.w3.org/2000/svg" id="layer1" transform="translate(0 -290.65)">
+                    <path id="circle2017"
+                          d="m2.8944091 291.16099c-1.3119941 0-2.38073328 1.06874-2.38073328 2.38074 0 1.31199 1.06873918 2.3828 2.38073328 2.3828.5603925 0 1.0757805-.19638 1.4831137-.52245l.9916707.99115a.26516505.26516505 0 0 0 .375171-.37465l-.9916708-.99167c.3263411-.40796.5229654-.92414.5229654-1.48518 0-1.312-1.0692559-2.38074-2.38125-2.38074zm0 .52917c1.0260113 0 1.8515666.82556 1.8515666 1.85157s-.8255553 1.85363-1.8515666 1.85363-1.8515666-.82762-1.8515666-1.85363.8255553-1.85157 1.8515666-1.85157z"
+                          font-variant-ligatures="normal" font-variant-position="normal" font-variant-caps="normal"
+                          font-variant-numeric="normal" font-variant-alternates="normal" font-feature-settings="normal"
+                          text-indent="0" text-align="start" text-decoration-line="none" text-decoration-style="solid"
+                          text-decoration-color="rgb(0,0,0)" text-transform="none" text-orientation="mixed"
+                          white-space="normal" shape-padding="0" isolation="auto" mix-blend-mode="normal"
+                          solid-color="rgb(0,0,0)" solid-opacity="1" vector-effect="none"
+                          paint-order="stroke fill markers" fill="#ffffff"></path>
+                </g>
+            </g>
+        </svg>
+                    </button>
+                    <div id="mainSearchResult" class="siteSearch--info">
+                    </div>
+                </form>
+            </div>
+            <div class="d-none d-md-block col-sm-1"></div>
+            <div class="col-auto d-none d-md-block">
+                <!-- user -->
+                <div class="header_navbar_profile">
+                    <div class="d-flex align-items-center dropdown">
+                        <a href="#" class="d-inline-block p-2" data-toggle="dropdown">
+                            <i class="fa fa-user mr-2"></i>
+                            <span>Mening profilim</span>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right header_navbar_lang_menu_dropdown">
+                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="/pages/contacts"> Aloqa
+                                uchun </a>
+                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="/profile"> Profil </a>
+
+
+                            <a class="d-none dropdown-item header_navbar_lang_menu_dropdown_item"
+                               href="/profile/buy-bonus"> Bonus xarid qilish </a>
+
+                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="/shop/favorite"> Mening
+                                sevimlilarim </a>
+                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="/profile/settings">
+                                Sozlamalar </a>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /user -->
+            </div>
+        </div>
+    </div>
+</header>

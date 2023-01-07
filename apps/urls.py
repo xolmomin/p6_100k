@@ -3,6 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from apps.views import ProfileView, StoreDetailView, WithdrawView, MarketListView, StreamPageListView, MainPageView, \
     ProductDetailView
+from apps.views.base import CategoryDetail
 
 urlpatterns = [
     path('', MainPageView.as_view(), name='main_page_view'),
@@ -13,4 +14,5 @@ urlpatterns = [
     path('admin/withdraw', csrf_exempt(WithdrawView.as_view()), name='withdraw'),
     path('admin/market', MarketListView.as_view(), name='market'),
     path('store/<int:pk>', StoreDetailView.as_view(), name='store'),
+    path('category/', CategoryDetail.as_view(), name='category_detail')
 ]

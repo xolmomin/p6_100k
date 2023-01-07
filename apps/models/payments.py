@@ -5,9 +5,9 @@ from django.db.models import Model, DecimalField, ForeignKey, CharField, TextCho
 
 class PaymentHistory(Model):
     class StatusChoices(TextChoices):
-        PENDING = 'pending'
-        ACCEPTED = 'accepted'
-        CANCELED = 'canceled'
+        PENDING = 'pending', 'Kutilmoqda'
+        ACCEPTED = 'accepted', "To'lab berildi"
+        CANCELED = 'canceled', 'Bekor qilingan'
 
     user = ForeignKey('apps.User', CASCADE)
     amount = DecimalField(max_digits=12, decimal_places=2)

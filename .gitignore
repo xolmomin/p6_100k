@@ -226,3 +226,4 @@ dmypy.json
 cython_debug/
 
 .idea
+apps/migrations/0*

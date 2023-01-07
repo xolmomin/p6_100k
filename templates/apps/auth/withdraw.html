@@ -1,11 +1,11 @@
-{% extends 'apps/base.html' %}
+{% extends 'apps/parts/base.html' %}
+{% load static %}
 {% block main %}
-    <main class="admin-template">
+    <main class="admin-template mb-5">
         <section class="main">
             <div class="container">
-
                 <br>
-
+                <p id="alert-messages"></p>
                 <div class="row">
                     <div class="col-sm-6 p-4">
                         <div class="card">
@@ -14,10 +14,11 @@
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">ID raqamingiz: <strong>{{ user.id }}</strong></h5>
-                                <h5 class="card-title">Asosiy balansda: {{ user.balance }} so'm</h5>
+                                <h5 class="card-title">Asosiy balansda: <span id="balance">{{ user.balance }}</span>
+                                    so'm</h5>
                                 <h5 class="card-title"><img src="https://100k.uz/themes/stock/assets/img/user/coins.png"
                                                             alt=""> Bonus
-                                    balans: <strong> {{ user.bonus }} COIN </strong></h5>
+                                    balans: <strong id="coin"> {{ user.bonus }}</strong><strong> COIN </strong></h5>
                                 <h5 class="card-title">Depozit balansda: {{ user.deposit }} so'm</h5>
                                 <h5 class="card-title">To'lab berildi: {{ user.payout }} so'm</h5>
                             </div>
@@ -32,7 +33,7 @@
                                         </div>
 
                                         <div class="bg-dark">
-                                            <form action="{% url 'withdraw' %}" method="post" class="card-body pt-0">
+                                            <form class="card-body pt-0" id="withdraw-form">
                                                 {% csrf_token %}
                                                 <div class="form-group">
                                                     <label class="text-white">Hisobingizdagi coinlar soni</label>
@@ -42,10 +43,10 @@
 
                                                 <div class="form-group">
                                                     <label class="text-white">Nechta COIN alishtirmoqchisiz?</label>
-                                                    <input name="amount" type="number" class="form-control"
+                                                    <input id="amount" type="number" class="form-control"
                                                            placeholder="COIN miqdorini kiriting">
                                                 </div>
-                                                <input type="submit" name="coin_exchange" class="btn btn-primary"
+                                                <input type="button" id="coin-exchange" class="btn btn-primary"
                                                        value="Tasdiqlash">
                                             </form>
                                         </div>
@@ -74,21 +75,21 @@
                                 <h5>To'lovga sorov berish formasi</h5>
                             </div>
 
-                            <form action="{% url 'withdraw' %}" method="post" class="card-body">
+                            <form class="card-body">
                                 {% csrf_token %}
                                 <div class="form-group">
                                     <label>Karta raqamingizni kiriting</label>
-                                    <input name="card_number" type="text" class="form-control" value=""
+                                    <input id="card-number" type="text" class="form-control" value=""
                                            placeholder="Karta raqamingizni kiriting">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Summani kiriting</label>
-                                    <input name="amount" type="number" class="form-control"
+                                    <input id="amount1" type="number" class="form-control"
                                            placeholder="Summani kiriting">
                                 </div>
 
-                                <input type="submit" name="card_withdraw" class="btn btn-primary" value="Tasdiqlash">
+                                <input type="button" id="card-withdraw" class="btn btn-primary" value="Tasdiqlash">
                             </form>
 
                         </div>
@@ -99,7 +100,7 @@
                 <br>
 
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table" id="table">
                         <thead>
                         <tr>
                             <th scope="col">Sana</th>
@@ -137,4 +138,5 @@
             </div>
         </section>
     </main>
+    <script src="{% static 'auth/js/withdraw.js' %}"></script>
 {% endblock %}

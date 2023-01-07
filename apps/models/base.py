@@ -6,7 +6,7 @@ from django_resized import ResizedImageField
 class Product(Model):
     title = CharField(max_length=255)
     main_picture = ResizedImageField(size=[500, 300], upload_to='%m')
-    price = IntegerField(max_length=200)
+    price = IntegerField()
     created_at = DateTimeField(auto_now_add=True)
     slug = SlugField(max_length=255, unique=True)
     store = ForeignKey('apps.Store', CASCADE)

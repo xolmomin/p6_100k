@@ -1,4 +1,4 @@
-from django.db.models import Model, CharField
+from django.db.models import Model, CharField, ForeignKey, CASCADE
 
 
 class Region(Model):
@@ -7,4 +7,4 @@ class Region(Model):
 
 class District(Model):
     name = CharField(max_length=100)
-    region_id = CharField(max_length=100)
+    region = ForeignKey(Region, on_delete=CASCADE)

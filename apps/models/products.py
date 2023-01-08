@@ -1,4 +1,5 @@
-from django.db.models import Model, CharField, IntegerField, DateTimeField, SlugField, ForeignKey, CASCADE, BooleanField
+from django.db.models import Model, CharField, IntegerField, DateTimeField, SlugField, ForeignKey, CASCADE, \
+    BooleanField, TextField, SET_NULL
 from django.utils.text import slugify
 from django_resized import ResizedImageField
 
@@ -6,6 +7,7 @@ from django_resized import ResizedImageField
 class Product(Model):
     title = CharField(max_length=255)
     main_picture = ResizedImageField(size=[500, 300], upload_to='%m')
+    description = TextField(null=True, blank=True)
     price = IntegerField()
     created_at = DateTimeField(auto_now_add=True)
     slug = SlugField(max_length=255, unique=True)
@@ -37,6 +39,9 @@ class Product(Model):
         super().save(*args, **kwargs)
 
 
-class ProductOrders(Model):   # main pagedigi productslada buyurtmalar uchun model
+class ProductOrders(Model):  # main pagedigi productslada buyurtmalar uchun model
     product = ForeignKey('apps.Product', CASCADE)  # productga ulangan boladu
-    orders = IntegerField(default=0)        # nechi matta zakaz qilingani
+    region = ForeignKey('apps.Region', SET_NULL, null=True, blank=True)
+    user = ForeignKey('apps.User', CASCADE)  # km zakaz qilingani
+    phone = IntegerField()
+

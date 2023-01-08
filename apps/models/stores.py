@@ -7,6 +7,7 @@ class Store(Model):
     name = CharField(max_length=255)
     short_des = CharField(max_length=255)
 
+
     class Meta:
         verbose_name = "Stores"
         verbose_name_plural = "Stores"

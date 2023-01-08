@@ -7,4 +7,3 @@ class CreateCommentForm(ModelForm):
     class Meta:
         model = Comment
         fields = ('content', 'author', 'name')
-

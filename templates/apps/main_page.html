@@ -12,7 +12,7 @@
                     <div class="row">
                         {% for category in categories %}
                             <div class="col-md-2 col-4">
-                                <a class="siteCategories--item" href="/explore/35">
+                                <a class="siteCategories--item" href="{% url 'category_detail' %}?category={{ category.slug }}">
                                     <img alt="Elektronika" height="100"
                                          src="{{ category.image.url }}"
                                          width="100">

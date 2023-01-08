@@ -114,7 +114,7 @@
                         {% if user.paymenthistory_set.count > 0 %}
                             {% for payment in user.paymenthistory_set.all %}
                                 <tr>
-                                    <td>{{ payment.created_at }}</td>
+                                    <td>{{ payment.created_at|date:"Y-m-d H:i" }}</td>
                                     <td>{{ payment.card_number }}</td>
                                     <td>{{ payment.amount }}</td>
                                     {% if payment.status == 'accepted' %}

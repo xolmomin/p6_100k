@@ -1,6 +1,7 @@
 import json
 
-from django.http import HttpResponse, JsonResponse
+from django.core.serializers import serialize
+from django.http import JsonResponse
 from django.views.generic import UpdateView
 
 from apps.forms import PaymentForm
@@ -45,7 +46,8 @@ class WithdrawView(UpdateView):
                     return JsonResponse({
                         'message': "So'rov muvaffaqiyatli bajarildi, admin javobini kuting!",
                         'balance': user.balance,
-                        'payment': json.dumps(payment)
+                        'created_at': payment.created_at.strftime("%Y-%m-%d %H:%M"),
+                        # 'payment': json.dumps(payment)
                     })
                 else:
                     return JsonResponse({'type': 'error', 'message': "Sizda mablag' yetarli emas!"})

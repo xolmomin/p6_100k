@@ -6,4 +6,4 @@ from apps.models.users import User
 class ProfileForm(ModelForm):
     class Meta:
         model = User
-        fields = ('image', 'first_name', 'last_name', 'phone')
+        fields = ('image', 'first_name', 'last_name', 'phone', 'address')

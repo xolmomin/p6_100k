@@ -13,9 +13,27 @@
 
 
                 <div class="container market-search-form">
-                    <form data-request="onMarketSearch"
-                          data-request-update="'admin/market-products': '#marketProductsList'"
-                          data-request-flash class="input-group mb-0 px-2">
+                    {#                    <form method="get">#}
+                    {##}
+                    {#                        <div class="input-group-prepend">#}
+                    {#                            <button class="btn btn-info" style="border: 1px solid #ddd" type="button"#}
+                    {#                                    onclick="$('.market-search-input').val(''); $('.market-search-input').submit()"#}
+                    {#                                    id="button-addon1">#}
+                    {#                            </button>#}
+                    {#                        </div>#}
+                    {#                        <input id="searchbar" type="text"#}
+                    {#                               class="form-control market-search-input" name="search"#}
+                    {#                               placeholder="Mahsulotlar bo'yicha qidiruv" aria-label="Mahsulotlar bo'yicha qidiruv"#}
+                    {#                               value="{{ search_input }}"/>#}
+                    {#                        <div class="input-group-append">#}
+                    {#                            <button class="btn btn-primary" data-attach-loading type="submit" id="button-addon2">#}
+                    {#                                Izlash#}
+                    {#                            </button>#}
+                    {#                        </div>#}
+                    {#                    </form>#}
+                    <form method="get" data-request="onMarketSearch"
+                          data-request-update="'admin/market-products': '#marketProductsList'" data-request-flash=""
+                          class="input-group mb-0 px-2">
 
                         <div class="input-group-prepend">
                             <button class="btn btn-info" style="border: 1px solid #ddd" type="button"
@@ -24,20 +42,19 @@
                             </button>
                         </div>
 
-                        <input type="text" class="form-control market-search-input" name="search"
+                        <input value="{{ search_input }}" type="text" class="form-control market-search-input"
+                               name="search"
                                placeholder="Mahsulotlar bo'yicha qidiruv" aria-label="Mahsulotlar bo'yicha qidiruv"
-                               data-request-update="'{% url 'market' %}': '#marketProductsList'"
-                               aria-describedby="button-addon2"
-                               data-request="onMarketSearch"
-                               data-track-input="500"
-                               data-request-flash/>
+                               data-request-update="'admin/market-products': '#marketProductsList'"
+                               aria-describedby="button-addon2" data-request="onMarketSearch" data-track-input="500"
+                               data-request-flash="">
 
                         <div class="input-group-append">
-                            <button class="btn btn-primary" data-attach-loading type="submit" id="button-addon2">Izlash
+                            <button class="btn btn-primary" data-attach-loading="" type="submit" id="button-addon2">
+                                Izlash
                             </button>
                         </div>
                     </form>
-
                     <div class="header_tab_menu">
                         <div class="header_menu" style="overflow: auto">
 

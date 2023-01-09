@@ -16,6 +16,6 @@ urlpatterns = [
     path('admin/withdraw', csrf_exempt(WithdrawView.as_view()), name='withdraw'),
     path('admin/market', MarketListView.as_view(), name='market'),
     path('store/<int:pk>', StoreDetailView.as_view(), name='store'),
-    path('category/', CategoryDetail.as_view(), name='category_detail')
+    path('category/', CategoryDetail.as_view(), name='category_detail'),
     path('admin/product/<int:pk>', AdminProductDetailView.as_view(), name='admin_product_detailview'),
 ]

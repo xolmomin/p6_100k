@@ -86,12 +86,12 @@
                                 </ul>
 
                                 <div class="card-body text-center">
-                                    <a href="#" data-request="onCreateStreamModal" data-request-data="'id': 1013"
+                                    <a href="#" data-request="onCreateStreamModal" data-request-data="'id': {{ product.id }}"
                                        data-request-update="'popups/create-product-stream' : '#commonModalContent'"
                                        data-toggle="modal" data-target="#commonModal" class="btn btn-primary"> Oqim
                                         yaratish </a>
 
-                                    <a href="/admin/product/1013" class="btn btn-default"> Batafsil </a>
+                                    <a href="{% url 'admin_product_detailview' product.id %}" class="btn btn-default"> Batafsil </a>
                                 </div>
                             </div>
                         </div>

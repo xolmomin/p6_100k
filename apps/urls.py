@@ -1,8 +1,7 @@
 from django.urls import path
 
-from apps.views import ProfileView
-from apps.views import WithdrawView, MarketListView, StreamPageListView
-from apps.views.base import MainPageView, ProductDetailView
+from apps.views import ProfileView, AdminProductDetailView, ProductDetailView, MainPageView, \
+        WithdrawView, MarketListView, StreamPageListView
 
 urlpatterns = [
     path('', MainPageView.as_view(), name='main_page_view'),
@@ -12,4 +11,6 @@ urlpatterns = [
     path('admin/streams', StreamPageListView.as_view(), name='stream_page_view'),
     path('admin/withdraw', WithdrawView.as_view(), name='withdraw'),
     path('admin/market', MarketListView.as_view(), name='market'),
+    path('admin/product/<int:pk>', AdminProductDetailView.as_view(), name='admin_product_detailview'),
 ]
+

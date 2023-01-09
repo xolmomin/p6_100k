@@ -19,6 +19,10 @@ class Product(Model):
         verbose_name = "Product"
         verbose_name_plural = "Products"
 
+    @property
+    def stream_count(self):
+        return self.stream_set.count()
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
@@ -35,6 +39,8 @@ class Product(Model):
                 else:
                     self.slug += '-1'
         super().save(*args, **kwargs)
+
+
 
 
 class ProductOrders(Model):   # main pagedigi productslada buyurtmalar uchun model

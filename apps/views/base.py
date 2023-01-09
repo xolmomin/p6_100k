@@ -48,4 +48,7 @@ class StreamPageListView(ListView):
         context['url'] = get_current_site(self.request)
         return context
 
-
+class AdminProductDetailView(DetailView):
+    template_name = 'apps/admin/product.html'
+    queryset = Product.objects.all()
+    slug_field = Product.pk

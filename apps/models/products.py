@@ -1,5 +1,5 @@
 from django.db.models import Model, CharField, IntegerField, DateTimeField, SlugField, ForeignKey, CASCADE, \
-    BooleanField, TextField
+    BooleanField, TextField, SET_NULL
 from django.utils.text import slugify
 from django_resized import ResizedImageField
 

@@ -57,13 +57,18 @@
                                        placeholder="Enter your last name" value="{{ user.last_name }}">
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <label class="small mb-1" for="inputAddress">Address</label>
+                            <input class="form-control" id="inputFirstName" name="address" type="text"
+                                   placeholder="Enter your first name" value="{{ user.address }}">
+                        </div>
                         <!-- Form Row        -->
                         <!-- Form Group (email address)-->
-                        <div class="mb-3">
-                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                            <input class="form-control" id="inputEmailAddress" name="email" type="email"
-                                   placeholder="Enter your email address" value="{{ user.email }}">
-                        </div>
+                        {#                        <div class="mb-3">#}
+                        {#                            <label class="small mb-1" for="inputEmailAddress">Email address</label>#}
+                        {#                            <input class="form-control" id="inputEmailAddress" name="email" type="email"#}
+                        {#                                   placeholder="Enter your email address" value="{{ user.email }}">#}
+                        {#                        </div>#}
                         <!-- Form Row-->
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (phone number)-->
@@ -72,18 +77,19 @@
                                 <input class="form-control" id="phone" type="tel" name="phone"
                                        placeholder="Enter your phone number" value="{{ user.phone }}">
                             </div>
-                            <div class="col-md-6">
-                                <button class="btn btn-primary" type="button">activate phone number</button>
-                            </div>
+
+                            {#                            <div class="col-md-6">#}
+                            {#                                <button class="btn btn-primary" type="button">activate phone number</button>#}
+                            {#                            </div>#}
                         </div>
-                        <div class="row gx-3 mb-3">
-                            <!-- Form Group (phone number)-->
-                            <div class="col-md-9">
-                                <label class="small mb-1" for="inputBio">Bio</label>
-                                <input class="form-control" id="biography" type="text" name="biography"
-                                       placeholder="{{ user.biography }}" value="{{ user.biography }}">
-                            </div>
-                        </div>
+                        {#                        <div class="row gx-3 mb-3">#}
+                        {#                            <!-- Form Group (phone number)-->#}
+                        {#                            <div class="col-md-9">#}
+                        {#                                <label class="small mb-1" for="inputBio">Bio</label>#}
+                        {#                                <input class="form-control" id="biography" type="text" name="biography"#}
+                        {#                                       placeholder="{{ user.biography }}" value="{{ user.biography }}">#}
+                        {#                            </div>#}
+                        {#                        </div>#}
                         <!-- Save changes button-->
                         <button class="btn btn-primary" type="submit">Save changes</button>
                     </div>
@@ -172,12 +178,10 @@
 <script src="{% static '/auth/js/jquery.maskedinput.min.js' %}"></script>
 <script>
     $(document).ready(function () {
-        $("#phone").mask("(__) ___-__-__");
+        $("#phone").mask("(99) 999-99-99");
     });
 
 </script>
-
 <script src="{% static '/auth/js/main.js' %}"></script>
-
 </body>
 </html>

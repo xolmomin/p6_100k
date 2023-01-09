@@ -1,5 +1,6 @@
 import json
 from django.http import JsonResponse
+from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 
 from apps.forms import PaymentForm
@@ -58,11 +59,15 @@ class WithdrawView(UpdateView):
 
 
 class ProfileView(UpdateView):
-    queryset = User.objects.all()
     context_object_name = 'profile'
     form_class = ProfileForm
     model = User
     template_name = 'apps/auth/profile.html'
+    success_url = reverse_lazy('main_page_view')
 
     def get_object(self, queryset=None):
         return self.request.user
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)

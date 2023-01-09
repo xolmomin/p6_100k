@@ -1,4 +1,4 @@
-from django.db.models import Model, ForeignKey, PROTECT, CharField, TextField, TextChoices, CASCADE, IntegerChoices
+from django.db.models import Model, ForeignKey, PROTECT, CharField, TextField, CASCADE, IntegerChoices
 
 
 class Comment(Model):

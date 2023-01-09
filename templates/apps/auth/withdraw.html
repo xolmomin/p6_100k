@@ -1,4 +1,4 @@
-{% extends 'apps/parts/base.html' %}
+{% extends 'apps/admin/admin_base.html' %}
 {% load static %}
 {% block main %}
     <main class="admin-template mb-5">
@@ -16,9 +16,11 @@
                                 <h5 class="card-title">ID raqamingiz: <strong>{{ user.id }}</strong></h5>
                                 <h5 class="card-title">Asosiy balansda: <span id="balance">{{ user.balance }}</span>
                                     so'm</h5>
-                                <h5 class="card-title"><img src="https://100k.uz/themes/stock/assets/img/user/coins.png"
-                                                            alt=""> Bonus
-                                    balans: <strong id="coin"> {{ user.bonus }}</strong><strong> COIN </strong></h5>
+                                <h5 class="card-title">
+                                    <img src="https://100k.uz/themes/stock/assets/img/user/coins.png" alt=""> Bonus
+                                    balans:
+                                    <strong id="coin"> {{ user.bonus }}</strong>
+                                    <strong> COIN </strong></h5>
                                 <h5 class="card-title">Depozit balansda: {{ user.deposit }} so'm</h5>
                                 <h5 class="card-title">To'lab berildi: {{ user.payout }} so'm</h5>
                             </div>

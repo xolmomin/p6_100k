@@ -1,5 +1,4 @@
 import json
-
 from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView

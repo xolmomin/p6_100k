@@ -18,6 +18,7 @@ class MainPageView(TemplateView):
         return context
 
 
+
 class ProductDetailView(FormView, DetailView):
     template_name = 'apps/product_detail.html'
     queryset = Product.objects.all()

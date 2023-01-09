@@ -4,7 +4,5 @@ django-resized==1.0.2
 Pillow==9.4.0
 psycopg2-binary==2.9.5
 python-dotenv==0.21.0
+PyYAML==6.0
 sqlparse==0.4.3
-pyyaml==6.0
-
-

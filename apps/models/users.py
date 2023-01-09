@@ -11,11 +11,11 @@ class User(AbstractUser):
     balance = DecimalField(max_digits=30, decimal_places=2, default=0)  # main balance
     bonus = PositiveIntegerField(default=0)  # bonus balance
     deposit = DecimalField(max_digits=30, decimal_places=2, default=0)  # deposit balance
+    coin = PositiveIntegerField(default=0)
 
     @property
     def payout(self):
         amounts = self.paymenthistory_set.filter(
             status=PaymentHistory.StatusChoices.ACCEPTED
         ).values_list('amount', flat=True)
-
         return sum(amounts)

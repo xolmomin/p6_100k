@@ -32,7 +32,8 @@
 
                     <li class="header_navbar_collapse_nav_item">
                         <div class="header_navbar_collapse_nav_item_pad">
-                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'dashboard' %}active{% endif %}" href="">
+                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'dashboard' %}active{% endif %}"
+                               href="{% url 'admin_page' %}">
                                 <span class="fa fa-tachometer"></span>
                                 <p> Dashboard </p></a>
                         </div>
@@ -40,7 +41,8 @@
 
                     <li class="header_navbar_collapse_nav_item">
                         <div class="header_navbar_collapse_nav_item_pad">
-                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'market' %}active{% endif %}" href="/admin/market">
+                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'market' %}active{% endif %}"
+                               href="/admin/market">
                                 <span class="fas fa-store"></span>
                                 <p> Market </p>
                             </a>
@@ -49,7 +51,8 @@
 
                     <li class="header_navbar_collapse_nav_item">
                         <div class="header_navbar_collapse_nav_item_pad">
-                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'streams' %}active{% endif %}" href="/admin/streams">
+                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'streams' %}active{% endif %}"
+                               href="/admin/streams">
                                 <span class="fa fa-link"></span>
                                 <p> Oqim </p>
                             </a>
@@ -57,7 +60,8 @@
                     </li>
                     <li class="header_navbar_collapse_nav_item">
                         <div class="header_navbar_collapse_nav_item_pad">
-                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'statistics' %}active{% endif %}" href="">
+                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'statistics' %}active{% endif %}"
+                               href="">
                                 <span class="fas fa-chart-line"></span>
                                 <p> Statistika </p>
                             </a>
@@ -65,7 +69,8 @@
                     </li>
                     <li class="header_navbar_collapse_nav_item">
                         <div class="header_navbar_collapse_nav_item_pad">
-                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'withdraw' %}active{% endif %}" href="/admin/withdraw">
+                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'withdraw' %}active{% endif %}"
+                               href="/admin/withdraw">
                                 <span class="fas fa-money-bill-alt"></span>
                                 <p> To'lov </p>
                             </a>

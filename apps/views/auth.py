@@ -1,6 +1,4 @@
 import json
-
-from django.core.serializers import serialize
 from django.http import JsonResponse
 from django.views.generic import UpdateView
 

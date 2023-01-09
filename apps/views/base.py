@@ -78,3 +78,10 @@ class AdminProductDetailView(DetailView):
     template_name = 'apps/admin/product.html'
     queryset = Product.objects.all()
     slug_field = Product.pk
+
+
+class AdminPageView(DetailView):
+    template_name = 'apps/admin/main_page.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user

@@ -5,8 +5,8 @@ from apps.models import Product, Category
 
 class MarketListView(ListView):
     template_name = 'apps/admin/market_page.html'
-    model = Product
-    paginate_by = 30
+    queryset = Product.objects.order_by('id')
+    paginate_by = 15
     context_object_name = 'products'
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -16,6 +16,8 @@ class MarketListView(ListView):
 
     def get_queryset(self, *args, **kwargs):
         qs = super().get_queryset()
-        if category := self.request.GET.get('category'):
+        if self.request.GET.get('category') in ('new', 'top'):
+            return qs.order_by('-created_at')
+        elif category := self.request.GET.get('category'):
             return qs.filter(category__slug=category)
         return qs

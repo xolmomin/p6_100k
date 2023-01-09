@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    <meta charset="utf-8"/>
+    <meta name="turbo-visit-control" content="disable"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="shortcut icon" href="https://100k.uz/themes/stock/assets/favicon/favicon.ico" type="image/png">
+    <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/owlcarousel/owl.carousel.min.css"/>
+    <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/owlcarousel/owl.theme.default.min.css"/>
+    <link rel="stylesheet" href="https://100k.uz/combine/59f82d61887ef6d210900fece577822f-1635082775"/>
+    <link rel="stylesheet" href="https://100k.uz/combine/e5aee909518633f91997c51dc946c9b8-1658941002"/>
+
 </head>
 <body>
-{#    <i class="fa-solid fa-left"></i>  left icon#}
 
 <div class="container-xl px-4 mt-4">
     <!-- Account page navigation-->
@@ -18,150 +21,212 @@
     <form method="post" action="{% url 'profile_page' %}" enctype="multipart/form-data" class="needs-validation"
           novalidate>
         {% csrf_token %}
-        <div class="row">
-            <div class="col-xl-4">
-                <!-- Profile picture card-->
-                <div class="card mb-4 mb-xl-0">
-                    <div class="card-header">Profile Picture</div>
-                    <div class="card-body text-center">
-                        <!-- Profile picture image-->
-                        {% if user.image %}
-                            <img class="img-account-profile rounded-circle mb-2" src="{{ user.image.url }}" width="180"
-                                 height="200">
-                            <!-- Profile picture help block-->
-                            <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                        {% endif %}
-                        <!-- Profile picture uimapload button-->
-                        <input class="form-control" name="image" type="file">
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-8">
-                <!-- Account details card-->
-                <div class="card mb-4">
-                    <div class="card-header"></div>
-                    <div class="card-body">
-                        <!-- Form Row-->
-                        <div class="row gx-3 mb-3">
-                            <!-- Form Group (first name)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputFirstName">First name</label>
-                                <input class="form-control" id="inputFirstName" name="first_name" type="text"
-                                       placeholder="Enter your first name" value="{{ user.first_name }}">
-                            </div>
-                            <!-- Form Group (last name)-->
 
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputLastName">Last name</label>
-                                <input class="form-control" id="inputLastName" name="last_name" type="text"
-                                       placeholder="Enter your last name" value="{{ user.last_name }}">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputAddress">Address</label>
-                                <input class="form-control" id="inputFirstName" name="address" type="text"
-                                       placeholder="Enter your first name" value="{{ user.address }}">
-                            </div>
-                        </div>
-                        <!-- Form Row-->
-                        <div class="row gx-3 mb-3">
-                            <!-- Form Group (phone number)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputPhone">Phone number</label>
-                                <input class="form-control" id="phone" type="tel" name="phone"
-                                       placeholder="Enter your phone number" value="{{ user.phone }}">
-                            </div>
-                        </div>
-                        <button class="btn btn-outline-primary" type="submit">Save changes</button>
-                    </div>
-                </div>
+        <div class="container border-bottom-4">
+            <div class="content_name_block">
+                <a href="/profile" class="content_name_block_back"><span class="icon-arrow"></span></a>
+                <div class="content_name_block_text"><p> Sozlamalar </p></div>
             </div>
         </div>
+
+        <div class="container">
+            <form data-request="onUpdate" data-request-files data-request-flash class="content_profile">
+                <div class="content_profile_main">
+                    <div class="content_profile_name">
+                        <div class="content_profile_name_img"
+                             style="background-image: url({{ user.image.url }})">
+                            <input class="input-upload" type="file" name="image" onchange="readURL(this);"/>
+                        </div>
+
+                        <div class="content_profile_name_text">
+                            <p> Rasmingizni taxrirlang! </p>
+                            <a href="javascript:" class="btn-new btn-input"> Fotosurat yuklash </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content_profile_form">
+                    <div class="form-group">
+                        <label>Telefon</label>
+                        <input type="text" name="phone" readonly class="form-control"
+                               placeholder=" Telefon raqamingizni kiriting " value="+998 {{ user.phone }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label> Ism</label>
+                        <input type="text" name="first_name" class="form-control" placeholder=" Ismingizni kiriting "
+                               value="{{ user.first_name }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label> Familiya</label>
+                        <input type="text" name="last_name" class="form-control" placeholder=" Familiyangizni kiriting "
+                               value="{{ user.last_name }}">
+                    </div>
+
+                    <div id="partialCountryState">
+
+                        <div class="form-group">
+                            <label for="accountCountry"> Viloyat </label>
+                            <select id="accountCountry" class="form-control" emptyOption="" data-request="onInit"
+                                    data-request-update="&quot;country-state&quot;:&quot;#partialCountryState&quot;"
+                                    name="region_id">
+                                <option value="" selected="selected"></option>
+                                <option value="13">Toshkent shaxar</option>
+                                <option value="12">Andijon</option>
+                                <option value="11">Buxoro</option>
+                                <option value="1">Fargona</option>
+                                <option value="10">Jizzax</option>
+                                <option value="6">Namangan</option>
+                                <option value="7">Navoiy</option>
+                                <option value="8">Qashqadaryo</option>
+                                <option value="9">Qoraqalpogiston</option>
+                                <option value="5">Samarqand</option>
+                                <option value="3">Sirdaryo</option>
+                                <option value="4">Surxondaryo</option>
+                                <option value="2">Toshkent viloyati</option>
+                                <option value="14">Xorazm</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="accountState"> Tuman / Shahar </label>
+                            <select id="accountState" class="form-control" emptyOption="" name="district_id">
+                                <option value="" selected="selected"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label> Manzilingiz </label>
+                        <input type="text" name="address" class="form-control" placeholder="Manzilingizni kiriting"
+                               value="{{ user.address }}">
+                    </div>
+
+                    <button onclick='FB.AppEvents.logEvent("settingsSave")' data-attach-loading type="submit"
+                            class="btn btn-block btn-primary"> Saqlash
+                    </button>
+
+                    <div class="text-center">
+                        <br>
+                        <a href="/profile/password"> Doimiy parol kiritish </a>
+                    </div>
+
+                    <br>
+                    <p class="text-center">
+                        <a target="_blank" class="btn btn-block btn-primary"
+                           href="https://telegram.me/yuzkabot?start=16729160686359405"> Telegram botni biriktirish </a>
+                        <br>
+                        <small> TG Aktivlashtirish kodi: </small> <strong> 16729160686359405 </strong>
+                    </p> <br>
+
+                    <br><br>
+                </div>
+            </form>
+        </div>
+
+
+        <script>
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var data = e.target.result;
+                        var file = $(input);
+                        file.parent().addClass("has-file");
+                        file.parent().css("background-image", 'url("' + data + '")');
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        </script>
+
+        <style type="text/css">
+            body {
+                margin-top: 20px;
+                background-color: #f2f6fc;
+                color: #69707a;
+            }
+
+            .img-account-profile {
+                height: 10rem;
+            }
+
+            .rounded-circle {
+                border-radius: 50% !important;
+            }
+
+            .card {
+                box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+            }
+
+            .card .card-header {
+                font-weight: 500;
+            }
+
+            .card-header:first-child {
+                border-radius: 0.35rem 0.35rem 0 0;
+            }
+
+            .card-header {
+                padding: 1rem 1.35rem;
+                margin-bottom: 0;
+                background-color: rgba(33, 40, 50, 0.03);
+                border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+            }
+
+            .form-control, .dataTable-input {
+                display: block;
+                width: 100%;
+                padding: 0.875rem 1.125rem;
+                font-size: 0.875rem;
+                font-weight: 400;
+                line-height: 1;
+                color: #69707a;
+                background-color: #fff;
+                background-clip: padding-box;
+                border: 1px solid #c5ccd6;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                border-radius: 0.35rem;
+                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            }
+
+            .nav-borders .nav-link.active {
+                color: #0061f2;
+                border-bottom-color: #0061f2;
+            }
+
+            .nav-borders .nav-link {
+                color: #69707a;
+                border-bottom-width: 0.125rem;
+                border-bottom-style: solid;
+                border-bottom-color: transparent;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+                padding-left: 0;
+                padding-right: 0;
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+        </style>
+
+        <script src="{% static '/auth/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+        <script src="{% static '/auth/vendor/bootstrap/js/popper.js' %}"></script>
+        <script src="{% static '/auth/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static '/auth/vendor/select2/select2.min.js' %}"></script>
+        <script src="{% static '/auth/vendor/tilt/tilt.jquery.min.js' %}"></script>
+        <script src="{% static '/auth/js/jquery.maskedinput.min.js' %}"></script>
+        <script>
+            $(document).ready(function () {
+                $("#phone").mask("(99) 999-99-99");
+            });
+
+        </script>
+        <script src="{% static '/auth/js/main.js' %}"></script>
+
     </form>
 </div>
-
-<style type="text/css">
-    body {
-        margin-top: 20px;
-        background-color: #f2f6fc;
-        color: #69707a;
-    }
-
-    .img-account-profile {
-        height: 10rem;
-    }
-
-    .rounded-circle {
-        border-radius: 50% !important;
-    }
-
-    .card {
-        box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
-    }
-
-    .card .card-header {
-        font-weight: 500;
-    }
-
-    .card-header:first-child {
-        border-radius: 0.35rem 0.35rem 0 0;
-    }
-
-    .card-header {
-        padding: 1rem 1.35rem;
-        margin-bottom: 0;
-        background-color: rgba(33, 40, 50, 0.03);
-        border-bottom: 1px solid rgba(33, 40, 50, 0.125);
-    }
-
-    .form-control, .dataTable-input {
-        display: block;
-        width: 100%;
-        padding: 0.875rem 1.125rem;
-        font-size: 0.875rem;
-        font-weight: 400;
-        line-height: 1;
-        color: #69707a;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid #c5ccd6;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        border-radius: 0.35rem;
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    }
-
-    .nav-borders .nav-link.active {
-        color: #0061f2;
-        border-bottom-color: #0061f2;
-    }
-
-    .nav-borders .nav-link {
-        color: #69707a;
-        border-bottom-width: 0.125rem;
-        border-bottom-style: solid;
-        border-bottom-color: transparent;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-        padding-left: 0;
-        padding-right: 0;
-        margin-left: 1rem;
-        margin-right: 1rem;
-    }
-</style>
-
-<script src="{% static '/auth/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
-<script src="{% static '/auth/vendor/bootstrap/js/popper.js' %}"></script>
-<script src="{% static '/auth/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-<script src="{% static '/auth/vendor/select2/select2.min.js' %}"></script>
-<script src="{% static '/auth/vendor/tilt/tilt.jquery.min.js' %}"></script>
-<script src="{% static '/auth/js/jquery.maskedinput.min.js' %}"></script>
-<script>
-    $(document).ready(function () {
-        $("#phone").mask("(99) 999-99-99");
-    });
-
-</script>
-<script src="{% static '/auth/js/main.js' %}"></script>
 </body>
 </html>

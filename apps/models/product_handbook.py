@@ -1,4 +1,4 @@
-from django.db.models import Model, CharField, SlugField
+from django.db.models import Model, CharField, SlugField, IntegerChoices, ForeignKey, PROTECT, TextField, CASCADE
 from django.utils.text import slugify
 from django_resized import ResizedImageField
 
@@ -35,3 +35,24 @@ class Category(Model):
     @property
     def product_count(self):
         return self.product_set.count()
+
+class Comment(Model):
+    class Rate(IntegerChoices):
+        Ajoyib = 1, 'Ajoyib'
+        Yaxshi = 2, 'Yaxshi'
+        Qoniqarli = 3, 'Qoniqarli'
+        Yomon = 4, 'Yomon'
+        Judayomon = 5, 'Judayomon'
+
+    author = ForeignKey('apps.User', PROTECT)
+    name = CharField(max_length=255)
+    content = TextField()
+    product = ForeignKey('apps.Product', CASCADE)
+    rate = CharField(max_length=25, choices=Rate.choices, default=Rate.Qoniqarli)
+
+    class Meta:
+        verbose_name = 'Comment'
+        verbose_name_plural = 'Comments'
+
+    def __str__(self):
+        return self.name

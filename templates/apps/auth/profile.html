@@ -9,11 +9,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+{#    <i class="fa-solid fa-left"></i>  left icon#}
+
 <div class="container-xl px-4 mt-4">
     <!-- Account page navigation-->
-    <nav class="nav nav-borders">
-        <a class="nav-link  ms-0" href="{% url 'profile_page' %}">Profile</a>
-    </nav>
+    <a class="nav-link  ms-0" style="color: #007bff" href="{% url 'main_page_view' %}"> <- Home</a>
     <hr class="mt-0 mb-4">
     <form method="post" action="{% url 'profile_page' %}" enctype="multipart/form-data" class="needs-validation"
           novalidate>
@@ -39,9 +39,8 @@
             <div class="col-xl-8">
                 <!-- Account details card-->
                 <div class="card mb-4">
-                    <div class="card-header">Account Details</div>
+                    <div class="card-header"></div>
                     <div class="card-body">
-                        <!-- Form Group (username)-->
                         <!-- Form Row-->
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (first name)-->
@@ -51,24 +50,18 @@
                                        placeholder="Enter your first name" value="{{ user.first_name }}">
                             </div>
                             <!-- Form Group (last name)-->
+
                             <div class="col-md-6">
                                 <label class="small mb-1" for="inputLastName">Last name</label>
                                 <input class="form-control" id="inputLastName" name="last_name" type="text"
                                        placeholder="Enter your last name" value="{{ user.last_name }}">
                             </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputAddress">Address</label>
+                                <input class="form-control" id="inputFirstName" name="address" type="text"
+                                       placeholder="Enter your first name" value="{{ user.address }}">
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <label class="small mb-1" for="inputAddress">Address</label>
-                            <input class="form-control" id="inputFirstName" name="address" type="text"
-                                   placeholder="Enter your first name" value="{{ user.address }}">
-                        </div>
-                        <!-- Form Row        -->
-                        <!-- Form Group (email address)-->
-                        {#                        <div class="mb-3">#}
-                        {#                            <label class="small mb-1" for="inputEmailAddress">Email address</label>#}
-                        {#                            <input class="form-control" id="inputEmailAddress" name="email" type="email"#}
-                        {#                                   placeholder="Enter your email address" value="{{ user.email }}">#}
-                        {#                        </div>#}
                         <!-- Form Row-->
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (phone number)-->
@@ -77,21 +70,8 @@
                                 <input class="form-control" id="phone" type="tel" name="phone"
                                        placeholder="Enter your phone number" value="{{ user.phone }}">
                             </div>
-
-                            {#                            <div class="col-md-6">#}
-                            {#                                <button class="btn btn-primary" type="button">activate phone number</button>#}
-                            {#                            </div>#}
                         </div>
-                        {#                        <div class="row gx-3 mb-3">#}
-                        {#                            <!-- Form Group (phone number)-->#}
-                        {#                            <div class="col-md-9">#}
-                        {#                                <label class="small mb-1" for="inputBio">Bio</label>#}
-                        {#                                <input class="form-control" id="biography" type="text" name="biography"#}
-                        {#                                       placeholder="{{ user.biography }}" value="{{ user.biography }}">#}
-                        {#                            </div>#}
-                        {#                        </div>#}
-                        <!-- Save changes button-->
-                        <button class="btn btn-primary" type="submit">Save changes</button>
+                        <button class="btn btn-outline-primary" type="submit">Save changes</button>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,5 @@
 import os
+import random
 
 import requests
 from django.core.management import BaseCommand
@@ -49,25 +50,22 @@ class Command(BaseCommand):
 
         print('\n\n\t\tCREATING Product')
         # Create 1000 dummy data Product
+        stores = Store.objects.all()
+        categories = Category.objects.all()
         for i in range(10):
             title = ' '.join(fake.text().split()[:3])
             print(title, end=' ')
-            # try:
             main_picture = download_image(fake.unique.image_url(), 'product')
-            # except:
-            #     print(os.error)
-            #     print('No answer')
-            #     continue
             price = abs(int(fake.longitude())) * 1000
             created_at = fake.date_time()
             bonus = price // 100
             free_delivery = fake.boolean()
             reserve = abs(int(fake.longitude()))
-            store = 1
-            category = 1
+            store = random.choice(stores)
+            category = random.choice(categories)
             product = Product.objects.create(title=title, main_picture=main_picture, price=price, created_at=created_at,
-                                             bonus=bonus, free_delivery=free_delivery, reserve=reserve, store_id=store,
-                                             category_id=category)
+                                             bonus=bonus, free_delivery=free_delivery, reserve=reserve, store=store,
+                                             category=category)
             print('product added')
 
 

@@ -7,4 +7,4 @@ class Region(Model):
 
 class District(Model):
     name = CharField(max_length=100)
-    region_id = CharField(max_length=100)
+    region = ForeignKey(Region, on_delete=CASCADE)

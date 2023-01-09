@@ -8,6 +8,9 @@ class Category(Model):
     image = ResizedImageField(upload_to='category/')
     slug = SlugField(max_length=255, unique=True)
 
+    def __str__(self):
+        return self.title
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
@@ -24,6 +27,10 @@ class Category(Model):
                 else:
                     self.slug += '-1'
         super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
 
     @property
     def product_count(self):

@@ -6,7 +6,7 @@ from django_resized import ResizedImageField
 
 class Product(Model):
     title = CharField(max_length=255)
-    main_picture = ResizedImageField(size=[500, 300], upload_to='%m')
+    main_picture = ResizedImageField(upload_to='%m')
     description = TextField(null=True, blank=True)
     price = IntegerField()
     created_at = DateTimeField(auto_now_add=True)

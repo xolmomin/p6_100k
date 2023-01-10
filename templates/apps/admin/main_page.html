@@ -1,0 +1,345 @@
+{% extends 'apps/admin/admin_base.html' %}
+{% load static %}
+{% block main %}
+    <main class="admin-template">
+        <section class="main">
+            <div class="container">
+                <div class="card-balance">
+                    <div class="card-balance_main">
+                        <div class="card-balance_name">
+                            <div class="card-balance_name_img" style="overflow: inherit">
+                                <img style="border-radius: 50%; width: 100px; height: 100px; object-fit: cover;"
+                                     src="https://100k.uz/storage/app/uploads/public/615/a75/175/thumb_6440_150_150_0_0_crop.jpg"
+                                     alt="card" style="width: 100px; "/>
+                            </div>
+                            <div class="card-balance_name_text">
+                                <h2> {{ user.first_name }} {{ user.last_name }} </h2>
+                                <p> Saytda "{{ user.date_joined|date:"Y-m-d" }}" chi sanadan </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="alert alert-success d-none">
+                        Reklama berishdan oldin mahsulot soni yetarli ekangligiga iqroq bo'ling.
+                        Mahsulot sonini <a style="color: red" href="{% url 'market' %}"> mahsulotlar bo'limi </a>dan
+                        topishingiz mumkin.
+                    </div>
+
+                    <div class="card-balance_main">
+                        <div class="card-balance_terminal">
+                            <p> Hisobingizda </p>
+                            <h2> {{ user.bonus }} bonus </h2>
+                            <div class="card-balance_terminal_bottom">
+                                <div class="d-block">
+                                    <p style="margin-bottom: 10px">Coin: {{ user.coin }}, Tahminiy balans: 0 bonus</p>
+                                    <h4> {{ user.first_name }} {{ user.last_name }} </h4>
+                                </div>
+                                <h4> 100k </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-balance_main">
+                        <div class="row">
+
+                            <div class="col-sm-3 col-6">
+                                <a href="https://telegra.ph/100kuz-Adminlar-uchun-qollanma-11-15" target="_blank"
+                                   class="card-balance_block">
+                                    <div class="card-balance_block_img">
+                                        <i class="fas fa-info-circle"></i>
+                                    </div>
+                                    <div class="card-balance_block_name">
+                                        <p>Dastur haqida</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-sm-3 col-6">
+                                <a href="/admin/promocodes" class="card-balance_block">
+                                    <div class="card-balance_block_img">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div class="card-balance_block_name">
+                                        <p> Doimiy mijozlar </p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-sm-3 col-6">
+                                <a href="/admin/requests" class="card-balance_block">
+                                    <div class="card-balance_block_img">
+                                        <i class="fa fa-list-ul"></i>
+                                    </div>
+                                    <div class="card-balance_block_name">
+                                        <p>So'rovlar (220)</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-sm-3 col-6">
+                                <a href="/admin/balance-history" class="card-balance_block">
+                                    <div class="card-balance_block_img">
+                                        <i class="fas fa-money-bill-alt"></i>
+                                    </div>
+                                    <div class="card-balance_block_name">
+                                        <p> Balans tarixi </p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-sm-3 col-6">
+                                <a href="/admin/coin-market" class="card-balance_block">
+                                    <div class="card-balance_block_img">
+                                        <i style="color: white" class="fas fa-store"></i>
+                                    </div>
+                                    <div class="card-balance_block_name">
+                                        <p> COIN Market </p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-sm-3 col-6">
+                                <a href="/admin/competition" class="card-balance_block">
+                                    <div class="card-balance_block_img">
+                                        <i style="color: #007bff" class="fas fa-trophy"></i>
+                                    </div>
+                                    <div class="card-balance_block_name">
+                                        <p> COIN Konkurs </p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-sm-3 col-6">
+                                <a href="/admin/top-30" class="card-balance_block">
+                                    <div class="card-balance_block_img">
+                                        <i style="color: #007bff" class="fas fa-trophy"></i>
+                                    </div>
+                                    <div class="card-balance_block_name">
+                                        <p> TOP-30 Konkurs </p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-sm-3 col-6">
+                                <a href="/admin/charts" class="card-balance_block">
+                                    <div class="card-balance_block_img">
+                                        <i style="color: white" class="fa fa-bar-chart"></i>
+                                    </div>
+                                    <div class="card-balance_block_name">
+                                        <p> Diagrammalar </p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-sm-3 col-6">
+                                <a href="/admin/hayriya" class="card-balance_block">
+                                    <div class="card-balance_block_img">
+                                        <i style="color: white" class="fa fa-box"></i>
+                                    </div>
+                                    <div class="card-balance_block_name">
+                                        <p> Hayriya qutisi </p>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <style>
+            .admin-template section.main .container {
+                background: #394248;
+                padding: 20px;
+                color: white;
+                background-image: url(https://i.pinimg.com/originals/af/8d/63/af8d63a477078732b79ff9d9fc60873f.jpg);
+            }
+
+            .verified {
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                right: 0;
+            }
+
+
+            /* my balance */
+            .card-balance {
+                min-height: 200px;
+            }
+
+            .card-balance_name {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .card-balance_name_img {
+                max-width: 100px;
+                width: 100%;
+                min-height: 100px;
+                border-radius: 50%;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .card-balance_name_img input {
+                position: absolute;
+                opacity: 0;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+            }
+
+            .card-balance_name_text h2 {
+                font-size: 25px;
+            }
+
+            .card-balance_name_text p {
+                font-size: 16px;
+                margin-bottom: 10px;
+                color: #999;
+            }
+
+            .card-balance_name_text .btn-share:hover,
+            .card-balance_name_text .btn-share:focus {
+                background-color: #2997FF;
+                color: $ white;
+            }
+
+            .card-balance_name_text .btn-share {
+                width: auto;
+                padding: 10px 30px 7px;
+                background-color: #303539;
+                color: #fff;
+                border-radius: 20px;
+                -webkit-box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.4);
+                -moz-box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.4);
+                box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.4);
+                transition: background-color 0.3s ease-out;
+            }
+
+            .card-balance_name_text {
+                padding-top: 20px;
+                color: white;
+            }
+
+            .card-balance_main {
+                padding: 20px 0;
+            }
+
+            .card-balance_main .col-6 {
+                display: flex;
+            }
+
+            .card-balance_terminal {
+                background: rgba(48, 104, 131, 1.0);
+                background: -webkit-linear-gradient(bottom right, rgba(48, 104, 131, 1.0), rgba(25, 42, 141, 1.0));
+                background: -moz-linear-gradient(bottom right, rgba(48, 104, 131, 1.0), rgba(25, 42, 141, 1.0));
+                background: linear-gradient(to top left, rgba(48, 104, 131, 1.0), rgba(25, 42, 141, 1.0));
+                color: white;
+                border-radius: 5px;
+                padding: 20px 30px;
+            }
+
+            .card-balance_terminal p {
+                font-size: 14px;
+                letter-spacing: 1px;
+                white-space: pre;
+            }
+
+            .card-balance_terminal h2 {
+                margin-top: 5px;
+                font-size: 35px;
+            }
+
+            .card-balance_terminal_bottom {
+                display: flex;
+                padding-top: 30px;
+                justify-content: space-between;
+            }
+
+            .card-balance_terminal_bottom h4 {
+                display: flex;
+                align-items: flex-end;
+                font-weight: 700;
+                font-style: italic;
+                letter-spacing: 2px;
+            }
+
+            .card-balance_block {
+                margin: 10px 0;
+                padding: 20px;
+                display: flex;
+                border-radius: 10px;
+                flex-direction: column;
+                align-items: center;
+                background-color: #303539;
+                transition: background-color 0.3s ease-out;
+                width: 100%;
+            }
+
+            .card-balance_block:hover {
+                background-color: #24292d;
+            }
+
+            .card-balance_block_img {
+                padding: 10px;
+                border-radius: 50%;
+                overflow: hidden;
+                position: relative;
+                background: #393f44;
+                display: flex;
+            }
+
+            .card-balance_block_img i {
+                font-size: 25px;
+            }
+
+            .card-balance_block_img .fa-info-circle {
+                background: rgba(31, 90, 160, 1.0);
+                background: -webkit-linear-gradient(top right, rgba(31, 90, 160, 1.0), rgba(179, 131, 217, 1.0));
+                background: -moz-linear-gradient(top right, rgba(31, 90, 160, 1.0), rgba(179, 131, 217, 1.0));
+                background: linear-gradient(to bottom left, rgba(31, 90, 160, 1.0), rgba(179, 131, 217, 1.0));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .card-balance_block_img .fa-users {
+                background: rgba(79, 215, 52, 1.0);
+                background: -webkit-linear-gradient(bottom left, rgba(79, 215, 52, 1.0), rgba(10, 80, 38, 1.0));
+                background: -moz-linear-gradient(bottom left, rgba(79, 215, 52, 1.0), rgba(10, 80, 38, 1.0));
+                background: linear-gradient(to top right, rgba(79, 215, 52, 1.0), rgba(10, 80, 38, 1.0));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .card-balance_block_img .fa-list-ul {
+                background: rgba(174, 35, 121, 1.0);
+                background: -webkit-linear-gradient(top right, rgba(174, 35, 121, 1.0), rgba(163, 9, 97, 1.0));
+                background: -moz-linear-gradient(top right, rgba(174, 35, 121, 1.0), rgba(163, 9, 97, 1.0));
+                background: linear-gradient(to bottom left, rgba(174, 35, 121, 1.0), rgba(163, 9, 97, 1.0));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .card-balance_block_img .fa-money-bill-alt {
+                background: rgba(198, 189, 69, 1.0);
+                background: -webkit-linear-gradient(top right, rgba(198, 189, 69, 1.0), rgba(215, 217, 131, 1.0));
+                background: -moz-linear-gradient(top right, rgba(198, 189, 69, 1.0), rgba(215, 217, 131, 1.0));
+                background: linear-gradient(to bottom left, rgba(198, 189, 69, 1.0), rgba(215, 217, 131, 1.0));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .card-balance_block_name {
+                padding-top: 15px;
+                color: white;
+                text-align: center;
+            }
+        </style>
+    </main>
+{% endblock %}

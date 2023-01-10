@@ -1,3 +1,4 @@
+from django.contrib.auth.views import LogoutView
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 
@@ -10,6 +11,7 @@ urlpatterns = [
     path('', MainPageView.as_view(), name='main_page_view'),
     path('product/shop/<str:slug>', ProductDetailView.as_view(), name='product_detail'),
     path('profile/', ProfileView.as_view(), name='profile_page'),
+    path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('product/<str:slug>', ProductDetailView.as_view(), name='product_detail_view'),
     path('store/<int:pk>', StoreDetailView.as_view(), name='store'),
     path('category/', CategoryDetail.as_view(), name='category_detail'),

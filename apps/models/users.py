@@ -1,5 +1,5 @@
 from django.contrib.auth.models import AbstractUser
-from django.db.models import CharField, DecimalField, PositiveIntegerField
+from django.db.models import CharField, DecimalField, PositiveIntegerField, Model, EmailField
 from django_resized import ResizedImageField
 
 from apps.models.payments import PaymentHistory
@@ -20,3 +20,16 @@ class User(AbstractUser):
             status=PaymentHistory.StatusChoices.ACCEPTED
         ).values_list('amount', flat=True)
         return sum(amounts)
+
+
+class Contact(Model):
+    phone = CharField(max_length=255)
+    email = EmailField(max_length=255)
+    telegram = CharField(max_length=255)
+
+    def __str__(self):
+        return self.pk
+
+    class Meta:
+        verbose_name = 'Contact'
+        verbose_name_plural = 'Contact'

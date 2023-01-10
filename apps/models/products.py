@@ -25,6 +25,14 @@ class Product(Model):
     def stream_count(self):
         return self.stream_set.count()
 
+    @property
+    def image_url(self):
+        try:
+            url = self.main_picture.url
+        except ValueError:
+            url = 'https://via.placeholder.com/400x400'
+        return url
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
@@ -48,4 +56,3 @@ class ProductOrders(Model):  # main pagedigi productslada buyurtmalar uchun mode
     region = ForeignKey('apps.Region', SET_NULL, null=True, blank=True)
     user = ForeignKey('apps.User', CASCADE)  # km zakaz qilingani
     phone = IntegerField()
-

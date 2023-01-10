@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
-from django.db.models import CharField,DecimalField, PositiveIntegerField, IntegerField, BooleanField, Model, TextChoices, PROTECT, ForeignKey, TextField, EmailField
+from django.db.models import CharField, DecimalField, PositiveIntegerField, Model, EmailField, ForeignKey, CASCADE, \
+    BooleanField, TextChoices, PROTECT, TextField
 from django_resized import ResizedImageField
-from apps.utils.token import bot_activation_token
 
 from apps.models.payments import PaymentHistory
 
@@ -37,6 +37,11 @@ class Contact(Model):
     class Meta:
         verbose_name = 'Contact'
         verbose_name_plural = 'Contact'
+
+
+class Favorite(Model):
+    user = ForeignKey('apps.User', CASCADE)
+    product = ForeignKey('apps.Product', CASCADE)
 
 
 class Tickets(Model):

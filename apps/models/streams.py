@@ -1,5 +1,6 @@
-from django.db.models import BooleanField, Model, ForeignKey, CharField, \
-    CASCADE, PositiveIntegerField
+from django.db.models import (BooleanField, Model, ForeignKey, CharField,
+                              CASCADE, PositiveIntegerField)
+from django_resized import ResizedImageField
 
 
 class Stream(Model):
@@ -9,3 +10,25 @@ class Stream(Model):
     user = ForeignKey('apps.User', CASCADE)  # oqim yaratgan foydalanuchi
     product = ForeignKey('apps.Product', CASCADE)  # oqim uchun mahsulot
     is_area = BooleanField(default=False)  # hududsiz qabul qilish
+
+
+class Store(Model):
+    image = ResizedImageField(size=[300, 300], crop=['middle', 'center'], upload_to='shops')
+    name = CharField(max_length=255)
+    short_des = CharField(max_length=255)
+
+    class Meta:
+        verbose_name = "Stores"
+        verbose_name_plural = "Stores"
+
+    def __str__(self):
+        return self.name
+
+
+class Region(Model):
+    name = CharField(max_length=100, default='Tashkent')
+
+
+class District(Model):
+    name = CharField(max_length=100, default='Tashkent')
+    region = ForeignKey(Region, on_delete=CASCADE)

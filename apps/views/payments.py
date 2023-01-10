@@ -6,8 +6,6 @@ from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 
 from apps.forms import PaymentForm
-from apps.forms.authform import ProfileForm
-from apps.models import User
 
 
 class WithdrawView(LoginRequiredMixin, UpdateView):
@@ -59,22 +57,3 @@ class WithdrawView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
-
-
-class ProfileView(UpdateView):
-    context_object_name = 'profile'
-    form_class = ProfileForm
-    queryset = User.objects.all()
-    redirect_authenticated_user = True
-    template_name = 'apps/auth/profile.html'
-    success_url = reverse_lazy('main_page_view')
-
-    def get_object(self, queryset=None):
-        return self.request.user
-
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        return super().form_invalid(form)

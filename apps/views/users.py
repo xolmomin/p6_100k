@@ -6,7 +6,7 @@ from apps.forms import ProfileModelForm, FavoriteModelForm
 from apps.models import User
 
 
-class ProfileView(UpdateView):
+class ProfileView(LoginRequiredMixin, UpdateView):
     context_object_name = 'profile'
     form_class = ProfileModelForm
     queryset = User.objects.all()

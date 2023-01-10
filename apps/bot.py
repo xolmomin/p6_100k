@@ -3,11 +3,9 @@ from django.http import JsonResponse
 from django.views import View
 from telebot.types import ReplyKeyboardMarkup
 
-from apps.models.users import Tickets
-from apps.utils.token import bot_activation_token
-from root import settings
-
 from apps.models import User
+from apps.models.users import Tickets
+from root import settings
 
 bot = telebot.TeleBot(settings.TELEGRAM_BOT_API_KEY)
 
@@ -96,8 +94,11 @@ def process_token_verification(message):
 @bot.message_handler(commands=['profile'])
 def profile_info(message):
     user = get_activated_user(message)
-    bot.send_message(message.from_user.id,f"Profilingiz haqida malumotlar:\nId: {user.id},\nBonus: 0,"
-                     f"\nIsm: {user.fist_name},\nFamiliya: {user.last_name},\nTelefon / Login: {user.phone}")
+    bot.send_message(
+        message.from_user.id,
+        f"Profilingiz haqida malumotlar:\nId: {user.id},\nBonus: 0,"
+        f"\nIsm: {user.fist_name},\nFamiliya: {user.last_name},\nTelefon / Login: {user.phone}"
+    )
 
 
 @bot.message_handler(commands=['newticket'])

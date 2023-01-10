@@ -1,7 +1,6 @@
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import JsonResponse
-from django.views.generic import DetailView, FormView, ListView
-from django.views.generic import TemplateView
+from django.views.generic import DetailView, FormView, ListView, TemplateView
 
 from apps.forms.base import CreateCommentForm
 from apps.models import Product, Comment, Stream, Category, Region
@@ -16,7 +15,6 @@ class MainPageView(TemplateView):
         context['products'] = Product.objects.all()[:6]
         context['categories'] = Category.objects.all()
         return context
-
 
 
 class ProductDetailView(FormView, DetailView):

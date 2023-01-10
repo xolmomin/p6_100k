@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
-from django.db.models import CharField, DecimalField, PositiveIntegerField, Model, EmailField, ForeignKey, CASCADE
+from django.db.models import CharField, DecimalField, PositiveIntegerField, Model, EmailField, ForeignKey, CASCADE, \
+    BooleanField, TextChoices, PROTECT, TextField
 from django_resized import ResizedImageField
-from apps.utils.token import bot_activation_token
 
 from apps.models.payments import PaymentHistory
 

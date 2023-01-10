@@ -37,7 +37,7 @@ class Command(BaseCommand):
         print('\n\n\t\tCREATING Store')
         for i in range(20):
             name = fake.unique.company()
-            description = ' '.join(fake.unique.texts().split()[:20]) + '.'
+            description = ' '.join(fake.unique.text().split()[:20]) + '.'
             print(name, end=' ')
             try:
                 image = fake.unique.image_url()
@@ -56,7 +56,7 @@ class Command(BaseCommand):
             title = ' '.join(fake.text().split()[:3])
             print(title, end=' ')
             main_picture = download_image(fake.unique.image_url(), 'product')
-            description = ' '.join(fake.unique.texts().split()[:40]) + '.'
+            description = ' '.join(fake.unique.text().split()[:40]) + '.'
             price = abs(int(fake.longitude())) * 1000
             created_at = fake.date_time()
             bonus = price // 100

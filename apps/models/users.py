@@ -53,8 +53,8 @@ class Tickets(Model):
         BOSHQA = 'other', 'boshqa'
 
     class PurposeTextChoice(TextChoices):
-        MUAMMO = 'issue', 'muammo'
-        TAKLIF = 'suggestion', 'taklif'
+        ISSUE = 'issue', 'muammo'
+        SUGGESTION = 'suggestion', 'taklif'
 
     author = ForeignKey(User, PROTECT)
     sender = CharField(max_length=55, choices=SenderTextChoice.choices)

@@ -1,7 +1,6 @@
-from django.http import JsonResponse
 from django.views.generic import ListView
 
-from apps.models import Product, Stream, Category, Contact
+from apps.models import Product, Category, Contact
 
 
 class MainPageView(ListView):
@@ -37,9 +36,3 @@ class ContactsView(ListView):
     model = Contact
 
 
-def completed(request, *args, **kwargs):
-    stream = Stream.objects.get(id=id)
-    stream.is_area = not stream.is_area
-    stream.save()
-
-    return JsonResponse({'status': 200})

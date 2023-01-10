@@ -1,7 +1,6 @@
-from django.contrib.admin import ModelAdmin, register
+from django.contrib.admin import ModelAdmin, register, StackedInline
 
-from apps.models import Store, Product, Category, Contact
-from apps.models.payments import PaymentHistory
+from apps.models import Store, Product, Category, Contact, PaymentHistory, ProductImage
 
 
 @register(Store)
@@ -9,8 +8,13 @@ class StoreAdmin(ModelAdmin):
     list_display = ('id', 'name')
 
 
+class ImageAdmin(StackedInline):
+    model = ProductImage
+
+
 @register(Product)
 class ProductAdmin(ModelAdmin):
+    inlines = [ImageAdmin]
     list_display = ('title', 'store_name')
     exclude = ('slug',)
 

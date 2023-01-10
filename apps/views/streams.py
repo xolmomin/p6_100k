@@ -6,7 +6,7 @@ from apps.models import Stream, Store, Product, Category
 
 class MainPageView(TemplateView):
     queryset = Product.objects.all()
-    template_name = 'apps/main_page.html'
+    template_name = 'apps/index.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)

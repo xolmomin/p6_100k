@@ -1,12 +1,10 @@
 from django.db.models import Model, CharField, IntegerField, DateTimeField, SlugField, ForeignKey, CASCADE, \
-    BooleanField, TextField, SET_NULL
+    BooleanField, TextField, SET_NULL, ImageField
 from django.utils.text import slugify
-from django_resized import ResizedImageField
 
 
 class Product(Model):
     title = CharField(max_length=255)
-    main_picture = ResizedImageField(upload_to='%m')
     description = TextField(null=True, blank=True)
     price = IntegerField()
     created_at = DateTimeField(auto_now_add=True)
@@ -24,14 +22,13 @@ class Product(Model):
     @property
     def stream_count(self):
         return self.stream_set.count()
-
-    @property
-    def image_url(self):
-        try:
-            url = self.main_picture.url
-        except ValueError:
-            url = 'https://via.placeholder.com/400x400'
-        return url
+    # @property
+    # def image_url(self):
+    #     try:
+    #         url = self.main_picture.url
+    #     except ValueError:
+    #         url = 'https://via.placeholder.com/400x400'
+    #     return url
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -49,6 +46,11 @@ class Product(Model):
                 else:
                     self.slug += '-1'
         super().save(*args, **kwargs)
+
+
+class ProductImage(Model):
+    product = ForeignKey('apps.Product', CASCADE)
+    image = ImageField(upload_to='image/', default='media/product-default.jpg')
 
 
 class ProductOrders(Model):  # main pagedigi productslada buyurtmalar uchun model

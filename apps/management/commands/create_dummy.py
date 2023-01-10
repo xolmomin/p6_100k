@@ -44,7 +44,8 @@ class Command(BaseCommand):
             except:
                 print('No answer')
                 continue
-            store = Store.objects.create(image=download_image(image, "store"), name=name,
+            store = Store.objects.create(image=download_image(image, "store"),
+                                         name=name,
                                          short_des=description)
             print('store added')
 
@@ -64,8 +65,13 @@ class Command(BaseCommand):
             reserve = abs(int(fake.longitude()))
             store = random.choice(stores)
             category = random.choice(categories)
-            product = Product.objects.create(title=title, main_picture=main_picture, description=description, price=price, created_at=created_at,
-                                             bonus=bonus, free_delivery=free_delivery, reserve=reserve, store=store,
+            product = Product.objects.create(title=title,
+                                             main_picture=main_picture,
+                                             description=description,
+                                             price=price,
+                                             created_at=created_at,
+                                             bonus=bonus,
+                                             free_delivery=free_delivery, reserve=reserve, store=store,
                                              category=category)
             print('product added')
 

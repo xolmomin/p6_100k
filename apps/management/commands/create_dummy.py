@@ -39,12 +39,8 @@ class Command(BaseCommand):
             name = fake.unique.company()
             description = ' '.join(fake.unique.text().split()[:20]) + '.'
             print(name, end=' ')
-            try:
-                image = fake.unique.image_url()
-            except:
-                print('No answer')
-                continue
-            store = Store.objects.create(image=download_image(image, "store"),
+            image = download_image(fake.unique.image_url(), "store")
+            store = Store.objects.create(image=image,
                                          name=name,
                                          short_des=description)
             print('store added')

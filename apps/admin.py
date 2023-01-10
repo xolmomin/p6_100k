@@ -1,6 +1,7 @@
 from django.contrib.admin import ModelAdmin, register
 
-from apps.models import Store, Product, Category
+from apps.models import Store, Product, Category, Contact
+from apps.models.payments import PaymentHistory
 
 
 @register(Store)
@@ -21,3 +22,13 @@ class ProductAdmin(ModelAdmin):
 class CategoryAdmin(ModelAdmin):
     exclude = ('slug',)
     list_display = ('id', 'title')
+
+
+@register(PaymentHistory)
+class PaymentAdmin(ModelAdmin):
+    list_display = ('user', 'amount', 'status')
+
+
+@register(Contact)
+class ContactAdmin(ModelAdmin):
+    pass

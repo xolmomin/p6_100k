@@ -17,4 +17,6 @@ class PaymentHistory(Model):
     created_at = DateTimeField(auto_now_add=True)
 
     class Meta:
+        verbose_name = 'Payment'
+        verbose_name_plural = 'Payment history'
         ordering = ('-created_at',)

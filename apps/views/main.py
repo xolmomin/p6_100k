@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.views.generic import DetailView, FormView, ListView, TemplateView
 
 from apps.forms.base import CreateCommentForm
-from apps.models import Product, Comment, Stream, Category, Region
+from apps.models import Product, Comment, Stream, Category, Region, Contact
 
 
 class MainPageView(TemplateView):
@@ -90,3 +90,8 @@ class AdminPageView(DetailView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+class ContactsView(ListView):
+    template_name = 'apps/contacts.html'
+    model = Contact

@@ -37,18 +37,12 @@ class Command(BaseCommand):
         print('\n\n\t\tCREATING Store')
         for i in range(20):
             name = fake.unique.company()
-            description = ' '.join(fake.unique.texts().split()[:20]) + '.'
+            description = ' '.join(fake.unique.text().split()[:20]) + '.'
             print(name, end=' ')
-            try:
-                image = fake.unique.image_url()
-            except:
-                print('No answer')
-                continue
-            store = Store.objects.create(
-                image=download_image(image, "store"),
-                name=name,
-                short_des=description
-            )
+            image = download_image(fake.unique.image_url(), "store")
+            store = Store.objects.create(image=image,
+                                         name=name,
+                                         short_des=description)
             print('store added')
 
         # Create 1000 dummy data Product
@@ -59,7 +53,7 @@ class Command(BaseCommand):
             title = ' '.join(fake.text().split()[:3])
             print(title, end=' ')
             main_picture = download_image(fake.unique.image_url(), 'product')
-            description = ' '.join(fake.unique.texts().split()[:40]) + '.'
+            description = ' '.join(fake.unique.text().split()[:40]) + '.'
             price = abs(int(fake.longitude())) * 1000
             created_at = fake.date_time()
             bonus = price // 100
@@ -67,9 +61,13 @@ class Command(BaseCommand):
             reserve = abs(int(fake.longitude()))
             store = random.choice(stores)
             category = random.choice(categories)
-            product = Product.objects.create(title=title, main_picture=main_picture, description=description,
-                                             price=price, created_at=created_at,
-                                             bonus=bonus, free_delivery=free_delivery, reserve=reserve, store=store,
+            product = Product.objects.create(title=title,
+                                             main_picture=main_picture,
+                                             description=description,
+                                             price=price,
+                                             created_at=created_at,
+                                             bonus=bonus,
+                                             free_delivery=free_delivery, reserve=reserve, store=store,
                                              category=category)
             print('product added')
 

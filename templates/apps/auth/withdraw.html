@@ -81,7 +81,7 @@
                                 {% csrf_token %}
                                 <div class="form-group">
                                     <label>Karta raqamingizni kiriting</label>
-                                    <input id="card-number" type="text" class="form-control" value=""
+                                    <input id="card-number" type="text" class="form-control" min="16" maxlength="16"
                                            placeholder="Karta raqamingizni kiriting">
                                 </div>
 

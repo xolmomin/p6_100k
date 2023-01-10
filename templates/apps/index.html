@@ -1,912 +1,144 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="uz">
+{% extends 'apps/parts/base.html' %}
 
-<!-- Mirrored from 100k.uz/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Jan 2023 11:55:07 GMT -->
-<!-- Added by HTTrack -->
-<meta http-equiv="content-type" content="text/html;charset=UTF-8"/><!-- /Added by HTTrack -->
-<head>
-    <style>
+{% block main %}
 
-        /* Dropdown Button */
-        .dropbtn {
-            background-color: #3498DB;
-            color: white;
-            padding: 16px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-        }
+    <main class="client-template">
+        <section class="main">
 
-        /* Dropdown button on hover & focus */
-        .dropbtn:hover, .dropbtn:focus {
-            background-color: #2980B9;
-        }
-
-        /* The container <div> - needed to position the dropdown content */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        /* Dropdown Content (Hidden by Default) */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f1f1f1;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-
-        /* Links inside the dropdown */
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        /* Change color of dropdown links on hover */
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-
-        /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-        .show {
-            display: block;
-        }
-    </style>
-    <meta charset="utf-8"/>
-    <meta name="turbo-visit-control" content="disable"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <link rel="shortcut icon" href="{% static 'apps/themes/stock/assets/favicon/favicon.ico' %}" type="image/png">
-    <link rel="stylesheet" href="{% static 'apps/themes/stock/assets/owlcarousel/owl.carousel.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'apps/themes/stock/assets/owlcarousel/owl.theme.default.min.css' %}"/>
-    <link rel="stylesheet" href="combine/59f82d61887ef6d210900fece577822f-1635082775.css"/>
-    <link rel="stylesheet" href="combine/e5aee909518633f91997c51dc946c9b8-1658941002.css"/>
-
-    <!-- seo meta tags -->
-    <title>Internet do&#039;kon O&#039;zbekiston bo&#039;ylab bepul yetqazib berish</title>
-    <meta name="description"
-          content="100k.uz - bu eng innavatsion goyalarni o&#039;z ichiga olgan internet do&#039;kon.">
-
-</head>
-<body class="d-flex flex-column max-h-screen">
-<div class="topLine">
-    <div class="container">
-        <div class="row align-items-center py-1">
-            <div class="col-auto">
-                <div class="d-flex">
-                    <a href="https://play.google.com/store/apps/details?id=uz.itmaker.stock" class="androidDownloadBtn">
-                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                             xmlns:svgjs="http://svgjs.com/svgjs" width="16" height="16" x="0" y="0"
-                             viewBox="0 0 505.145 505.145" style="enable-background:new 0 0 512 512"
-                             xml:space="preserve" class="">
-                        <g xmlns="http://www.w3.org/2000/svg">
-                			<path style=""
-                                  d="M68.541,164.715h-1.294c-16.588,0-30.113,13.568-30.113,30.113v131.107     c0,16.61,13.525,30.134,30.113,30.134h1.316c16.588,0,30.113-13.568,30.113-30.134V194.827     C98.654,178.283,85.108,164.715,68.541,164.715z"
-                                  fill="#010002" data-original="#010002" class=""></path>
-                            <path style=""
-                                  d="M113.085,376.54c0,15.229,12.446,27.632,27.675,27.632h29.574v70.817     c0,16.631,13.568,30.156,30.113,30.156h1.294c16.61,0,30.156-13.546,30.156-30.156v-70.817h41.33v70.817     c0,16.631,13.611,30.156,30.156,30.156h1.273c16.609,0,30.134-13.546,30.134-30.156v-70.817h29.595     c15.207,0,27.654-12.403,27.654-27.632V169.525H113.085V376.54z"
-                                  fill="#010002" data-original="#010002" class=""></path>
-                            <path style=""
-                                  d="M322.041,43.983l23.491-36.26c1.51-2.287,0.841-5.414-1.467-6.903     c-2.286-1.51-5.414-0.884-6.903,1.467l-24.353,37.512c-18.27-7.485-38.676-11.691-60.226-11.691     c-21.571,0-41.934,4.206-60.247,11.691l-24.31-37.512c-1.488-2.351-4.638-2.977-6.946-1.467     c-2.308,1.488-2.977,4.616-1.467,6.903l23.512,36.26c-42.387,20.773-70.968,59.924-70.968,104.834     c0,2.761,0.173,5.479,0.41,8.175h280.053c0.237-2.696,0.388-5.414,0.388-8.175C393.009,103.907,364.406,64.756,322.041,43.983z      M187.655,108.911c-7.442,0-13.482-5.997-13.482-13.46c0-7.463,6.04-13.439,13.482-13.439c7.485,0,13.482,5.975,13.482,13.439     S195.097,108.911,187.655,108.911z M317.49,108.911c-7.442,0-13.482-5.997-13.482-13.46c0-7.463,6.04-13.439,13.482-13.439     c7.463,0,13.46,5.975,13.46,13.439C330.95,102.914,324.953,108.911,317.49,108.911z"
-                                  fill="#010002" data-original="#010002" class=""></path>
-                            <path style=""
-                                  d="M437.876,164.715h-1.251c-16.588,0-30.156,13.568-30.156,30.113v131.107     c0,16.61,13.59,30.134,30.156,30.134h1.273c16.609,0,30.113-13.568,30.113-30.134V194.827     C468.011,178.283,454.464,164.715,437.876,164.715z"
-                                  fill="#010002" data-original="#010002" class=""></path>
-                        </g>
-                    </svg>
-                        <span class="d-none d-sm-inline">Google Play</span>
-                    </a>
-                    <a href="https://apps.apple.com/pl/app/100k-uz/id1529911106" class="iosDownloadBtn">
-                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                             xmlns:svgjs="http://svgjs.com/svgjs" width="16" height="16" x="0" y="0"
-                             viewBox="0 0 502.657 502.657" style="enable-background:new 0 0 512 512"
-                             xml:space="preserve" class=""><g>
-                        <g xmlns="http://www.w3.org/2000/svg">
-                    		<path d="M389.063,281.758c-13.827-69.587,52.223-110.399,52.223-110.399s-25.734-37.231-68.983-46.809    c-43.228-9.599-64.863,2.394-86.456,11.389c-21.614,9.017-32.399,9.017-32.399,9.017c-31.191,0-53.992-33.025-113.419-17.99    c-40.941,10.332-84.04,57.594-91.827,114.002c-7.787,56.429,9.017,128.432,41.416,184.236    c32.399,55.847,65.403,76.835,88.828,77.439c23.426,0.582,46.809-16.782,75.002-21.01c28.215-4.185,45.579,10.225,73.254,18.012    c27.567,7.766,37.231,0.561,68.983-26.446c31.838-27.007,60.657-104.467,60.657-104.467S402.89,351.388,389.063,281.758z"
-                                  fill="#000000" data-original="#000000" class=""></path>
-                            <path d="M327.845,79.531C358.475,48.319,348.1,0,348.1,0s-43.012,7.55-71.831,37.533c-28.797,30.005-24.03,77.396-24.03,77.396    S297.214,110.723,327.845,79.531z"
-                                  fill="#000000" data-original="#000000" class=""></path>
-                    	</g>
-                	</svg>
-                        <span class="d-none d-sm-inline">Appstore</span>
-                    </a>
-                </div>
-            </div>
-            <div class="col"></div>
-
-
-            <div class="col-auto">
-                <div class="dropdown px-2">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-globe mr-1"></i>
-                        <span> Mening profilim </span>
-                    </a>
-
-                    <div class="dropdown-menu mt-3 dropdown-menu-right">
-                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
-                           href="pages/contacts.html"> Aloqa uchun </a>
-                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
-                           href="auth.html"> Profil </a>
-
-
-                        <a class="d-none dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
-                           href="profile/buy-bonus.html"> Bonus xarid qilish </a>
-
-                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
-                           href="auth.html"> Mening sevimlilarim </a>
-                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
-                           href="auth.html"> Sozlamalar </a>
-
-
+            <div class="siteCategories pt-5 pb-3">
+                <div class="container">
+                    <!-- <h2 class="font-weight-bold mb-5">Our categories</h2> -->
+                    <div class="row">
+                        {% for category in categories %}
+                            <div class="col-md-2 col-4">
+                                <a class="siteCategories--item"
+                                   href="{% url 'category_detail' %}?category={{ category.slug }}">
+                                    <img alt="Elektronika" height="100" style="width:100px;height:100px;"
+                                         src="{{ category.image.url }}"
+                                         width="100">
+                                    <span> {{ category.title }}  <small>{{ category.product_count }}</small> </span>
+                                </a>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<header class="siteHeader">
-    <div class="container">
-        <div class="row align-items-center siteHeader--height">
-            <div class="col-auto col-logo">
-                <a href="index.html" class="header_navbar_brand_logo">
-                    <img src="{% static 'apps/themes/stock/assets/100k.png' %}"
-                         style="height: 30px; object-fit: cover; margin-top: -10px" alt="100k.uz">
-                </a>
-            </div>
-            <div class="d-none d-md-block col-sm-1"></div>
-            <div class="col col-search">
-                <form data-request="onSearch" data-request-flash
-                      data-request-update="'site/main-search-result': '#mainSearchResult'" class="siteSearch">
-
-                    <input name="search" type="text" placeholder="qidiruv..." autocomplete="off"
-                           data-request="onSearch" data-request-flash data-track-input="500"
-                           data-request-update="'site/main-search-result': '#mainSearchResult'">
-
-                    <button data-attach-loading>
-                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                             xmlns:svgjs="http://svgjs.com/svgjs" width="20" height="20" x="0" y="0"
-                             viewBox="0 0 6.3499999 6.3500002" style="enable-background:new 0 0 512 512"
-                             xml:space="preserve">
-            <g>
-                <g xmlns="http://www.w3.org/2000/svg" id="layer1" transform="translate(0 -290.65)">
-                    <path id="circle2017"
-                          d="m2.8944091 291.16099c-1.3119941 0-2.38073328 1.06874-2.38073328 2.38074 0 1.31199 1.06873918 2.3828 2.38073328 2.3828.5603925 0 1.0757805-.19638 1.4831137-.52245l.9916707.99115a.26516505.26516505 0 0 0 .375171-.37465l-.9916708-.99167c.3263411-.40796.5229654-.92414.5229654-1.48518 0-1.312-1.0692559-2.38074-2.38125-2.38074zm0 .52917c1.0260113 0 1.8515666.82556 1.8515666 1.85157s-.8255553 1.85363-1.8515666 1.85363-1.8515666-.82762-1.8515666-1.85363.8255553-1.85157 1.8515666-1.85157z"
-                          font-variant-ligatures="normal" font-variant-position="normal" font-variant-caps="normal"
-                          font-variant-numeric="normal" font-variant-alternates="normal" font-feature-settings="normal"
-                          text-indent="0" text-align="start" text-decoration-line="none" text-decoration-style="solid"
-                          text-decoration-color="rgb(0,0,0)" text-transform="none" text-orientation="mixed"
-                          white-space="normal" shape-padding="0" isolation="auto" mix-blend-mode="normal"
-                          solid-color="rgb(0,0,0)" solid-opacity="1" vector-effect="none"
-                          paint-order="stroke fill markers" fill="#ffffff"></path>
-                </g>
-            </g>
-        </svg>
-                    </button>
-                    <div id="mainSearchResult" class="siteSearch--info">
-                    </div>
-                </form>
-            </div>
-            <div class="d-none d-md-block col-sm-1"></div>
-            <div class="col-auto d-none d-md-block">
-                <!-- user -->
-                <div class="header_navbar_profile">
-
-                    <input class="text-box" type="text" placeholder="Mening profilim" readonly>
-                    <div class="options">
-                        <div onclick="show('Adminlar uchun')">
-                            <a href="{% url 'admin_page' %}">Adminlar uchun</a>
+            <div class="container" id="productsList">
+                <div class="productsList py-4">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-auto">
+                            <h2 class="mb-3 font-weight-bold">Yangi kelgan mahsulotlar</h2>
                         </div>
-                        <div onclick="show('Market')">
-                            <a href="{% url 'admin_page' %}">Market</a>
+                        <div class="col-auto">
+                            <div class="mb-3">
+                                <a href="{% url 'explore' %}?sort=new">Barchasini ko'rish</a>
+                            </div>
                         </div>
                     </div>
+                    <div class="row">
+                     {% for product in products %}
+                       <div class="col-md-3 col-sm-4 col-6">
+                            <div class="productsList--item">
+                                <a href="{% url 'product_detail' product.slug %}" class="productsList--item--link"></a>
+                                <div class="productsList--item--image">
+                                    <img src="{{ product.image_url }}" style="height: 200px; width: 200px;" alt="">
+                                </div>
+                                <div class="productsList--item--info">
+                                    <div class="productsList--item--title">
+                                        {{ product.title }}
+                                    </div>
+                                    <div class="productsList--item--price">
+                                        <strong class="font-weight-bold"> {{ product.price}} </strong>
 
-                    <div class="d-flex align-items-center dropdown">
-                        <a href="#" class="d-inline-block p-2" data-toggle="dropdown">
-                            <i class="fa fa-user mr-2"></i>
-                            <span>Mening profilim</span>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right header_navbar_lang_menu_dropdown">
-                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="pages/contacts.html">
-                                Aloqa uchun </a>
-                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="auth.html"> Profil </a>
-                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
-                               href="{% url 'admin_page' %}"> Adminlar uchun </a>
-
-                            <a class="d-none dropdown-item header_navbar_lang_menu_dropdown_item"
-                               href="profile/buy-bonus.html"> Bonus </a>
-
-                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="auth.html"> Mening</a>
-                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="auth.html">Sevimlilar</a>
-
+                                        <span class="small">so'm</span>
+                                    </div>
+{#                                    <div class="productsList--item--orders">#}
+{#                                        buyurtmalar: {{ product.productorders_set.count }}#}
+{#                                    </div>#}
+                                </div>
+                            </div>
                         </div>
+                     {% endfor %}
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</header>
+                <div class="productsList py-4">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-auto">
+                            <h2 class="mb-3 font-weight-bold"> Ommabop mahsulotlar </h2>
+                        </div>
+                        <div class="col-auto">
+                            <div class="mb-3">
+                                <a href="{% url 'explore' %}?sort=rating"> Barchasini korish </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                         {% for product in products %}
+                       <div class="col-md-3 col-sm-4 col-6">
+                            <div class="productsList--item">
+                                <a href="{% url 'product_detail' product.slug %}" class="productsList--item--link"></a>
+                                <div class="productsList--item--image">
+                                    <img src="{{ product.image_url }}" style="height: 200px; width: 200px;" alt="">
+                                </div>
+                                <div class="productsList--item--info">
+                                    <div class="productsList--item--title">
+                                        {{ product.title }}
+                                    </div>
+                                    <div class="productsList--item--price">
+                                        <strong class="font-weight-bold"> {{ product.price}} </strong>
 
+                                        <span class="small">so'm</span>
+                                    </div>
+                                    <div class="productsList--item--orders">
+                                        buyurtmalar: {{ product.productorders_set.count }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     {% endfor %}
+                    </div>
 
-<div class="d-md-none header_navbar_collapse">
-    <ul class="header_navbar_collapse_nav" style="min-height: 54px">
-        <li class="header_navbar_collapse_nav_item">
-            <div class="header_navbar_collapse_nav_item_pad">
-                <a class="header_navbar_collapse_nav_item_link active" href="index.html"><span class="icon-home"></span>
-                    <p></p></a>
-            </div>
-        </li>
-        <li class="header_navbar_collapse_nav_item">
-            <div class="header_navbar_collapse_nav_item_pad">
-                <a class="header_navbar_collapse_nav_item_link " href="explore.html"> <span class="fa fa-search"
-                                                                                            aria-hidden="true"></span>
-                    <p></p></a>
-            </div>
-        </li>
-
-        <li class="header_navbar_collapse_nav_item">
-            <div class="header_navbar_collapse_nav_item_pad">
-                <a class="header_navbar_collapse_nav_item_link " href="add.html"> <span class="fa fa-plus"
-                                                                                        aria-hidden="true"></span>
-                    <p></p></a>
-            </div>
-        </li>
-
-        <li class="header_navbar_collapse_nav_item">
-            <div class="header_navbar_collapse_nav_item_pad">
-                <a class="header_navbar_collapse_nav_item_link " href="shop/orders.html">
-                    <span class="icon-cart"></span>
-                    <p></p></a>
-            </div>
-        </li>
-
-
-        <li class="header_navbar_collapse_nav_item">
-            <div class="header_navbar_collapse_nav_item_pad">
-                <a class="header_navbar_collapse_nav_item_link " href="auth.html">
-
-                    <span class="fa fa-user"></span>
-
-                    <p></p>
-                </a>
-            </div>
-        </li>
-    </ul>
-</div>
-
-
-<main class="client-template">
-    <section class="main">
-
-
-        <div class="siteCategories pt-5 pb-3">
-            <div class="container">
-                <!-- <h2 class="font-weight-bold mb-5">Our categories</h2> -->
-                <div class="row">
-                    <div class="col-md-2 col-4">
-                        <a class="siteCategories--item" href="explore/35.html">
-                            <img alt="Elektronika" height="100"
-                                 src="storage/app/uploads/public/637/e16/8d4/thumb_15787_100_100_0_0_crop.png"
-                                 width="100">
-                            <span> Elektronika  <small>(4)</small> </span>
-                        </a>
-                    </div>
-                    <div class="col-md-2 col-4">
-                        <a class="siteCategories--item" href="explore/16.html">
-                            <img alt="Quloqchinlar" height="100"
-                                 src="storage/app/uploads/public/637/e17/fcb/thumb_15801_100_100_0_0_crop.png"
-                                 width="100">
-                            <span> Quloqchinlar  <small>(6)</small> </span>
-                        </a>
-                    </div>
-                    <div class="col-md-2 col-4">
-                        <a class="siteCategories--item" href="explore/15.html">
-                            <img alt="Aqlli soatlar" height="100"
-                                 src="storage/app/uploads/public/637/e18/064/thumb_15802_100_100_0_0_crop.png"
-                                 width="100">
-                            <span> Aqlli soatlar  <small>(7)</small> </span>
-                        </a>
-                    </div>
-                    <div class="col-md-2 col-4">
-                        <a class="siteCategories--item" href="explore/12.html">
-                            <img alt="Telefonlar" height="100"
-                                 src="storage/app/uploads/public/637/e17/564/thumb_15788_100_100_0_0_crop.png"
-                                 width="100">
-                            <span> Telefonlar  <small>(20)</small> </span>
-                        </a>
-                    </div>
-                    <div class="col-md-2 col-4">
-                        <a class="siteCategories--item" href="explore/29.html">
-                            <img alt="Maishiy texnika" height="100"
-                                 src="storage/app/uploads/public/637/e17/683/thumb_15789_100_100_0_0_crop.png"
-                                 width="100">
-                            <span> Maishiy texnika  <small>(5)</small> </span>
-                        </a>
-                    </div>
-                    <div class="col-md-2 col-4">
-                        <a class="siteCategories--item" href="explore/21.html">
-                            <img alt="Uy uchun texnika" height="100"
-                                 src="storage/app/uploads/public/637/e18/d7d/thumb_15812_100_100_0_0_crop.png"
-                                 width="100">
-                            <span> Uy uchun texnika  <small>(85)</small> </span>
-                        </a>
-                    </div>
-                    <div class="col-md-2 col-4">
-                        <a class="siteCategories--item" href="explore/70.html">
-                            <img alt="Sochlar parvarishi" height="100"
-                                 src="storage/app/uploads/public/637/e1c/44b/thumb_15831_100_100_0_0_crop.png"
-                                 width="100">
-                            <span> Sochlar parvarishi  <small>(1)</small> </span>
-                        </a>
-                    </div>
-                    <div class="col-md-2 col-4">
-                        <a class="siteCategories--item" href="explore/11.html">
-                            <img alt="Go&#039;zallik" height="100"
-                                 src="storage/app/uploads/public/637/e17/8cd/thumb_15793_100_100_0_0_crop.png"
-                                 width="100">
-                            <span> Go&#039;zallik  <small>(118)</small> </span>
-                        </a>
-                    </div>
-                    <div class="col-md-2 col-4">
-                        <a class="siteCategories--item" href="explore/22.html">
-                            <img alt="Aksesuarlar" height="100"
-                                 src="storage/app/uploads/public/637/e21/0d7/thumb_15848_100_100_0_0_crop.png"
-                                 width="100">
-                            <span> Aksesuarlar  <small>(22)</small> </span>
-                        </a>
-                    </div>
-                    <div class="col-md-2 col-4">
-                        <a class="siteCategories--item" href="explore/79.html">
-                            <img alt="Salomatlik" height="100"
-                                 src="storage/app/uploads/public/637/e17/9de/thumb_15795_100_100_0_0_crop.png"
-                                 width="100">
-                            <span> Salomatlik  <small>(2)</small> </span>
-                        </a>
-                    </div>
-                    <div class="col-md-2 col-4">
-                        <a class="siteCategories--item" href="explore/27.html">
-                            <img alt="Avtotovarlar" height="100"
-                                 src="storage/app/uploads/public/637/e17/a8e/thumb_15796_100_100_0_0_crop.png"
-                                 width="100">
-                            <span> Avtotovarlar  <small>(17)</small> </span>
-                        </a>
-                    </div>
-                    <div class="col-md-2 col-4">
-                        <a class="siteCategories--item" href="explore/23.html">
-                            <img alt="Bolajonlar uchun" height="100"
-                                 src="storage/app/uploads/public/637/e17/b27/thumb_15797_100_100_0_0_crop.png"
-                                 width="100">
-                            <span> Bolajonlar uchun  <small>(24)</small> </span>
-                        </a>
-                    </div>
-                    <div class="col-md-2 col-4">
-                        <a class="siteCategories--item" href="explore/99.html">
-                            <img alt="Taqinchoqlar" height="100"
-                                 src="storage/app/uploads/public/637/e22/413/thumb_15858_100_100_0_0_crop.png"
-                                 width="100">
-                            <span> Taqinchoqlar  <small>(1)</small> </span>
-                        </a>
-                    </div>
-                    <div class="col-md-2 col-4">
-                        <a class="siteCategories--item" href="explore/24.html">
-                            <img alt="Kitoblar" height="100"
-                                 src="storage/app/uploads/public/637/e17/c24/thumb_15799_100_100_0_0_crop.png"
-                                 width="100">
-                            <span> Kitoblar  <small>(12)</small> </span>
-                        </a>
-                    </div>
-                    <div class="col-md-2 col-4">
-                        <a class="siteCategories--item" href="explore/20.html">
-                            <img alt="Sovg&#039;alar" height="100"
-                                 src="storage/app/uploads/public/637/e17/d36/thumb_15800_100_100_0_0_crop.png"
-                                 width="100">
-                            <span> Sovg&#039;alar  <small>(32)</small> </span>
-                        </a>
-                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container" id="productsList">
-            <div class="productsList py-4">
-                <div class="row align-items-center justify-content-between">
-                    <div class="col-auto">
-                        <h2 class="mb-3 font-weight-bold">Yangi kelgan mahsulotlar</h2>
-                    </div>
-                    <div class="col-auto">
-                        <div class="mb-3">
-                            <a href="explored4b4.html?sort=new">Barchasini ko'rish</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
 
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/kingyes-sprey.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/63b/55e/fe3/thumb_16946_200_200_0_0_crop.jpg"
-                                     width="200" height="200" alt="Kingyes sprey (Soch turmagi uchun)">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    Kingyes sprey (Soch turmagi uchun)
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 109,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 1014
-                                </div>
+            <section class="advantagesSection">
+                <div class="container">
+                    <h2 class="font-weight-bold mb-5">100k.uz qulayliklari</h2>
+                    <div class="row text-center">
+                        <div class="col-md col-sm-6 mb-4">
+                            <div class="advantagesSection--item">
+                                <i class="fa fa-truck"></i>
+                                <h3>Tezkor yetkazib berish xizmati</h3>
+                                <p> Buyurtmangiz O'zbekistonning barcha viloyatlariga 3 kun ichida yetqazib
+                                    beriladi. </p>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/xamyon-joynomoz.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/63b/440/f3b/thumb_16923_200_200_0_0_crop.jpg"
-                                     width="200" height="200" alt="Xamyon joynomoz">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    Xamyon joynomoz
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 186,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 1013
-                                </div>
+                        <div class="col-md col-sm-6 mb-4">
+                            <div class="advantagesSection--item">
+                                <i class="fa fa-money"></i>
+                                <h3>To'lov istalgan usulda</h3>
+                                <p>Buyurtmani oldindan click, payme yoki buyurtmani qo'lingizga olganingizdan keyin
+                                    amalga oshiring.</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/keda-189a.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/63a/f2e/9b4/thumb_16862_200_200_0_0_crop.jpg"
-                                     width="200" height="200" alt="Keda 189A">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    Keda 189A
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 172,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 1012
-                                </div>
+                        <div class="col-md col-sm-6 mb-4">
+                            <div class="advantagesSection--item">
+                                <i class="fa fa-support"></i>
+                                <h3> CALL-CENTER </h3>
+                                <p> Dam olish kunlarisiz qo'llab quvvatlash bo'limi mavjud. <br> <strong>+998 55 500
+                                    55-11</strong></p>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/regstrator-super-hd-1080.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/63a/9ca/738/thumb_16808_200_200_0_0_crop.jpg"
-                                     width="200" height="200" alt="Regstrator Super hd 1080">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    Regstrator Super hd 1080
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 257,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 1011
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/vitek-2.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/63a/9c7/22e/thumb_16806_200_200_0_0_crop.jpg"
-                                     width="200" height="200" alt="Vitek">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    Vitek
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 347,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 1010
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/splatter-ball-gung.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/63a/72c/65e/thumb_16754_200_200_0_0_crop.jpg"
-                                     width="200" height="200" alt="SPLATTER BALL GUNG">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    SPLATTER BALL GUNG
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 299,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 1008
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/depilatsiya-sprey.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/63a/5e2/004/thumb_16732_200_200_0_0_crop.jpg"
-                                     width="200" height="200" alt="Depilatsiya sprey">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    Depilatsiya sprey
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 99,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 1006
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/kechada-k33.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/63a/5ce/509/thumb_16725_200_200_0_0_crop.jpg"
-                                     width="200" height="200" alt="KECHADA K33">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    KECHADA K33
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 299,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 1005
-                                </div>
+                        <div class="col-md col-sm-6 mb-4">
+                            <div class="advantagesSection--item">
+                                <i class="fa fa-gift"></i>
+                                <h3> Mijozlarni rag'batlantirish tizimi </h3>
+                                <p> Doimiy mijozlar uchun sovg'alar va bonuslar taqdim etiladi. </p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="productsList py-4">
-                <div class="row align-items-center justify-content-between">
-                    <div class="col-auto">
-                        <h2 class="mb-3 font-weight-bold"> Ommabop mahsulotlar </h2>
-                    </div>
-                    <div class="col-auto">
-                        <div class="mb-3">
-                            <a href="explore8b48.html?sort=rating"> Barchasini korish </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/sekret-kamera.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/62b/085/cde/thumb_11619_200_200_0_0_crop.png"
-                                     width="200" height="200" alt="Sekret kamera">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    Sekret kamera
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 179,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 392
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/soft-spray.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/609/59e/7df/thumb_4103_200_200_0_0_crop.jpg"
-                                     width="200" height="200" alt="Soft spray">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    Soft spray
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 169,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 399
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/osha-mashxur-ozdiruvchi-mayka-endi-ayollar-uchun-ham.html"
-                               class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/5ff/050/53f/thumb_1574_200_200_0_0_crop.jpg"
-                                     width="200" height="200"
-                                     alt="O&#039;sha mashxur ozdiruvchi mayka endi ayollar uchun ham">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    O&#039;sha mashxur ozdiruvchi mayka endi ayollar uchun ham
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 177,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 258
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/uzamax.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/60c/bba/618/thumb_4851_200_200_0_0_crop.jpg"
-                                     width="200" height="200" alt="Uzamax">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    Uzamax
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 177,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 433
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/elektron-karset.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/629/a5e/6c7/thumb_11063_200_200_0_0_crop.png"
-                                     width="200" height="200" alt="Elektron karset">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    Elektron karset
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 99,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 384
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/islomiy-nabor.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/60b/b05/5f1/thumb_4582_200_200_0_0_crop.jpg"
-                                     width="200" height="200" alt="Islomiy nabor">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    Islomiy nabor
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 299,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 426
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/mini-chok-moshika.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/638/384/cb2/thumb_16021_200_200_0_0_crop.png"
-                                     width="200" height="200" alt="Mini chok mashinka">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    Mini chok mashinka
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 197,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 212
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/bluetooth-kozoynak.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/638/385/ed7/thumb_16054_200_200_0_0_crop.png"
-                                     width="200" height="200" alt="bluetooth ko&#039;zoynak">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    bluetooth ko&#039;zoynak
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 197,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 423
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <section class="advantagesSection">
-            <div class="container">
-                <h2 class="font-weight-bold mb-5">100k.uz qulayliklari</h2>
-                <div class="row text-center">
-                    <div class="col-md col-sm-6 mb-4">
-                        <div class="advantagesSection--item">
-                            <i class="fa fa-truck"></i>
-                            <h3>Tezkor yetkazib berish xizmati</h3>
-                            <p> Buyurtmangiz O'zbekistonning barcha viloyatlariga 3 kun ichida yetqazib beriladi. </p>
-                        </div>
-                    </div>
-                    <div class="col-md col-sm-6 mb-4">
-                        <div class="advantagesSection--item">
-                            <i class="fa fa-money"></i>
-                            <h3>To'lov istalgan usulda</h3>
-                            <p>Buyurtmani oldindan click, payme yoki buyurtmani qo'lingizga olganingizdan keyin amalga
-                                oshiring.</p>
-                        </div>
-                    </div>
-                    <div class="col-md col-sm-6 mb-4">
-                        <div class="advantagesSection--item">
-                            <i class="fa fa-support"></i>
-                            <h3> CALL-CENTER </h3>
-                            <p> Dam olish kunlarisiz qo'llab quvvatlash bo'limi mavjud. <br> <strong>+998 55 500
-                                55-11</strong></p>
-                        </div>
-                    </div>
-                    <div class="col-md col-sm-6 mb-4">
-                        <div class="advantagesSection--item">
-                            <i class="fa fa-gift"></i>
-                            <h3> Mijozlarni rag'batlantirish tizimi </h3>
-                            <p> Doimiy mijozlar uchun sovg'alar va bonuslar taqdim etiladi. </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </section>
         </section>
-    </section>
-</main>
-
-<footer class="siteFooter mt-auto">
-    <div class="container py-4">
-        <div class="row">
-            <div class="col-lg col-sm-6">
-                <ul class="nav flex-column">
-                    <li>
-                        <a href="auth.html" class="nav-link"> Mening kabinetim </a>
-                    </li>
-                    <li>
-                        <a href="auth.html" class="nav-link">Mening sevimlilarim</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-lg col-sm-6">
-                <ul class="nav flex-column">
-                    <li>
-                        <a href="pages/about.html" class="nav-link"> Biz haqimizda </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-lg col-sm-6">
-                <ul class="nav flex-column">
-                    <li>
-                        <a href="pages/contacts.html" class="nav-link"> Aloqa uchun </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-lg col-sm-6">
-                <ul class="nav flex-column">
-                    <li>
-                        <a href="pages/privacy-policy.html" target="_blank" class="nav-link">Ommaviy oferta</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div>
-        <div class="container py-2">
-            <div class="row">
-                <div class="col-auto">
-                    2016-2021 - 100K.UZ
-                </div>
-                <div class="col"></div>
-                <div class="col-auto">
-                    Barcha huquqlar himoyalangan
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-
-
-
-<script src="../kit.fontawesome.com/43236b6dfa.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/imask"></script>
-
-<script src="{% static 'apps/themes/stock/assets/js/bundle.js' %}"></script>
-<script src="{% static 'apps/themes/stock/assets/lazysizes/lazysizes.min.js' %}"></script>
-<script src="{% static 'apps/themes/stock/assets/owlcarousel/owl.carousel.min.js' %}"></script>
-<script src="../rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
-<script src="{% static 'apps/themes/stock/assets/js/custom.js' %}"></script>
-<script src="modules/system/assets/js/framework-extras.js"></script>
-<link rel="stylesheet" property="stylesheet" href="modules/system/assets/css/framework-extras.css">
-</body>
-
-<!-- Mirrored from 100k.uz/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Jan 2023 11:57:03 GMT -->
-</html>
+    </main>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'apps/parts/base.html' %}
+
+{% block main %}
+
+    <main class="client-template">
+
+        <section class="main">
+
+            <div class="container border-bottom-4">
+                <div class="header_tab_menu">
+                    <div class="header_menu" style="overflow: auto">
+                        <a href="{% url 'explore' %}" class="btn btn-default active"> Barchasi </a>
+                        {% for category in categories %}
+                            <a href="{% url 'explore' %}?sort={{ category.slug }}"
+                               class="btn btn-default"> {{ category.title }} </a>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="container" id="productsList">
+                <div class="content_grid infinite-container">
+                    <div class="row">
+                        {% for product in products %}
+                            <div class="col-sm-3 col-4 infinite-item" style="padding: 2px">
+                                <div class="content_grid_card" style="padding: 0px">
+                                    <a href="{% url 'product_detail' product.slug %}">
+                                        <img loading="lazy" class="lazyloaded" src="{{ product.image_url }}" alt="">
+                                    </a>
+
+                                    <a class="content_grid_card_basket">
+                                        <span class="icon-bookmark "></span>
+                                    </a>
+
+                                    <div class="content_grid_card_price">
+                                        <p>{{ product.price }} so'm </p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

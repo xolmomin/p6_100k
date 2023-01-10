@@ -2,15 +2,14 @@ from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 
 from apps.views import ProfileView, AdminProductDetailView, ProductDetailView, MainPageView, WithdrawView, \
-    MarketListView, StreamPageListView, AdminPageView, ContactsView
-from apps.views import StoreDetailView
-from apps.views.main import CategoryDetail
+    MarketListView, StreamPageListView, AdminPageView, ContactsView, ExploreProductsView, StoreDetailView, \
+    CategoryDetail
 
 urlpatterns = [
     path('', MainPageView.as_view(), name='main_page_view'),
     path('product/shop/<str:slug>', ProductDetailView.as_view(), name='product_detail'),
+    path('explore', ExploreProductsView.as_view(), name='explore'),
     path('profile/', ProfileView.as_view(), name='profile_page'),
-    path('product/<str:slug>', ProductDetailView.as_view(), name='product_detail_view'),
     path('store/<int:pk>', StoreDetailView.as_view(), name='store'),
     path('category/', CategoryDetail.as_view(), name='category_detail'),
     path('contacts/', ContactsView.as_view(), name='contacts'),

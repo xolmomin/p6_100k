@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, IntegerField
 
 from apps.models import Comment, User
 from apps.models.users import Favorite
@@ -17,6 +17,8 @@ class CreateCommentForm(ModelForm):
 
 
 class FavoriteModelForm(ModelForm):
+    id = IntegerField()
+
     class Meta:
         model = Favorite
         exclude = ()

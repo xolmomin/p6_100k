@@ -1,3 +1,4 @@
+from django.db.models import F
 from django.http import JsonResponse
 from django.views.generic import FormView, DetailView, ListView
 
@@ -41,7 +42,8 @@ class CategoryDetail(ListView):
 
 
 def completed(request, *args, **kwargs):
-    stream = Stream.objects.get(id=id)
-    stream.is_area = not stream.is_area
-    stream.save()
+    # stream = Stream.objects.get(id=id)
+    # stream.is_area = not stream.is_area
+    # stream.save()
+    Stream.objects.filter(id=id).update(is_area=~F('is_area'))
     return JsonResponse({'status': 200})

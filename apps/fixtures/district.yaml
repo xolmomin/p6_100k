@@ -1,0 +1,901 @@
+- model: apps.District
+  pk: 1
+  fields:
+    name: Beruniy tumani
+    region_id: 1
+- model: apps.District
+  pk: 2
+  fields:
+    name: Chimboy tumani
+    region_id: 1
+- model: apps.District
+  pk: 3
+  fields:
+    name: Ellikqal'a tumani
+    region_id: 1
+- model: apps.District
+  pk: 4
+  fields:
+    name: Kegeyli tumani
+    region_id: 1
+- model: apps.District
+  pk: 5
+  fields:
+    name: Mo'ynoq tumani
+    region_id: 1
+- model: apps.District
+  pk: 6
+  fields:
+    name: Nukus tumani
+    region_id: 1
+- model: apps.District
+  pk: 7
+  fields:
+    name: Qanliko'l tumani
+    region_id: 1
+- model: apps.District
+  pk: 8
+  fields:
+    name: Qo'ng'irot tumani
+    region_id: 1
+- model: apps.District
+  pk: 9
+  fields:
+    name: Qorao'zak tumani
+    region_id: 1
+- model: apps.District
+  pk: 10
+  fields:
+    name: Shumanay tumani
+    region_id: 1
+- model: apps.District
+  pk: 11
+  fields:
+    name: Taxtako'pir tumani
+    region_id: 1
+- model: apps.District
+  pk: 12
+  fields:
+    name: To'rtko'l tumani
+    region_id: 1
+- model: apps.District
+  pk: 13
+  fields:
+    name: Xo'jayli tumani
+    region_id: 1
+- model: apps.District
+  pk: 14
+  fields:
+    name: Bog'ot tumani
+    region_id: 2
+- model: apps.District
+  pk: 15
+  fields:
+    name: Gurlan tumani
+    region_id: 2
+- model: apps.District
+  pk: 16
+  fields:
+    name: Xonqa tumani
+    region_id: 2
+- model: apps.District
+  pk: 17
+  fields:
+    name: Hazorasp tumani
+    region_id: 2
+- model: apps.District
+  pk: 18
+  fields:
+    name: Xiva tumani
+    region_id: 2
+- model: apps.District
+  pk: 19
+  fields:
+    name: Qo'shko'pir tumani
+    region_id: 2
+- model: apps.District
+  pk: 20
+  fields:
+    name: Shovot tumani
+    region_id: 2
+- model: apps.District
+  pk: 21
+  fields:
+    name: Urganch tumani
+    region_id: 2
+- model: apps.District
+  pk: 22
+  fields:
+    name: Yangiariq tumani
+    region_id: 2
+- model: apps.District
+  pk: 23
+  fields:
+    name: Yangibozor tumani
+    region_id: 2
+- model: apps.District
+  pk: 24
+  fields:
+    name: Tuproqqal'a tumani
+    region_id: 2
+- model: apps.District
+  pk: 25
+  fields:
+    name: Konimex tumani
+    region_id: 3
+- model: apps.District
+  pk: 26
+  fields:
+    name: Karmana tumani
+    region_id: 3
+- model: apps.District
+  pk: 27
+  fields:
+    name: Qiziltepa tumani
+    region_id: 3
+- model: apps.District
+  pk: 28
+  fields:
+    name: Xatircha tumani
+    region_id: 3
+- model: apps.District
+  pk: 29
+  fields:
+    name: Navbahor tumani
+    region_id: 3
+- model: apps.District
+  pk: 30
+  fields:
+    name: Nurota tumani
+    region_id: 3
+- model: apps.District
+  pk: 31
+  fields:
+    name: Tomdi tumani
+    region_id: 3
+- model: apps.District
+  pk: 32
+  fields:
+    name: Uchquruq tumani
+    region_id: 3
+- model: apps.District
+  pk: 33
+  fields:
+    name: Olot tumani
+    region_id: 4
+- model: apps.District
+  pk: 34
+  fields:
+    name: Buxoro tumani
+    region_id: 4
+- model: apps.District
+  pk: 35
+  fields:
+    name: G'ijduvon tumani
+    region_id: 4
+- model: apps.District
+  pk: 36
+  fields:
+    name: Jondor tumani
+    region_id: 4
+- model: apps.District
+  pk: 37
+  fields:
+    name: Kogon tumani
+    region_id: 4
+- model: apps.District
+  pk: 38
+  fields:
+    name: Qorako'l tumani
+    region_id: 4
+- model: apps.District
+  pk: 39
+  fields:
+    name: Qorovulbozor tumani
+    region_id: 4
+- model: apps.District
+  pk: 40
+  fields:
+    name: Peshku tumani
+    region_id: 4
+- model: apps.District
+  pk: 41
+  fields:
+    name: Pomitan tumani
+    region_id: 4
+- model: apps.District
+  pk: 42
+  fields:
+    name: Shofirkon tumani
+    region_id: 4
+- model: apps.District
+  pk: 43
+  fields:
+    name: Vobkent tumani
+    region_id: 4
+- model: apps.District
+  pk: 44
+  fields:
+    name: Bulung'ur tumani
+    region_id: 5
+- model: apps.District
+  pk: 45
+  fields:
+    name: Ishtixon tumani
+    region_id: 5
+- model: apps.District
+  pk: 46
+  fields:
+    name: Jomboy tumani
+    region_id: 5
+- model: apps.District
+  pk: 47
+  fields:
+    name: Kattaqo'rg'on tumani
+    region_id: 5
+- model: apps.District
+  pk: 48
+  fields:
+    name: Qo'shrabot tumani
+    region_id: 5
+- model: apps.District
+  pk: 49
+  fields:
+    name: Narpay tumani
+    region_id: 5
+- model: apps.District
+  pk: 50
+  fields:
+    name: Nurobot tumani
+    region_id: 5
+- model: apps.District
+  pk: 51
+  fields:
+    name: Oqdaryo tumani
+    region_id: 5
+- model: apps.District
+  pk: 52
+  fields:
+    name: Paxtachi tumani
+    region_id: 5
+- model: apps.District
+  pk: 53
+  fields:
+    name: Payariq tumani
+    region_id: 5
+- model: apps.District
+  pk: 54
+  fields:
+    name: Pastdarg'om tumani
+    region_id: 5
+- model: apps.District
+  pk: 55
+  fields:
+    name: Samarqand tumani
+    region_id: 5
+- model: apps.District
+  pk: 56
+  fields:
+    name: Toyloq tumani
+    region_id: 5
+- model: apps.District
+  pk: 57
+  fields:
+    name: Urgut tumani
+    region_id: 5
+- model: apps.District
+  pk: 58
+  fields:
+    name: Chiroqchi tumani
+    region_id: 6
+- model: apps.District
+  pk: 59
+  fields:
+    name: Dehqonobod tumani
+    region_id: 6
+- model: apps.District
+  pk: 60
+  fields:
+    name: G'uzor tumani
+    region_id: 6
+- model: apps.District
+  pk: 61
+  fields:
+    name: Qamashi tumani
+    region_id: 6
+- model: apps.District
+  pk: 62
+  fields:
+    name: Qarshi tumani
+    region_id: 6
+- model: apps.District
+  pk: 63
+  fields:
+    name: Koson tumani
+    region_id: 6
+- model: apps.District
+  pk: 64
+  fields:
+    name: Kasbi tumani
+    region_id: 6
+- model: apps.District
+  pk: 65
+  fields:
+    name: Kitob tumani
+    region_id: 6
+- model: apps.District
+  pk: 66
+  fields:
+    name: Mirishkor tumani
+    region_id: 6
+- model: apps.District
+  pk: 67
+  fields:
+    name: Muborak tumani
+    region_id: 6
+- model: apps.District
+  pk: 68
+  fields:
+    name: Nishon tumani
+    region_id: 6
+- model: apps.District
+  pk: 69
+  fields:
+    name: Shahrisabz tumani
+    region_id: 6
+- model: apps.District
+  pk: 70
+  fields:
+    name: Yakkabog' tumani
+    region_id: 6
+- model: apps.District
+  pk: 71
+  fields:
+    name: Angor tumani
+    region_id: 7
+- model: apps.District
+  pk: 72
+  fields:
+    name: Boysun tumani
+    region_id: 7
+- model: apps.District
+  pk: 73
+  fields:
+    name: Denov tumani
+    region_id: 7
+- model: apps.District
+  pk: 74
+  fields:
+    name: Jarqo'rg'on tumani
+    region_id: 7
+- model: apps.District
+  pk: 75
+  fields:
+    name: Qiziriq tumani
+    region_id: 7
+- model: apps.District
+  pk: 76
+  fields:
+    name: Qumqo'rg'on tumani
+    region_id: 7
+- model: apps.District
+  pk: 77
+  fields:
+    name: Muzrabot tumani
+    region_id: 7
+- model: apps.District
+  pk: 78
+  fields:
+    name: Oltinsoy tumani
+    region_id: 7
+- model: apps.District
+  pk: 79
+  fields:
+    name: Sariosiyo tumani
+    region_id: 7
+- model: apps.District
+  pk: 80
+  fields:
+    name: Sherobod tumani
+    region_id: 7
+- model: apps.District
+  pk: 81
+  fields:
+    name: Sho'rchi tumani
+    region_id: 7
+- model: apps.District
+  pk: 82
+  fields:
+    name: Termiz tumani
+    region_id: 7
+- model: apps.District
+  pk: 83
+  fields:
+    name: Uzun tumani
+    region_id: 7
+- model: apps.District
+  pk: 84
+  fields:
+    name: Arnasoy tumani
+    region_id: 8
+- model: apps.District
+  pk: 85
+  fields:
+    name: Baxmal tumani
+    region_id: 8
+- model: apps.District
+  pk: 86
+  fields:
+    name: Do'stlik tumani
+    region_id: 8
+- model: apps.District
+  pk: 87
+  fields:
+    name: Forish tumani
+    region_id: 8
+- model: apps.District
+  pk: 88
+  fields:
+    name: G'allaorol tumani
+    region_id: 8
+- model: apps.District
+  pk: 89
+  fields:
+    name: Sharof Rashidov tumani
+    region_id: 8
+- model: apps.District
+  pk: 90
+  fields:
+    name: Mirzacho'l tumani
+    region_id: 8
+- model: apps.District
+  pk: 91
+  fields:
+    name: Paxtakor tumani
+    region_id: 8
+- model: apps.District
+  pk: 92
+  fields:
+    name: Yangiobod tumani
+    region_id: 8
+- model: apps.District
+  pk: 93
+  fields:
+    name: Zomin tumani
+    region_id: 8
+- model: apps.District
+  pk: 94
+  fields:
+    name: Zafarobod tumani
+    region_id: 8
+- model: apps.District
+  pk: 95
+  fields:
+    name: Zarbdor tumani
+    region_id: 8
+- model: apps.District
+  pk: 96
+  fields:
+    name: Oqoltin tumani
+    region_id: 9
+- model: apps.District
+  pk: 97
+  fields:
+    name: Boyovut tumani
+    region_id: 9
+- model: apps.District
+  pk: 98
+  fields:
+    name: Guliston tumani
+    region_id: 9
+- model: apps.District
+  pk: 99
+  fields:
+    name: Xovos tumani
+    region_id: 9
+- model: apps.District
+  pk: 100
+  fields:
+    name: Mirzaobod tumani
+    region_id: 9
+- model: apps.District
+  pk: 101
+  fields:
+    name: Sayxunobod tumani
+    region_id: 9
+- model: apps.District
+  pk: 102
+  fields:
+    name: Sardoba tumani
+    region_id: 9
+- model: apps.District
+  pk: 103
+  fields:
+    name: Sirdaryo tumani
+    region_id: 9
+- model: apps.District
+  pk: 104
+  fields:
+    name: Bekobod tumani
+    region_id: 10
+- model: apps.District
+  pk: 105
+  fields:
+    name: Bo'tonliq tumani
+    region_id: 10
+- model: apps.District
+  pk: 106
+  fields:
+    name: Bo'ka tumani
+    region_id: 10
+- model: apps.District
+  pk: 107
+  fields:
+    name: Chinoz tumani
+    region_id: 10
+- model: apps.District
+  pk: 108
+  fields:
+    name: Qibray tumani
+    region_id: 10
+- model: apps.District
+  pk: 109
+  fields:
+    name: Ohangaron tumani
+    region_id: 10
+- model: apps.District
+  pk: 110
+  fields:
+    name: Oqqo'rg'on tumani
+    region_id: 10
+- model: apps.District
+  pk: 111
+  fields:
+    name: Parkent tumani
+    region_id: 10
+- model: apps.District
+  pk: 112
+  fields:
+    name: Piskent tumani
+    region_id: 10
+- model: apps.District
+  pk: 113
+  fields:
+    name: Quyi chirchiq tumani
+    region_id: 10
+- model: apps.District
+  pk: 114
+  fields:
+    name: O'rta chirchiq tumani
+    region_id: 10
+- model: apps.District
+  pk: 115
+  fields:
+    name: Yangiyo'l tumani
+    region_id: 10
+- model: apps.District
+  pk: 116
+  fields:
+    name: Yuqori chirchiq tumani
+    region_id: 10
+- model: apps.District
+  pk: 117
+  fields:
+    name: Zangiorta tumani
+    region_id: 10
+- model: apps.District
+  pk: 118
+  fields:
+    name: Chortoq tumani
+    region_id: 11
+- model: apps.District
+  pk: 119
+  fields:
+    name: Chust tumani
+    region_id: 11
+- model: apps.District
+  pk: 120
+  fields:
+    name: Kosonsoy tumani
+    region_id: 11
+- model: apps.District
+  pk: 121
+  fields:
+    name: Mingbuloq tumani
+    region_id: 11
+- model: apps.District
+  pk: 122
+  fields:
+    name: Namangan tumani
+    region_id: 11
+- model: apps.District
+  pk: 123
+  fields:
+    name: Norin tumani (Ozbekiston)
+    region_id: 11
+- model: apps.District
+  pk: 124
+  fields:
+    name: Pop tumani
+    region_id: 11
+- model: apps.District
+  pk: 125
+  fields:
+    name: To'raqo'rg'on tumani
+    region_id: 11
+- model: apps.District
+  pk: 126
+  fields:
+    name: Uchqo'rg'on tumani
+    region_id: 11
+- model: apps.District
+  pk: 127
+  fields:
+    name: Uychi tumani
+    region_id: 11
+- model: apps.District
+  pk: 128
+  fields:
+    name: Yangiqo'rg'on tumani
+    region_id: 11
+- model: apps.District
+  pk: 129
+  fields:
+    name: Oltiariq tumani
+    region_id: 12
+- model: apps.District
+  pk: 130
+  fields:
+    name: Bag'dod tumani
+    region_id: 12
+- model: apps.District
+  pk: 131
+  fields:
+    name: Beshariq tumani
+    region_id: 12
+- model: apps.District
+  pk: 132
+  fields:
+    name: Buvayda tumani
+    region_id: 12
+- model: apps.District
+  pk: 133
+  fields:
+    name: Dang'ara tumani
+    region_id: 12
+- model: apps.District
+  pk: 134
+  fields:
+    name: Farg'ona tumani
+    region_id: 12
+- model: apps.District
+  pk: 135
+  fields:
+    name: Furqat tumani
+    region_id: 12
+- model: apps.District
+  pk: 136
+  fields:
+    name: Qo'shtepa tumani
+    region_id: 12
+- model: apps.District
+  pk: 137
+  fields:
+    name: Quva tumani
+    region_id: 12
+- model: apps.District
+  pk: 138
+  fields:
+    name: Rishton tumani
+    region_id: 12
+- model: apps.District
+  pk: 139
+  fields:
+    name: So'x tumani
+    region_id: 12
+- model: apps.District
+  pk: 140
+  fields:
+    name: Toshloq tumani
+    region_id: 12
+- model: apps.District
+  pk: 141
+  fields:
+    name: Uchko'prik tumani
+    region_id: 12
+- model: apps.District
+  pk: 142
+  fields:
+    name: O'zbekiston tumani
+    region_id: 12
+- model: apps.District
+  pk: 143
+  fields:
+    name: Yozyovon tumani
+    region_id: 12
+- model: apps.District
+  pk: 144
+  fields:
+    name: Quvasoy tumani
+    region_id: 12
+- model: apps.District
+  pk: 145
+  fields:
+    name: Andijon tumani
+    region_id: 13
+- model: apps.District
+  pk: 146
+  fields:
+    name: Asaka tumani
+    region_id: 13
+- model: apps.District
+  pk: 147
+  fields:
+    name: Baliqchi tumani
+    region_id: 13
+- model: apps.District
+  pk: 148
+  fields:
+    name: Bo'z tumani
+    region_id: 13
+- model: apps.District
+  pk: 149
+  fields:
+    name: Buloqboshi tumani
+    region_id: 13
+- model: apps.District
+  pk: 150
+  fields:
+    name: Izboskan tumani
+    region_id: 13
+- model: apps.District
+  pk: 151
+  fields:
+    name: Jalaquduq tumani
+    region_id: 13
+- model: apps.District
+  pk: 152
+  fields:
+    name: Xo'laobod tumani
+    region_id: 13
+- model: apps.District
+  pk: 153
+  fields:
+    name: Qo'rg'ontepa tumani
+    region_id: 13
+- model: apps.District
+  pk: 154
+  fields:
+    name: Marhamat tumani
+    region_id: 13
+- model: apps.District
+  pk: 155
+  fields:
+    name: Oltinko'l tumani
+    region_id: 13
+- model: apps.District
+  pk: 156
+  fields:
+    name: Paxtaobod tumani
+    region_id: 13
+- model: apps.District
+  pk: 157
+  fields:
+    name: Shahrixon tumani
+    region_id: 13
+- model: apps.District
+  pk: 158
+  fields:
+    name: Ulug'nor tumani
+    region_id: 13
+- model: apps.District
+  pk: 159
+  fields:
+    name: Bektemir tumani
+    region_id: 14
+- model: apps.District
+  pk: 160
+  fields:
+    name: Chilonzor tumani
+    region_id: 14
+- model: apps.District
+  pk: 161
+  fields:
+    name: Hamza tumani
+    region_id: 14
+- model: apps.District
+  pk: 162
+  fields:
+    name: Mirobod tumani
+    region_id: 14
+- model: apps.District
+  pk: 163
+  fields:
+    name: Mirzi Ulug'bek tumani
+    region_id: 14
+- model: apps.District
+  pk: 164
+  fields:
+    name: Sergili tumani
+    region_id: 14
+- model: apps.District
+  pk: 165
+  fields:
+    name: Shayhontohur tumani
+    region_id: 14
+- model: apps.District
+  pk: 166
+  fields:
+    name: Olmazor tumani
+    region_id: 14
+- model: apps.District
+  pk: 167
+  fields:
+    name: Uchtepa tumani
+    region_id: 14
+- model: apps.District
+  pk: 168
+  fields:
+    name: Yakkasaroy tumani
+    region_id: 14
+- model: apps.District
+  pk: 169
+  fields:
+    name: Yunusobod tumani
+    region_id: 14
+- model: apps.District
+  pk: 170
+  fields:
+    name: Andijon shahar
+    region_id: 13
+- model: apps.District
+  pk: 171
+  fields:
+    name: Farg'ona shahar
+    region_id: 12
+- model: apps.District
+  pk: 172
+  fields:
+    name: Namangan shahar
+    region_id: 11
+- model: apps.District
+  pk: 173
+  fields:
+    name: Sirdaryo shahar
+    region_id: 9
+- model: apps.District
+  pk: 174
+  fields:
+    name: Jizzax shahar
+    region_id: 8
+- model: apps.District
+  pk: 175
+  fields:
+    name: Surxondaryo shahar
+    region_id: 8
+- model: apps.District
+  pk: 176
+  fields:
+    name: Qashqadaryo shahar
+    region_id: 6
+- model: apps.District
+  pk: 177
+  fields:
+    name: Samarqand shahar
+    region_id: 5
+- model: apps.District
+  pk: 178
+  fields:
+    name: Buxoro shahar
+    region_id: 4
+- model: apps.District
+  pk: 179
+  fields:
+    name: Navoiy  shahar
+    region_id: 3
+- model: apps.District
+  pk: 180
+  fields:
+    name: Xorazm shahar
+    region_id: 2
+

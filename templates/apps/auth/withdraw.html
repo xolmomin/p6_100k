@@ -1,0 +1,144 @@
+{% extends 'apps/admin/admin_base.html' %}
+{% load static %}
+{% block main %}
+    <main class="admin-template mb-5">
+        <section class="main">
+            <div class="container">
+                <br>
+                <p id="alert-messages"></p>
+                <div class="row">
+                    <div class="col-sm-6 p-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Mening hisobim</h5>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">ID raqamingiz: <strong>{{ user.id }}</strong></h5>
+                                <h5 class="card-title">Asosiy balansda: <span id="balance">{{ user.balance }}</span>
+                                    so'm</h5>
+                                <h5 class="card-title">
+                                    <img src="https://100k.uz/themes/stock/assets/img/user/coins.png" alt=""> Bonus
+                                    balans:
+                                    <strong id="coin"> {{ user.bonus }}</strong>
+                                    <strong> COIN </strong></h5>
+                                <h5 class="card-title">Depozit balansda: {{ user.deposit }} so'm</h5>
+                                <h5 class="card-title">To'lab berildi: {{ user.payout }} so'm</h5>
+                            </div>
+
+
+                            <div class="card-footer p-0">
+                                <div class="pos-f-t">
+                                    <div class="collapse" id="navbarToggleExternalContent">
+                                        <div class="bg-dark p-4 pb-0">
+                                            <h5 class="text-white h4"> COIN-larni ayriboshlash </h5>
+                                            <span class="text-white"> Hozirda bitta COIN qiymati - 1,000 bonusga teng.</span>
+                                        </div>
+
+                                        <div class="bg-dark">
+                                            <form class="card-body pt-0" id="withdraw-form">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <label class="text-white">Hisobingizdagi coinlar soni</label>
+                                                    <input class="form-control" value="{{ user.bonus }}"
+                                                           readonly="true">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="text-white">Nechta COIN alishtirmoqchisiz?</label>
+                                                    <input id="amount" type="number" class="form-control"
+                                                           placeholder="COIN miqdorini kiriting">
+                                                </div>
+                                                <input type="button" id="coin-exchange" class="btn btn-primary"
+                                                       value="Tasdiqlash">
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <nav class="navbar navbar-light">
+                                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                                data-target="#navbarToggleExternalContent"
+                                                aria-controls="navbarToggleExternalContent" aria-expanded="false"
+                                                aria-label="Toggle navigation">
+                                            <span class="navbar-toggler-icon"></span>
+                                        </button>
+
+                                        COIN-larni ayriboshlash
+                                    </nav>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 p-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>To'lovga sorov berish formasi</h5>
+                            </div>
+
+                            <form class="card-body">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label>Karta raqamingizni kiriting</label>
+                                    <input id="card-number" type="text" class="form-control" min="16" maxlength="16"
+                                           placeholder="Karta raqamingizni kiriting">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Summani kiriting</label>
+                                    <input id="amount1" type="number" class="form-control"
+                                           placeholder="Summani kiriting">
+                                </div>
+
+                                <input type="button" id="card-withdraw" class="btn btn-primary" value="Tasdiqlash">
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <br>
+
+                <div class="table-responsive">
+                    <table class="table" id="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Sana</th>
+                            <th scope="col">Hisob raqam</th>
+                            <th scope="col">Summa</th>
+                            <th scope="col">Holat</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% if user.paymenthistory_set.count > 0 %}
+                            {% for payment in user.paymenthistory_set.all %}
+                                <tr>
+                                    <td>{{ payment.created_at|date:"Y-m-d H:i" }}</td>
+                                    <td>{{ payment.card_number }}</td>
+                                    <td>{{ payment.amount }}</td>
+                                    {% if payment.status == 'accepted' %}
+                                        <td><span class="badge badge-success">To'lab berildi</span></td>
+                                    {% elif payment.status == 'pending' %}
+                                        <td><span class="badge badge-warning">Kutilmoqda</span></td>
+                                    {% else %}
+                                        <td><span class="badge badge-danger">Bekor qilingan</span></td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr class="text-center">
+                                <th colspan="4"> Hozircha sizda pul yechish sorovlari mavjud emas</th>
+                            </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+    </main>
+    <script src="{% static 'auth/js/withdraw.js' %}"></script>
+{% endblock %}

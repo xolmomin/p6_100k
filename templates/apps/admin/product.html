@@ -1,0 +1,112 @@
+{% extends 'apps/admin/admin_base.html' %}
+{% load static %}
+{% block main %}
+<main class="admin-template">
+            <section class="main">
+    <div class="container">
+        <br>
+        <h2 class="text-center text-primary">{{ product.title }}</h2>
+
+        <div class="row">
+            <div class="col-sm-6 p-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5> Shaxsiy </h5>
+                    </div>
+
+                    <div class="card-body">
+                        <h5> Oqimlar soni: <strong> {{ product.stream_count }} </strong> </h5>
+                        <hr>
+                        <h5> Namoishlar soni: <strong>0</strong> </h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 p-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4> Umumiy </h4>
+                    </div>
+
+                    <div class="card-body">
+                        <h5> Oqimlar soni: <strong>90</strong> </h5>
+                        <hr>
+                        <h5> Namoishlar soni: <strong>981</strong> </h5>
+                        <hr>
+                        <h5> Admin bonusi: <strong> 50000 </strong> </h5>
+                        <hr>
+                        <h5> Mahsulot narxi: <strong> 279000 </strong> </h5>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+                <div>
+            <br>
+            <hr>
+            <h3 class="text-center"> Ushbu mahsulotga yaratilgan shaxsiy oqimlar </h3>
+            <script src="https://code.highcharts.com/highcharts.js"></script>
+            <script src="https://code.highcharts.com/modules/exporting.js"></script>
+            <script src="https://code.highcharts.com/modules/export-data.js"></script>
+            <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+            <figure class="highcharts-figure" style="margin: 0; width: 100%; max-width: 100%; padding-bottom: 20px">
+              <div id="container"></div>
+            </figure>
+
+            <script>
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: 'Bir nechta oqimlar yarating va ularni taqqoslang'
+                    },
+                    xAxis: {
+                        categories: ["erkak"]
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Quyidagi tugmalar ustiga bosib kerakli malumotni aniqroq koring'
+                        }
+                    },
+                    legend: {
+                        reversed: true
+                    },
+                    plotOptions: {
+                        series: {
+                            stacking: 'normal'
+                        }
+                    },
+                    series: [{
+                        name: 'Xaridlar',
+                        color: '#27ae60',
+                        data: [0]
+                    }, {
+                        name: 'Sorovlar',
+                        color: '#3498db',
+                        data: [0]
+                    }, {
+                        name: 'Tashriflar',
+                        color: '#e67e22',
+                        data: [0]
+                    }]
+                });
+                </script>
+            </div>
+
+
+
+    </div>
+</section>
+
+
+<style>
+hr {
+    margin: 10px 0;
+}
+</style>        </main>
+{% endblock %}

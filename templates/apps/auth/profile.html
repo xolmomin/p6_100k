@@ -15,7 +15,6 @@
 <body>
 
 <div class="container-xl px-4 mt-4">
-    <!-- Account page navigation-->
     <hr class="mt-0 mb-4">
     <form method="post" action="{% url 'profile_page' %}" enctype="multipart/form-data" class="needs-validation"
           novalidate>
@@ -32,11 +31,13 @@
                             <span> Mening profilim</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right header_navbar_lang_menu_dropdown">
-                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href=""> Aloqa uchun </a>
-                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href=""> Profil </a>
-                            <a class="d-none dropdown-item header_navbar_lang_menu_dropdown_item" href=""> Bonus xarid qilish </a>
-                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href=""> Mening sevimlilarim </a>
-                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="">Sozlamalar </a>
+                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'contacts' %}">
+                                Aloqa uchun </a>
+                            <a class="d-none dropdown-item header_navbar_lang_menu_dropdown_item" href=""> Bonus xarid
+                                qilish </a>
+                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="#"> Mening
+                                sevimlilarim </a>
+                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="#">Sozlamalar </a>
                         </div>
                     </div>
                 </div>
@@ -54,8 +55,8 @@
                         </div>
 
                         <div class="content_profile_name_text">
-                            <p> Rasmingizni taxrirlang! </p>
-                            <a href="javascript:" class="btn-new btn-input"> Fotosurat yuklash </a>
+                            <p> Rasmingizni tahrirlang! </p>
+                            <input type="file" id="img" name="image" accept="image/*">
                         </div>
                     </div>
                 </div>
@@ -64,7 +65,7 @@
                     <div class="form-group">
                         <label>Telefon</label>
                         <input type="text" name="phone" readonly class="form-control"
-                               placeholder=" Telefon raqamingizni kiriting " value="+998 {{ user.phone }}">
+                               placeholder=" Telefon raqamingizni kiriting " value="{{ user.phone }}">
                     </div>
 
                     <div class="form-group">
@@ -79,33 +80,58 @@
                                value="{{ user.last_name }}">
                     </div>
 
-                    <div id="partialCountryState">
-
+                    <div>
                         <div class="form-group">
-                            <label for="accountCountry"> Viloyat </label>
-                            <select id="accountCountry" class="form-control" emptyOption="" data-request="onInit"
-                                    data-request-update="&quot;country-state&quot;:&quot;#partialCountryState&quot;"
-                                    name="region_id">
+                            <script type="text/javascript">
+                                function showDistricts(region) {
+                                    let districts;
+                                    switch (region) {
+                                        case "1":
+                                            districts = ["", "Yunusobod", "Chilonzor"];
+                                            break;
+                                        case "2":
+                                            districts = ["", "Pop", "Chust"];
+                                            break;
+                                    }
+
+                                    let districtSelector = document.getElementById("district");
+                                    districtSelector.innerHTML = '';
+
+                                    for (let i = 0; i < districts.length; i++) {
+                                        let opt = document.createElement('option');
+                                        if (i > 0) {
+                                            opt.value = districts[i];
+                                            opt.innerHTML = districts[i];
+                                        } else {
+                                            opt.value = '';
+                                            opt.innerHTML = '';
+                                        }
+                                        districtSelector.appendChild(opt);
+                                    }
+                                }
+                            </script>
+                            <label>Viloyatni tanlang:</label>
+                            <select class="form-control" name="region" onchange="showDistricts(this.value)">
                                 <option value="" selected="selected"></option>
-                                <option value="13">Toshkent shaxar</option>
-                                <option value="12">Andijon</option>
-                                <option value="11">Buxoro</option>
-                                <option value="1">Fargona</option>
-                                <option value="10">Jizzax</option>
-                                <option value="6">Namangan</option>
+                                <option value="1">Toshkent shahar</option>
+                                <option value="2">Namangan</option>
+                                <option value="3">Andijon</option>
+                                <option value="4">Buxoro</option>
+                                <option value="5">Fargona</option>
+                                <option value="6">Jizzax</option>
                                 <option value="7">Navoiy</option>
                                 <option value="8">Qashqadaryo</option>
                                 <option value="9">Qoraqalpogiston</option>
-                                <option value="5">Samarqand</option>
-                                <option value="3">Sirdaryo</option>
-                                <option value="4">Surxondaryo</option>
-                                <option value="2">Toshkent viloyati</option>
+                                <option value="10">Samarqand</option>
+                                <option value="11">Sirdaryo</option>
+                                <option value="12">Surxondaryo</option>
+                                <option value="13">Toshkent viloyati</option>
                                 <option value="14">Xorazm</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="accountState"> Tuman / Shahar </label>
-                            <select id="accountState" class="form-control" emptyOption="" name="district_id">
+                            <label>Tuman/Shahar</label>
+                            <select id="district" class="form-control" name="district">
                                 <option value="" selected="selected"></option>
                             </select>
                         </div>
@@ -114,7 +140,7 @@
                     <div class="form-group">
                         <label> Manzilingiz </label>
                         <input type="text" name="address" class="form-control" placeholder="Manzilingizni kiriting"
-                               value="{{ user.address }}">
+                               value="{{ user.address|default_if_none:'' }}">
                     </div>
 
                     <button onclick='FB.AppEvents.logEvent("settingsSave")' data-attach-loading type="submit"

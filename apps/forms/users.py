@@ -7,7 +7,7 @@ from apps.models.users import Favorite
 class ProfileModelForm(ModelForm):
     class Meta:
         model = User
-        fields = ('image', 'first_name', 'last_name', 'phone', 'address')
+        fields = ('image', 'first_name', 'last_name', 'phone', 'address', 'region', 'district')
 
 
 class CreateCommentForm(ModelForm):

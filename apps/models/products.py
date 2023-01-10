@@ -22,10 +22,12 @@ class Product(Model):
     @property
     def stream_count(self):
         return self.stream_set.count()
+
+
     # @property
     # def image_url(self):
     #     try:
-    #         url = self.main_picture.url
+    #         url = self.productimage_set.first.url
     #     except ValueError:
     #         url = 'https://via.placeholder.com/400x400'
     #     return url

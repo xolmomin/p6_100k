@@ -7,30 +7,12 @@
 
             <div class="container">
                 <br>
-                <br>/
+                <br>
                 <h3 class="text-center"> Hozirda sotuvda bor<br> mahsulotlar </h3>
                 <br>
 
 
                 <div class="container market-search-form">
-                    {#                    <form method="get">#}
-                    {##}
-                    {#                        <div class="input-group-prepend">#}
-                    {#                            <button class="btn btn-info" style="border: 1px solid #ddd" type="button"#}
-                    {#                                    onclick="$('.market-search-input').val(''); $('.market-search-input').submit()"#}
-                    {#                                    id="button-addon1">#}
-                    {#                            </button>#}
-                    {#                        </div>#}
-                    {#                        <input id="searchbar" type="text"#}
-                    {#                               class="form-control market-search-input" name="search"#}
-                    {#                               placeholder="Mahsulotlar bo'yicha qidiruv" aria-label="Mahsulotlar bo'yicha qidiruv"#}
-                    {#                               value="{{ search_input }}"/>#}
-                    {#                        <div class="input-group-append">#}
-                    {#                            <button class="btn btn-primary" data-attach-loading type="submit" id="button-addon2">#}
-                    {#                                Izlash#}
-                    {#                            </button>#}
-                    {#                        </div>#}
-                    {#                    </form>#}
                     <form method="get" data-request="onMarketSearch"
                           data-request-update="'admin/market-products': '#marketProductsList'" data-request-flash=""
                           class="input-group mb-0 px-2">
@@ -44,10 +26,7 @@
 
                         <input value="{{ search_input }}" type="text" class="form-control market-search-input"
                                name="search"
-                               placeholder="Mahsulotlar bo'yicha qidiruv" aria-label="Mahsulotlar bo'yicha qidiruv"
-                               data-request-update="'admin/market-products': '#marketProductsList'"
-                               aria-describedby="button-addon2" data-request="onMarketSearch" data-track-input="500"
-                               data-request-flash="">
+                               placeholder="Mahsulotlar bo'yicha qidiruv" aria-label="Mahsulotlar bo'yicha qidiruv">
 
                         <div class="input-group-append">
                             <button class="btn btn-primary" data-attach-loading="" type="submit" id="button-addon2">
@@ -75,7 +54,7 @@
                             <div class="card">
                                 <a href="{% url 'product_detail' product.slug %}" target="_blank">
                                     <img width="274.46" height="182.97" class="card-img-top"
-                                         src="{{ product.main_picture.url }}"
+                                         src="{{ product.productimage_set.first.image.url }}"
                                          alt="{{ product.title }}" style="width:274.46px;height:182.97px;">
                                 </a>
 

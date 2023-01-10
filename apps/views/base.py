@@ -46,6 +46,12 @@ class StreamPageListView(ListView):
     context_object_name = 'streams'
     paginate_by = 9
 
+    def post(self, request, *args, **kwargs):
+        stream = Stream.objects.filter(id=int(request.POST['id'])).first()
+        stream.is_area = not stream.is_area
+        stream.save()
+        return super().post(self, request, *args, **kwargs)
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context['url'] = get_current_site(self.request)
@@ -77,4 +83,3 @@ class CategoryDetail(ListView):
 class AdminProductDetailView(DetailView):
     template_name = 'apps/admin/product.html'
     queryset = Product.objects.all()
-    slug_field = Product.pk

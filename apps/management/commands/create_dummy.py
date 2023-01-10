@@ -19,11 +19,10 @@ class Command(BaseCommand):
     '''
 
     def handle(self, *args, **options):
-
         # Create 10 dummy data Category
         print('\n\n\t\tCREATING Category')
         for i in range(10):
-            title = ''.join(fake.text().split()[:3])
+            title = ' '.join(fake.text().split()[:3])
             print(title, end=' ')
             try:
                 img = download_image(fake.image_url(), 'category')
@@ -38,6 +37,7 @@ class Command(BaseCommand):
         print('\n\n\t\tCREATING Store')
         for i in range(20):
             name = fake.unique.company()
+            description = ' '.join(fake.unique.texts().split()[:20]) + '.'
             print(name, end=' ')
             try:
                 image = fake.unique.image_url()
@@ -45,17 +45,18 @@ class Command(BaseCommand):
                 print('No answer')
                 continue
             store = Store.objects.create(image=download_image(image, "store"), name=name,
-                                         short_des=''.join(name.split()[:2]))
+                                         short_des=description)
             print('store added')
 
-        print('\n\n\t\tCREATING Product')
         # Create 1000 dummy data Product
+        print('\n\n\t\tCREATING Product')
         stores = Store.objects.all()
         categories = Category.objects.all()
         for i in range(10):
             title = ' '.join(fake.text().split()[:3])
             print(title, end=' ')
             main_picture = download_image(fake.unique.image_url(), 'product')
+            description = ' '.join(fake.unique.texts().split()[:40]) + '.'
             price = abs(int(fake.longitude())) * 1000
             created_at = fake.date_time()
             bonus = price // 100
@@ -63,7 +64,7 @@ class Command(BaseCommand):
             reserve = abs(int(fake.longitude()))
             store = random.choice(stores)
             category = random.choice(categories)
-            product = Product.objects.create(title=title, main_picture=main_picture, price=price, created_at=created_at,
+            product = Product.objects.create(title=title, main_picture=main_picture, description=description, price=price, created_at=created_at,
                                              bonus=bonus, free_delivery=free_delivery, reserve=reserve, store=store,
                                              category=category)
             print('product added')

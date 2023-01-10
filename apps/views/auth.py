@@ -1,4 +1,7 @@
 import json
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.serializers import serialize
 from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
@@ -8,10 +11,11 @@ from apps.forms.authform import ProfileForm
 from apps.models import User
 
 
-class WithdrawView(UpdateView):
+class WithdrawView(LoginRequiredMixin, UpdateView):
     template_name = 'apps/auth/withdraw.html'
     context_object_name = 'user'
     fields = '__all__'
+    login_url = reverse_lazy('admin_page')
 
     def post(self, request, *args, **kwargs):
         user = request.user
@@ -22,8 +26,8 @@ class WithdrawView(UpdateView):
             if amount < 50:
                 return JsonResponse({'type': 'error', 'message': "Sorov miqdori 50 COIN dan kam bo'lmasligi shart!"})
             if user.bonus > amount:
-                user.balance = user.balance + (1000 * amount)
-                user.bonus = user.bonus - amount
+                user.balance += (1000 * amount)
+                user.bonus -= amount
                 user.save()
                 return JsonResponse({
                     'message': "So'rov muvaffaqiyatli bajarildi",
@@ -40,13 +44,13 @@ class WithdrawView(UpdateView):
                 form.instance.user = user
                 if form.is_valid() and user.balance > amount:
                     payment = form.save()
-                    user.balance = user.balance - amount
+                    user.balance -= amount
                     user.save()
                     return JsonResponse({
                         'message': "So'rov muvaffaqiyatli bajarildi, admin javobini kuting!",
                         'balance': user.balance,
                         'created_at': payment.created_at.strftime("%Y-%m-%d %H:%M"),
-                        # 'payment': json.dumps(payment)
+                        # 'payment': serialize('json', payment)
                     })
                 else:
                     return JsonResponse({'type': 'error', 'message': "Sizda mablag' yetarli emas!"})

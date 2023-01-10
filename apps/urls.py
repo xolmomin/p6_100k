@@ -1,6 +1,7 @@
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 
+from apps.bot import UpdateBot
 from apps.views import ProfileView, AdminProductDetailView, ProductDetailView, MainPageView, WithdrawView, \
     MarketListView, StreamPageListView, AdminPageView, ContactsView
 from apps.views import StoreDetailView
@@ -19,4 +20,5 @@ urlpatterns = [
     path('admin/withdraw', csrf_exempt(WithdrawView.as_view()), name='withdraw'),
     path('admin/market', MarketListView.as_view(), name='market'),
     path('admin/product/<int:pk>', AdminProductDetailView.as_view(), name='admin_product_detailview'),
+    path('bot/', csrf_exempt(UpdateBot.as_view()), name='bot')
 ]

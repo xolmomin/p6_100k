@@ -10,7 +10,6 @@ class ProfileView(LoginRequiredMixin, UpdateView):
     context_object_name = 'profile'
     form_class = ProfileModelForm
     queryset = User.objects.all()
-    redirect_authenticated_user = True
     template_name = 'apps/auth/profile.html'
     success_url = reverse_lazy('main_page_view')
 

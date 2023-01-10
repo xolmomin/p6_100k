@@ -18,7 +18,6 @@ class MainPageView(TemplateView):
 class StreamPageListView(ListView):
     template_name = 'apps/admin/stream.html'
     model = Stream
-    queryset = Stream.objects.all()
     context_object_name = 'streams'
     paginate_by = 9
 

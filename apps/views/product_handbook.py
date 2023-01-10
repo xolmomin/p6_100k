@@ -13,8 +13,8 @@ class CategoryDetail(ListView):
         qs = self.get_queryset()
         context['categories'] = Category.objects.all()
         context['products'] = qs
-        context['category_slug'] = Category.objects.filter(slug=slug).first()
-        context['products2'] = Product.objects.all()
+        # context['category_slug'] = Category.objects.filter(slug=slug).first()
+        # context['products2'] = Product.objects.all()
         return context
 
     def get_queryset(self):

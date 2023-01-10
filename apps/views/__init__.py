@@ -1,5 +1,7 @@
-from apps.views.auth import WithdrawView, ProfileView
-from apps.views.main import MainPageView, AdminProductDetailView, ProductDetailView, StreamPageListView, AdminPageView, \
-    ContactsView, ExploreProductsView, CategoryDetail
-from apps.views.market import MarketListView
-from apps.views.store_detail import StoreDetailView
+from apps.views.payments import WithdrawView
+from apps.views.users import ProfileView
+from apps.views.admin import MarketListView, AdminProductDetailView, AdminPageView
+from apps.views.main import MainPageView, ContactsView, ExploreProductsView
+from apps.views.products import CategoryDetail, ProductDetailView, ProductDetailView
+
+from apps.views.streams import StoreDetailView, StreamPageListView

@@ -1,3 +1,4 @@
+from django.contrib.auth.views import LogoutView
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 
@@ -5,7 +6,6 @@ from apps.bot import UpdateBot
 from apps.views import ProfileView, AdminProductDetailView, ProductDetailView, MainPageView, WithdrawView, \
     MarketListView, StreamPageListView, AdminPageView, ContactsView, ExploreProductsView, StoreDetailView, \
     CategoryDetail
-
 
 urlpatterns = [
     path('', MainPageView.as_view(), name='main_page_view'),

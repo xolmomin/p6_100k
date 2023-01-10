@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView
 
-from apps.models import Product, Category
+from apps.models import Product, Category, Contact
 
 
 class MarketListView(ListView):
@@ -42,3 +42,7 @@ class AdminPageView(DetailView):
     def get_object(self, queryset=None):
         return self.request.user
 
+
+class ContactsView(ListView):
+    template_name = 'apps/contacts.html'
+    model = Contact

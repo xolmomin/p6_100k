@@ -31,34 +31,35 @@
                         </div>
                         <div class="col-auto">
                             <div class="mb-3">
-                                <a href="{% url 'explore' %}?sort=new">Barchasini ko'rish</a>
+                                <a href="{% url 'explore' %}">Barchasini ko'rish</a>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                     {% for product in products %}
-                       <div class="col-md-3 col-sm-4 col-6">
-                            <div class="productsList--item">
-                                <a href="{% url 'product_detail' product.slug %}" class="productsList--item--link"></a>
-                                <div class="productsList--item--image">
-                                    <img src="{{ product.image_url }}" style="height: 200px; width: 200px;" alt="">
-                                </div>
-                                <div class="productsList--item--info">
-                                    <div class="productsList--item--title">
-                                        {{ product.title }}
+                        {% for product in products %}
+                            <div class="col-md-3 col-sm-4 col-6">
+                                <div class="productsList--item">
+                                    <a href="{% url 'product_detail' product.slug %}"
+                                       class="productsList--item--link"></a>
+                                    <div class="productsList--item--image">
+                                        <img src="{{ product.image_url }}" style="height: 200px; width: 200px;" alt="">
                                     </div>
-                                    <div class="productsList--item--price">
-                                        <strong class="font-weight-bold"> {{ product.price}} </strong>
+                                    <div class="productsList--item--info">
+                                        <div class="productsList--item--title">
+                                            {{ product.title }}
+                                        </div>
+                                        <div class="productsList--item--price">
+                                            <strong class="font-weight-bold"> {{ product.price }} </strong>
 
-                                        <span class="small">so'm</span>
+                                            <span class="small">so'm</span>
+                                        </div>
+                                        {#                                    <div class="productsList--item--orders">#}
+                                        {#                                        buyurtmalar: {{ product.productorders_set.count }}#}
+                                        {#                                    </div>#}
                                     </div>
-{#                                    <div class="productsList--item--orders">#}
-{#                                        buyurtmalar: {{ product.productorders_set.count }}#}
-{#                                    </div>#}
                                 </div>
                             </div>
-                        </div>
-                     {% endfor %}
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="productsList py-4">
@@ -68,146 +69,38 @@
                         </div>
                         <div class="col-auto">
                             <div class="mb-3">
-                                <a href="{% url 'explore' %}?sort=rating"> Barchasini korish </a>
+                                <a href="{% url 'explore' %}"> Barchasini korish </a>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                         {% for product in products %}
-                       <div class="col-md-3 col-sm-4 col-6">
-                            <div class="productsList--item">
-                                <a href="{% url 'product_detail' product.slug %}" class="productsList--item--link"></a>
-                                <div class="productsList--item--image">
-                                    <img src="{{ product.image_url }}" style="height: 200px; width: 200px;" alt="">
-                                </div>
-                                <div class="productsList--item--info">
-                                    <div class="productsList--item--title">
-                                        {{ product.title }}
+                        {% for product in products %}
+                            <div class="col-md-3 col-sm-4 col-6">
+                                <div class="productsList--item">
+                                    <a href="{% url 'product_detail' product.slug %}"
+                                       class="productsList--item--link"></a>
+                                    <div class="productsList--item--image">
+                                        <img src="{{ product.image_url }}" style="height: 200px; width: 200px;" alt="">
                                     </div>
-                                    <div class="productsList--item--price">
-                                        <strong class="font-weight-bold"> {{ product.price}} </strong>
+                                    <div class="productsList--item--info">
+                                        <div class="productsList--item--title">
+                                            {{ product.title }}
+                                        </div>
+                                        <div class="productsList--item--price">
+                                            <strong class="font-weight-bold"> {{ product.price }} </strong>
 
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 258
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/uzamax.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/60c/bba/618/thumb_4851_200_200_0_0_crop.jpg"
-                                     width="200" height="200" alt="Uzamax">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    Uzamax
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 177,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 433
+                                            <span class="small">so'm</span>
+                                        </div>
+                                        <div class="productsList--item--orders">
+                                            buyurtmalar: {{ product.productorders_set.count }}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/elektron-karset.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/629/a5e/6c7/thumb_11063_200_200_0_0_crop.png"
-                                     width="200" height="200" alt="Elektron karset">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    Elektron karset
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 99,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 384
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/islomiy-nabor.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/60b/b05/5f1/thumb_4582_200_200_0_0_crop.jpg"
-                                     width="200" height="200" alt="Islomiy nabor">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    Islomiy nabor
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 299,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 426
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/mini-chok-moshika.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/638/384/cb2/thumb_16021_200_200_0_0_crop.png"
-                                     width="200" height="200" alt="Mini chok mashinka">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    Mini chok mashinka
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 197,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 212
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-4 col-6">
-                        <div class="productsList--item">
-                            <a href="shop/product/bluetooth-kozoynak.html" class="productsList--item--link"></a>
-                            <div class="productsList--item--image">
-                                <img src="storage/app/uploads/public/638/385/ed7/thumb_16054_200_200_0_0_crop.png"
-                                     width="200" height="200" alt="bluetooth ko&#039;zoynak">
-                            </div>
-                            <div class="productsList--item--info">
-                                <div class="productsList--item--title">
-                                    bluetooth ko&#039;zoynak
-                                </div>
-                                <div class="productsList--item--price">
-                                    <strong class="font-weight-bold"> 197,000 </strong>
-
-                                    <span class="small">so'm</span>
-                                </div>
-                                <div class="productsList--item--orders">
-                                    buyurtmalar: 423
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-        </div>
 
             <section class="advantagesSection">
                 <div class="container">

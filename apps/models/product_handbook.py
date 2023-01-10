@@ -36,6 +36,7 @@ class Category(Model):
     def product_count(self):
         return self.product_set.count()
 
+
 class Comment(Model):
     class Rate(IntegerChoices):
         Ajoyib = 1, 'Ajoyib'

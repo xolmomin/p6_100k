@@ -1,7 +1,4 @@
-from django.contrib.sites.shortcuts import get_current_site
-from django.http import JsonResponse
-from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from apps.models import Product, Category
 
@@ -31,3 +28,17 @@ class MarketListView(ListView):
         elif category := self.request.GET.get('category'):
             return qs.filter(category__slug=category)
         return qs
+
+
+class AdminProductDetailView(DetailView):
+    template_name = 'apps/admin/product.html'
+    queryset = Product.objects.all()
+    slug_field = Product.pk
+
+
+class AdminPageView(DetailView):
+    template_name = 'apps/admin/main_page.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user
+

@@ -1,10 +1,10 @@
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 
-from apps.views import ProfileView, AdminProductDetailView, ProductDetailView, MainPageView, WithdrawView, \
-    MarketListView, StreamPageListView, AdminPageView, ContactsView
+from apps.views import (ProfileView, AdminProductDetailView, ProductDetailView, MainPageView, WithdrawView,
+                        MarketListView, StreamPageListView, AdminPageView, ContactsView)
 from apps.views import StoreDetailView
-from apps.views.main import CategoryDetail
+from apps.views.product_handbook import CategoryDetail
 
 urlpatterns = [
     path('', MainPageView.as_view(), name='main_page_view'),

@@ -1,5 +1,5 @@
 from django.contrib.auth.models import AbstractUser
-from django.db.models import CharField, DecimalField, PositiveIntegerField, Model, EmailField
+from django.db.models import CharField, DecimalField, PositiveIntegerField, Model, EmailField, ForeignKey, CASCADE
 from django_resized import ResizedImageField
 
 from apps.models.payments import PaymentHistory
@@ -33,3 +33,8 @@ class Contact(Model):
     class Meta:
         verbose_name = 'Contact'
         verbose_name_plural = 'Contact'
+
+
+class Favorite(Model):
+    user = ForeignKey('apps.User', CASCADE)
+    product = ForeignKey('apps.Product', CASCADE)

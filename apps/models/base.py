@@ -18,7 +18,7 @@ class Product(Model):
 
 # TODO Javlon Commentni alohida file ga olib ciqib qoying
 class Comment(Model):
-    author = ForeignKey('auth.User', PROTECT)
+    author = ForeignKey('apps.User', PROTECT)
     name = CharField(max_length=255)
     content = TextField()
 
@@ -34,23 +34,7 @@ class Stream(Model):
     name = CharField(max_length=255)
     donation = CharField(max_length=20)  # hayriya uchun mablag`
     reduce = CharField(max_length=20)  # narxini kamaytirish uchun mablag`
-    user = ForeignKey('auth.User', CASCADE)  # oqim yaratgan foydalanuchi
+    user = ForeignKey('apps.User', CASCADE)  # oqim yaratgan foydalanuchi
     product = ForeignKey('apps.Product', CASCADE)  # oqim uchun mahsulot
     is_area = BooleanField(default=False)  # hududsiz qabul qilish
 
-
-class Tickets(Model):
-    class SenderTextChoice(TextChoices):
-        XARIDOR = 'customer', 'xaridor'
-        KURYER = 'kuryer', 'kuryer'
-        ADMIN = 'admin', 'admin'
-        SOTUVCHI = 'salesman', 'sotuvchi'
-        BOSHQA = 'other', 'boshqa'
-    class PurposeTextChoice(TextChoices):
-        MUAMMO = 'issue', 'muammo'
-        TAKLIF = 'suggestion', 'taklif'
-    sender = CharField(max_length=55, choices=SenderTextChoice.choices)
-    sender_name = CharField(max_length=255)
-    phone_number = CharField(max_length=20)
-    ticket_purpose = CharField(max_length=55, choices=PurposeTextChoice.choices)
-    message = TextField()

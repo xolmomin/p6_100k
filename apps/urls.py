@@ -7,5 +7,5 @@ from apps.views.base import MainPageView, ProductDetailView
 urlpatterns = [
     path('', MainPageView.as_view(), name='main_page_view'),
     path('product/<str:slug>', ProductDetailView.as_view(), name='product_detail_view'),
-    path('bot/', csrf_exempt(UpdateBot), name='bot'),
+    path('bot/', csrf_exempt(UpdateBot.as_view()), name='bot_view'),
 ]

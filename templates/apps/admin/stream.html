@@ -3,63 +3,63 @@
 {% block main %}
 
 
-<main class="admin-template">
-    <section class="main">
-        <div class="container">
+    <main class="admin-template">
+        <section class="main">
+            <div class="container">
 
-            <br>
-            <br>
-            <h3 class="text-center"> Mening havolalarim </h3>
-            <br>
+                <br>
+                <br>
+                <h3 class="text-center"> Mening havolalarim </h3>
+                <br>
 
-            <div class="row">
+                <div class="row">
 
-                {% for stream in streams %}
+                    {% for stream in streams %}
 
 
-                    <div class="col-sm-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <a href="#"
-                                   data-request="onDeleteStream"
-                                   data-request-data="'id': {{ stream.id }}"
-                                   data-request-flash
-                                   data-request-success="$(this).closest('.col-sm-4').remove()"
-                                   data-request-confirm="Diqqat! Ochirilgan oqimni tiklab bo'lmaydi?"
-                                   class="text-danger" style="float: right"> <span class="fa fa-trash"></span> </a>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <a href="#"
+                                       data-request="onDeleteStream"
+                                       data-request-data="'id': {{ stream.id }}"
+                                       data-request-flash
+                                       data-request-success="$(this).closest('.col-sm-4').remove()"
+                                       data-request-confirm="Diqqat! Ochirilgan oqimni tiklab bo'lmaydi?"
+                                       class="text-danger" style="float: right"> <span class="fa fa-trash"></span> </a>
 
-                                <h5> {{ stream.name }} </h5>
-                            </div>
-
-                            <div class="card-body">
-                                <p class="card-text">
-                                    {{ stream.product.title }}
-                                </p>
-
-                                <div class="form-group">
-                                    <input type="text" value="https://{{ url }}/stream/{{ stream.id }}" readonly
-                                           class="ref_link form-control">
+                                    <h5> {{ stream.name }} </h5>
                                 </div>
 
-                                <p>
-                                    <label> <input {% if stream.is_area %}checked{% endif %}
-                                                   data-request="onToggleRegion" data-input-track
-                                                   type="checkbox" data-request-data="'id': '{{ stream.id }}'"
-                                                   data-request-flash
-                                                   name="is_region_disabled"> sorovlarni hududsiz qabul qilish </label>
-                                </p>
-                                <hr>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        {{ stream.product.title }}
+                                    </p>
 
-                                <button class="copy_ref_bn btn btn-primary">Nusxa ko'chirish</button>
+                                    <div class="form-group">
+                                        <input type="text" value="https://{{ url }}/stream/{{ stream.id }}" readonly
+                                               class="ref_link form-control">
+                                    </div>
+
+                                    <p>
+                                        <label> <input {% if stream.is_area %}checked{% endif %}
+                                                       type="checkbox"
+                                                       onclick="areaChange({{ stream.id }})"> sorovlarni hududsiz qabul
+                                            qilish
+                                        </label>
+                                    </p>
+                                    <hr>
+
+                                    <button class="copy_ref_bn btn btn-primary">Nusxa ko'chirish</button>
+                                </div>
                             </div>
+                            <br>
                         </div>
-                        <br>
-                    </div>
 
-                {% endfor %}
+                    {% endfor %}
 
 
-                <div class="pagination">
+                    <div class="pagination">
                     <span class="step-links">
                         {% if page_obj.has_previous %}
                             <a href="?page={{ page_obj.previous_page_number }}">previous</a>
@@ -73,66 +73,74 @@
                             <a href="?page={{ page_obj.next_page_number }}">next</a>
                         {% endif %}
                     </span>
+                    </div>
+
+
+                    {#                <div class="col-sm-12">#}
+                    {#                    <div style="text-align: center">#}
+                    {##}
+                    {#                        <strong> &nbsp;&nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp; </strong>#}
+                    {##}
+                    {#                    </div>#}
+                    {#                    <br>#}
+                    {#                    <br>#}
+                    {#                </div>#}
+
                 </div>
 
-
-                {#                <div class="col-sm-12">#}
-                {#                    <div style="text-align: center">#}
-                {##}
-                {#                        <strong> &nbsp;&nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp; </strong>#}
-                {##}
-                {#                    </div>#}
-                {#                    <br>#}
-                {#                    <br>#}
-                {#                </div>#}
-
             </div>
-
-        </div>
-    </section>
+        </section>
 
 
-</main>
-<script>
-    $(".card-body .copy_ref_bn").on('click', function () {
-        var copyText = $(this).parent().find('.ref_link').get(0);
+    </main>
+    <script>
+        $(".card-body .copy_ref_bn").on('click', function () {
+            var copyText = $(this).parent().find('.ref_link').get(0);
 
-        copyText.select();
-        document.execCommand("copy");
-        $(this).text('Nusxa olindi');
-    });
-</script>
-
-<script>
-    function csrfSafeMethod(method) {
-        // these HTTP methods do not require CSRF protection
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    };
-
-
-    $('.form-check').on('click', '.form-check-input', function () {
-        var dataID = $(this).data('id');
-
-        $.ajaxSetup({
-            beforeSend: function (xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    // Only send the token to relative URLs i.e. locally.
-                    xhr.setRequestHeader("X-CSRFToken", Cookies.get('csrftoken'));
-                }
-            }
+            copyText.select();
+            document.execCommand("copy");
+            $(this).text('Nusxa olindi');
         });
+    </script>
 
-        $.ajax({
-            url: "content/completed/",
-            type: "POST",
-            data: {
-                id: dataID
-            },
-            success: function () {
-                console.log('Success')
+    <script>
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
             }
         })
-    });
-</script>
+    </script>
+
+    <script>
+
+        {#const submit = document.getElementById('is_region_disabled')#}
+
+        function areaChange(id) {
+            $.ajax({
+                url: "",
+                type: "POST",
+                data: {
+                    id: id
+                },
+                success: function () {
+                    console.log('Success')
+                }
+            })
+        }
+
+
+    </script>
 
 {% endblock %}

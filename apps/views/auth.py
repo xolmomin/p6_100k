@@ -1,7 +1,6 @@
 import json
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.serializers import serialize
 from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView

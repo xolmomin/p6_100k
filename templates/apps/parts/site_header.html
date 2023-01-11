@@ -50,7 +50,9 @@
                 <div class="dropdown-menu dropdown-menu-right header_navbar_lang_menu_dropdown">
                     <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'contacts' %}">
                         Aloqa uchun </a>
-                    <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'profile_page' %}">
+                    <a class="dropdown-item header_navbar_lang_menu_dropdown_item"
+                       href="
+                               {% if user.is_authenticated %}{% url 'profile_page' %}{% else %}{% url 'login' %}{% endif %}">
                         Profil </a>
 
                     {% if user.is_authenticated %}

@@ -23,14 +23,13 @@ class Product(Model):
     def stream_count(self):
         return self.stream_set.count()
 
-
-    # @property
-    # def image_url(self):
-    #     try:
-    #         url = self.productimage_set.first.url
-    #     except ValueError:
-    #         url = 'https://via.placeholder.com/400x400'
-    #     return url
+    @property
+    def image_url(self):
+        try:
+            url = self.productimage_set.first().image.url
+        except (ValueError, AttributeError):
+            url = 'https://via.placeholder.com/400x400'
+        return url
 
     def save(self, *args, **kwargs):
         if not self.slug:

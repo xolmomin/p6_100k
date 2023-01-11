@@ -12,7 +12,7 @@
                             <div class="col-md-2 col-4">
                                 <a class="siteCategories--item"
                                    href="{% url 'category_detail' %}?category={{ category.slug }}">
-                                    <img alt="Elektronika" height="100" style="width:100px;height:100px;"
+                                    <img alt="" height="100" style="width:100px;height:100px;"
                                          src="{{ category.image.url }}"
                                          width="100">
                                     <span> {{ category.title }}  {% if category.product_count > 0 %}
@@ -43,7 +43,7 @@
                                     <a href="{% url 'product_detail' product.slug %}"
                                        class="productsList--item--link"></a>
                                     <div class="productsList--item--image">
-                                        <img src="{{ product.productimage_set.first.image.url }}"
+                                        <img src="{{ product.image_url }}"
                                              style="height: 200px; width: 200px;" alt="">
                                     </div>
                                     <div class="productsList--item--info">
@@ -79,7 +79,7 @@
                                     <a href="{% url 'product_detail' product.slug %}"
                                        class="productsList--item--link"></a>
                                     <div class="productsList--item--image">
-                                        <img src="{{ product.productimage_set.first.image.url }}"
+                                        <img src="{{ product.image_url }}"
                                              style="height: 200px; width: 200px;" alt="">
                                     </div>
                                     <div class="productsList--item--info">

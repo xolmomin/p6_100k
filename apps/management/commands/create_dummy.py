@@ -18,62 +18,74 @@ class Command(BaseCommand):
     * Store          -> 20
     '''
 
+    def add_arguments(self, parser):
+        parser.add_argument('-p', '--product', type=int, help='Define a product number prefix', )
+        parser.add_argument('-s', '--store', type=int, help='Define a store number prefix', )
+        parser.add_argument('-c', '--category', type=int, help='Define a category number prefix', )
+
     def handle(self, *args, **options):
-        # Create 10 dummy data Category
-        print('\n\n\t\tCREATING Category')
-        for i in range(10):
-            title = ' '.join(fake.text().split()[:3])
-            print(title, end=' ')
-            try:
-                img = download_image(fake.image_url(), 'category')
-            except:
-                print('No answer')
-                continue
-            catagory = Category.objects.create(title=title, image=img)
-            catagory.save()
-            print('category added')
 
-        # Create 20 dummy data Store
-        print('\n\n\t\tCREATING Store')
-        for i in range(20):
-            name = fake.unique.company()
-            description = ' '.join(fake.unique.text().split()[:20]) + '.'
-            print(name, end=' ')
-            image = download_image(fake.unique.image_url(), "store")
-            store = Store.objects.create(image=image,
-                                         name=name,
-                                         short_des=description)
-            print('store added')
+        p = options['product'] if options['product'] else 0
+        c = options['category'] if options['category'] else 0
+        s = options['store'] if options['store'] else 0
 
-        # Create 1000 dummy data Product
-        print('\n\n\t\tCREATING Product')
-        stores = Store.objects.all()
-        categories = Category.objects.all()
-        for i in range(10):
-            title = ' '.join(fake.text().split()[:3])
-            print(title, end=' ')
-            description = ' '.join(fake.unique.text().split()[:40]) + '.'
-            price = abs(int(fake.longitude())) * 1000
-            created_at = fake.date_time()
-            bonus = price // 100
-            free_delivery = fake.boolean()
-            reserve = abs(int(fake.longitude()))
-            store = random.choice(stores)
-            category = random.choice(categories)
-            product = Product.objects.create(title=title,
-                                             description=description,
-                                             price=price,
-                                             created_at=created_at,
-                                             bonus=bonus,
-                                             free_delivery=free_delivery, reserve=reserve, store=store,
-                                             category=category)
+        if c:
+            # Create 10 dummy data Category
+            print('\n\n\t\tCREATING Category')
+            for i in range(c):
+                title = ' '.join(fake.text().split()[:3])
+                print(title, end=' ')
+                try:
+                    img = download_image(fake.image_url(), 'category')
+                except:
+                    print('No answer')
+                    continue
+                catagory = Category.objects.create(title=title, image=img)
+                catagory.save()
+                print('category added')
 
-            print('product added')
-            # Create image for product
-            for j in range(random.randint(1, 6)):
-                image = download_image(fake.image_url(), 'product')
-                ProductImage.objects.create(image=image, product_id=product.id)
-                print(product.title, ' added image')
+        if s:
+            # Create 20 dummy data Store
+            print('\n\n\t\tCREATING Store')
+            for i in range(s):
+                name = fake.unique.company()
+                description = ' '.join(fake.unique.text().split()[:20]) + '.'
+                print(name, end=' ')
+                image = download_image(fake.unique.image_url(), "store")
+                store = Store.objects.create(image=image,
+                                             name=name,
+                                             short_des=description)
+                print('store added')
+        if p:
+            # Create 1000 dummy data Product
+            print('\n\n\t\tCREATING Product')
+            stores = Store.objects.all()
+            categories = Category.objects.all()
+            for i in range(p):
+                title = ' '.join(fake.text().split()[:3])
+                print(title, end=' ')
+                description = ' '.join(fake.unique.text().split()[:40]) + '.'
+                price = abs(int(fake.longitude())) * 1000
+                created_at = fake.date_time()
+                bonus = price // 100
+                free_delivery = fake.boolean()
+                reserve = abs(int(fake.longitude()))
+                store = random.choice(stores)
+                category = random.choice(categories)
+                product = Product.objects.create(title=title,
+                                                 description=description,
+                                                 price=price,
+                                                 created_at=created_at,
+                                                 bonus=bonus,
+                                                 free_delivery=free_delivery, reserve=reserve, store=store,
+                                                 category=category)
+
+                print('product added')
+                # Create image for product
+                for j in range(random.randint(1, 6)):
+                    image = download_image(fake.image_url(), 'product')
+                    ProductImage.objects.create(image=image, product_id=product.id)
+                    print(product.title, ' added image')
 
 
 def download_image(url, place_url):

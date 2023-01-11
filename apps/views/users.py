@@ -1,15 +1,24 @@
+from random import random
+
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.contrib.auth.views import LoginView
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy, reverse
 from django.views.generic import FormView, UpdateView
 
 from apps.forms import ProfileModelForm, FavoriteModelForm
 from apps.models import User
 
 
+class LogInView(LoginView):
+    template_name = 'apps/auth/login.html'
+
+
 class ProfileView(LoginRequiredMixin, UpdateView):
     context_object_name = 'profile'
     form_class = ProfileModelForm
     queryset = User.objects.all()
+    redirect_authenticated_user = True
     template_name = 'apps/auth/profile.html'
     success_url = reverse_lazy('main_page_view')
 
@@ -20,10 +29,13 @@ class ProfileView(LoginRequiredMixin, UpdateView):
         form.save()
         return super().form_valid(form)
 
-    def form_invalid(self, form):
-        return super().form_invalid(form)
-
 
 class FavoriteFormView(LoginRequiredMixin, FormView):
     template_name = 'apps/favorite.html'
     form_class = FavoriteModelForm
+
+
+def SendSms(request):
+    code = int(random() * 10 ** 5)
+    print(code)
+    return HttpResponseRedirect(reverse('login'))

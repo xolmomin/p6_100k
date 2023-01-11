@@ -13,7 +13,7 @@ class ProfileModelForm(ModelForm):
 class CreateCommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ('content', 'author', 'name')
+        fields = ('content', 'product', 'name')
 
 
 class FavoriteModelForm(ModelForm):

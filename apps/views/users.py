@@ -4,10 +4,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import FormView, UpdateView
+from django.views.generic import FormView, UpdateView, ListView
 
 from apps.forms import ProfileModelForm, FavoriteModelForm
-from apps.models import User
+from apps.models import User, Contact
 
 
 class LogInView(LoginView):

@@ -1,25 +1,19 @@
 {% extends 'apps/admin/admin_base.html' %}
 {% load static %}
 {% block main %}
-
     <main class="admin-template">
         <section class="main">
-
             <div class="container">
-                <br>
                 <br>
                 <h3 class="text-center"> Hozirda sotuvda bor<br> mahsulotlar </h3>
                 <br>
-
-
                 <div class="container market-search-form">
                     <form method="get" data-request="onMarketSearch"
                           data-request-update="'admin/market-products': '#marketProductsList'" data-request-flash=""
                           class="input-group mb-0 px-2">
-
                         <div class="input-group-prepend">
                             <button class="btn btn-info" style="border: 1px solid #ddd" type="button"
-                                    onclick="$('.market-search-input').val(''); $('.market-search-input').submit()"
+                                    onclick="$('.market-search-input').val('');"
                                     id="button-addon1">X
                             </button>
                         </div>
@@ -27,7 +21,6 @@
                         <input value="{{ search_input }}" type="text" class="form-control market-search-input"
                                name="search"
                                placeholder="Mahsulotlar bo'yicha qidiruv" aria-label="Mahsulotlar bo'yicha qidiruv">
-
                         <div class="input-group-append">
                             <button class="btn btn-primary" data-attach-loading="" type="submit" id="button-addon2">
                                 Izlash
@@ -36,10 +29,8 @@
                     </form>
                     <div class="header_tab_menu">
                         <div class="header_menu" style="overflow: auto">
-
-                            <a href="{% url 'market' %}?category=new" class="btn btn-default ">Yangi 🕒 </a>
-
-                            <a href="{% url 'market' %}?category=new" class="btn btn-default ">TOP ⭐ </a>
+                            <a href="{% url 'market' %}?category=new" class="btn btn-default">Yangi 🕒 </a>
+                            <a href="{% url 'market' %}?category=new" class="btn btn-default">TOP ⭐ </a>
                             {% for category in categories %}
                                 <a href="{% url 'market' %}?category={{ category.slug }}"
                                    class="btn btn-default "> {{ category.title }} ({{ category.product_count }}) </a>
@@ -84,8 +75,7 @@
                                             data-request-data="'id': {{ product.id }}"
                                             data-request-update="'popups/create-product-stream' : '#commonModalContent'"
                                             data-toggle="modal" data-target="#exampleModalCenter"
-                                            class="btn btn-primary" id="submit">
-                                        Oqim yaratish
+                                            class="btn btn-primary" id="submit">Oqim yaratish
                                     </button>
                                     <a href="{% url 'admin_product_detailview' product.id %}" class="btn btn-default">
                                         Batafsil</a>
@@ -95,11 +85,8 @@
                                      aria-labelledby="exampleModalLabel"
                                      aria-hidden="true">
                                     <div class="modal-dialog" id="commonModalContent" role="document">
-
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     {% endfor %}
@@ -132,9 +119,9 @@
                             <input type="hidden" id="product_id" value="2">
 
                             <div class="modal-header">
-                                <h5 class="modal-title" id="product_title"> product.title -
+                                <h5 class="modal-title" id="product_title"> {{ product.title }} -
                                     <strong
-                                            id="currentAdminFee">product.price </strong> bonus
+                                            id="currentAdminFee">{{ product.price }} </strong> bonus
                                 </h5>
                                 <div class="product_title">
                                     <p id="product_title"></p>
@@ -154,7 +141,6 @@
                                     <label> Oqim nomi </label>
                                     <input type="text" name="name" class="form-control">
                                 </div>
-
                                 <input type="hidden" name="type" value="market">
 
                                 <!-- hayriyaga yonaltirish -->
@@ -166,7 +152,6 @@
                                                             $('#charityCollapse').find('input').val();
                                                             $('#discountedPrice').text( 1000 + ' so\'m')
                                                             ">
-
                                     <label class="form-check-label" for="isEnabledCharity">
                                         Daromadning bir qismini hayriya ishlariga yo'naltirish
                                     </label>
@@ -184,7 +169,6 @@
                                             <p>min: <strong>100</strong> so'm - <strong>max:
                                                 5000</strong> so'm </p>
                                         </div>
-
                                         Yuqorida kiritilgan summa <strong>ushbu oqim buyurtmasi</strong>
                                         yetqazib berilganda admin hisobidan ushlab qolinadi. Istalgan
                                         kishi 100 somdan 5000 so'mgacha o'z daromatidan hayriya
@@ -214,17 +198,15 @@
                                 <div class="collapse multi-collapse" id="multiCollapseExample1">
                                     <div class="card card-body bg-warning">
                                         <div class="form-group">
-                                            <label> Chegirma miqdori</label>
+                                            <label>Chegirma miqdori</label>
                                             <input type="number" min="0" max="40000" name="discount"
                                                    class="form-control" oninput="
                                                     $('#currentAdminFee').text(50000 - $(this).val()  + ' so\'m');
                                                     $('#discountedPrice').text({{ product.price }} - $(this).val()  + ' so\'m');
                                                     ">
-
                                             <p>min: <strong>5000</strong> so'm - <strong>max:
                                                 40000</strong> so'm </p>
                                         </div>
-
                                         Diqqat! Mahsulot narxini tushurish admin bonusi evaziga amalga
                                         oshiriladi.
                                         Chegirma miqdorini kiritishdan oldin reklama harajatlarini
@@ -242,18 +224,15 @@
                                 <hr>
 
                                 <div class="text-center">
-                                    <button type="submit" data-request-loading=""
-                                            class="btn btn-primary"> Oqim yaratish
+                                    <button type="submit" data-request-loading="" class="btn btn-primary">Oqim
+                                        yaratish
                                     </button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-
             </div>
-
-
         </section>
 
         <style>

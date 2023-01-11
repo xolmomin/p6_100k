@@ -54,8 +54,9 @@ class ProductImage(Model):
     image = ImageField(upload_to='image/', default='media/product-default.jpg')
 
 
-class ProductOrders(Model):  # main pagedigi productslada buyurtmalar uchun model
-    product = ForeignKey('apps.Product', CASCADE)  # productga ulangan boladu
-    region = ForeignKey('apps.Region', SET_NULL, null=True, blank=True)
-    user = ForeignKey('apps.User', CASCADE)  # km zakaz qilingani
-    phone = IntegerField()
+class ProductOrders(Model):
+    name = CharField(max_length=255)
+    region = CharField(max_length=255)
+    phone = CharField(max_length=25)
+    product = ForeignKey('apps.Product', CASCADE)
+    created_at = DateTimeField(auto_now_add=True)

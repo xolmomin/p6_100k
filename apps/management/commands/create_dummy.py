@@ -5,7 +5,7 @@ import requests
 from django.core.management import BaseCommand
 from faker import Faker
 
-from apps.models import Product, Store, Category
+from apps.models import Product, Store, Category, ProductImage
 
 fake = Faker()
 
@@ -52,7 +52,6 @@ class Command(BaseCommand):
         for i in range(10):
             title = ' '.join(fake.text().split()[:3])
             print(title, end=' ')
-            main_picture = download_image(fake.unique.image_url(), 'product')
             description = ' '.join(fake.unique.text().split()[:40]) + '.'
             price = abs(int(fake.longitude())) * 1000
             created_at = fake.date_time()
@@ -62,14 +61,19 @@ class Command(BaseCommand):
             store = random.choice(stores)
             category = random.choice(categories)
             product = Product.objects.create(title=title,
-                                             main_picture=main_picture,
                                              description=description,
                                              price=price,
                                              created_at=created_at,
                                              bonus=bonus,
                                              free_delivery=free_delivery, reserve=reserve, store=store,
                                              category=category)
+
             print('product added')
+            # Create image for product
+            for j in range(random.randint(1, 6)):
+                image = download_image(fake.image_url(), 'product')
+                ProductImage.objects.create(image=image, product_id=product.id)
+                print(product.title, ' added image')
 
 
 def download_image(url, place_url):

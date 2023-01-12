@@ -15,12 +15,13 @@
         data: {},
         flash: true,
     })" id="authForm">
+                {% csrf_token %}
                 <input type="phone"
                        class="border-2 border-gray-200 rounded-xl px-4 py-1.5 focus:outline-none focus:border-primary focus:shadow-lg focus:shadow-primary/20 transition-colors duration-200 min-w-[16rem]"
                        placeholder="Telefon raqamingizni kiring" x-mask="+998(99) 999-99-99"
                        x-on:focus="!$event.target.value.startsWith('+998') ? $event.target.value = '+998' : ''"
                        x-on:blur="$event.target.value == '+998(' || $event.target.value == '+998' ? $event.target.value = '': ''"
-                       x-ref="phone" x-model="phone" name="username" autocomplete="off">
+                       x-ref="phone" x-model="phone" name="phone" autocomplete="off">
                 <label for="checkboxField" class="select-none cursor-pointer group relative">
                     <input class="absolute top-1/2 left-1.5 peer h-0.5 w-0.5" type="checkbox" required=""
                            id="checkboxField">
@@ -54,6 +55,4 @@
             <span class="">Copyright © 2020 Barcha huquqlar himoyalangan</span>
         </div>
     </main>
-    <script src="{% static 'apps/themes/stock/assets/main.1ab22af8.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'apps/themes/stock/assets/main.b406c4a6.css' %}">
 {% endblock %}

@@ -7,7 +7,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import FormView, UpdateView, ListView
 
 from apps.forms import ProfileModelForm, FavoriteModelForm
-from apps.models import User, Contact
+from apps.models import User, Contact, Region, District
 
 
 class LogInView(LoginView):
@@ -21,6 +21,12 @@ class ProfileView(LoginRequiredMixin, UpdateView):
     redirect_authenticated_user = True
     template_name = 'apps/auth/profile.html'
     success_url = reverse_lazy('main_page_view')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['regions'] = Region.objects.all()
+        context['districts'] = District.objects.all()
+        return context
 
     def get_object(self, queryset=None):
         return self.request.user

@@ -112,27 +112,16 @@
                             </script>
                             <label>Viloyatni tanlang:</label>
                             <select class="form-control" name="region" onchange="showDistricts(this.value)">
-                                <option value="" selected="selected"></option>
-                                <option value="1">Toshkent shahar</option>
-                                <option value="2">Namangan</option>
-                                <option value="3">Andijon</option>
-                                <option value="4">Buxoro</option>
-                                <option value="5">Fargona</option>
-                                <option value="6">Jizzax</option>
-                                <option value="7">Navoiy</option>
-                                <option value="8">Qashqadaryo</option>
-                                <option value="9">Qoraqalpogiston</option>
-                                <option value="10">Samarqand</option>
-                                <option value="11">Sirdaryo</option>
-                                <option value="12">Surxondaryo</option>
-                                <option value="13">Toshkent viloyati</option>
-                                <option value="14">Xorazm</option>
+                                <option value="{{ user.region|default_if_none:'' }}" selected="selected"></option>
+                                {% for region in regions %}
+                                    <option value="{{ region.id }}">{{ region.name }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Tuman/Shahar</label>
                             <select id="district" class="form-control" name="district">
-                                <option value="" selected="selected"></option>
+                                <option value="{{ user.district|default_if_none:'' }}" selected="selected"></option>
                             </select>
                         </div>
                     </div>
@@ -154,12 +143,15 @@
                     </div>
 
                     <br>
-                    <p class="text-center">
-                        <a target="_blank" class="btn btn-block btn-primary"
-                           href=""> Telegram botni biriktirish </a>
-                        <br>
-                        <small> TG Aktivlashtirish kodi: </small> <strong> 16729160686359405 </strong>
-                    </p> <br>
+                    {% if user.bot_active_token %}
+                        <p class="text-center">
+                            <a target="_blank" class="btn btn-block btn-primary"
+                               href=""> Telegram botni biriktirish </a>
+                            <br>
+                            <small> TG Aktivlashtirish kodi: </small> <strong> {{ user.bot_active_token }} </strong>
+                        </p>
+                    {% endif %}
+                    <br>
 
                     <br><br>
                 </div>

@@ -29,10 +29,17 @@
                         <div class="col-md-6 mb-4">
                             <div class="owl-carousel owl-theme content_linear_card_body_indicators owl-loaded owl-drag">
                                 <div class="item">
-                                    <img loading="lazy" class="lazyload"
-                                         src="https://100k.uz/themes/stock/assets/img/loading.gif"
-                                         data-src="{{ product.productimage_set.first.image.url }}"
-                                         style="width:431.01px;height:431.01px;" alt="card"/>
+                                    {% if product.video %}
+                                        <video width="431.01" height="431.01" style="width:431.01px;height:431.01px;" controls>
+                                            <source src="{{ product.video.url }}" type="video/mp4">
+                                        </video>
+                                    {% else %}
+                                        <img loading="lazy" class="lazyload"
+                                             src="https://100k.uz/themes/stock/assets/img/loading.gif"
+                                             data-src="{{ product.productimage_set.first.image.url }}"
+                                             style="width:431.01px;height:431.01px;" alt="card"/>
+                                    {% endif %}
+
                                 </div>
                             </div>
 

@@ -7,22 +7,23 @@
 
             <div class="siteCategories pt-5 pb-3">
                 <div class="container">
-                    <!-- <h2 class="font-weight-bold mb-5">Our categories</h2> -->
                     <div class="row">
                         {% for category in categories %}
                             <div class="col-md-2 col-4">
                                 <a class="siteCategories--item"
                                    href="{% url 'category_detail' %}?category={{ category.slug }}">
-                                    <img alt="Elektronika" height="100" style="width:100px;height:100px;"
+                                    <img alt="" height="100" style="width:100px;height:100px;"
                                          src="{{ category.image.url }}"
                                          width="100">
-                                    <span> {{ category.title }}  <small>{{ category.product_count }}</small> </span>
+                                    <span> {{ category.title }}  {% if category.product_count > 0 %}
+                                        <small>({{ category.product_count }})</small>{% endif %} </span>
                                 </a>
                             </div>
                         {% endfor %}
                     </div>
                 </div>
             </div>
+
             <div class="container" id="productsList">
                 <div class="productsList py-4">
                     <div class="row align-items-center justify-content-between">
@@ -42,7 +43,8 @@
                                     <a href="{% url 'product_detail' product.slug %}"
                                        class="productsList--item--link"></a>
                                     <div class="productsList--item--image">
-                                        <img src="{{ product.image_url }}" style="height: 200px; width: 200px;" alt="">
+                                        <img src="{{ product.image_url }}"
+                                             style="height: 200px; width: 200px;" alt="">
                                     </div>
                                     <div class="productsList--item--info">
                                         <div class="productsList--item--title">
@@ -53,9 +55,6 @@
 
                                             <span class="small">so'm</span>
                                         </div>
-                                        {#                                    <div class="productsList--item--orders">#}
-                                        {#                                        buyurtmalar: {{ product.productorders_set.count }}#}
-                                        {#                                    </div>#}
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +79,8 @@
                                     <a href="{% url 'product_detail' product.slug %}"
                                        class="productsList--item--link"></a>
                                     <div class="productsList--item--image">
-                                        <img src="{{ product.image_url }}" style="height: 200px; width: 200px;" alt="">
+                                        <img src="{{ product.image_url }}"
+                                             style="height: 200px; width: 200px;" alt="">
                                     </div>
                                     <div class="productsList--item--info">
                                         <div class="productsList--item--title">

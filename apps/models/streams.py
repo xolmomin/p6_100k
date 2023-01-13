@@ -1,5 +1,4 @@
-from django.db.models import (BooleanField, Model, ForeignKey, CharField,
-                              CASCADE, PositiveIntegerField)
+from django.db.models import BooleanField, Model, ForeignKey, CharField, CASCADE, PositiveIntegerField
 from django_resized import ResizedImageField
 
 

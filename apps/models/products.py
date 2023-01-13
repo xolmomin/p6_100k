@@ -1,12 +1,10 @@
 from django.db.models import Model, CharField, IntegerField, DateTimeField, SlugField, ForeignKey, CASCADE, \
-    BooleanField, TextField, SET_NULL
+    BooleanField, TextField, SET_NULL, ImageField, TextChoices, FileField
 from django.utils.text import slugify
-from django_resized import ResizedImageField
 
 
 class Product(Model):
     title = CharField(max_length=255)
-    main_picture = ResizedImageField(upload_to='%m')
     description = TextField(null=True, blank=True)
     price = IntegerField()
     created_at = DateTimeField(auto_now_add=True)
@@ -14,6 +12,7 @@ class Product(Model):
     bonus = IntegerField()
     free_delivery = BooleanField(default=False)
     reserve = IntegerField()
+    video = FileField(upload_to='product/', null=True, blank=True)
     store = ForeignKey('apps.Store', CASCADE)
     category = ForeignKey('apps.Category', CASCADE)
 
@@ -28,8 +27,8 @@ class Product(Model):
     @property
     def image_url(self):
         try:
-            url = self.main_picture.url
-        except ValueError:
+            url = self.productimage_set.first().image.url
+        except (ValueError, AttributeError):
             url = 'https://via.placeholder.com/400x400'
         return url
 
@@ -51,8 +50,26 @@ class Product(Model):
         super().save(*args, **kwargs)
 
 
-class ProductOrders(Model):  # main pagedigi productslada buyurtmalar uchun model
-    product = ForeignKey('apps.Product', CASCADE)  # productga ulangan boladu
-    region = ForeignKey('apps.Region', SET_NULL, null=True, blank=True)
-    user = ForeignKey('apps.User', CASCADE)  # km zakaz qilingani
-    phone = IntegerField()
+class ProductImage(Model):
+    product = ForeignKey('apps.Product', CASCADE)
+    image = ImageField(upload_to='image/', default='media/product-default.jpg')
+
+
+class ProductOrders(Model):
+    class OrderStatus(TextChoices):
+        TASHRIF = 'Tashrif'
+        YANGI = 'Yangi'
+        QABUL = 'Qabul qilindi'
+        YETKAZILMOQDA = 'Yetkazilmoqda'
+        YETKAZILDI = 'Yetkazib berildi'
+        QAYTA = 'Qayta qo\'ng\'iroq'
+        SPAM = 'Spam'
+        HOLD = 'Hold'
+        ARXIV = 'Arxivlandi'
+
+    name = CharField(max_length=255)
+    region = CharField(max_length=255)
+    phone = CharField(max_length=25)
+    status = CharField(max_length=20, choices=OrderStatus.choices, default=OrderStatus.YANGI)
+    product = ForeignKey('apps.Product', CASCADE)
+    created_at = DateTimeField(auto_now_add=True)

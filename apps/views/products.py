@@ -1,9 +1,10 @@
-from django.db.models import F
-from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse_lazy
 from django.views.generic import FormView, DetailView, ListView
 
-from apps.forms import CreateCommentForm
-from apps.models import Product, Comment, Region, Stream, Category
+from apps.forms import CreateCommentForm, OrderForm
+from apps.models import Product, Comment, Category
+from apps.views import MainPageView
 
 
 class ProductDetailView(FormView, DetailView):
@@ -14,9 +15,32 @@ class ProductDetailView(FormView, DetailView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
-        context['comment'] = Comment.objects.all()
-        context['regions'] = Region.objects.all()
+        context['comment'] = Comment.objects.filter(product__slug=self.request.path.split('/')[-1])
         return context
+
+    def post(self, request, *args, **kwargs):
+        slug = kwargs.get('slug')
+        product = get_object_or_404(Product, slug=slug)
+        data = {
+            'product': product,
+            'name': request.POST.get('name'),
+            'content': request.POST.get('content'),
+            'rate': request.POST.get('rate')
+        }
+        form = self.form_class(data)
+        if form.is_valid():
+            form.save()
+        return redirect('product_detail', slug)
+
+
+class ProductOrderView(MainPageView, FormView):
+    template_name = 'apps/index.html'
+    form_class = OrderForm
+    success_url = reverse_lazy('order')
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 
 
 class CategoryDetail(ListView):
@@ -26,12 +50,9 @@ class CategoryDetail(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
-        slug = self.request.GET.get('category')
         qs = self.get_queryset()
         context['categories'] = Category.objects.all()
         context['products'] = qs
-        context['category_slug'] = Category.objects.filter(slug=slug).first()
-        context['products2'] = Product.objects.all()
         return context
 
     def get_queryset(self):
@@ -39,11 +60,3 @@ class CategoryDetail(ListView):
         if category := self.request.GET.get('category'):
             return qs.filter(category__slug=category)
         return qs
-
-
-def completed(request, *args, **kwargs):
-    # stream = Stream.objects.get(id=id)
-    # stream.is_area = not stream.is_area
-    # stream.save()
-    Stream.objects.filter(id=id).update(is_area=~F('is_area'))
-    return JsonResponse({'status': 200})

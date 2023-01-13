@@ -1,17 +1,18 @@
-from django.http import JsonResponse
-from django.views.generic import ListView
+from django.views.generic import ListView, FormView
 
-from apps.models import Product, Stream, Category, Contact
+from apps.forms import OrderForm
+from apps.models import Product, Category, Contact
 
 
-class MainPageView(ListView):
+class MainPageView(ListView, FormView):
     template_name = 'apps/index.html'
     queryset = Category.objects.all()
     context_object_name = 'categories'
+    form_class = OrderForm
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
-        context['products'] = Product.objects.all()[:6]
+        context['products'] = Product.objects.all()[:8]
         return context
 
 
@@ -35,11 +36,3 @@ class ExploreProductsView(ListView):
 class ContactsView(ListView):
     template_name = 'apps/contacts.html'
     model = Contact
-
-
-def completed(request, *args, **kwargs):
-    stream = Stream.objects.get(id=id)
-    stream.is_area = not stream.is_area
-    stream.save()
-
-    return JsonResponse({'status': 200})

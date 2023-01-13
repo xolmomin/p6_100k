@@ -1,4 +1,5 @@
-from django.db.models import Model, CharField, SlugField, IntegerChoices, ForeignKey, PROTECT, TextField, CASCADE
+from django.db.models import Model, CharField, SlugField, IntegerChoices, ForeignKey, PROTECT, TextField, CASCADE, \
+    BooleanField
 from django.utils.text import slugify
 from django_resized import ResizedImageField
 
@@ -45,11 +46,11 @@ class Comment(Model):
         Yomon = 4, 'Yomon'
         Judayomon = 5, 'Judayomon'
 
-    author = ForeignKey('apps.User', PROTECT)
     name = CharField(max_length=255)
     content = TextField()
-    product = ForeignKey('apps.Product', CASCADE)
+    status = BooleanField(default=False)
     rate = CharField(max_length=25, choices=Rate.choices, default=Rate.Qoniqarli)
+    product = ForeignKey('apps.Product', CASCADE)
 
     class Meta:
         verbose_name = 'Comment'

@@ -8,7 +8,8 @@ from apps.models.payments import PaymentHistory
 
 class User(AbstractUser):
     phone = CharField(max_length=255, unique=True)
-    image = ResizedImageField(size=[200, 200], crop=['middle', 'center'], upload_to='users')
+    image = ResizedImageField(size=[200, 200], crop=['middle', 'center'], upload_to='users',
+                              default='media/product-default.jpg')
     address = CharField(max_length=555, blank=True, null=True)
     telegram_id = CharField(max_length=55, null=True, blank=True)
     bot_is_activate = BooleanField(default=False)
@@ -17,6 +18,8 @@ class User(AbstractUser):
     bonus = PositiveIntegerField(default=0)  # bonus balance
     deposit = DecimalField(max_digits=30, decimal_places=2, default=0)  # deposit balance
     coin = PositiveIntegerField(default=0)
+    region = CharField(max_length=255, null=True, blank=True)
+    district = CharField(max_length=255, null=True, blank=True)
 
     @property
     def payout(self):
@@ -53,8 +56,8 @@ class Tickets(Model):
         BOSHQA = 'other', 'boshqa'
 
     class PurposeTextChoice(TextChoices):
-        MUAMMO = 'issue', 'muammo'
-        TAKLIF = 'suggestion', 'taklif'
+        ISSUE = 'issue', 'muammo'
+        SUGGESTION = 'suggestion', 'taklif'
 
     author = ForeignKey(User, PROTECT)
     sender = CharField(max_length=55, choices=SenderTextChoice.choices)

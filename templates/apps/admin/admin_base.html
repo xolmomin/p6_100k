@@ -42,7 +42,7 @@
                     <li class="header_navbar_collapse_nav_item">
                         <div class="header_navbar_collapse_nav_item_pad">
                             <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'market' %}active{% endif %}"
-                               href="/admin/market">
+                               href="{% url 'market' %}">
                                 <span class="fas fa-store"></span>
                                 <p> Market </p>
                             </a>
@@ -52,7 +52,7 @@
                     <li class="header_navbar_collapse_nav_item">
                         <div class="header_navbar_collapse_nav_item_pad">
                             <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'streams' %}active{% endif %}"
-                               href="/admin/streams">
+                               href="{% url 'stream_page_view' %}">
                                 <span class="fa fa-link"></span>
                                 <p> Oqim </p>
                             </a>
@@ -70,7 +70,7 @@
                     <li class="header_navbar_collapse_nav_item">
                         <div class="header_navbar_collapse_nav_item_pad">
                             <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'withdraw' %}active{% endif %}"
-                               href="/admin/withdraw">
+                               href="{% url 'withdraw' %}">
                                 <span class="fas fa-money-bill-alt"></span>
                                 <p> To'lov </p>
                             </a>
@@ -84,20 +84,20 @@
                 <div class="d-flex align-items-center dropdown">
                     <a class="btn nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">
-                        <img src="https://100k.uz/storage/app/uploads/public/615/a75/175/thumb_6440_150_150_0_0_crop.jpg"
+                        <img src="{{ user.image.url }}"
                              alt="profile"/>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right header_navbar_lang_menu_dropdown">
-                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'profile_page' %}"> Profil </a>
-
-                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'admin_page' %}"> Adminlar
-                            uchun </a>
+                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'profile_page' %}">
+                            Profil </a>
 
                         <a class="d-none dropdown-item header_navbar_lang_menu_dropdown_item" href="/profile/buy-bonus">
                             Bonus xarid qilish </a>
                         <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="/shop/favorite"> Mening
                             sevimlilarim </a>
+                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="#">Moderatorlar uchun</a>
+
                         <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="/profile/settings">
                             Sozlamalar </a>
 

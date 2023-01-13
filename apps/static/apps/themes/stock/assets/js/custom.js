@@ -7,5 +7,4 @@ $(document).ready(function () {
             return pastedValue.replace(/\D/g,'').slice(-9);
         }
     });
-    
 });

@@ -1,5 +1,5 @@
 from django.db.models import Model, CharField, IntegerField, DateTimeField, SlugField, ForeignKey, CASCADE, \
-    BooleanField, TextField, SET_NULL, ImageField
+    BooleanField, TextField, SET_NULL, ImageField, TextChoices, FileField
 from django.utils.text import slugify
 
 
@@ -12,6 +12,7 @@ class Product(Model):
     bonus = IntegerField()
     free_delivery = BooleanField(default=False)
     reserve = IntegerField()
+    video = FileField(upload_to='product/', null=True, blank=True)
     store = ForeignKey('apps.Store', CASCADE)
     category = ForeignKey('apps.Category', CASCADE)
 
@@ -55,8 +56,20 @@ class ProductImage(Model):
 
 
 class ProductOrders(Model):
+    class OrderStatus(TextChoices):
+        TASHRIF = 'Tashrif'
+        YANGI = 'Yangi'
+        QABUL = 'Qabul qilindi'
+        YETKAZILMOQDA = 'Yetkazilmoqda'
+        YETKAZILDI = 'Yetkazib berildi'
+        QAYTA = 'Qayta qo\'ng\'iroq'
+        SPAM = 'Spam'
+        HOLD = 'Hold'
+        ARXIV = 'Arxivlandi'
+
     name = CharField(max_length=255)
     region = CharField(max_length=255)
     phone = CharField(max_length=25)
+    status = CharField(max_length=20, choices=OrderStatus.choices, default=OrderStatus.YANGI)
     product = ForeignKey('apps.Product', CASCADE)
     created_at = DateTimeField(auto_now_add=True)

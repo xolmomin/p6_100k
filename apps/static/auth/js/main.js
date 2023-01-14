@@ -2,7 +2,7 @@
 (function ($) {
     "use strict";
 
-    
+
     /*==================================================================
     [ Validate ]*/
     var input = $('.validate-input .input100');
@@ -51,7 +51,8 @@
 
         $(thisAlert).removeClass('alert-validate');
     }
-    
-    
+
+
 
 })(jQuery);
+

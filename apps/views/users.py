@@ -2,12 +2,13 @@ from json import loads
 
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import FormView, UpdateView, TemplateView, ListView
 
 from apps.forms import ProfileModelForm, FavoriteModelForm
-from apps.models import User, District
+from apps.models import User, District, Region
 from apps.utils import validate_phone
 from root.settings import FAKE_VERIFICATION
 
@@ -44,6 +45,11 @@ class ProfileView(LoginRequiredMixin, UpdateView):
     template_name = 'apps/auth/profile.html'
     success_url = reverse_lazy('main_page_view')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['regions'] = Region.objects.all().order_by('name')
+        return context
+
     def get_object(self, queryset=None):
         return self.request.user
 
@@ -62,5 +68,5 @@ class DistrictsView(ListView):
         data = loads(request.body)
 
         if region_id := data.get('region'):
-            districts = District.objects.filter(region__id=region_id).values_list('name', flat=True)
-            print()
+            districts = list(District.objects.filter(region__id=region_id).values_list('name', flat=True))
+            return JsonResponse(districts, safe=False)

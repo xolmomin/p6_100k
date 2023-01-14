@@ -1,272 +1,124 @@
-<!DOCTYPE html>
+{% extends 'apps/admin/admin_base.html' %}
 {% load static %}
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="turbo-visit-control" content="disable"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <link rel="shortcut icon" href="https://100k.uz/themes/stock/assets/favicon/favicon.ico" type="image/png">
-    <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/owlcarousel/owl.carousel.min.css"/>
-    <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/owlcarousel/owl.theme.default.min.css"/>
-    <link rel="stylesheet" href="https://100k.uz/combine/59f82d61887ef6d210900fece577822f-1635082775"/>
-    <link rel="stylesheet" href="https://100k.uz/combine/e5aee909518633f91997c51dc946c9b8-1658941002"/>
-    <title> Profile </title>
-</head>
-<body>
+{% block styles %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    {#    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>#}
+{% endblock %}
+{% block main %}
+    <main class="admin-template">
+        <section class="main">
+            <div class="container-xl px-4 mt-4">
+                <hr class="mt-5 mb-4">
+                <form method="post" action="{% url 'profile_page' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="content_profile_main">
+                        <div class="content_profile_name">
+                            <div class="content_profile_name_img"
+                                 style="background-image: url({{ user.image_url }})">
+                                <input class="input-upload" type="file" name="image" onchange="readURL(this);"/>
+                            </div>
 
-<div class="container-xl px-4 mt-4">
-    <hr class="mt-0 mb-4">
-    <form method="post" action="{% url 'profile_page' %}" enctype="multipart/form-data" class="needs-validation"
-          novalidate>
-        {% csrf_token %}
-
-        <div class="container border-bottom-4">
-            <div class="content_name_block">
-                <a href="/profile" class="content_name_block_back"><span class="icon-arrow"></span></a>
-                <div class="fa fa-user mr-1"><p> Sozlamalar | </p></div>
-                <div class="header_navbar_profile">
-                    <div class="d-flex align-items-center dropdown">
-                        <a href="#" class="d-inline-block " data-toggle="dropdown">
-                            <i class="fa fa-user mr-1"></i>
-                            <span> Mening profilim</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right header_navbar_lang_menu_dropdown">
-                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'contacts' %}">
-                                Aloqa uchun </a>
-                            <a class="d-none dropdown-item header_navbar_lang_menu_dropdown_item" href=""> Bonus xarid
-                                qilish </a>
-                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="#"> Mening
-                                sevimlilarim </a>
-                            <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="#">Sozlamalar </a>
+                            <div class="content_profile_name_text">
+                                <p> Rasmingizni tahrirlang! </p>
+                                <input type="file" id="img" name="image" accept="image/*">
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
-        </div>
-
-        <div class="container">
-            <form data-request="onUpdate" data-request-files data-request-flash class="content_profile">
-                <div class="content_profile_main">
-                    <div class="content_profile_name">
-                        <div class="content_profile_name_img"
-                             style="background-image: url({{ user.image_url }})">
-                            <input class="input-upload" type="file" name="image" onchange="readURL(this);"/>
-                        </div>
-
-                        <div class="content_profile_name_text">
-                            <p> Rasmingizni tahrirlang! </p>
-                            <input type="file" id="img" name="image" accept="image/*">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="content_profile_form">
-                    <div class="form-group">
-                        <label>Telefon</label>
-                        <input type="text" name="phone" readonly class="form-control"
-                               placeholder=" Telefon raqamingizni kiriting " value="{{ user.phone }}">
-                    </div>
-
-                    <div class="form-group">
-                        <label> Ism</label>
-                        <input type="text" name="first_name" class="form-control" placeholder=" Ismingizni kiriting "
-                               value="{{ user.first_name }}">
-                    </div>
-
-                    <div class="form-group">
-                        <label> Familiya</label>
-                        <input type="text" name="last_name" class="form-control" placeholder=" Familiyangizni kiriting "
-                               value="{{ user.last_name }}">
-                    </div>
-
-                    <div>
+                    <div class="content_profile_form">
                         <div class="form-group">
-                            <script type="text/javascript">
-                                function getDistricts(regin_id) {
-                                    alert(regin_id)
-                                    fetch('{% url 'get_districts' %}', {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json',
-                                        },
-                                        body: JSON.stringify({'region': regin_id})
-                                    })
-                                        .then((response) => {
-                                            return response.json();
-                                        })
-                                        .then((data) => {
-                                            let districts = data
-                                            let districtSelector = document.getElementById("district");
-                                            districtSelector.innerHTML = '';
-                                            for (let i = 0; i < districts.length; i++) {
-                                                let opt = document.createElement('option');
-                                                opt.value = districts[i];
-                                                opt.innerHTML = districts[i];
-                                                districtSelector.appendChild(opt);
-                                            }
-                                        })
-                                }
+                            <label>Telefon</label>
+                            <input type="text" name="phone" readonly class="form-control"
+                                   placeholder=" Telefon raqamingizni kiriting " value="{{ user.phone }}">
+                        </div>
 
+                        <div class="form-group">
+                            <label> Ism</label>
+                            <input type="text" name="first_name" class="form-control"
+                                   placeholder=" Ismingizni kiriting "
+                                   value="{{ user.first_name }}">
+                        </div>
 
-                            </script>
-                            <label>Viloyatni tanlang:</label>
-                            <select class="form-control" name="region" onchange="getDistricts(this.value)">
-                                <option value="1">Toshkent shahar</option>
-                                <option value="2">Namangan</option>
-                                <option value="3">Andijon</option>
-                                <option value="4">Buxoro</option>
-                                <option value="5">Fargona</option>
-                                <option value="6">Jizzax</option>
-                                <option value="7">Navoiy</option>
-                                <option value="8">Qashqadaryo</option>
-                                <option value="9">Qoraqalpogiston</option>
-                                <option value="10">Samarqand</option>
-                                <option value="11">Sirdaryo</option>
-                                <option value="12">Surxondaryo</option>
-                                <option value="13">Toshkent viloyati</option>
-                                <option value="14">Xorazm</option>
+                        <div class="form-group">
+                            <label> Familiya</label>
+                            <input type="text" name="last_name" class="form-control"
+                                   placeholder=" Familiyangizni kiriting "
+                                   value="{{ user.last_name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="region">Viloyatni tanlang:</label>
+                            <select class="form-select" name="region" id="region"
+                                    onchange="getDistricts(this.value)">
+                                <option selected disabled>Quyidagilardan birini tanlang</option>
+                                {% for region in regions %}
+                                    <option value="{{ region.id }}">{{ region.name }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="district">Tuman/Shahar</label>
-                            <select id="district" class="form-control" name="district">
+                            <select id="district" class="form-select" name="district">
                             </select>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label> Manzilingiz </label>
-                        <input type="text" name="address" class="form-control" placeholder="Manzilingizni kiriting"
-                               value="{{ user.address|default_if_none:'' }}">
-                    </div>
 
-                    <button onclick='FB.AppEvents.logEvent("settingsSave")' data-attach-loading type="submit"
-                            class="btn btn-block btn-primary"> Saqlash
-                    </button>
+                        <div class="form-group">
+                            <label> Manzilingiz </label>
+                            <input type="text" name="address" class="form-control"
+                                   placeholder="Manzilingizni kiriting"
+                                   value="{{ user.address|default_if_none:'' }}">
+                        </div>
 
-                    <div class="text-center">
+                        <button onclick='FB.AppEvents.logEvent("settingsSave")' data-attach-loading
+                                type="submit"
+                                class="btn btn-block btn-primary"> Saqlash
+                        </button>
+
+                        <div class="text-center">
+                            <br>
+                            <a class="btn btn-block btn-danger btn-block btn-primary "
+                               href="" style="color:red;"> Doimiy parol kiritish </a>
+                        </div>
+
                         <br>
-                        <a class="btn btn-block btn-danger btn-block btn-primary "
-                           href="" style="color:red;"> Doimiy parol kiritish </a>
+                        <p class="text-center">
+                            <a target="_blank" class="btn btn-block btn-primary"
+                               href=""> Telegram botni biriktirish </a>
+                            <br>
+                            <small> TG Aktivlashtirish kodi: </small> <strong> 16729160686359405 </strong>
+                        </p> <br>
+
+                        <br><br>
                     </div>
-
-                    <br>
-                    <p class="text-center">
-                        <a target="_blank" class="btn btn-block btn-primary"
-                           href=""> Telegram botni biriktirish </a>
-                        <br>
-                        <small> TG Aktivlashtirish kodi: </small> <strong> 16729160686359405 </strong>
-                    </p> <br>
-
-                    <br><br>
-                </div>
-            </form>
-        </div>
-
-
-        <script>
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        var data = e.target.result;
-                        var file = $(input);
-                        file.parent().addClass("has-file");
-                        file.parent().css("background-image", 'url("' + data + '")');
-                    };
-
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-        </script>
-
-        <style type="text/css">
-            body {
-                margin-top: 20px;
-                background-color: #f2f6fc;
-                color: #69707a;
-            }
-
-            .img-account-profile {
-                height: 10rem;
-            }
-
-            .rounded-circle {
-                border-radius: 50% !important;
-            }
-
-            .card {
-                box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
-            }
-
-            .card .card-header {
-                font-weight: 500;
-            }
-
-            .card-header:first-child {
-                border-radius: 0.35rem 0.35rem 0 0;
-            }
-
-            .card-header {
-                padding: 1rem 1.35rem;
-                margin-bottom: 0;
-                background-color: rgba(33, 40, 50, 0.03);
-                border-bottom: 1px solid rgba(33, 40, 50, 0.125);
-            }
-
-            .form-control, .dataTable-input {
-                display: block;
-                width: 100%;
-                padding: 0.875rem 1.125rem;
-                font-size: 0.875rem;
-                font-weight: 400;
-                line-height: 1;
-                color: #69707a;
-                background-color: #fff;
-                background-clip: padding-box;
-                border: 1px solid #c5ccd6;
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                appearance: none;
-                border-radius: 0.35rem;
-                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-            }
-
-            .nav-borders .nav-link.active {
-                color: #0061f2;
-                border-bottom-color: #0061f2;
-            }
-
-            .nav-borders .nav-link {
-                color: #69707a;
-                border-bottom-width: 0.125rem;
-                border-bottom-style: solid;
-                border-bottom-color: transparent;
-                padding-top: 0.5rem;
-                padding-bottom: 0.5rem;
-                padding-left: 0;
-                padding-right: 0;
-                margin-left: 1rem;
-                margin-right: 1rem;
-            }
-        </style>
-
-        <script src="{% static '/auth/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
-        <script src="{% static '/auth/vendor/bootstrap/js/popper.js' %}"></script>
-        <script src="{% static '/auth/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-        <script src="{% static '/auth/vendor/select2/select2.min.js' %}"></script>
-        <script src="{% static '/auth/vendor/tilt/tilt.jquery.min.js' %}"></script>
-        <script src="{% static '/auth/js/jquery.maskedinput.min.js' %}"></script>
-        <script>
-            $(document).ready(function () {
-                $("#phone").mask("(99) 999-99-99");
-            });
-
-        </script>
-        <script src="{% static '/auth/js/main.js' %}"></script>
-
-    </form>
-</div>
-</body>
-</html>
+                </form>
+            </div>
+        </section>
+    </main>
+    <script type="text/javascript">
+        function getDistricts(regin_id) {
+            {#alert(regin_id)#}
+            fetch('{% url 'get_districts' %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({'region': regin_id})
+            })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    let districts = data
+                    console.log(data)
+                    let districtSelector = document.getElementById("district");
+                    districtSelector.innerHTML = '';
+                    for (let i = 0; i < districts.length; i++) {
+                        let opt = document.createElement('option');
+                        opt.value = districts[i];
+                        opt.innerHTML = districts[i];
+                        districtSelector.appendChild(opt);
+                    }
+                })
+        }
+    </script>
+{% endblock %}

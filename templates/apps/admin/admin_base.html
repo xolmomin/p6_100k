@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/owlcarousel/owl.theme.default.min.css"/>
     <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/css/style.bundle.css"/>
     <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/css/sk-custom.css"/>
-
-
+    {% block styles %}{% endblock %}
     <!-- seo meta tags -->
     <title></title>
     <meta name="description" content="">
@@ -101,7 +100,7 @@
                         <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'profile_page' %}">
                             Sozlamalar </a>
 
-                       <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
+                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
                            href="{% url 'logout' %}"> Chiqish </a>
 
                     </div>

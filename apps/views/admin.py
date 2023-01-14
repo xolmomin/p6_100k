@@ -5,10 +5,12 @@ from apps.forms.products import CreateStreamForm
 from apps.models import Product, Category, Contact, Stream
 
 
-class MarketListView(ListView, FormView):
+class MarketListView(ListView, CreateView, FormView):
     template_name = 'apps/admin/market_page.html'
     paginate_by = 15
     model = Stream
+    object = Stream
+    # object_list =
     form_class = CreateStreamForm
     success_url = reverse_lazy('market')
 

@@ -55,6 +55,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'root.wsgi.application'
 AUTH_USER_MODEL = 'apps.User'
+# AUTHENTICATION_BACKENDS = ['apps.backends.EmailBackend']
 
 DATABASES = {
     'default': {
@@ -106,3 +107,10 @@ DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
 TELEGRAM_BOT_API_KEY = os.getenv('TELEGRAM_BOT_API_KEY')
 
 LOGIN_URL = '/login/'
+
+APPEND_SLASH = True
+
+FAKE_VERIFICATION = True  # to verify without sms service when the twilio api is not configured yet
+TWILIO_VERIFY_SERVICE_SID = os.getenv('TWILIO_VERIFY_SERVICE_SID')
+TWILIO_ACCOUNT_SID = os.getenv('TWILIO_ACCOUNT_SID')
+TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')

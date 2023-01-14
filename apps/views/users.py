@@ -1,17 +1,40 @@
-from random import random
+from json import loads
 
+from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView
-from django.http import HttpResponseRedirect
-from django.urls import reverse_lazy, reverse
-from django.views.generic import FormView, UpdateView, ListView
+from django.http import JsonResponse
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.views.generic import FormView, UpdateView, TemplateView, ListView
 
 from apps.forms import ProfileModelForm, FavoriteModelForm
-from apps.models import User, Contact, Region, District
+from apps.models import User, District, Region
+from apps.utils import validate_phone
+from root.settings import FAKE_VERIFICATION
 
 
-class LogInView(LoginView):
+class ProfileLoginView(TemplateView):
     template_name = 'apps/auth/login.html'
+
+    # def form_valid(self, form):
+    #     phone = form.clean_phone()
+    #     user = User.objects.get(phone__iexact=phone)
+    #     login(self.request, user)
+    #     return super().form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        data: dict = request.POST
+        phone: str = data.get('phone')
+        code: str = data.get('password')
+        validate = validate_phone(phone, code, FAKE_VERIFICATION)
+        if validate.get('success'):
+            if user := validate.get('user'):
+                login(self.request, user)
+            else:
+                return self.render_to_response(validate)
+        else:
+            return self.render_to_response(validate)
+        return redirect('admin_page')
 
 
 class ProfileView(LoginRequiredMixin, UpdateView):
@@ -24,8 +47,7 @@ class ProfileView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['regions'] = Region.objects.all()
-        context['districts'] = District.objects.all()
+        context['regions'] = Region.objects.all().order_by('name')
         return context
 
     def get_object(self, queryset=None):
@@ -41,7 +63,10 @@ class FavoriteFormView(LoginRequiredMixin, FormView):
     form_class = FavoriteModelForm
 
 
-def SendSms(request):
-    code = int(random() * 10 ** 5)
-    print(code)
-    return HttpResponseRedirect(reverse('login'))
+class DistrictsView(ListView):
+    def post(self, request, *args, **kwargs):
+        data = loads(request.body)
+        if region_id := data.get('region'):
+            districts = list(District.objects.filter(region__id=region_id).values_list('name', flat=True))
+            return JsonResponse(districts, safe=False)
+        return JsonResponse({'success': False, 'message': 'region id not found'}, safe=False)

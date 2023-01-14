@@ -3,13 +3,14 @@ from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 
 from apps.bot import UpdateBot
-from apps.views import (ExploreProductsView, StreamDeleteView)
+from apps.views import (ExploreProductsView, StreamDeleteView, SearchPageView)
 from apps.views import ProfileView, AdminProductDetailView, ProductDetailView, MainPageView, WithdrawView, \
     MarketListView, StreamPageListView, AdminPageView, ContactsView, StoreDetailView, ProfileLoginView, \
     ExploreProductsView, CategoryDetail, DistrictsView
 
 urlpatterns = [
     path('', MainPageView.as_view(), name='main_page_view'),
+    path('search', csrf_exempt(SearchPageView.as_view()), name='search_page_view'),
     path('product/shop/<str:slug>', ProductDetailView.as_view(), name='product_detail'),
     path('explore', ExploreProductsView.as_view(), name='explore'),
     path('logout', LogoutView.as_view(next_page='/'), name='logout'),

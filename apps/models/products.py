@@ -20,6 +20,13 @@ class Product(Model):
         verbose_name = "Product"
         verbose_name_plural = "Products"
 
+    def json(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description
+        }
+
     @property
     def stream_count(self):
         return self.stream_set.count()
@@ -53,7 +60,6 @@ class Product(Model):
 class ProductImage(Model):
     product = ForeignKey('apps.Product', CASCADE)
     image = ImageField(upload_to='image/', default='media/product-default.jpg')
-
 
 
 class ProductOrders(Model):

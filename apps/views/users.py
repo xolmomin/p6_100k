@@ -66,7 +66,7 @@ class FavoriteFormView(LoginRequiredMixin, FormView):
 class DistrictsView(ListView):
     def post(self, request, *args, **kwargs):
         data = loads(request.body)
-
         if region_id := data.get('region'):
             districts = list(District.objects.filter(region__id=region_id).values_list('name', flat=True))
             return JsonResponse(districts, safe=False)
+        return JsonResponse({'success': False, 'message': 'region id not found'}, safe=False)

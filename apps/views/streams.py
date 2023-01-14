@@ -50,9 +50,6 @@ class StreamPageListView(LoginRequiredMixin, ListView, UpdateView):
 
         return super().form_valid(form)
 
-    def form_invalid(self, form):
-        return super().form_invalid(form)
-
 
 class StreamDeleteView(TemplateView):
     model = Stream

@@ -9,7 +9,66 @@
     <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/owlcarousel/owl.theme.default.min.css"/>
     <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/css/style.bundle.css"/>
     <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/css/sk-custom.css"/>
+    <style>
+        .oc-flash-message.succes {
 
+        }
+    </style>
+
+    <style>
+        .btn.active {
+            color: #fff;
+        }
+
+        .header_menu {
+            padding: 12px;
+        }
+
+        .header_menu .btn-default {
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 10px;
+            font-size: 15px;
+        }
+
+        .header_menu .btn-default.active, .header_menu .btn-default:hover {
+            background-color: #000;
+        }
+    </style>
+
+    <style>
+        .toast {
+            position: fixed;
+            z-index: 10300;
+            width: 500px;
+            left: 50%;
+            top: 50px;
+            margin-left: -250px;
+            color: #fff;
+            font-size: 1rem;
+            padding: 10px 30px 10px 15px;
+            border-radius: 5px;
+            opacity: 0;
+            transition: all 0.5s, width 0s;
+            transform: scale(0.9);
+        }
+
+        .toast--visible {
+            opacity: 1;
+            top: 60px;
+            visibility: visible;
+        }
+
+        .toast--succes {
+            background: #86c843;
+
+        }
+
+        .toast--error {
+            background: #cc3300;
+
+        }
+    </style>
 
     <!-- seo meta tags -->
     <title></title>
@@ -141,16 +200,110 @@
 
 {% block main %}
 {% endblock %}
-<script src="https://kit.fontawesome.com/43236b6dfa.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/imask"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function myFunction(id) {
+        // Get the text field
+        var title = document.getElementById(`product_title_${id}`).value;
+        var price = document.getElementById(`product_price_${id}`).value;
+        $("#title").html(title);
+        $("#price").html(price);
+        document.getElementById('product_id').value = id;
+    }
+</script>
 
-<script src="https://100k.uz/themes/stock/assets/js/bundle.js"></script>
-<script src="https://100k.uz/themes/stock/assets/lazysizes/lazysizes.min.js"></script>
-<script src="https://100k.uz/themes/stock/assets/owlcarousel/owl.carousel.min.js"></script>
-<script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
-<script src="https://100k.uz/themes/stock/assets/js/custom.js"></script>
-<script src="/modules/system/assets/js/framework-extras.js"></script>
-<link rel="stylesheet" property="stylesheet" href="/modules/system/assets/css/framework-extras.css">
+
+<script>
+    const myModal = new bootstrap.Modal('#exampleModalCenter')
+    myModal.hide();
+</script>
+<script>
+    const Toast = {
+        init() {
+            this.hideTimeout = null;
+            this.el = document.createElement('div');
+            this.el.className = 'toast';
+            document.body.appendChild(this.el)
+        },
+
+        show(message, state) {
+            clearTimeout(this.hideTimeout);
+            this.el.textContent = message;
+            this.el.className = 'toast toast--visible';
+            if (state) {
+                this.el.classList.add(`toast--${state}`);
+            }
+            this.hideTimeout = setTimeout(() => {
+                {#this.el.classList.remove('toast-visible');#}
+                this.el.className = `toast toast--${state}`;
+            }, 3000);
+        }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => Toast.init());
+</script>
+
+<script>
+    $(".card-body .copy_ref_bn").on('click', function () {
+        var copyText = $(this).parent().find('.ref_link').get(0);
+        copyText.select();
+        document.execCommand("copy");
+        $(this).text('Nusxa olindi');
+    });
+</script>
+
+<script>
+    function myFunctionCopy(id) {
+        // Get the text field
+        var copyText = document.getElementById(id);
+        // Select the text field
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText.value);
+
+    }
+
+    function areaChange(id) {
+        $.ajax({
+            url: "",
+            type: "POST",
+            data: {
+                id: id,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function () {
+                console.log('Success')
+            },
+            error: function () {
+                console.log("Ajax test failure")
+                Toast.show('Hududni tanlash o`zgardi!', 'succes')
+            }
+
+        })
+    }
+
+    function areaDelete(id) {
+        var result = confirm("Diqqat! Ochirilgan oqimni tiklab bo'lmaydi?");
+        if (result) {
+            $.ajax({
+                url: "/admin/delete-stream",
+                type: "GET",
+                data: {
+                    id: id
+                },
+                success: function () {
+                    console.log('Success')
+                },
+                error: function () {
+                    document.location.reload();
+                    {#document.getElementById(`div_${id}`).outerHTML = "";#}
+                }
+            })
+        }
+    }
+</script>
 
 <script>
 

@@ -13,8 +13,7 @@
                 <div class="row">
 
                     {% for stream in streams %}
-
-                        <div class="col-sm-4">
+                        <div class="col-sm-4" id="div_{{ stream.id }}">
                             <div class="card">
                                 <div class="card-header">
                                     <a href="#"
@@ -36,7 +35,7 @@
 
                                     <div class="form-group">
                                         <input type="text" value="https://{{ url }}/stream/{{ stream.id }}" readonly
-                                               class="ref_link form-control">
+                                               class="ref_link form-control" id="{{ stream.id }}">
                                     </div>
 
                                     <p>
@@ -48,7 +47,10 @@
                                     </p>
                                     <hr>
 
-                                    <button class="copy_ref_bn btn btn-primary">Nusxa ko'chirish</button>
+                                    <button onclick="myFunctionCopy({{ stream.id }})"
+                                            class="copy_ref_bn btn btn-primary">Nusxa
+                                        ko'chirish
+                                    </button>
                                 </div>
                             </div>
                             <br>
@@ -80,46 +82,4 @@
 
 
     </main>
-    <script>
-        $(".card-body .copy_ref_bn").on('click', function () {
-            var copyText = $(this).parent().find('.ref_link').get(0);
-            copyText.select();
-            document.execCommand("copy");
-            $(this).text('Nusxa olindi');
-        });
-    </script>
-
-    <script>
-        function areaChange(id) {
-            $.ajax({
-                url: "",
-                type: "POST",
-                data: {
-                    id: id,
-                    csrfmiddlewaretoken: '{{ c }}'
-                },
-                success: function () {
-                    console.log('Success')
-                }
-            })
-        }
-
-        function areaDelete(id) {
-            var result = confirm("Diqqat! Ochirilgan oqimni tiklab bo'lmaydi?");
-            alert(id)
-            if (result) {
-                $.ajax({
-                    url: "",
-                    type: "DELETE",
-                    data: {
-                        id: id
-                    },
-                    success: function () {
-                        console.log('Success')
-                    }
-                })
-            }
-        }
-    </script>
-
 {% endblock %}

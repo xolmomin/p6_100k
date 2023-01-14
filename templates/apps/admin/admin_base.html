@@ -9,8 +9,68 @@
     <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/owlcarousel/owl.theme.default.min.css"/>
     <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/css/style.bundle.css"/>
     <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/css/sk-custom.css"/>
+    <style>
+        .oc-flash-message.succes {
 
+        }
+    </style>
 
+    <style>
+        .btn.active {
+            color: #fff;
+        }
+
+        .header_menu {
+            padding: 12px;
+        }
+
+        .header_menu .btn-default {
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 10px;
+            font-size: 15px;
+        }
+
+        .header_menu .btn-default.active, .header_menu .btn-default:hover {
+            background-color: #000;
+        }
+    </style>
+
+    <style>
+        .toast {
+            position: fixed;
+            z-index: 10300;
+            width: 500px;
+            left: 50%;
+            top: 50px;
+            margin-left: -250px;
+            color: #fff;
+            font-size: 1rem;
+            padding: 10px 30px 10px 15px;
+            border-radius: 5px;
+            opacity: 0;
+            transition: all 0.5s, width 0s;
+            transform: scale(0.9);
+        }
+
+        .toast--visible {
+            opacity: 1;
+            top: 60px;
+            visibility: visible;
+        }
+
+        .toast--succes {
+            background: #86c843;
+
+        }
+
+        .toast--error {
+            background: #cc3300;
+
+        }
+    </style>
+
+    {% block styles %}{% endblock %}
     <!-- seo meta tags -->
     <title></title>
     <meta name="description" content="">
@@ -84,7 +144,7 @@
                 <div class="d-flex align-items-center dropdown">
                     <a class="btn nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">
-                        <img src="{{ user.image.url }}"
+                        <img src="{{ user.image_url }}"
                              alt="profile"/>
                     </a>
 
@@ -98,38 +158,11 @@
                             sevimlilarim </a>
                         <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="#">Moderatorlar uchun</a>
 
-                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="/profile/settings">
+                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'profile_page' %}">
                             Sozlamalar </a>
 
-
-                        <a onclick='FB.AppEvents.logEvent("logOut")'
-                           class="dropdown-item header_navbar_lang_menu_dropdown_item"
-                           data-request-confirm="Siz rostdan ham akkountingizdan chiqmoqchimisiz?"
-                           data-request="onLogout"
-                           data-request-data="redirect: '/'">
-                            Chiqish
-                        </a>
-
-
-                        <hr class="my-2">
-
-                        <div class="d-flex justify-content-between px-2">
-                            <!-- <a onclick='FB.AppEvents.logEvent("openTg")' href="https://t.me/offical_100k" class="p-2">
-                                <img src="https://image.flaticon.com/icons/svg/2111/2111646.svg" style="width: 20px;" alt="">
-                            </a> -->
-
-                            <a onclick='FB.AppEvents.logEvent("openAndroid")' target="_blank"
-                               href="https://play.google.com/store/apps/details?id=uz.itmaker.stock" class="p-2">
-                                <img src="https://image.flaticon.com/icons/svg/732/732179.svg" style="width: 20px;"
-                                     alt="">
-                            </a>
-
-                            <a onclick='FB.AppEvents.logEvent("openIos")' target="_blank"
-                               href="https://apps.apple.com/ru/app/100k-uz/id1529911106" class="p-2">
-                                <img src="https://image.flaticon.com/icons/svg/831/831276.svg" style="width: 20px;"
-                                     alt="">
-                            </a>
-                        </div>
+                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
+                           href="{% url 'logout' %}"> Chiqish </a>
 
                     </div>
                 </div>
@@ -141,16 +174,114 @@
 
 {% block main %}
 {% endblock %}
-<script src="https://kit.fontawesome.com/43236b6dfa.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/imask"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 
-<script src="https://100k.uz/themes/stock/assets/js/bundle.js"></script>
-<script src="https://100k.uz/themes/stock/assets/lazysizes/lazysizes.min.js"></script>
-<script src="https://100k.uz/themes/stock/assets/owlcarousel/owl.carousel.min.js"></script>
-<script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
-<script src="https://100k.uz/themes/stock/assets/js/custom.js"></script>
-<script src="/modules/system/assets/js/framework-extras.js"></script>
-<link rel="stylesheet" property="stylesheet" href="/modules/system/assets/css/framework-extras.css">
+<script>
+    function myFunction(id) {
+        // Get the text field
+        var title = document.getElementById(`product_title_${id}`).value;
+        var price = document.getElementById(`product_price_${id}`).value;
+        console.log(title);
+        console.log(price);
+        $('#title').html(title);
+        $('#price').html(price);
+        console.log('worked');
+        document.getElementById('product_id').value = id;
+    }
+</script>
+
+<script>
+    const myModal = new bootstrap.Modal('#exampleModalCenter')
+    myModal.hide();
+</script>
+<script>
+    const Toast = {
+        init() {
+            this.hideTimeout = null;
+            this.el = document.createElement('div');
+            this.el.className = 'toast';
+            document.body.appendChild(this.el)
+        },
+
+        show(message, state) {
+            clearTimeout(this.hideTimeout);
+            this.el.textContent = message;
+            this.el.className = 'toast toast--visible';
+            if (state) {
+                this.el.classList.add(`toast--${state}`);
+            }
+            this.hideTimeout = setTimeout(() => {
+                {#this.el.classList.remove('toast-visible');#}
+                this.el.className = `toast toast--${state}`;
+            }, 3000);
+        }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => Toast.init());
+</script>
+
+<script>
+    $(".card-body .copy_ref_bn").on('click', function () {
+        var copyText = $(this).parent().find('.ref_link').get(0);
+        copyText.select();
+        document.execCommand("copy");
+        $(this).text('Nusxa olindi');
+    });
+</script>
+
+<script>
+    function myFunctionCopy(id) {
+        // Get the text field
+        var copyText = document.getElementById(id);
+        // Select the text field
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText.value);
+
+    }
+
+    function areaChange(id) {
+        $.ajax({
+            url: "",
+            type: "POST",
+            data: {
+                id: id,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function () {
+                console.log('Success')
+            },
+            error: function () {
+                console.log("Ajax test failure")
+                Toast.show('Hududni tanlash o`zgardi!', 'succes')
+            }
+
+        })
+    }
+
+    function areaDelete(id) {
+        var result = confirm("Diqqat! Ochirilgan oqimni tiklab bo'lmaydi?");
+        if (result) {
+            $.ajax({
+                url: "/admin/delete-stream",
+                type: "GET",
+                data: {
+                    id: id
+                },
+                success: function () {
+                    console.log('Success')
+                },
+                error: function () {
+                    document.location.reload();
+                    {#document.getElementById(`div_${id}`).outerHTML = "";#}
+                }
+            })
+        }
+    }
+</script>
 
 <script>
 

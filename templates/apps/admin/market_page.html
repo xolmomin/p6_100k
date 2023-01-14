@@ -8,7 +8,7 @@
                 <h3 class="text-center"> Hozirda sotuvda bor<br> mahsulotlar </h3>
                 <br>
                 <div class="container market-search-form">
-                    <form method="get" data-request="onMarketSearch"
+                    <form method="get" data-bs-request="onMarketSearch"
                           data-request-update="'admin/market-products': '#marketProductsList'" data-request-flash=""
                           class="input-group mb-0 px-2">
                         <div class="input-group-prepend">
@@ -32,8 +32,10 @@
                             <a href="{% url 'market' %}?category=new" class="btn btn-default">Yangi 🕒 </a>
                             <a href="{% url 'market' %}?category=new" class="btn btn-default">TOP ⭐ </a>
                             {% for category in categories %}
-                                <a href="{% url 'market' %}?category={{ category.slug }}"
-                                   class="btn btn-default "> {{ category.title }} ({{ category.product_count }}) </a>
+                                {% if category.product_count > 0 %}
+                                    <a href="{% url 'market' %}?category={{ category.slug }}"
+                                       class="btn btn-default "> {{ category.title }}
+                                        ({{ category.product_count }}) </a>{% endif %}
                             {% endfor %}
                         </div>
                     </div>
@@ -69,23 +71,20 @@
                                 </ul>
 
                                 <div class="card-body text-center">
-                                    <textarea id="product_title" hidden>{{ product.title }}</textarea>
-                                    <textarea id="product_price" hidden> {{ product.price }}</textarea>
-                                    <button href="#" data-request="onCreateStreamModal"
-                                            data-request-data="'id': {{ product.id }}"
-                                            data-request-update="'popups/create-product-stream' : '#commonModalContent'"
-                                            data-toggle="modal" data-target="#exampleModalCenter"
-                                            class="btn btn-primary" id="submit">Oqim yaratish
+                                    <input type="text" id="product_title_{{ product.id }}" hidden
+                                           value="{{ product.title }}">
+                                    <input type="text" id="product_price_{{ product.id }}" hidden
+                                           value="{{ product.price }}">
+                                    <button href="#" data-bs-request="onCreateStreamModal"
+                                            data-bs-product-id="{{ product.id }}"
+                                            data-bs-product-title="{{ product.title }}"
+                                            data-bs-product-price="{{ product.price }}"
+                                            data-bs-toggle="modal" data-bs-target="#exampleModalCenter"
+                                            class="btn btn-primary" id="submit" onclick="myFunction({{ product.id }})">
+                                        Oqim yaratish
                                     </button>
                                     <a href="{% url 'admin_product_detailview' product.id %}" class="btn btn-default">
                                         Batafsil</a>
-                                </div>
-                                <!-- Modal -->
-                                <div class="modal fade" id="commonModal" tabindex="-1" role="dialog"
-                                     aria-labelledby="exampleModalLabel"
-                                     aria-hidden="true">
-                                    <div class="modal-dialog" id="commonModalContent" role="document">
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -115,43 +114,37 @@
                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 
                     <div class="modal-dialog">
-                        <form class="modal-content">
-                            <input type="hidden" id="product_id" value="2">
-
+                        <form class="modal-content" action="" method="POST">
+                            {% csrf_token %}
                             <div class="modal-header">
-                                <h5 class="modal-title" id="product_title"> {{ product.title }} -
-                                    <strong
-                                            id="currentAdminFee">{{ product.price }} </strong> bonus
+                                <h5 class="modal-title"><label id="title"></label> - <strong id="price"></strong> bonus
                                 </h5>
-                                <div class="product_title">
-                                    <p id="product_title"></p>
-                                </div>
 
-
-                                <button type="button" class="close" data-dismiss="modal"
-                                        aria-label="Close">
+                                <button type="button" class="close"
+                                        data-bs-toggle="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
 
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <p id="product_title"></p>
-
                                     <label> Oqim nomi </label>
+                                    <input hidden class="form-control" id="product_id" name="product">
                                     <input type="text" name="name" class="form-control">
                                 </div>
+
                                 <input type="hidden" name="type" value="market">
 
                                 <!-- hayriyaga yonaltirish -->
                                 <div class="form-group form-check">
                                     <input type="checkbox" class="form-check-input"
-                                           id="isEnabledCharity" data-toggle="collapse"
+                                           id="isEnabledCharity" data-bs-toggle="collapse"
                                            href="#charityCollapse" role="button" aria-expanded="false"
                                            aria-controls="charityCollapse" onclick="
                                                             $('#charityCollapse').find('input').val();
                                                             $('#discountedPrice').text( 1000 + ' so\'m')
                                                             ">
+
                                     <label class="form-check-label" for="isEnabledCharity">
                                         Daromadning bir qismini hayriya ishlariga yo'naltirish
                                     </label>
@@ -163,7 +156,7 @@
                                         <div class="form-group">
                                             <label> Hayriya ajratiladigan summa har bir
                                                 buyurtmadan </label>
-                                            <input type="number" min="100" max="5000" name="charity"
+                                            <input type="number" min="100" max="5000" name="donation"
                                                    class="form-control">
 
                                             <p>min: <strong>100</strong> so'm - <strong>max:
@@ -183,7 +176,7 @@
                                 <!-- mahsulotga skidka -->
                                 <div class="form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="exampleCheck1"
-                                           data-toggle="collapse" href="#multiCollapseExample1"
+                                           data-bs-toggle="collapse" href="#multiCollapseExample1"
                                            role="button" aria-expanded="false"
                                            aria-controls="multiCollapseExample1" onclick="
                                             $('#multiCollapseExample1').find('input').val();
@@ -198,8 +191,8 @@
                                 <div class="collapse multi-collapse" id="multiCollapseExample1">
                                     <div class="card card-body bg-warning">
                                         <div class="form-group">
-                                            <label>Chegirma miqdori</label>
-                                            <input type="number" min="0" max="40000" name="discount"
+                                            <label> Chegirma miqdori</label>
+                                            <input type="number" min="0" max="40000" name="reduce"
                                                    class="form-control" oninput="
                                                     $('#currentAdminFee').text(50000 - $(this).val()  + ' so\'m');
                                                     $('#discountedPrice').text({{ product.price }} - $(this).val()  + ' so\'m');
@@ -213,7 +206,7 @@
                                         hisobga oling.
                                         <hr>
                                         <p>Birinchi mahsulot narxi: &nbsp;
-                                            <strike> {{ product.price }} so'm </strike> &nbsp;&nbsp;
+                                            <strike> so'm </strike> &nbsp;&nbsp;
                                             <span
                                                     style="font-size: 16px;" id="discountedPrice"
                                                     class="badge badge-success"> 1000 so'm </span>
@@ -224,8 +217,8 @@
                                 <hr>
 
                                 <div class="text-center">
-                                    <button type="submit" data-request-loading="" class="btn btn-primary">Oqim
-                                        yaratish
+                                    <button type="submit" data-bs-request-loading=""
+                                            class="btn btn-primary"> Oqim yaratish
                                     </button>
                                 </div>
                             </div>
@@ -256,4 +249,5 @@
             }
         </style>
     </main>
+
 {% endblock %}

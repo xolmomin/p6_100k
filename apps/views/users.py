@@ -5,24 +5,17 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import FormView, UpdateView, TemplateView, ListView
+from django.views.generic import FormView, UpdateView, ListView, TemplateView
 
 from apps.forms import ProfileModelForm, FavoriteModelForm
-from apps.models import User, Contact
-from root import settings
 from apps.models import User, District, Region
 from apps.utils import validate_phone
+from root import settings
 from root.settings import FAKE_VERIFICATION
 
 
 class ProfileLoginView(TemplateView):
     template_name = 'apps/auth/login.html'
-
-    # def form_valid(self, form):
-    #     phone = form.clean_phone()
-    #     user = User.objects.get(phone__iexact=phone)
-    #     login(self.request, user)
-    #     return super().form_valid(form)
 
     def post(self, request, *args, **kwargs):
         data: dict = request.POST
@@ -50,7 +43,6 @@ class ProfileView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['bot_user'] = settings.BOT_USER
-
         context['regions'] = Region.objects.all().order_by('name')
         return context
 

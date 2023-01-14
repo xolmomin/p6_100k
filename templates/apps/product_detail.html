@@ -23,26 +23,24 @@
                     </div>
                 </div>
 
-                <form id="orderForm" data-request-success="$(this).find('.needclear').val('')"
-                      data-request="onOrder" data-request-flash>
-
+                <form method="post" action="{% url 'order' %}">
+                    {% csrf_token %}
                     <div class="row">
                         <div class="col-md-6 mb-4">
                             <div class="owl-carousel owl-theme content_linear_card_body_indicators owl-loaded owl-drag">
-                                {#                                {% for image in  product.productimage_set.all %}#}
                                 <div class="item">
-                                    <img loading="lazy" class="lazyload"
-                                         src="https://100k.uz/themes/stock/assets/img/loading.gif"
-                                         data-src="{{ product.productimage_set.first.image.url }}"
-                                         style="width:431.01px;height:431.01px;" alt="card"/>
+                                    {% if product.video %}
+                                        <video width="431.01" height="431.01" style="width:431.01px;height:431.01px;" controls>
+                                            <source src="{{ product.video.url }}" type="video/mp4">
+                                        </video>
+                                    {% else %}
+                                        <img loading="lazy" class="lazyload"
+                                             src="https://100k.uz/themes/stock/assets/img/loading.gif"
+                                             data-src="{{ product.productimage_set.first.image.url }}"
+                                             style="width:431.01px;height:431.01px;" alt="card"/>
+                                    {% endif %}
+
                                 </div>
-                                {#                                {% endfor %}#}
-                                {#                                <div class="item">#}
-                                {#                                    <img loading="lazy" class="lazyload"#}
-                                {#                                         src="https://100k.uz/themes/stock/assets/img/loading.gif"#}
-                                {#                                         data-src="https://100k.uz/storage/app/uploads/public/63b/c7c/e49/63bc7ce49fb82146597804.jpeg"#}
-                                {#                                         alt="card"/>#}
-                                {#                                </div>#}
                             </div>
 
                             <div class="productShop d-none d-md-block d-lg-block d-xl-block mt-4">
@@ -82,37 +80,37 @@
                                 </div>
 
                                 <div class="my-3">
-                                    <input type="hidden" name="product_id" value="1023"/>
+                                    <input type="hidden" name="product" value="{{ product.pk }}"/>
                                     <input type="hidden" name="stream_id" value=""/>
 
                                     <div class="form-group">
-                                        <input class="form-control needclear" name="client_full_name"
-                                               placeholder="Ismingiz" type="text"/>
+                                        <input class="form-control needclear" name="name" placeholder="Ismingiz"
+                                               type="text"/>
                                     </div>
 
                                     <div class="form-group">
-                                        <input class="my-phone-mask form-control needclear" name="customer_phone"
+                                        <input class="my-phone-mask form-control needclear" name="phone"
                                                id="customer_phone" placeholder="Telefon raqamingiz" type="text"/>
                                     </div>
 
                                     <div id="partialCountryState">
                                         <div class="form-group">
-                                            <select required="true" class="form-control" name="region_id">
+                                            <select required="true" class="form-control" name="region">
                                                 <option value="" selected="selected">Hududni tanlang ⬇</option>
-                                                <option value="13">Toshkent shahri</option>
-                                                <option value="12">Andijon</option>
-                                                <option value="11">Buxoro</option>
-                                                <option value="1">Fargona</option>
-                                                <option value="10">Jizzax</option>
-                                                <option value="6">Namangan</option>
-                                                <option value="7">Navoiy</option>
-                                                <option value="8">Qashqadaryo</option>
-                                                <option value="9">Qoraqalpogiston</option>
-                                                <option value="5">Samarqand</option>
-                                                <option value="3">Sirdaryo</option>
-                                                <option value="4">Surxondaryo</option>
-                                                <option value="2">Toshkent viloyati</option>
-                                                <option value="14">Xorazm</option>
+                                                <option value="Toshkent shahri">Toshkent shahri</option>
+                                                <option value="Andijon">Andijon</option>
+                                                <option value="Buxoro">Buxoro</option>
+                                                <option value="Fargona">Fargona</option>
+                                                <option value="Jizzax">Jizzax</option>
+                                                <option value="Namangan">Namangan</option>
+                                                <option value="Navoiy">Navoiy</option>
+                                                <option value="Qashqadaryo">Qashqadaryo</option>
+                                                <option value="Qoraqalpogiston">Qoraqalpogiston</option>
+                                                <option value="Samarqand">Samarqand</option>
+                                                <option value="Sirdaryo">Sirdaryo</option>
+                                                <option value="Surxondaryo">Surxondaryo</option>
+                                                <option value="Toshkent viloyati">Toshkent viloyati</option>
+                                                <option value="Xorazm">Xorazm</option>
                                             </select>
                                         </div>
                                     </div>
@@ -122,8 +120,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="text-center">
-                                                <button onclick='fbq("track", "trackNewOrder"); FB.AppEvents.logEvent("newOrder")'
-                                                        data-attach-loading type="submit" style="max-width: 100%"
+                                                <button type="submit" style="max-width: 100%"
                                                         class="sk-btn sk-btn--primary sk-btn--block sk-btn--lg">
                                                     Buyurtma berish
                                                 </button>
@@ -168,48 +165,9 @@
                         <div class="tab-pane fade show active" id="productDescription">
                             <div>
                                 <p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &quot;System Font&quot;;">
-                                    <span style="font-family: &quot;.SFUI-Regular&quot;;">🔥Ассалому Алекум азиз кузатувчилар🔥</span>
+                                    <span style="font-family: &quot;.SFUI-Regular&quot;;">{{ product.description }}</span>
                                 </p>
-                                <p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &quot;System Font&quot;;">
-                                    <span style="font-family: &quot;.SFUI-Regular&quot;;">⚡14-январга совға🫡⚡</span></p>
-                                <p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &quot;System Font&quot;; min-height: 14.3px;">
-                                    <br></p>
-                                <p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &quot;System Font&quot;;">
-                                    <span style="font-family: &quot;.SFUI-Regular&quot;;">⚜Байрам ва туғилган кун ҳар хил хурсандчлик кунлари учун эркаклар учун ажойиб тўпламни сизга тақдим этамиз!🤗</span>
-                                </p>
-                                <p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &quot;System Font&quot;; min-height: 14.3px;">
-                                    <br></p>
-                                <p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &quot;System Font&quot;;">
-                                    <span style="font-family: &quot;.SFUI-Regular&quot;;">⚜ Наборимиз ичида?&nbsp;</span>
-                                </p>
-                                <p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &quot;System Font&quot;;">
-                                    <span style="font-family: &quot;.SFUI-Regular&quot;;">✅ Пул&nbsp;ва документларни солиш учун кожадан барсетка</span>
-                                </p>
-                                <p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &quot;System Font&quot;;">
-                                    <span style="font-family: &quot;.SFUI-Regular&quot;;">✅ Ролх брендига тегишли соат хама ёшга бирдак тушади&nbsp;</span>
-                                </p>
-                                <p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &quot;System Font&quot;;">
-                                    <span style="font-family: &quot;.SFUI-Regular&quot;;">✅ Эркаклар учун кожадан ремент</span>
-                                </p>
-                                <p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &quot;System Font&quot;; min-height: 14.3px;">
-                                    <br></p>
-                                <p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &quot;System Font&quot;;">
-                                    <span style="font-family: &quot;.SFUI-Regular&quot;;">Махсулотлар сони чекланган шошиламиз 🏃азизлар 😇</span>
-                                </p>
-                                <p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &quot;System Font&quot;; min-height: 14.3px;">
-                                    <br></p>
-                                <p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &quot;System Font&quot;;">
-                                    <span style="font-family: &quot;.SFUI-Regular&quot;;">💰 Нархи 227&nbsp;000 сўм😅</span>
-                                </p>
-                                <p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &quot;System Font&quot;; min-height: 14.3px;">
-                                    <br></p>
-                                <p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &quot;System Font&quot;;">
-                                    <span style="font-family: &quot;.SFUI-Regular&quot;;">&nbsp; Буюртма бериш учун👇</span>
-                                </p>
-                                <p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &quot;System Font&quot;;">
-                                    <span style="font-family: &quot;.SFUI-Regular&quot;;">&nbsp; &nbsp; &nbsp;</span><span
-                                        style="font-family: &quot;.SFUI-Regular&quot;;">🚚 Ўзбекистон бўйлаб етказиб бериш мутлақо бепул!</span>
-                                </p></div>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="productReviews">
                             <div class="row align-items-center">
@@ -224,16 +182,16 @@
                             </div>
 
                             <ul id="productReviewsList" class="commentsList">
-                                <p class="text-center text-muted" style="font-size: 19px;"><br><br> Ushbu mahsulotga
-                                    izohlar hali qoldirilmagan. </p>
+                                {% for foo in comment %}
+                                    <h5>{{ foo.name }}</h5>
+                                    <p class="text-center text-muted" style="font-size: 19px;">{{ foo.content }}</p>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
 
                 </div>
             </div>
-
-
         </section>
 
 
@@ -242,7 +200,8 @@
               data-request-success="$(this).find('input.form-control').val('')"
               data-request-update="'product/reviews-list': '#productReviewsList'"
               class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
+              aria-hidden="true" method="post" action="../">
+            {% csrf_token %}
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -257,55 +216,42 @@
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Ismingiz</label>
-                            <input type="text" name="author" class="form-control" id="exampleInputEmail1"
+                            <input type="text" name="name" class="form-control" id="exampleInputEmail1"
                                    placeholder="Ismingizni kiriting">
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputPassword1">Izohingiz</label>
-                            <textarea name="text" placeholder="Izohingizni kiriting"
+                            <textarea name="content" placeholder="Izohingizni kiriting"
                                       class="form-control" id="exampleInputPassword1"></textarea>
                         </div>
 
                         <div class="form-group">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="rating" id="rating5" value="5"
-                                       checked>
-                                <label class="form-check-label" for="rating5">
-                                    Ajoyib
-                                </label>
+                                <input class="form-check-input" type="radio" name="rate" id="rating5" value="5" checked>
+                                <label class="form-check-label" for="rating5">Ajoyib</label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="rating" id="rating4" value="4">
-                                <label class="form-check-label" for="rating4">
-                                    Yaxshi
-                                </label>
+                                <input class="form-check-input" type="radio" name="rate" id="rating4" value="4">
+                                <label class="form-check-label" for="rating4">Yaxshi</label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="rating" id="rating3" value="3">
-                                <label class="form-check-label" for="rating3">
-                                    Qoniqarli
-                                </label>
+                                <input class="form-check-input" type="radio" name="rate" id="rating3" value="3">
+                                <label class="form-check-label" for="rating3">Qoniqarli</label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="rating" id="rating2" value="2">
-                                <label class="form-check-label" for="rating2">
-                                    Yomon
-                                </label>
+                                <input class="form-check-input" type="radio" name="rate" id="rating2" value="2">
+                                <label class="form-check-label" for="rating2">Yomon</label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="rating" id="rating1" value="1">
-                                <label class="form-check-label" for="rating1">
-                                    Juda yomon
-                                </label>
+                                <input class="form-check-input" type="radio" name="rate" id="rating1" value="1">
+                                <label class="form-check-label" for="rating1">Juda yomon</label>
                             </div>
                         </div>
-
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Bekor qilish</button>
@@ -315,25 +261,50 @@
             </div>
         </form>
 
-        <style>
+        <div class="post-footer__comment">
+            {% if comments.count > 0 %}
+                <h3 class="comment-title"><span>{{ post.comment_count }} comment</span></h3>
+            {% endif %}
+            <div class="post-footer__comment__detail">
+                {% for comment in comments|slice:3 %}
+                    <div class="comment__item">
+                        <div class="comment__item__avatar">
+                            <img src="{{ user.image.url }}"
+                                 alt="Author avatar"/>
+                        </div>
+                        <div class="comment__item__content">
+                            <div class="comment__item__content__header">
+                                <h5>{{ comment.author.first_name }}</h5>
+                                <div class="data">
+                                    <p>
+                                        <i class="far fa-clock"></i>{{ comment.created_at|date:'M d, Y' }}
+                                    </p>
+                                </div>
+                            </div>
+                            <p>{{ comment.text }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <style>
 
-            .siteFooter .container, .topLine {
-                display: none;
-            }
-
-            /* hide search and center logo on mobile */
-            @media (max-width: 767px) {
-                .col-logo {
-                    flex: 1 0 auto;
-                    text-align: center;
+                .siteFooter .container, .topLine {
+                    display: none;
                 }
 
-                .col-search {
-                    display: none !important;
+                /* hide search and center logo on mobile */
+                @media (max-width: 767px) {
+                    .col-logo {
+                        flex: 1 0 auto;
+                        text-align: center;
+                    }
+
+                    .col-search {
+                        display: none !important;
+                    }
                 }
-            }
 
-        </style>
-
+            </style>
+        </div>
     </main>
 {% endblock %}

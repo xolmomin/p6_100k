@@ -3,22 +3,17 @@
 {% block main %}
     <main class="admin-template">
         <section class="main">
-
             <div class="container">
-                <br>
                 <br>
                 <h3 class="text-center"> Hozirda sotuvda bor<br> mahsulotlar </h3>
                 <br>
-
-
                 <div class="container market-search-form">
                     <form method="get" data-bs-request="onMarketSearch"
                           data-request-update="'admin/market-products': '#marketProductsList'" data-request-flash=""
                           class="input-group mb-0 px-2">
-
                         <div class="input-group-prepend">
                             <button class="btn btn-info" style="border: 1px solid #ddd" type="button"
-                                    onclick="$('.market-search-input').val(''); $('.market-search-input').submit()"
+                                    onclick="$('.market-search-input').val('');"
                                     id="button-addon1">X
                             </button>
                         </div>
@@ -26,7 +21,6 @@
                         <input value="{{ search_input }}" type="text" class="form-control market-search-input"
                                name="search"
                                placeholder="Mahsulotlar bo'yicha qidiruv" aria-label="Mahsulotlar bo'yicha qidiruv">
-
                         <div class="input-group-append">
                             <button class="btn btn-primary" data-attach-loading="" type="submit" id="button-addon2">
                                 Izlash
@@ -35,10 +29,8 @@
                     </form>
                     <div class="header_tab_menu">
                         <div class="header_menu" style="overflow: auto">
-
-                            <a href="{% url 'market' %}?category=new" class="btn btn-default ">Yangi 🕒 </a>
-
-                            <a href="{% url 'market' %}?category=new" class="btn btn-default ">TOP ⭐ </a>
+                            <a href="{% url 'market' %}?category=new" class="btn btn-default">Yangi 🕒 </a>
+                            <a href="{% url 'market' %}?category=new" class="btn btn-default">TOP ⭐ </a>
                             {% for category in categories %}
                                 {% if category.product_count > 0 %}
                                     <a href="{% url 'market' %}?category={{ category.slug }}"
@@ -50,7 +42,6 @@
                 </div>
 
                 <div id="marketProductsList" class="row">
-
                     {% for product in products %}
                         <div class="col-sm-4 p-2">
                             <div class="card">
@@ -92,10 +83,9 @@
                                             class="btn btn-primary" id="submit" onclick="myFunction({{ product.id }})">
                                         Oqim yaratish
                                     </button>
-                                    <a href="" class="btn btn-default">
+                                    <a href="{% url 'admin_product_detailview' product.id %}" class="btn btn-default">
                                         Batafsil</a>
                                 </div>
-
 
 
                             </div>
@@ -174,7 +164,6 @@
                                             <p>min: <strong>100</strong> so'm - <strong>max:
                                                 5000</strong> so'm </p>
                                         </div>
-
                                         Yuqorida kiritilgan summa <strong>ushbu oqim buyurtmasi</strong>
                                         yetqazib berilganda admin hisobidan ushlab qolinadi. Istalgan
                                         kishi 100 somdan 5000 so'mgacha o'z daromatidan hayriya
@@ -210,11 +199,9 @@
                                                     $('#currentAdminFee').text(50000 - $(this).val()  + ' so\'m');
                                                     $('#discountedPrice').text({{ product.price }} - $(this).val()  + ' so\'m');
                                                     ">
-
                                             <p>min: <strong>5000</strong> so'm - <strong>max:
                                                 40000</strong> so'm </p>
                                         </div>
-
                                         Diqqat! Mahsulot narxini tushurish admin bonusi evaziga amalga
                                         oshiriladi.
                                         Chegirma miqdorini kiritishdan oldin reklama harajatlarini
@@ -240,10 +227,28 @@
                         </form>
                     </div>
                 </div>
-
             </div>
-
-
         </section>
+
+        <style>
+            .btn.active {
+                color: #fff;
+            }
+
+            .header_menu {
+                padding: 12px;
+            }
+
+            .header_menu .btn-default {
+                border: 1px solid #ddd;
+                border-radius: 20px;
+                padding: 10px;
+                font-size: 15px;
+            }
+
+            .header_menu .btn-default.active, .header_menu .btn-default:hover {
+                background-color: #000;
+            }
+        </style>
     </main>
 {% endblock %}

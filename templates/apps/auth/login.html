@@ -8,10 +8,9 @@
             </a>
             <h2 class="text-lg font-medium my-2">Tizimga kirish</h2>
 
-            <form method="post" style="margin-left: 60px" class="flex flex-col items-stretch gap-2" x-data="{phone: ''}"
-                  @submit.prevent="oc.request($el, 'onAuth', {
+            <form class="flex flex-col items-stretch gap-2" x-data="{phone: ''}" @submit.prevent="oc.request($el, 'onAuth', {
         update: {
-            'v2auth/login': '!#authForm', 
+            'v2auth/login': '!#authForm',
         },
         data: {},
         flash: true,
@@ -22,17 +21,13 @@
                        placeholder="Telefon raqamingizni kiring" x-mask="+998(99) 999-99-99"
                        x-on:focus="!$event.target.value.startsWith('+998') ? $event.target.value = '+998' : ''"
                        x-on:blur="$event.target.value == '+998(' || $event.target.value == '+998' ? $event.target.value = '': ''"
-                       x-ref="phone" x-model="phone" name="username" autocomplete="off">
-                <button><a href="{% url 'sms' %}">Send SMS</a></button>
-                <br><br>
-                <input type="text" name="sms_code">
-                <br><br>
+                       x-ref="phone" x-model="phone" name="phone" autocomplete="off">
                 <label for="checkboxField" class="select-none cursor-pointer group relative">
-                    <input class="absolute top-1/2 left-1.5 peer h-0.5 w-0.5" type="checkbox"
-                           required id="checkboxField">
+                    <input class="absolute top-1/2 left-1.5 peer h-0.5 w-0.5" type="checkbox" required=""
+                           id="checkboxField">
                     <div class="inline-block relative w-4 h-4 -mb-0.5 bg-white border border-primary shadow group-hover:shadow-primary/50 transition-all duration-200 rounded-sm peer-checked:bg-primary
-            before:bg-transparent before:block before:top-1.5 before:-rotate-45 before:translate-x-[.1875rem] before:rounded-xl before:absolute before:h-0.5 before:w-3 before:peer-checked:bg-white 
-            after:bg-transparent after:block after:top-[.4375rem] before:z-10 z-10 after:rotate-45 after:-translate-x-[.0625rem] after:rounded-xl after:absolute after:h-0.5 after:w-2 after:peer-checked:bg-white 
+            before:bg-transparent before:block before:top-1.5 before:-rotate-45 before:translate-x-[.1875rem] before:rounded-xl before:absolute before:h-0.5 before:w-3 before:peer-checked:bg-white
+            after:bg-transparent after:block after:top-[.4375rem] before:z-10 z-10 after:rotate-45 after:-translate-x-[.0625rem] after:rounded-xl after:absolute after:h-0.5 after:w-2 after:peer-checked:bg-white
             ">
                     </div>
                     Men <a class="text-primary hover:text-primary/70 font-medium transition-all duration-200"
@@ -40,17 +35,15 @@
                     foydalanish shartlari
                 </a> bilan tanishdim.
                 </label>
-                <br>
                 <button class="px-4 py-1.5 rounded-xl
-            bg-black 
+            bg-black
             text-white
             shadow-lg shadow-black/50 hover:shadow-primary/50
-            hover:bg-primary 
+            hover:bg-primary
             disabled:bg-gray-200
             disabled:shadow-none
             disabled:text-black
-            transition-all duration-200" x-bind:disabled="phone.length < 18"
-                        data-attach-loading>
+            transition-all duration-200" x-bind:disabled="phone.length < 18" data-attach-loading="" disabled="disabled">
                     Raqamni tekshirish
                 </button>
             </form>

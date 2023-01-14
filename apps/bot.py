@@ -49,9 +49,7 @@ def start_message(message):
     if is_current_user_active(message):
         bot.send_message(message.from_user.id, 'shaxsiy kabinetdagi tokenni kiriting')
     else:
-        bot.send_message(message.from_user.id,
-                         "Assalom aleykum, 100k.uz botiga xush kelibsiz!"
-                         "\nBotdan to'liq foydalanish uchun /activate komandasi bilan botni aktivlashtiring.")
+        bot.send_message(message.from_user.id, "Assalom aleykum, 100k.uz botiga xush kelibsiz!\nBotdan to'liq foydalanish uchun /activate komandasi bilan botni aktivlashtiring.")
 
 
 @bot.message_handler(commands=['activate'])

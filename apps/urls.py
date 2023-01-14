@@ -3,17 +3,13 @@ from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 
 from apps.bot import UpdateBot
-from apps.views import (LogInView, SendSms, ExploreProductsView, StreamDeleteView)
+from apps.views import (ExploreProductsView, StreamDeleteView)
 from apps.views import ProfileView, AdminProductDetailView, ProductDetailView, MainPageView, WithdrawView, \
-    MarketListView, StreamPageListView, AdminPageView, ContactsView, StoreDetailView, \
-    CategoryDetail
-def text_req(request):
-    print(request.POST)
-
+    MarketListView, StreamPageListView, AdminPageView, ContactsView, StoreDetailView, LogInView, SendSms, \
+    ExploreProductsView, CategoryDetail
+from apps.views.products import ProductOrderView
 
 urlpatterns = [
-
-    path('nimadir', text_req, name='data_send'),
     path('', MainPageView.as_view(), name='main_page_view'),
     path('product/shop/<str:slug>', ProductDetailView.as_view(), name='product_detail'),
     path('explore', ExploreProductsView.as_view(), name='explore'),
@@ -29,7 +25,8 @@ urlpatterns = [
     path('admin/delete-stream', StreamDeleteView.as_view(), name='stream_deleteview'),
     path('admin/withdraw', csrf_exempt(WithdrawView.as_view()), name='withdraw'),
     path('admin/market', MarketListView.as_view(), name='market'),
-    path('admin/product', AdminProductDetailView.as_view(), name='admin_product_detailview'),
+    path('admin/product/<int:pk>', AdminProductDetailView.as_view(), name='admin_product_detailview'),
     path('sms/', SendSms, name='sms'),
-    path('bot/', csrf_exempt(UpdateBot.as_view()), name='bot')
+    path('bot/', csrf_exempt(UpdateBot.as_view()), name='bot'),
+    path('order/', ProductOrderView.as_view(), name='order')
 ]

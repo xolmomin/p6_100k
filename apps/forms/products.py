@@ -1,7 +1,16 @@
+from django.forms import ModelForm
+
+from apps.models import ProductOrders
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm, IntegerField
 
 from apps.models import Stream
+
+
+class OrderForm(ModelForm):
+    class Meta:
+        model = ProductOrders
+        exclude = ()
 
 
 class CreateStreamForm(ModelForm):

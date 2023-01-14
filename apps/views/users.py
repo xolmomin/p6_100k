@@ -8,6 +8,7 @@ from django.views.generic import FormView, UpdateView, ListView
 
 from apps.forms import ProfileModelForm, FavoriteModelForm
 from apps.models import User, Contact
+from root import settings
 
 
 class LogInView(LoginView):
@@ -28,6 +29,11 @@ class ProfileView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['bot_user'] = settings.BOT_USER
+        return context
 
 
 class FavoriteFormView(LoginRequiredMixin, FormView):

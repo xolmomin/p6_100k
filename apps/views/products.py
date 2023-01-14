@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import FormView, DetailView, ListView
 
 from apps.forms import CreateCommentForm, OrderForm
-from apps.models import Product, Comment, Category
+from apps.models import Product, Comment, Category, Stream
 from apps.views import MainPageView
 
 
@@ -60,3 +60,12 @@ class CategoryDetail(ListView):
         if category := self.request.GET.get('category'):
             return qs.filter(category__slug=category)
         return qs
+
+
+class GetStreamView(DetailView):
+    pk_url_kwarg = 'pk'
+    model = Stream
+
+    def render_to_response(self, context, **response_kwargs):
+        return super().render_to_response(context, **response_kwargs)
+

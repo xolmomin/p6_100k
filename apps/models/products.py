@@ -1,5 +1,5 @@
 from django.db.models import Model, CharField, IntegerField, DateTimeField, SlugField, ForeignKey, CASCADE, \
-    BooleanField, TextField, SET_NULL, ImageField, TextChoices, FileField
+    BooleanField, TextField, ImageField, TextChoices, FileField
 from django.utils.text import slugify
 
 
@@ -53,6 +53,7 @@ class Product(Model):
 class ProductImage(Model):
     product = ForeignKey('apps.Product', CASCADE)
     image = ImageField(upload_to='image/', default='media/product-default.jpg')
+
 
 
 class ProductOrders(Model):

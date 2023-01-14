@@ -1,4 +1,3 @@
-from django.contrib.auth.forms import AuthenticationForm
 from django.forms import ModelForm, IntegerField
 
 from apps.models import Comment, User
@@ -23,3 +22,15 @@ class FavoriteModelForm(ModelForm):
     class Meta:
         model = Favorite
         exclude = ()
+
+
+# class LoginForm(ModelForm):
+#     class Meta:
+#         model = User
+#         fields = ('phone', 'password')
+#
+#     def clean_phone(self):
+#         phone: str = self.data.get('phone')
+#         if phone.startswith('+'):
+#             return phone.replace('(', '').replace(')', '').replace('-', '').replace(' ', '')
+#         return phone

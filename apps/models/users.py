@@ -28,6 +28,14 @@ class User(AbstractUser):
         ).values_list('amount', flat=True)
         return sum(amounts)
 
+    @property
+    def image_url(self):
+        try:
+            url = self.image.image.url
+        except (ValueError, AttributeError):
+            url = 'https://via.placeholder.com/100x100'
+        return url
+
 
 class Contact(Model):
     phone = CharField(max_length=255)

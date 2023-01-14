@@ -84,7 +84,7 @@
                 <div class="d-flex align-items-center dropdown">
                     <a class="btn nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">
-                        <img src="{{ user.image.url }}"
+                        <img src="{{ user.image_url }}"
                              alt="profile"/>
                     </a>
 
@@ -98,38 +98,11 @@
                             sevimlilarim </a>
                         <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="#">Moderatorlar uchun</a>
 
-                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="/profile/settings">
+                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'profile_page' %}">
                             Sozlamalar </a>
 
-
-                        <a onclick='FB.AppEvents.logEvent("logOut")'
-                           class="dropdown-item header_navbar_lang_menu_dropdown_item"
-                           data-request-confirm="Siz rostdan ham akkountingizdan chiqmoqchimisiz?"
-                           data-request="onLogout"
-                           data-request-data="redirect: '/'">
-                            Chiqish
-                        </a>
-
-
-                        <hr class="my-2">
-
-                        <div class="d-flex justify-content-between px-2">
-                            <!-- <a onclick='FB.AppEvents.logEvent("openTg")' href="https://t.me/offical_100k" class="p-2">
-                                <img src="https://image.flaticon.com/icons/svg/2111/2111646.svg" style="width: 20px;" alt="">
-                            </a> -->
-
-                            <a onclick='FB.AppEvents.logEvent("openAndroid")' target="_blank"
-                               href="https://play.google.com/store/apps/details?id=uz.itmaker.stock" class="p-2">
-                                <img src="https://image.flaticon.com/icons/svg/732/732179.svg" style="width: 20px;"
-                                     alt="">
-                            </a>
-
-                            <a onclick='FB.AppEvents.logEvent("openIos")' target="_blank"
-                               href="https://apps.apple.com/ru/app/100k-uz/id1529911106" class="p-2">
-                                <img src="https://image.flaticon.com/icons/svg/831/831276.svg" style="width: 20px;"
-                                     alt="">
-                            </a>
-                        </div>
+                       <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
+                           href="{% url 'logout' %}"> Chiqish </a>
 
                     </div>
                 </div>

@@ -1,3 +1,5 @@
+from django.http import HttpResponse, JsonResponse
+from django.views import View
 from django.views.generic import ListView, FormView
 
 from apps.forms import OrderForm
@@ -14,6 +16,17 @@ class MainPageView(ListView, FormView):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context['products'] = Product.objects.all()[:8]
         return context
+
+
+from django.forms import model_to_dict
+
+
+class SearchPageView(View):
+    def post(self, request, *args, **kwargs):
+        data = []
+        for product in Product.objects.all()[:10]:
+            data.append(model_to_dict(product, fields=('id', 'title', 'description')))
+        return JsonResponse(data, safe=False)
 
 
 class ExploreProductsView(ListView):

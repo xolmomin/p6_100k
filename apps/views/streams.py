@@ -32,7 +32,6 @@ class StreamPageListView(LoginRequiredMixin, ListView, UpdateView):
         # Stream.objects.filter(id=id).delete()
         return super().get(request, *args, **kwargs)
 
-
     def post(self, request, *args, **kwargs):
         id = int(request.POST['id'])
         Stream.objects.filter(id=id).update(is_area=Case(
@@ -47,7 +46,6 @@ class StreamPageListView(LoginRequiredMixin, ListView, UpdateView):
         return context
 
     def form_valid(self, form):
-
         return super().form_valid(form)
 
 

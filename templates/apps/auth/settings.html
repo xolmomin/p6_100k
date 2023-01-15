@@ -9,7 +9,7 @@
         <section class="main">
             <div class="container-xl px-4 mt-4">
                 <hr class="mt-5 mb-4">
-                <form method="post" action="{% url 'profile_page' %}" enctype="multipart/form-data">
+                <form method="post" action="{% url 'settings' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="content_profile_main">
                         <div class="content_profile_name">
@@ -38,7 +38,6 @@
                                    placeholder=" Ismingizni kiriting "
                                    value="{{ user.first_name }}">
                         </div>
-
                         <div class="form-group">
                             <label> Familiya</label>
                             <input type="text" name="last_name" class="form-control"
@@ -60,34 +59,29 @@
                             <select id="district" class="form-select" name="district">
                             </select>
                         </div>
-
-
                         <div class="form-group">
                             <label> Manzilingiz </label>
                             <input typeis_active="text" name="address" class="form-control"
                                    placeholder="Manzilingizni kiriting"
                                    value="{{ user.address|default_if_none:'' }}">
                         </div>
-
                         <button onclick='FB.AppEvents.logEvent("settingsSave")' data-attach-loading
                                 type="submit"
                                 class="btn btn-block btn-primary"> Saqlash
                         </button>
-
                         <div class="text-center">
                             <br>
                             <a class="btn btn-block btn-danger btn-block btn-primary "
-                               href="" style="color:red;"> Doimiy parol kiritish </a>
+                               href="" style="color:black;"> Doimiy parol kiritish </a>
                         </div>
-
                         <br>
                         <p class="text-center">
                             <a target="_blank" class="btn btn-block btn-primary"
-                               href=""> Telegram botni biriktirish </a>
+                               href="http://t.me/{{ bot_user }}?start={{ activation_token }}"> Telegram botni
+                                biriktirish </a>
                             <br>
-                            <small> TG Aktivlashtirish kodi: </small> <strong> 16729160686359405 </strong>
+                            <small> TG Aktivlashtirish kodi: </small> <br><strong> {{ activation_token }} </strong>
                         </p> <br>
-
                         <br><br>
                     </div>
                 </form>

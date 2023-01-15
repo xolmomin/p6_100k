@@ -10,6 +10,7 @@ from django.views.generic import FormView, UpdateView, ListView, TemplateView
 from apps.forms import ProfileModelForm, FavoriteModelForm
 from apps.models import User, District, Region
 from apps.utils import validate_phone
+from apps.utils.token import bot_activation_token
 from root import settings
 from root.settings import FAKE_VERIFICATION
 
@@ -32,16 +33,17 @@ class ProfileLoginView(TemplateView):
         return redirect('admin_page')
 
 
-class ProfileView(LoginRequiredMixin, UpdateView):
+class SettingsView(LoginRequiredMixin, UpdateView):
     context_object_name = 'profile'
     form_class = ProfileModelForm
     queryset = User.objects.all()
     redirect_authenticated_user = True
-    template_name = 'apps/auth/profile.html'
+    template_name = 'apps/auth/settings.html'
     success_url = reverse_lazy('main_page_view')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['activation_token'] = bot_activation_token.make_token(self.request.user)
         context['bot_user'] = settings.BOT_USER
         context['regions'] = Region.objects.all().order_by('name')
         return context

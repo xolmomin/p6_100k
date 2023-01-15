@@ -12,11 +12,9 @@
             <div class="col col-search">
                 <form data-request="onSearch" data-request-flash
                       data-request-update="'search': '#mainSearchResult'" class="siteSearch" data-request-url="search">
-
                     <input name="search" type="text" placeholder="qidiruv..." autocomplete="off"
                            data-request="onSearch" data-request-flash data-track-input="1000" data-request-url="search"
                            data-request-update="'search': '#mainSearchResult'">
-
                     <button data-attach-loading>
                         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                              xmlns:svgjs="http://svgjs.com/svgjs" width="20" height="20" x="0" y="0"
@@ -46,14 +44,11 @@
                     <i class="fa fa-user mr-2"></i>
                     <span>Mening profilim</span>
                 </a>
-
                 <div class="dropdown-menu dropdown-menu-right header_navbar_lang_menu_dropdown">
                     <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'contacts' %}">
                         Aloqa uchun </a>
-                    <a class="dropdown-item header_navbar_lang_menu_dropdown_item"
-                       href="
-
-                               {% if user.is_authenticated %}{% url 'profile_page' %}{% else %}{% url 'login' %}{% endif %}">
+                    <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="
+                            {% url 'profile_page' %}">
                         Profil </a>
 
                     {% if user.is_authenticated %}
@@ -61,12 +56,11 @@
                            href="{% url 'admin_page' %}"> Adminlar uchun </a>
                     {% endif %}
                     <a class="d-none dropdown-item header_navbar_lang_menu_dropdown_item"
-                       href="profile/buy-bonus.html"> Bonus </a>
-
-                    <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="auth.html"> Mening
+                       href="#"> Bonus </a>
+                    <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'favorite' %}"> Mening
                         sevimlilarim</a>
                     <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
-                       href="{% url 'profile_page' %}"> Sozlamalar </a>
+                       href="{% url 'settings' %}"> Sozlamalar </a>
                     {% if user.is_authenticated %}
                         <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
                            href="{% url 'logout' %}"> Chiqish </a>

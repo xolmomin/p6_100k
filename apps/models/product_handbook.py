@@ -1,4 +1,4 @@
-from django.db.models import Model, CharField, SlugField, IntegerChoices, ForeignKey, PROTECT, TextField, CASCADE, \
+from django.db.models import Model, CharField, SlugField, IntegerChoices, ForeignKey, TextField, CASCADE, \
     BooleanField
 from django.utils.text import slugify
 from django_resized import ResizedImageField

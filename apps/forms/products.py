@@ -1,9 +1,7 @@
-from django.forms import ModelForm
-
-from apps.models import ProductOrders
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm, IntegerField
 
+from apps.models import ProductOrders
 from apps.models import Stream
 
 
@@ -16,6 +14,7 @@ class OrderForm(ModelForm):
 class CreateStreamForm(ModelForm):
     donation = IntegerField(required=False)
     reduce = IntegerField(required=False)
+
     class Meta:
         model = Stream
         fields = ('name', 'product', 'donation', 'reduce')

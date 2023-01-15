@@ -1,0 +1,91 @@
+{% extends 'apps/parts/base.html' %}
+{% load static %}
+{% block main %}
+    <main class="client-template">
+        <section class="main">
+
+            <div class="container border-bottom-4">
+                <div class="content_name_block">
+                    <a href="/" class="content_name_block_back"><span class="icon-arrow"></span></a>
+                    <div class="content_name_block_text"><p> {{ user.first_name }} {{ user.last_name }}</p></div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="content_profile">
+
+                    <div class="content_profile_main">
+                        <div class="content_profile_name">
+                            <div class="content_profile_name_img">
+
+                                <img style="width: 100px; height: 100px;"
+                                     src="{{ user.image.url }}"
+                                     alt="profile"/>
+
+                            </div>
+                            <div class="content_profile_name_text">
+                                <h2> {{ user.first_name }} {{ user.last_name }} </h2>
+                                <p>{{ user.phone }}</p>
+                                <a href="{% url 'settings' %}" class="btn btn-link"> Sozlamalarga o'tish </a>
+                            </div>
+                        </div>
+
+                        <div class="content_profile_settings">
+                            <a href="#" class="content_profile_setting"
+                            >
+                                <div class="content_profile_setting_icon"><span class="icon-all-order"></span></div>
+                                <div class="content_profile_setting_border">
+                                    <div class="content_profile_setting_text"><p> Mening buyurtmalarim </p></div>
+                                    <div class="content_profile_setting_next"><span class="icon-arrow"></span></div>
+                                </div>
+                            </a>
+                            <a href="#" class="content_profile_setting">
+                                <div class="content_profile_setting_icon"><span class="icon-all-order"></span></div>
+                                <div class="content_profile_setting_border">
+                                    <div class="content_profile_setting_text"><p> Mening mahsulotlarim </p></div>
+                                    <div class="content_profile_setting_next"><span class="icon-arrow"></span></div>
+                                </div>
+                            </a>
+
+                            <a href="{% url 'favorite' %}" class="content_profile_setting">
+                                <div class="content_profile_setting_icon"><span class="icon-pending-payment"></span>
+                                </div>
+                                <div class="content_profile_setting_border border-0">
+                                    <div class="content_profile_setting_text"><p> Mening sevimlarim </p></div>
+                                    <div class="content_profile_setting_next"><span class="icon-arrow"></span></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <div class="content_profile_gray"></div>
+                    <div class="content_profile_other">
+                        <div class="content_profile_settings">
+                            <a href="#" class="content_profile_setting d-none">
+                                <div class="content_profile_setting_icon"><span class="icon-pending-payment"></span>
+                                </div>
+                                <div class="content_profile_setting_border">
+                                    <div class="content_profile_setting_text"><p> Bonus xarid qilish </p></div>
+                                    <div class="content_profile_setting_next"><span class="icon-arrow"></span></div>
+                                </div>
+                            </a>
+
+
+                            <a href="{% url 'contacts' %}" class="content_profile_setting">
+                                <div class="content_profile_setting_icon"><span class="icon-support"></span></div>
+                                <div class="content_profile_setting_border">
+                                    <div class="content_profile_setting_text"><p> Mijozlarni qo'llab-quvvatlash </p>
+                                    </div>
+                                    <div class="content_profile_setting_next"><span class="icon-arrow"></span></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock %}

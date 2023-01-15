@@ -121,7 +121,7 @@
                     <li class="header_navbar_collapse_nav_item">
                         <div class="header_navbar_collapse_nav_item_pad">
                             <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'statistics' %}active{% endif %}"
-                               href="">
+                               href="{% url 'admin_statistics' %}">
                                 <span class="fas fa-chart-line"></span>
                                 <p> Statistika </p>
                             </a>

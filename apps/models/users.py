@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db.models import CharField, DecimalField, PositiveIntegerField, Model, EmailField, ForeignKey, CASCADE, \
-    BooleanField, TextChoices, PROTECT, TextField
+    BooleanField, TextChoices, PROTECT, TextField, ManyToManyField
 from django_resized import ResizedImageField
 
 from apps.models.payments import PaymentHistory
@@ -20,6 +20,7 @@ class User(AbstractUser):
     coin = PositiveIntegerField(default=0)
     region = CharField(max_length=255, null=True, blank=True)
     district = CharField(max_length=255, null=True, blank=True)
+    favourite = ManyToManyField('apps.Product', 'favourites')
 
     @property
     def payout(self):

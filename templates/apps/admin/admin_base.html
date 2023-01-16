@@ -187,16 +187,15 @@
 <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 <script src="https://100k.uz/themes/stock/assets/js/custom.js"></script>
 <script src="/modules/system/assets/js/framework-extras.js"></script>
+
+
 <script>
     function myFunction(id) {
         // Get the text field
         var title = document.getElementById(`product_title_${id}`).value;
         var price = document.getElementById(`product_price_${id}`).value;
-        console.log(title);
-        console.log(price);
         $('#title').html(title);
         $('#price').html(price);
-        console.log('worked');
         document.getElementById('product_id').value = id;
     }
 </script>
@@ -285,14 +284,30 @@
                     console.log('Success')
                 },
                 error: function () {
-                    document.location.reload();
-                    {#document.getElementById(`div_${id}`).outerHTML = "";#}
                 }
             })
         }
     }
 </script>
 
+<script>
+    function onClickLike(id) {
+        $.ajax({
+            type: "GET",
+            url: '/my_def_in_view',
+            data: {
+                "id": id,
+            },
+            dataType: "json",
+            success: function (data) {
+                alert("successfull")
+            },
+            failure: function () {
+                alert("failure");
+            }
+        });
+    }
+</script>
 <script>
 
     const user_input = $("#user-input")

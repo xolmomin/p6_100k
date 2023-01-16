@@ -37,7 +37,11 @@ class User(AbstractUser):
             url = 'https://via.placeholder.com/100x100'
         return url
 
-
+    @property
+    def favorites(self):
+        if self.favorite_set.exists():
+            return self.favorite_set.all()
+        return False
 class Contact(Model):
     phone = CharField(max_length=255)
     email = EmailField(max_length=255)

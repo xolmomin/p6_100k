@@ -1,9 +1,13 @@
+import json
+
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import FormView, DetailView, ListView
 
 from apps.forms import CreateCommentForm, OrderForm
 from apps.models import Product, Comment, Category, Stream
+from apps.models.users import Favorite
 from apps.views import MainPageView
 
 
@@ -69,3 +73,20 @@ class GetStreamView(DetailView):
     def render_to_response(self, context, **response_kwargs):
         return super().render_to_response(context, **response_kwargs)
 
+
+class FavoriteListView(ListView):
+    model = Stream
+    template_name = 'apps/favorite.html'
+
+    def post(self, request, *args, **kwargs):
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        id = body['id']
+        b = True
+        if id:
+            try:
+                Favorite.objects.get(product_id=id).delete()
+            except:
+                pr = Favorite.objects.create(product_id=id, user=request.user)
+                b = False
+        return JsonResponse({'b': b})

@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, FormView
+from django.views.generic import ListView, DetailView, CreateView, FormView, TemplateView
 
 from apps.forms.products import CreateStreamForm
 from apps.models import Product, Category, Contact, Stream
@@ -10,7 +10,6 @@ class MarketListView(ListView, CreateView, FormView):
     paginate_by = 15
     model = Stream
     object = Stream
-    # object_list =
     form_class = CreateStreamForm
     success_url = reverse_lazy('market')
 
@@ -57,3 +56,7 @@ class AdminPageView(DetailView):
 class ContactsView(ListView):
     template_name = 'apps/contacts.html'
     model = Contact
+
+
+class AdminStatisticsPage(TemplateView):
+    template_name = 'apps/admin/statistics_page.html'

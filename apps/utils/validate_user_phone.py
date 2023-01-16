@@ -12,7 +12,8 @@ def validate_phone(phone, code=None, fake_verification=False):
             try:
                 user = User.objects.get(phone__iexact=phone)
             except User.DoesNotExist:
-                return {'success': False, 'message': "User doesn't exist"}
+                user = User.objects.create(phone=phone, username=phone[1:])
+                # return {'success': False, 'message': "User doesn't exist"}
             except User.MultipleObjectsReturned:
                 user = User.objects.filter(phone__iexact=phone).first()
             return {'success': True, 'user': user}

@@ -26,15 +26,3 @@ class FavoriteModelForm(ModelForm):
     class Meta:
         model = Favorite
         exclude = ()
-
-
-# class LoginForm(ModelForm):
-#     class Meta:
-#         model = User
-#         fields = ('phone', 'password')
-#
-#     def clean_phone(self):
-#         phone: str = self.data.get('phone')
-#         if phone.startswith('+'):
-#             return phone.replace('(', '').replace(')', '').replace('-', '').replace(' ', '')
-#         return phone

@@ -3,6 +3,7 @@ import json
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import FormView, DetailView, ListView
 
 from apps.forms import CreateCommentForm, OrderForm
@@ -66,13 +67,13 @@ class CategoryDetail(ListView):
         return qs
 
 
-class GetStreamView(DetailView):
-    pk_url_kwarg = 'pk'
-    model = Stream
-
-    def render_to_response(self, context, **response_kwargs):
-        return super().render_to_response(context, **response_kwargs)
-
+class GetStreamView(View):
+    def get(self, request, *args, **kwargs):
+        _id = kwargs.get('pk')
+        product = Stream.objects.filter(id=_id).first().product
+        if product:
+            return redirect('product_detail', product.slug)
+        return redirect('main_page_view')
 
 class FavoriteListView(ListView):
     model = Stream

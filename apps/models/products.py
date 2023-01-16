@@ -7,14 +7,14 @@ class Product(Model):
     title = CharField(max_length=255)
     description = TextField(null=True, blank=True)
     price = IntegerField()
-    created_at = DateTimeField(auto_now_add=True)
-    slug = SlugField(max_length=255, unique=True)
     bonus = IntegerField()
-    free_delivery = BooleanField(default=False)
     reserve = IntegerField()
     video = FileField(upload_to='product/', null=True, blank=True)
+    free_delivery = BooleanField(default=False)
     store = ForeignKey('apps.Store', CASCADE)
     category = ForeignKey('apps.Category', CASCADE)
+    slug = SlugField(max_length=255, unique=True)
+    created_at = DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = "Product"

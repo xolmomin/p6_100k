@@ -106,7 +106,7 @@ DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
 
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 BOT_USER = os.getenv('BOT_USER')
-LOGIN_URL = 'login/'
+LOGIN_URL = '/login'
 
 APPEND_SLASH = True
 

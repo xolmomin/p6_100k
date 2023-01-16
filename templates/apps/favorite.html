@@ -29,7 +29,7 @@
                         {% for favourite in user.favorites %}
                             <div class="col-md-3 col-sm-3 col-3">
                                 <div class="productsList--item">
-                                    <a href=""
+                                    <a href="{% url 'product_detail' favourite.product.slug %}"
                                        class="productsList--item--link"></a>
                                     <div class="productsList--item--image">
                                         <img src="{{ favourite.product.image_url }}"

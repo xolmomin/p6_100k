@@ -1,0 +1,359 @@
+{% load admin_header %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="turbo-visit-control" content="disable"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/owlcarousel/owl.carousel.min.css"/>
+    <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/owlcarousel/owl.theme.default.min.css"/>
+    <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/css/style.bundle.css"/>
+    <link rel="stylesheet" href="https://100k.uz/themes/stock/assets/css/sk-custom.css"/>
+    <style>
+        .oc-flash-message.succes {
+
+        }
+    </style>
+
+    <style>
+        .btn.active {
+            color: #fff;
+        }
+
+        .header_menu {
+            padding: 12px;
+        }
+
+        .header_menu .btn-default {
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 10px;
+            font-size: 15px;
+        }
+
+        .header_menu .btn-default.active, .header_menu .btn-default:hover {
+            background-color: #000;
+        }
+    </style>
+
+    <style>
+        .toast {
+            position: fixed;
+            z-index: 10300;
+            width: 500px;
+            left: 50%;
+            top: 50px;
+            margin-left: -250px;
+            color: #fff;
+            font-size: 1rem;
+            padding: 10px 30px 10px 15px;
+            border-radius: 5px;
+            opacity: 0;
+            transition: all 0.5s, width 0s;
+            transform: scale(0.9);
+        }
+
+        .toast--visible {
+            opacity: 1;
+            top: 60px;
+            visibility: visible;
+        }
+
+        .toast--succes {
+            background: #86c843;
+
+        }
+
+        .toast--error {
+            background: #cc3300;
+
+        }
+    </style>
+
+    {% block styles %}{% endblock %}
+    <!-- seo meta tags -->
+    <title></title>
+    <meta name="description" content="">
+
+
+</head>
+<body>
+<header class="header" id="top">
+    <div class="container">
+        <nav class="header_navbar">
+
+            <a href="/" class="header_navbar_brand_logo d-none d-md-block ">100k.uz </a>
+            <a href="/admin" class="header_navbar_brand_back d-md-none"> <span class="icon-arrow"></span> </a>
+            <a href="#!" class="header_navbar_brand_name d-md-none"> Admin market </a>
+
+
+            <div class="header_navbar_collapse">
+                <ul class="header_navbar_collapse_nav">
+
+                    <li class="header_navbar_collapse_nav_item">
+                        <div class="header_navbar_collapse_nav_item_pad">
+                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'dashboard' %}active{% endif %}"
+                               href="{% url 'admin_page' %}">
+                                <span class="fa fa-tachometer"></span>
+                                <p> Dashboard </p></a>
+                        </div>
+                    </li>
+
+                    <li class="header_navbar_collapse_nav_item">
+                        <div class="header_navbar_collapse_nav_item_pad">
+                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'market' %}active{% endif %}"
+                               href="{% url 'market' %}">
+                                <span class="fas fa-store"></span>
+                                <p> Market </p>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="header_navbar_collapse_nav_item">
+                        <div class="header_navbar_collapse_nav_item_pad">
+                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'streams' %}active{% endif %}"
+                               href="{% url 'stream_page_view' %}">
+                                <span class="fa fa-link"></span>
+                                <p> Oqim </p>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="header_navbar_collapse_nav_item">
+                        <div class="header_navbar_collapse_nav_item_pad">
+                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'statistics' %}active{% endif %}"
+                               href="{% url 'admin_statistics' %}">
+                                <span class="fas fa-chart-line"></span>
+                                <p> Statistika </p>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="header_navbar_collapse_nav_item">
+                        <div class="header_navbar_collapse_nav_item_pad">
+                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'withdraw' %}active{% endif %}"
+                               href="{% url 'withdraw' %}">
+                                <span class="fas fa-money-bill-alt"></span>
+                                <p> To'lov </p>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="header_navbar_profile">
+                <div class="d-flex align-items-center dropdown">
+                    <a class="btn nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        <img src="{{ user.image_url }}"
+                             alt="profile"/>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right header_navbar_lang_menu_dropdown">
+                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'profile_page' %}">
+                            Profil </a>
+
+                        <a class="d-none dropdown-item header_navbar_lang_menu_dropdown_item" href="/profile/buy-bonus">
+                            Bonus xarid qilish </a>
+                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="/shop/favorite"> Mening
+                            sevimlilarim </a>
+                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="#">Moderatorlar uchun</a>
+
+                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'profile_page' %}">
+                            Sozlamalar </a>
+
+                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
+                           href="{% url 'logout' %}"> Chiqish </a>
+
+                    </div>
+                </div>
+            </div>
+
+        </nav>
+    </div>
+</header>
+
+{% block main %}
+{% endblock %}
+<script src="https://kit.fontawesome.com/43236b6dfa.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/imask"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
+
+<script src="https://100k.uz/themes/stock/assets/js/bundle.js"></script>
+<script src="https://100k.uz/themes/stock/assets/lazysizes/lazysizes.min.js"></script>
+<script src="https://100k.uz/themes/stock/assets/owlcarousel/owl.carousel.min.js"></script>
+<script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+<script src="https://100k.uz/themes/stock/assets/js/custom.js"></script>
+<script src="/modules/system/assets/js/framework-extras.js"></script>
+
+
+<script>
+    function myFunction(id) {
+        // Get the text field
+        var title = document.getElementById(`product_title_${id}`).value;
+        var price = document.getElementById(`product_price_${id}`).value;
+        $('#title').html(title);
+        $('#price').html(price);
+        document.getElementById('product_id').value = id;
+    }
+</script>
+
+<script>
+    const myModal = new bootstrap.Modal('#exampleModalCenter')
+    myModal.hide();
+</script>
+<script>
+    const Toast = {
+        init() {
+            this.hideTimeout = null;
+            this.el = document.createElement('div');
+            this.el.className = 'toast';
+            document.body.appendChild(this.el)
+        },
+
+        show(message, state) {
+            clearTimeout(this.hideTimeout);
+            this.el.textContent = message;
+            this.el.className = 'toast toast--visible';
+            if (state) {
+                this.el.classList.add(`toast--${state}`);
+            }
+            this.hideTimeout = setTimeout(() => {
+                {#this.el.classList.remove('toast-visible');#}
+                this.el.className = `toast toast--${state}`;
+            }, 3000);
+        }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => Toast.init());
+</script>
+
+<script>
+    $(".card-body .copy_ref_bn").on('click', function () {
+        var copyText = $(this).parent().find('.ref_link').get(0);
+        copyText.select();
+        document.execCommand("copy");
+        $(this).text('Nusxa olindi');
+    });
+</script>
+
+<script>
+    function myFunctionCopy(id) {
+        // Get the text field
+        var copyText = document.getElementById(id);
+        // Select the text field
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText.value);
+
+    }
+
+    function areaChange(id) {
+        $.ajax({
+            url: "",
+            type: "POST",
+            data: {
+                id: id,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+            success: function () {
+                console.log('Success')
+            },
+            error: function () {
+                console.log("Ajax test failure")
+                Toast.show('Hududni tanlash o`zgardi!', 'succes')
+            }
+
+        })
+    }
+
+    function areaDelete(id) {
+        var result = confirm("Diqqat! Ochirilgan oqimni tiklab bo'lmaydi?");
+        if (result) {
+            $.ajax({
+                url: "/admin/delete-stream",
+                type: "GET",
+                data: {
+                    id: id
+                },
+                success: function () {
+                    console.log('Success')
+                },
+                error: function () {
+                }
+            })
+        }
+    }
+</script>
+
+<script>
+    function onClickLike(id) {
+        $.ajax({
+            type: "GET",
+            url: '/my_def_in_view',
+            data: {
+                "id": id,
+            },
+            dataType: "json",
+            success: function (data) {
+                alert("successfull")
+            },
+            failure: function () {
+                alert("failure");
+            }
+        });
+    }
+</script>
+<script>
+
+    const user_input = $("#user-input")
+    const search_icon = $('#search-icon')
+    const results = $('#replaceable-content')
+    const endpoint = '/search'
+    const delay_by_in_ms = 700
+    let scheduled_function = false
+    let csrf_token = "321";
+    let ajax_call = function (endpoint, request_parameters) {
+        $.post(endpoint, request_parameters)
+            .done(response => {
+                let posts = response['products']
+                console.log(posts)
+                if (posts) {
+                    let html_content = ``
+                    for (i in posts) {
+                        html_content += `<a class="list-group-item" href="product_detail/shop/${posts[i]['slug']}">
+                                            <img src="${domain}/media/${posts[i]['pic']}" with="50" height="50" alt="Post Image">
+                                        ${posts[i]['title']}</a>`
+                    }
+                    results.html(html_content)
+                }
+            })
+    }
+
+    user_input.on('keyup', function () {
+        let key_val = $(this).val()
+        const request_parameters = {
+            like: key_val, // value of user_input: the HTML element with ID user-input
+            csrfmiddlewaretoken: csrf_token
+        }
+        console.log(request_parameters)
+        // start animating the search icon with the CSS class
+        // if scheduled_function is NOT false, cancel the execution of the function
+        if (key_val === '') {
+            results.addClass('d-none')
+        } else {
+            if (scheduled_function) {
+                clearTimeout(scheduled_function)
+            }
+            results.removeClass('d-none')
+            // setTimeout returns the ID of the function to be executed
+            scheduled_function = setTimeout(ajax_call, delay_by_in_ms, endpoint, request_parameters)
+        }
+    })
+</script>
+</body>
+</html>

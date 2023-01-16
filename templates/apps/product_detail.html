@@ -11,7 +11,7 @@
                     <div class="col-auto my-3 text-right">
                         <strong>
                             {{ product.price }} so'm
-                        </strong>.product
+                        </strong>
                         <div class="text-warning">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -61,7 +61,8 @@
                                         </div>
                                     </div>
                                     <div class="col-auto">
-                                        <a href="/store/198" class="sk-btn sk-btn--hover">Do'konning sahifasi</a>
+                                        <a href="{% url 'store' product.pk %}" class="sk-btn sk-btn--hover">Do'konning
+                                            sahifasi</a>
                                     </div>
                                 </div>
                             </div>
@@ -311,9 +312,6 @@
         </div>
     </main>
 
-
-
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
@@ -329,7 +327,6 @@
                 },
                 body: JSON.stringify(data)
             })
-            {{ id }}
                 .then((response) => {
                     return response.json();
                 })
@@ -344,6 +341,4 @@
         }
 
     </script>
-
-
 {% endblock %}

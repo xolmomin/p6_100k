@@ -1,6 +1,7 @@
 from django.contrib.auth.views import LogoutView
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import TemplateView
 
 from apps.bot import UpdateBot
 from apps.views import (ExploreProductsView, StreamDeleteView, SearchPageView, ProductOrderView, FavoriteListView)
@@ -25,7 +26,7 @@ urlpatterns = [
     path('settings', SettingsView.as_view(), name='settings'),
     path('profile/', ProfileView.as_view(), name='profile_page'),
     path('order/', ProductOrderView.as_view(), name='order'),
-    path('oqim/<int:pk>', GetStreamView.as_view(), name='get_stream_view'),
+    path('stream/<int:pk>', GetStreamView.as_view(), name='get_stream_view'),
     path('admin-page', AdminPageView.as_view(), name='admin_page'),
     path('admin/profile/get-destricts', csrf_exempt(DistrictsView.as_view()), name='get_districts'),
     path('admin/streams', StreamPageListView.as_view(), name='stream_page_view'),
@@ -36,5 +37,7 @@ urlpatterns = [
     path('admin/statistics', AdminStatisticsPage.as_view(), name='admin_statistics'),
 
     path('bot', csrf_exempt(UpdateBot.as_view()), name='bot'),
+
+    path('moderator/', TemplateView.as_view(template_name='apps/moderator/test.html'), name='moderator')
 
 ]

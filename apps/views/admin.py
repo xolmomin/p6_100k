@@ -1,11 +1,13 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, FormView, TemplateView
+from django.views.generic import ListView, DetailView, CreateView, FormView
 
 from apps.forms.products import CreateStreamForm
-from apps.models import Product, Category, Contact, Stream
+from apps.models import Product, Category, Contact, Stream, ProductOrders
 
 
-class MarketListView(ListView, CreateView, FormView):
+class MarketListView(LoginRequiredMixin, ListView, CreateView, FormView):
     template_name = 'apps/admin/market_page.html'
     paginate_by = 15
     model = Stream
@@ -40,13 +42,13 @@ class MarketListView(ListView, CreateView, FormView):
         return qs
 
 
-class AdminProductDetailView(DetailView):
+class AdminProductDetailView(LoginRequiredMixin, DetailView):
     template_name = 'apps/admin/product.html'
     queryset = Product.objects.all()
     slug_field = 'pk'
 
 
-class AdminPageView(DetailView):
+class AdminPageView(LoginRequiredMixin, DetailView):
     template_name = 'apps/admin/main_page.html'
 
     def get_object(self, queryset=None):
@@ -58,5 +60,14 @@ class ContactsView(ListView):
     model = Contact
 
 
-class AdminStatisticsPage(TemplateView):
+class AdminStatisticsPage(LoginRequiredMixin, ListView):
+    queryset = Stream.objects.all()
     template_name = 'apps/admin/statistics_page.html'
+    context_object_name = 'streams'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        qs = self.get_queryset()
+        context['streams'] = ProductOrders.objects.values('status', 'product_id').annotate(
+            count=Count('status'))
+        return context

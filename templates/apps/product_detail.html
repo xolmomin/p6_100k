@@ -98,21 +98,21 @@
                                         <div class="form-group">
 
                                             <select required="true" class="form-control" name="region">
-                                                <option value="" selected="selected">Hududni tanlang ⬇</option>
-                                                <option value="Toshkent shahri">Toshkent shahri</option>
-                                                <option value="Andijon">Andijon</option>
-                                                <option value="Buxoro">Buxoro</option>
-                                                <option value="Fargona">Fargona</option>
-                                                <option value="Jizzax">Jizzax</option>
-                                                <option value="Namangan">Namangan</option>
-                                                <option value="Navoiy">Navoiy</option>
-                                                <option value="Qashqadaryo">Qashqadaryo</option>
-                                                <option value="Qoraqalpogiston">Qoraqalpogiston</option>
-                                                <option value="Samarqand">Samarqand</option>
-                                                <option value="Sirdaryo">Sirdaryo</option>
-                                                <option value="Surxondaryo">Surxondaryo</option>
-                                                <option value="Toshkent viloyati">Toshkent viloyati</option>
-                                                <option value="Xorazm">Xorazm</option>
+                                                <option value="1" selected="selected">Hududni tanlang ⬇</option>
+{#                                                <option value="Toshkent shahri">Toshkent shahri</option>#}
+{#                                                <option value="Andijon">Andijon</option>#}
+{#                                                <option value="Buxoro">Buxoro</option>#}
+{#                                                <option value="Fargona">Fargona</option>#}
+{#                                                <option value="Jizzax">Jizzax</option>#}
+{#                                                <option value="Namangan">Namangan</option>#}
+{#                                                <option value="Navoiy">Navoiy</option>#}
+{#                                                <option value="Qashqadaryo">Qashqadaryo</option>#}
+{#                                                <option value="Qoraqalpogiston">Qoraqalpogiston</option>#}
+{#                                                <option value="Samarqand">Samarqand</option>#}
+{#                                                <option value="Sirdaryo">Sirdaryo</option>#}
+{#                                                <option value="Surxondaryo">Surxondaryo</option>#}
+{#                                                <option value="Toshkent viloyati">Toshkent viloyati</option>#}
+{#                                                <option value="Xorazm">Xorazm</option>#}
                                             </select>
                                         </div>
                                     </div>
@@ -133,7 +133,8 @@
                                                onclick='onClickLike({{ product.id }})'
 
                                                data-request-flash href="javascript:">
-                                                <span class="fa-heart far {% if product.id in user.favorites_id %} fa {% endif %} " id="span"></span>
+                                                <span class="fa-heart far {% if product.id in user.favorites_id %} fa {% endif %} "
+                                                      id="span"></span>
                                             </a>
                                         </div>
                                     </div>
@@ -179,9 +180,9 @@
                             </div>
 
                             <ul id="productReviewsList" class="commentsList">
-                                {% for foo in comment %}
-                                    <h5>{{ foo.name }}</h5>
-                                    <p class="text-center text-muted" style="font-size: 19px;">{{ foo.content }}</p>
+                                {% for comment in product.comment_set.all %}
+                                    <h5>{{ comment.name }}</h5>
+                                    <p class="text-center text-muted" style="font-size: 19px;">{{ comment.content }}</p>
                                 {% endfor %}
                             </ul>
                         </div>

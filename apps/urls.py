@@ -12,6 +12,11 @@ from apps.views import ProfileView, AdminProductDetailView, ProductDetailView, M
 from apps.views import (StreamDeleteView, SearchPageView, FavoriteView, SettingsView,
                         AdminStatisticsPage)
 
+operator_urls = [
+    path('operator/', OperatorPageView.as_view(), name='operator'),
+    path('operator/my-order', MyOrderPageView.as_view(), name='my_order')
+]
+
 urlpatterns = [
     path('', MainPageView.as_view(), name='main_page_view'),
     path('search', csrf_exempt(SearchPageView.as_view()), name='search_page_view'),
@@ -38,7 +43,5 @@ urlpatterns = [
     path('admin/statistics', AdminStatisticsPage.as_view(), name='admin_statistics'),
 
     path('bot', csrf_exempt(UpdateBot.as_view()), name='bot'),
+] + operator_urls
 
-    path('operator/', OperatorPageView.as_view(), name='operator'),
-    path('operator/my-order', MyOrderPageView.as_view(), name='my_order')
-]

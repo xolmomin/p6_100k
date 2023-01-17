@@ -34,7 +34,7 @@
                                     </p>
 
                                     <div class="form-group">
-                                        <input type="text" value="{{ url }}/stream/{{ stream.id }}" readonly
+                                        <input type="text" value="{{ request.get_host }}/stream/{{ stream.id }}" readonly
                                                class="ref_link form-control" id="{{ stream.id }}">
                                     </div>
 

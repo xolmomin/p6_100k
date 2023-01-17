@@ -21,7 +21,7 @@ class MainPageView(TemplateView):
 
 class StreamPageListView(LoginRequiredMixin, ListView, UpdateView):
     template_name = 'apps/admin/stream.html'
-    queryset = Stream.objects.order_by('id').all()
+    queryset = Stream.objects.order_by('id')
     form_class = UpdateStreamForm
     object = Stream
     context_object_name = 'streams'
@@ -33,6 +33,7 @@ class StreamPageListView(LoginRequiredMixin, ListView, UpdateView):
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
+        # self.get_object()
         id = int(request.POST['id'])
         Stream.objects.filter(id=id).update(is_area=Case(
             When(is_area=True, then=Value(False)),
@@ -44,7 +45,6 @@ class StreamPageListView(LoginRequiredMixin, ListView, UpdateView):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context['url'] = get_current_site(self.request)
         return context
-
 
 
 class StreamDeleteView(TemplateView):

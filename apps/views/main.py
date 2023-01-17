@@ -12,7 +12,6 @@ class MainPageView(ListView, FormView):
     template_name = 'apps/index.html'
     queryset = Category.objects.all()
     context_object_name = 'categories'
-    form_class = OrderForm
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)

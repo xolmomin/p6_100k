@@ -3,11 +3,13 @@ from django.forms import ModelForm, IntegerField
 
 from apps.models import Order, Stream
 
+
 class OrderForm(ModelForm):
+    stream = IntegerField(required=False)
 
     class Meta:
         model = Order
-        exclude = ('status',)
+        exclude = ('status', 'operator')
 
 
 class CreateStreamForm(ModelForm):

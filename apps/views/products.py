@@ -3,6 +3,7 @@ import urllib
 from urllib.parse import urlencode
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import F
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
@@ -33,11 +34,6 @@ class ProductDetailView(FormView, DetailView):
     context_object_name = 'product'
     form_class = CreateCommentForm
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(object_list=object_list, **kwargs)
-        context['comment'] = Comment.objects.filter(product__slug=self.request.path.split('/')[-1])
-        return context
-
     def get(self, request, *args, **kwargs):
         stream_id = self.request.GET.get('stream')
         if stream_id:
@@ -59,7 +55,7 @@ class ProductDetailView(FormView, DetailView):
         return redirect('product_detail', slug)
 
 
-class ProductOrderView(MainPageView, FormView):
+class ProductOrderView(FormView):
     template_name = 'apps/index.html'
     form_class = OrderForm
     success_url = reverse_lazy('order')
@@ -94,13 +90,18 @@ class FavoriteListView(LoginRequiredMixin, ListView):
 
     def post(self, request, *args, **kwargs):
         body_unicode = request.body.decode('utf-8')
+
         body = json.loads(body_unicode)
         id = body['id']
-        b = True
-        if id:
-            try:
-                Favorite.objects.get(product_id=id).delete()
-            except:
-                pr = Favorite.objects.create(product_id=id, user=request.user)
-                b = False
-        return JsonResponse({'b': b})
+        favorite, created = Favorite.objects.get_or_create(product_id=id, user=request.user)
+        if not created:
+            favorite.delete()
+        #
+        # b = True
+        # if id:
+        #     try:
+        #         Favorite.objects.get(product_id=id).delete()
+        #     except:
+        #         pr = Favorite.objects.create(product_id=id, user=request.user)
+        #         b = False
+        return JsonResponse({'created': created})

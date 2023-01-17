@@ -28,8 +28,6 @@ class StreamPageListView(LoginRequiredMixin, ListView, UpdateView):
     paginate_by = 18
 
     def get(self, request, *args, **kwargs):
-        # id = int(request.GET['id'])
-        # Stream.objects.filter(id=id).delete()
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
@@ -53,8 +51,8 @@ class StreamDeleteView(TemplateView):
     success_url = reverse_lazy('stream_page_view')
 
     def get(self, request, *args, **kwargs):
-        id = int(request.GET['id'])
-        Stream.objects.filter(id=id).delete()
+        _id = int(request.GET['id'])
+        Stream.objects.filter(id=_id).delete()
         return super().get(request, *args, **kwargs)
 
 

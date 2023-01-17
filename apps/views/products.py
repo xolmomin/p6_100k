@@ -1,5 +1,4 @@
 import json
-import urllib
 from urllib.parse import urlencode
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -11,9 +10,8 @@ from django.views import View
 from django.views.generic import FormView, DetailView, ListView
 
 from apps.forms import CreateCommentForm, OrderForm
-from apps.models import Product, Comment, Category, Stream
+from apps.models import Product, Category, Stream, Region
 from apps.models.users import Favorite
-from apps.views import MainPageView
 
 
 class GetStreamView(View):
@@ -34,9 +32,13 @@ class ProductDetailView(FormView, DetailView):
     context_object_name = 'product'
     form_class = CreateCommentForm
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['regions'] = Region.objects.all()
+        return context
+
     def get(self, request, *args, **kwargs):
-        stream_id = self.request.GET.get('stream')
-        if stream_id:
+        if stream_id := self.request.GET.get('stream'):
             Stream.objects.filter(pk=stream_id).update(views=F('views') + 1)
         return super().get(request, *args, **kwargs)
 
@@ -55,7 +57,7 @@ class ProductDetailView(FormView, DetailView):
         return redirect('product_detail', slug)
 
 
-class ProductOrderView(FormView):
+class OrderView(FormView):
     template_name = 'apps/index.html'
     form_class = OrderForm
     success_url = reverse_lazy('order')
@@ -92,16 +94,8 @@ class FavoriteListView(LoginRequiredMixin, ListView):
         body_unicode = request.body.decode('utf-8')
 
         body = json.loads(body_unicode)
-        id = body['id']
-        favorite, created = Favorite.objects.get_or_create(product_id=id, user=request.user)
+        _id = body['id']
+        favorite, created = Favorite.objects.get_or_create(product_id=_id, user=request.user)
         if not created:
             favorite.delete()
-        #
-        # b = True
-        # if id:
-        #     try:
-        #         Favorite.objects.get(product_id=id).delete()
-        #     except:
-        #         pr = Favorite.objects.create(product_id=id, user=request.user)
-        #         b = False
         return JsonResponse({'created': created})

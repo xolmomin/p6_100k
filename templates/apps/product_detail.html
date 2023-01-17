@@ -99,20 +99,9 @@
 
                                             <select required="true" class="form-control" name="region">
                                                 <option value="1" selected="selected">Hududni tanlang ⬇</option>
-{#                                                <option value="Toshkent shahri">Toshkent shahri</option>#}
-{#                                                <option value="Andijon">Andijon</option>#}
-{#                                                <option value="Buxoro">Buxoro</option>#}
-{#                                                <option value="Fargona">Fargona</option>#}
-{#                                                <option value="Jizzax">Jizzax</option>#}
-{#                                                <option value="Namangan">Namangan</option>#}
-{#                                                <option value="Navoiy">Navoiy</option>#}
-{#                                                <option value="Qashqadaryo">Qashqadaryo</option>#}
-{#                                                <option value="Qoraqalpogiston">Qoraqalpogiston</option>#}
-{#                                                <option value="Samarqand">Samarqand</option>#}
-{#                                                <option value="Sirdaryo">Sirdaryo</option>#}
-{#                                                <option value="Surxondaryo">Surxondaryo</option>#}
-{#                                                <option value="Toshkent viloyati">Toshkent viloyati</option>#}
-{#                                                <option value="Xorazm">Xorazm</option>#}
+                                                {% for region in regions %}
+                                                    <option value="{{ region.pk }}">{{ region.name }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     </div>
@@ -142,7 +131,6 @@
                             </div>
                         </div>
                     </div>
-
                 </form>
             </div>
 
@@ -264,7 +252,7 @@
                 <h3 class="comment-title"><span>{{ post.comment_count }} comment</span></h3>
             {% endif %}
             <div class="post-footer__comment__detail">
-                {% for comment in comments|slice:3 %}
+                {% for comment in product.comment_set.all|slice:3 %}
                     <div class="comment__item">
                         <div class="comment__item__avatar">
                             <img src="{{ user.image.url }}"

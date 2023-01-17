@@ -42,16 +42,16 @@ class Category(Model):
 
 class Comment(BaseModel):
     class Rate(IntegerChoices):
-        Ajoyib = 1, 'Ajoyib'
-        Yaxshi = 2, 'Yaxshi'
-        Qoniqarli = 3, 'Qoniqarli'
-        Yomon = 4, 'Yomon'
-        Judayomon = 5, 'Judayomon'
+        GREAT = 1, 'Ajoyib'
+        GOOD = 2, 'Yaxshi'
+        SATISFACTORY = 3, 'Qoniqarli'
+        BAD = 4, 'Yomon'
+        TOO_BAD = 5, 'Judayomon'
 
     name = CharField(max_length=255)
     content = TextField()
     status = BooleanField(default=False)
-    rate = CharField(max_length=25, choices=Rate.choices, default=Rate.Qoniqarli)
+    rate = CharField(max_length=25, choices=Rate.choices, default=Rate.SATISFACTORY)
     product = ForeignKey('apps.Product', CASCADE)
 
     def __str__(self):

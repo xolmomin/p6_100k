@@ -70,11 +70,11 @@ class Favorite(Model):
 
 class Ticket(BaseModel):
     class SenderTextChoice(TextChoices):
-        XARIDOR = 'customer', 'xaridor'
-        KURYER = 'kuryer', 'kuryer'
+        CUSTOMER = 'customer', 'xaridor'
+        COURIER = 'courier', 'kuryer'
         ADMIN = 'admin', 'admin'
-        SOTUVCHI = 'salesman', 'sotuvchi'
-        BOSHQA = 'other', 'boshqa'
+        SALESMAN = 'salesman', 'sotuvchi'
+        OTHER = 'other', 'boshqa'
 
     class PurposeTextChoice(TextChoices):
         ISSUE = 'issue', 'muammo'

@@ -1,5 +1,5 @@
 from django.db.models import Model, CharField, IntegerField, DateTimeField, SlugField, ForeignKey, CASCADE, \
-    BooleanField, TextField, ImageField, TextChoices, FileField, SET_NULL
+    BooleanField, TextField, ImageField, TextChoices, FileField, SET_NULL, DecimalField
 from django.utils.text import slugify
 
 from apps.models.base import BaseModel
@@ -8,10 +8,10 @@ from apps.models.base import BaseModel
 class Product(Model):
     title = CharField(max_length=255)
     description = TextField(null=True, blank=True)
-    price = IntegerField()
+    price = DecimalField(max_digits=9, decimal_places=2)
     bonus = IntegerField()
     reserve = IntegerField()
-    video = FileField(upload_to='product/', null=True, blank=True)
+    video = FileField(upload_to='products/', null=True, blank=True)
     free_delivery = BooleanField(default=False)
     store = ForeignKey('apps.Store', CASCADE)
     category = ForeignKey('apps.Category', CASCADE)
@@ -55,20 +55,23 @@ class ProductImage(Model):
 
 class Order(BaseModel):
     class Status(TextChoices):
-        YANGI = 'Yangi'
-        QABUL = 'Qabul qilindi'
-        YETKAZILMOQDA = 'Yetkazilmoqda'
-        YETKAZILDI = 'Yetkazib berildi'
-        QAYTA = 'Qayta qo\'ng\'iroq'
-        SPAM = 'Spam'
-        HOLD = 'Hold'
-        ARXIV = 'Arxivlandi'
+        NEW = 'new', 'Yangi'
+        ACCEPTED = 'accepted', 'Qabul qilindi'
+        SHIPPING = 'shipping', 'Yetkazilmoqda'
+        DELIVERED = 'delivered' 'Yetkazib berildi'
+        CALLBACK = 'callback', "Qayta qo'ng'iroq"
+        SPAM = 'spam', 'Spam'
+        HOLD = 'hold', 'Hold'
+        ARXIV = 'arxiv', 'Arxivlandi'
 
     name = CharField(max_length=255)
-    region = ForeignKey('apps.Region', SET_NULL, null=True, blank=True)
-    address = CharField(max_length=255, null=True, blank=True)
     phone = CharField(max_length=25)
-    status = CharField(max_length=20, choices=Status.choices, default=Status.YANGI)
+    status = CharField(max_length=50, choices=Status.choices, default=Status.NEW)
+    address = CharField(max_length=255, null=True, blank=True)
+    region = ForeignKey('apps.Region', SET_NULL, null=True, blank=True)
     product = ForeignKey('apps.Product', SET_NULL, null=True)
     operator = ForeignKey('apps.User', SET_NULL, null=True)
     stream = ForeignKey('apps.Stream', SET_NULL, null=True)
+
+    class Meta:
+        ordering = ('-created_at',)

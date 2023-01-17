@@ -1,15 +1,12 @@
 mig:
 	python3 manage.py makemigrations
 	python3 manage.py migrate
+	@echo 'Migrate qilindi.'
 
-user:
-	python3 manage.py shell -c "from apps.models import User; User.objects.create_superuser('admin1', '1')"
+dummy:
+	python3 manage.py createdummydata -c 10 -s 5 -p 1000
 
-#username := admin1
-#email := admin@gmail.com
-#password := 1
-#
-#user:
-#	python3 manage.py createsuperuser --username=$(username) --email=$(email)
-#	@echo -p $(password)
-#	@echo $(password)
+load:
+	python3 manage.py loaddata region
+	python3 manage.py loaddata district
+	@echo 'Regions and districts added'

@@ -1,11 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Count
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, FormView
 
 from apps.forms.products import CreateStreamForm
-from apps.utils import statistic_query
 from apps.models import Product, Category, Contact, Stream, Order
+from apps.utils import statistic_query
 
 
 class MarketListView(LoginRequiredMixin, ListView, CreateView, FormView):

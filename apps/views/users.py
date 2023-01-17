@@ -10,7 +10,7 @@ from django.views.generic import FormView, UpdateView, ListView, TemplateView
 from apps.forms import ProfileModelForm, FavoriteModelForm
 from apps.models import User, District, Region
 from apps.utils import validate_phone
-from apps.utils.token import bot_activation_token
+from apps.utils.token import token_generator
 from root import settings
 from root.settings import FAKE_VERIFICATION
 
@@ -43,7 +43,8 @@ class SettingsView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['activation_token'] = bot_activation_token.make_token(self.request.user)
+        user = self.request.user
+        context['activation_token'] = token_generator(user.pk, user.date_joined)
         context['bot_user'] = settings.BOT_USER
         context['regions'] = Region.objects.all().order_by('name')
         return context

@@ -1,6 +1,6 @@
 from uuid import uuid4
 
-from django.db.models import Model, DecimalField, ForeignKey, CharField, TextChoices, CASCADE, DateTimeField
+from django.db.models import DecimalField, ForeignKey, CharField, TextChoices, CASCADE
 
 from apps.models.base import BaseModel
 

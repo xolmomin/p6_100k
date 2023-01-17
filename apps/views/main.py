@@ -4,8 +4,7 @@ from django.http import JsonResponse
 from django.views import View
 from django.views.generic import ListView, FormView, TemplateView
 
-from apps.forms import OrderForm
-from apps.models import Product, Category, Contact, Favorite
+from apps.models import Product, Category, Favorite
 
 
 class MainPageView(ListView, FormView):

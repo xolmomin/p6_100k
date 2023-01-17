@@ -45,8 +45,6 @@ class StreamPageListView(LoginRequiredMixin, ListView, UpdateView):
         context['url'] = get_current_site(self.request)
         return context
 
-    def form_valid(self, form):
-        return super().form_valid(form)
 
 
 class StreamDeleteView(TemplateView):

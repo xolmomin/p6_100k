@@ -6,14 +6,16 @@ from apps.models import Stream
 
 
 class OrderForm(ModelForm):
+
     class Meta:
         model = ProductOrders
-        exclude = ()
+        exclude = ('status',)
 
 
 class CreateStreamForm(ModelForm):
     donation = IntegerField(required=False)
     reduce = IntegerField(required=False)
+    views = IntegerField(required=False)
 
     class Meta:
         model = Stream

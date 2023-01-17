@@ -1,8 +1,11 @@
+from django.db import connection
+from django.db.models import Count
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, FormView, TemplateView
+from django.views.generic import ListView, DetailView, CreateView, FormView
 
 from apps.forms.products import CreateStreamForm
-from apps.models import Product, Category, Contact, Stream
+from apps.models import Product, Category, Contact, Stream, ProductOrders
+from apps.utils import statistic_query
 
 
 class MarketListView(ListView, CreateView, FormView):
@@ -58,5 +61,30 @@ class ContactsView(ListView):
     model = Contact
 
 
-class AdminStatisticsPage(TemplateView):
+class AdminStatisticsPage(ListView):
     template_name = 'apps/admin/statistics_page.html'
+    model = ProductOrders
+
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        l = []
+        f = self.request.GET.get('search', '')
+        k = statistic_query(f)
+        for i in k:
+            d = {'name': i[0], 'yangi': i[1], 'qabul': i[2],
+                 'yetkazilmoqda': i[3], 'yetqazib': i[4],
+                 'qayta_tel': i[5], 'spam': i[6],
+                 'qaytdi': i[7], 'hold': i[8],
+                 'arxivlandi': i[9], 'tashrif': i[10]}
+            l.append(d)
+        context['orders'] = l
+        k = tuple(zip(*k))
+        context['jami'] = {'yangi': sum(k[1]), 'qabul': sum(k[2]),
+                           'yetkazilmoqda': sum(k[3]), 'yetqazib': sum(k[4]),
+                           'qayta_tel': sum(k[5]), 'spam': sum(k[6]),
+                           'qaytdi': sum(k[7]), 'hold': sum(k[8]),
+                           'arxivlandi': sum(k[9]), 'jami': sum(k[10])}
+        return context

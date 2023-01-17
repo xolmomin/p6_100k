@@ -132,15 +132,8 @@
                                                onclick='onClickLike({{ product.id }})'
 
                                                data-request-flash href="javascript:">
-                                                <span class="fa-heart far" id="span"></span>
+                                                <span class="fa-heart far {% if product.id in user.favorites_id %} fa {% endif %} " id="span"></span>
                                             </a>
-                                            {#                                            <a class="sk-btn sk-btn--secondary sk-btn--outlined" style="font-size:24px;"#}
-                                            {#                                               onclick="FB.AppEvents.logEvent(&quot;productMarked&quot;)"#}
-                                            {#                                               data-request="onBookmark" data-request-data="id: 1023"#}
-                                            {#                                               data-request-success="$(this).find('span').toggleClass('fa')"#}
-                                            {#                                               data-request-flash="" href="javascript:">#}
-                                            {#                                                <span class="fa-heart far fa" aria-hidden="true"></span>#}
-                                            {#                                            </a>#}
                                         </div>
                                     </div>
                                 </div>

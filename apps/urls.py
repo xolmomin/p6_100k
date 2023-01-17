@@ -25,7 +25,7 @@ urlpatterns = [
     path('settings', SettingsView.as_view(), name='settings'),
     path('profile/', ProfileView.as_view(), name='profile_page'),
     path('order/', ProductOrderView.as_view(), name='order'),
-    path('oqim/<int:pk>', GetStreamView.as_view(), name='get_stream_view'),
+    path('stream/<int:pk>', GetStreamView.as_view(), name='get_stream_view'),
     path('admin-page', AdminPageView.as_view(), name='admin_page'),
     path('admin/profile/get-destricts', csrf_exempt(DistrictsView.as_view()), name='get_districts'),
     path('admin/streams', StreamPageListView.as_view(), name='stream_page_view'),
@@ -33,7 +33,7 @@ urlpatterns = [
     path('admin/withdraw', csrf_exempt(WithdrawView.as_view()), name='withdraw'),
     path('admin/market', MarketListView.as_view(), name='market'),
     path('admin/product/<int:pk>', AdminProductDetailView.as_view(), name='admin_product_detailview'),
-    path('admin/statistics', AdminStatisticsPage.as_view(), name='admin_statistics'),
+    path(r'admin/statistics', AdminStatisticsPage.as_view(), name='admin_statistics'),
 
     path('bot', csrf_exempt(UpdateBot.as_view()), name='bot'),
 

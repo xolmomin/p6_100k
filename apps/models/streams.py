@@ -1,4 +1,4 @@
-from django.db.models import BooleanField, Model, ForeignKey, CharField, CASCADE, PositiveIntegerField
+from django.db.models import BooleanField, Model, ForeignKey, CharField, CASCADE, PositiveIntegerField, IntegerField
 from django_resized import ResizedImageField
 
 
@@ -8,6 +8,7 @@ class Stream(Model):
     reduce = PositiveIntegerField(default=0)  # narxini kamaytirish uchun mablag`
     user = ForeignKey('apps.User', CASCADE)  # oqim yaratgan foydalanuchi
     product = ForeignKey('apps.Product', CASCADE)  # oqim uchun mahsulot
+    views = IntegerField(default=0)  # ko`rilgan oqimlar soni
     is_area = BooleanField(default=False)  # hududsiz qabul qilish
 
 

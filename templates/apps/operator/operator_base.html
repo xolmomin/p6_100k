@@ -71,10 +71,11 @@
         }
     </style>
 
-    {% block styles %}
-    {% endblock %}
+    {% block styles %}{% endblock %}
+    <!-- seo meta tags -->
     <title></title>
     <meta name="description" content="">
+
 
 </head>
 <body>
@@ -82,60 +83,6 @@
     <div class="container">
         <nav class="header_navbar">
             <a href="{% url 'main_page_view' %}" class="header_navbar_brand_logo d-none d-md-block ">100k.uz </a>
-            <a href="{% url 'admin_page' %}" class="header_navbar_brand_back d-md-none"> <span
-                    class="icon-arrow"></span> </a>
-            <a href="{% url 'market' %}" class="header_navbar_brand_name d-md-none"> Admin market </a>
-            <div class="header_navbar_collapse">
-                <ul class="header_navbar_collapse_nav">
-                    <li class="header_navbar_collapse_nav_item">
-                        <div class="header_navbar_collapse_nav_item_pad">
-                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'admin-page' %}active{% endif %}"
-                               href="{% url 'admin_page' %}">
-                                <span class="fa fa-tachometer"></span>
-                                <p>Dashboard</p></a>
-                        </div>
-                    </li>
-
-                    <li class="header_navbar_collapse_nav_item">
-                        <div class="header_navbar_collapse_nav_item_pad">
-                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'market' %}active{% endif %}"
-                               href="{% url 'market' %}">
-                                <span class="fas fa-store"></span>
-                                <p>Market</p>
-                            </a>
-                        </div>
-                    </li>
-
-                    <li class="header_navbar_collapse_nav_item">
-                        <div class="header_navbar_collapse_nav_item_pad">
-                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'streams' %}active{% endif %}"
-                               href="{% url 'stream_page_view' %}">
-                                <span class="fa fa-link"></span>
-                                <p>Oqim</p>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="header_navbar_collapse_nav_item">
-                        <div class="header_navbar_collapse_nav_item_pad">
-                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'statistics' %}active{% endif %}"
-                               href="{% url 'admin_statistics' %}">
-                                <span class="fas fa-chart-line"></span>
-                                <p>Statistika</p>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="header_navbar_collapse_nav_item">
-                        <div class="header_navbar_collapse_nav_item_pad">
-                            <a class="header_navbar_collapse_nav_item_link {% if request.path|is_active:'withdraw' %}active{% endif %}"
-                               href="{% url 'withdraw' %}">
-                                <span class="fas fa-money-bill-alt"></span>
-                                <p> To'lov </p>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
             <div class="header_navbar_profile">
                 <div class="d-flex align-items-center dropdown">
                     <a class="btn nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -143,22 +90,11 @@
                         <img src="{{ user.image_url }}"
                              alt="profile"/>
                     </a>
-
                     <div class="dropdown-menu dropdown-menu-right header_navbar_lang_menu_dropdown">
-                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'profile_page' %}">
-                            Profil </a>
-
-                        <a class="d-none dropdown-item header_navbar_lang_menu_dropdown_item" href="#">
-                            Bonus xarid qilish </a>
-                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'favorite' %}">
-                            Mening
-                            sevimlilarim </a>
-                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'operator' %}">Operatorlar
+                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'admin_page' %}">Adminlar
                             uchun</a>
-                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'profile_page' %}">
-                            Sozlamalar </a>
                         <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
-                           href="{% url 'logout' %}"> Chiqish </a>
+                           href="{% url 'admin_page' %}"> Chiqish </a>
                     </div>
                 </div>
             </div>
@@ -172,7 +108,7 @@
 <script src="https://unpkg.com/imask"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 
 
@@ -185,8 +121,9 @@
 
 <script>
     function myFunction(id) {
-        let title = document.getElementById(`product_title_${id}`).value;
-        let price = document.getElementById(`product_price_${id}`).value;
+        // Get the text field
+        var title = document.getElementById(`product_title_${id}`).value;
+        var price = document.getElementById(`product_price_${id}`).value;
         $('#title').html(title);
         $('#price').html(price);
         document.getElementById('product_id').value = id;
@@ -214,6 +151,7 @@
                 this.el.classList.add(`toast--${state}`);
             }
             this.hideTimeout = setTimeout(() => {
+                {#this.el.classList.remove('toast-visible');#}
                 this.el.className = `toast toast--${state}`;
             }, 3000);
         }
@@ -224,7 +162,7 @@
 
 <script>
     $(".card-body .copy_ref_bn").on('click', function () {
-        let copyText = $(this).parent().find('.ref_link').get(0);
+        var copyText = $(this).parent().find('.ref_link').get(0);
         copyText.select();
         document.execCommand("copy");
         $(this).text('Nusxa olindi');
@@ -233,10 +171,15 @@
 
 <script>
     function myFunctionCopy(id) {
-        let copyText = document.getElementById(id);
+        // Get the text field
+        var copyText = document.getElementById(id);
+        // Select the text field
         copyText.select();
-        copyText.setSelectionRange(0, 99999);
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text inside the text field
         navigator.clipboard.writeText(copyText.value);
+
     }
 
     function areaChange(id) {
@@ -259,7 +202,7 @@
     }
 
     function areaDelete(id) {
-        let result = confirm("Diqqat! Ochirilgan oqimni tiklab bo'lmaydi?");
+        var result = confirm("Diqqat! Ochirilgan oqimni tiklab bo'lmaydi?");
         if (result) {
             $.ajax({
                 url: "/admin/delete-stream",
@@ -294,6 +237,9 @@
             }
         });
     }
+
+
 </script>
+
 </body>
 </html>

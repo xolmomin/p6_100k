@@ -64,7 +64,6 @@ class ProductImage(Model):
 
 class ProductOrders(Model):
     class OrderStatus(TextChoices):
-        TASHRIF = 'Tashrif'
         YANGI = 'Yangi'
         QABUL = 'Qabul qilindi'
         YETKAZILMOQDA = 'Yetkazilmoqda'

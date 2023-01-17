@@ -1,6 +1,7 @@
 from django.contrib.auth.views import LogoutView
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import TemplateView
 
 from apps.bot import UpdateBot
 from apps.views import (ExploreProductsView, StreamDeleteView, SearchPageView, ProductOrderView, FavoriteListView)
@@ -36,5 +37,7 @@ urlpatterns = [
     path(r'admin/statistics', AdminStatisticsPage.as_view(), name='admin_statistics'),
 
     path('bot', csrf_exempt(UpdateBot.as_view()), name='bot'),
+
+    path('moderator/', TemplateView.as_view(template_name='apps/moderator/test.html'), name='moderator')
 
 ]

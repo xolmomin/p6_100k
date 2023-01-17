@@ -12,7 +12,6 @@ class Stream(Model):
     is_area = BooleanField(default=False)  # hududsiz qabul qilish
 
 
-
 class Store(Model):
     image = ResizedImageField(size=[300, 300], crop=['middle', 'center'], upload_to='shops')
     name = CharField(max_length=255)

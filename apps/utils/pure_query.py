@@ -20,5 +20,6 @@ def statistic_query(f: str):
                                     JOIN apps_productorders a on ap.id = a.product_id
                             WHERE st.name ilike '{f}%'
                            GROUP BY st.name, st.views, a.status) as table1
-                        GROUP BY table1.name''')
+                        GROUP BY table1.name
+                        ORDER BY table1.name''')
     return cursor.fetchall()

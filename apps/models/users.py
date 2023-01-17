@@ -48,6 +48,8 @@ class User(AbstractUser):
         if self.favorite_set.exists():
             return self.favorite_set.values_list('product_id', flat=True)
         return False
+
+
 class Contact(Model):
     phone = CharField(max_length=255)
     email = EmailField(max_length=255)

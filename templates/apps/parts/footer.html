@@ -5,18 +5,10 @@
             <div class="col-lg col-sm-6">
                 <ul class="nav flex-column">
                     <li>
-                        <a href="/profile" class="nav-link"> Mening kabinetim </a>
+                        <a href="{% url 'profile_page' %}" class="nav-link"> Mening kabinetim </a>
                     </li>
                     <li>
-                        <a href="/shop/favorite" class="nav-link">Mening sevimlilarim</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-lg col-sm-6">
-                <ul class="nav flex-column">
-                    <li>
-                        <a href="/pages/about" class="nav-link"> Biz haqimizda </a>
+                        <a href="{% url 'favorite' %}" class="nav-link">Mening sevimlilarim</a>
                     </li>
                 </ul>
             </div>
@@ -24,7 +16,7 @@
             <div class="col-lg col-sm-6">
                 <ul class="nav flex-column">
                     <li>
-                        <a href="/pages/contacts" class="nav-link"> Aloqa uchun </a>
+                        <a href="{% url 'contacts' %}" class="nav-link"> Biz haqimizda </a>
                     </li>
                 </ul>
             </div>
@@ -32,7 +24,15 @@
             <div class="col-lg col-sm-6">
                 <ul class="nav flex-column">
                     <li>
-                        <a href="/pages/privacy-policy" target="_blank" class="nav-link">Ommaviy oferta</a>
+                        <a href="{% url 'contacts' %}" class="nav-link"> Aloqa uchun </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg col-sm-6">
+                <ul class="nav flex-column">
+                    <li>
+                        <a href="#" target="_blank" class="nav-link">Ommaviy oferta</a>
                     </li>
                 </ul>
             </div>
@@ -41,13 +41,9 @@
     <div>
         <div class="container py-2">
             <div class="row">
-                <div class="col-auto">
-                    2016-2021 - 100K.UZ
-                </div>
+                <div class="col-auto">2022-2023 - 100K.UZ</div>
                 <div class="col"></div>
-                <div class="col-auto">
-                    Barcha huquqlar himoyalangan
-                </div>
+                <div class="col-auto">Barcha huquqlar himoyalangan</div>
             </div>
         </div>
     </div>

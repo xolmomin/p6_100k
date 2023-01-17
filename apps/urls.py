@@ -4,7 +4,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
 
 from apps.bot import UpdateBot
-from apps.views import (ExploreProductsView, StreamDeleteView, SearchPageView, ProductOrderView, FavoriteListView)
+from apps.views import (ExploreProductsView, StreamDeleteView, SearchPageView, ProductOrderView, FavoriteListView,
+                        OperatorPageView, MyOrderPageView)
 from apps.views import ProfileView, AdminProductDetailView, ProductDetailView, MainPageView, WithdrawView, \
     MarketListView, StreamPageListView, AdminPageView, ContactsView, StoreDetailView, ProfileLoginView, \
     ExploreProductsView, CategoryDetail, DistrictsView, ProductOrderView, GetStreamView
@@ -34,10 +35,10 @@ urlpatterns = [
     path('admin/withdraw', csrf_exempt(WithdrawView.as_view()), name='withdraw'),
     path('admin/market', MarketListView.as_view(), name='market'),
     path('admin/product/<int:pk>', AdminProductDetailView.as_view(), name='admin_product_detailview'),
-    path(r'admin/statistics', AdminStatisticsPage.as_view(), name='admin_statistics'),
+    path('admin/statistics', AdminStatisticsPage.as_view(), name='admin_statistics'),
 
     path('bot', csrf_exempt(UpdateBot.as_view()), name='bot'),
 
-    path('moderator/', TemplateView.as_view(template_name='apps/moderator/test.html'), name='moderator')
-
+    path('operator/', OperatorPageView.as_view(), name='operator'),
+    path('operator/my-order', MyOrderPageView.as_view(), name='my_order')
 ]

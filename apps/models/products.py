@@ -1,6 +1,8 @@
 from django.db.models import Model, CharField, IntegerField, DateTimeField, SlugField, ForeignKey, CASCADE, \
-    BooleanField, TextField, ImageField, TextChoices, FileField
+    BooleanField, TextField, ImageField, TextChoices, FileField, SET_NULL
 from django.utils.text import slugify
+
+from apps.models.base import BaseModel
 
 
 class Product(Model):
@@ -15,17 +17,6 @@ class Product(Model):
     category = ForeignKey('apps.Category', CASCADE)
     slug = SlugField(max_length=255, unique=True)
     created_at = DateTimeField(auto_now_add=True)
-
-    class Meta:
-        verbose_name = "Product"
-        verbose_name_plural = "Products"
-
-    def json(self):
-        return {
-            'id': self.id,
-            'title': self.title,
-            'description': self.description
-        }
 
     @property
     def stream_count(self):
@@ -62,8 +53,8 @@ class ProductImage(Model):
     image = ImageField(upload_to='image/', default='media/product-default.jpg')
 
 
-class ProductOrders(Model):
-    class OrderStatus(TextChoices):
+class Order(BaseModel):
+    class Status(TextChoices):
         YANGI = 'Yangi'
         QABUL = 'Qabul qilindi'
         YETKAZILMOQDA = 'Yetkazilmoqda'
@@ -74,10 +65,10 @@ class ProductOrders(Model):
         ARXIV = 'Arxivlandi'
 
     name = CharField(max_length=255)
-    region = CharField(max_length=255)
+    region = ForeignKey('apps.Region', SET_NULL, null=True, blank=True)
+    address = CharField(max_length=255, null=True, blank=True)
     phone = CharField(max_length=25)
-    status = CharField(max_length=20, choices=OrderStatus.choices, default=OrderStatus.YANGI)
-    product = ForeignKey('apps.Product', CASCADE)
-    operator = ForeignKey('apps.User', CASCADE, null=True)
-    stream = ForeignKey('apps.Stream', CASCADE, null=True)
-    created_at = DateTimeField(auto_now_add=True)
+    status = CharField(max_length=20, choices=Status.choices, default=Status.YANGI)
+    product = ForeignKey('apps.Product', SET_NULL, null=True)
+    operator = ForeignKey('apps.User', SET_NULL, null=True)
+    stream = ForeignKey('apps.Stream', SET_NULL, null=True)

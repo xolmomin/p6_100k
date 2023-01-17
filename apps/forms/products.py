@@ -1,14 +1,12 @@
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm, IntegerField
 
-from apps.models import ProductOrders
-from apps.models import Stream
-
+from apps.models import Order, Stream
 
 class OrderForm(ModelForm):
 
     class Meta:
-        model = ProductOrders
+        model = Order
         exclude = ('status',)
 
 

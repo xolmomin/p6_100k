@@ -4,7 +4,7 @@ from django.views import View
 from telebot.types import ReplyKeyboardMarkup
 
 from apps.models import User
-from apps.models.users import Tickets
+from apps.models.users import Ticket
 from root import settings
 
 bot = telebot.TeleBot(settings.BOT_TOKEN)

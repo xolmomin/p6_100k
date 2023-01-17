@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView, FormView
 
 from apps.forms.products import CreateStreamForm
 from apps.utils import statistic_query
-from apps.models import Product, Category, Contact, Stream, ProductOrders
+from apps.models import Product, Category, Contact, Stream, Order
 
 
 class MarketListView(LoginRequiredMixin, ListView, CreateView, FormView):
@@ -63,7 +63,7 @@ class ContactsView(ListView):
 
 class AdminStatisticsPage(ListView):
     template_name = 'apps/admin/statistics_page.html'
-    model = ProductOrders
+    model = Order
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)

@@ -1,8 +1,9 @@
 from django.contrib.auth.models import AbstractUser
 from django.db.models import CharField, DecimalField, PositiveIntegerField, Model, EmailField, ForeignKey, CASCADE, \
-    BooleanField, TextChoices, PROTECT, TextField, ManyToManyField
+    BooleanField, TextChoices, PROTECT, TextField, ManyToManyField, SET_NULL
 from django_resized import ResizedImageField
 
+from apps.models.base import BaseModel
 from apps.models.payments import PaymentHistory
 
 
@@ -13,13 +14,12 @@ class User(AbstractUser):
     address = CharField(max_length=555, blank=True, null=True)
     telegram_id = CharField(max_length=55, null=True, blank=True)
     bot_is_activate = BooleanField(default=False)
-    bot_active_token = CharField(max_length=255, unique=True)
     balance = DecimalField(max_digits=30, decimal_places=2, default=0)  # main balance
     bonus = PositiveIntegerField(default=0)  # bonus balance
     deposit = DecimalField(max_digits=30, decimal_places=2, default=0)  # deposit balance
     coin = PositiveIntegerField(default=0)
-    region = CharField(max_length=255, null=True, blank=True)
-    district = CharField(max_length=255, null=True, blank=True)
+    region = ForeignKey('apps.Region', SET_NULL, null=True, blank=True)
+    district = ForeignKey('apps.District', SET_NULL, null=True, blank=True)
     favourite = ManyToManyField('apps.Product', 'favourites')
 
     @property
@@ -68,7 +68,7 @@ class Favorite(Model):
     product = ForeignKey('apps.Product', CASCADE)
 
 
-class Tickets(Model):
+class Ticket(BaseModel):
     class SenderTextChoice(TextChoices):
         XARIDOR = 'customer', 'xaridor'
         KURYER = 'kuryer', 'kuryer'

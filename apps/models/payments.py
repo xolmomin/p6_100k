@@ -2,8 +2,10 @@ from uuid import uuid4
 
 from django.db.models import Model, DecimalField, ForeignKey, CharField, TextChoices, CASCADE, DateTimeField
 
+from apps.models.base import BaseModel
 
-class PaymentHistory(Model):
+
+class PaymentHistory(BaseModel):
     class StatusChoices(TextChoices):
         PENDING = 'pending', 'Kutilmoqda'
         ACCEPTED = 'accepted', "To'lab berildi"
@@ -14,7 +16,6 @@ class PaymentHistory(Model):
     card_number = CharField(max_length=16)
     status = CharField(choices=StatusChoices.choices, default=StatusChoices.PENDING, max_length=10)
     transaction_id = CharField(max_length=255, default=uuid4)
-    created_at = DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = 'Payment'

@@ -6,9 +6,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <form data-request="onStreamSearch"
-                              data-request-update="'admin/streams-table': '#marketStreamList'"
-                              data-request-flash class="request-search-form input-group mb-0 p-4">
+                        <form class="input-group mb-0 p-4"
+                              method="get" action="{% url 'admin_statistics' %}">
+                            {% csrf_token %}
                             <div class="input-group-prepend">
                                 <button class="btn btn-info" style="border: 1px solid #ddd" type="button"
                                         onclick="$('.market-search-input').val(''); $('.request-search-form').submit()"
@@ -23,7 +23,7 @@
                                    data-track-input="500"
                                    data-request-flash/>
                             <div class="input-group-append">
-                                <button class="btn btn-primary" data-attach-loading type="submit" id="button-addon2">
+                                <button class="btn btn-primary" >
                                     Izlash
                                 </button>
                             </div>

@@ -78,4 +78,6 @@ class ProductOrders(Model):
     phone = CharField(max_length=25)
     status = CharField(max_length=20, choices=OrderStatus.choices, default=OrderStatus.YANGI)
     product = ForeignKey('apps.Product', CASCADE)
+    operator = ForeignKey('apps.User', CASCADE, null=True)
+    stream = ForeignKey('apps.Stream', CASCADE, null=True)
     created_at = DateTimeField(auto_now_add=True)

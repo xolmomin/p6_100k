@@ -6,7 +6,9 @@ from apps.bot import UpdateBot
 from apps.views import (ExploreProductsView, CategoryDetail, DistrictsView, OrderView, GetStreamView,
                         StreamDeleteView, SearchPageView, FavoriteView, SettingsView, AdminStatisticsPage,
                         FavoriteListView, ProfileView, AdminProductDetailView, ProductDetailView, MainPageView,
-                        WithdrawView, OperatorPageView, MyOrderPageView, MarketListView, StreamPageListView, StreamUpdateView, AdminPageView, ContactsView, StoreDetailView, ProfileLoginView, AdminRequestsView, AdminDonateView, AdminChartsView, AdminPaymentHistoryView)
+                        WithdrawView, OperatorPageView, MyOrderPageView, MarketListView, StreamPageListView,
+                        AdminPageView, ContactsView, StoreDetailView, ProfileLoginView, AdminRequestsView,
+                        AdminDonateView, AdminChartsView, AdminPaymentHistoryView, StreamUpdateView)
 
 operator_urls = [
     path('operator/main', OperatorPageView.as_view(), name='operator'),

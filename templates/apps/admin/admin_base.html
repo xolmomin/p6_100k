@@ -241,31 +241,46 @@
 
     function areaChange(id) {
         $.ajax({
-            url: "",
-            type: "POST",
-            data: {
-                id: id,
-                csrfmiddlewaretoken: '{{ csrf_token }}'
-            },
-            success: function () {
-                console.log('Success')
-            },
-            error: function () {
-                console.log("Ajax test failure")
-                Toast.show('Hududni tanlash o`zgardi!', 'succes')
-            }
+                url: `/admin/update-stream/${id}`,
+                type: "PUT",
+                data: {
+                    id: id,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function () {
+                    console.log('Success')
+                },
+                error: function () {
+                }
+            })
 
-        })
+        {#$.ajax({#}
+        {#    url: `/admin/update-stream/${id}`,#}
+        {#    type: "PUT",#}
+        {#    data: {#}
+        {#        id: id,#}
+        {#        csrfmiddlewaretoken: '{{ csrf_token }}'#}
+        {#    },#}
+        {#    success: function () {#}
+        {#        console.log('Success')#}
+        {#    },#}
+        {#    error: function () {#}
+        {#        console.log("Ajax test failure")#}
+        {#        Toast.show('Hududni tanlash o`zgardi!', 'succes')#}
+        {#    }#}
+        {##}
+        {#})#}
     }
 
     function areaDelete(id) {
         let result = confirm("Diqqat! Ochirilgan oqimni tiklab bo'lmaydi?");
         if (result) {
             $.ajax({
-                url: "/admin/delete-stream",
-                type: "GET",
+                url: `/admin/delete-stream/${id}`,
+                type: "DELETE",
                 data: {
-                    id: id
+                    id: id,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
                 },
                 success: function () {
                     console.log('Success')
@@ -283,7 +298,7 @@
             type: "GET",
             url: '/my_def_in_view',
             data: {
-                "id": id,
+                "id": id
             },
             dataType: "json",
             success: function (data) {

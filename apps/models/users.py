@@ -39,9 +39,9 @@ class User(AbstractUser):
 
     @property
     def favorites(self):
-        if self.favorite_set.exists():
-            return self.favorite_set.all()
-        return False
+        # if self.favorite_set.exists():
+        return self.favorite_set.all()
+        # return False
 
     @property
     def favorites_id(self):

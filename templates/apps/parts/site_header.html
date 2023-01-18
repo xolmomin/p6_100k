@@ -54,6 +54,8 @@
                     {% if user.is_authenticated %}
                         <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
                            href="{% url 'admin_page' %}"> Adminlar uchun </a>
+                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'operator' %}">Operatorlar
+                            uchun</a>
                     {% endif %}
                     <a class="d-none dropdown-item header_navbar_lang_menu_dropdown_item"
                        href="#"> Bonus </a>

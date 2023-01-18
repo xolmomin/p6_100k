@@ -1,0 +1,155 @@
+{% extends 'apps/admin/admin_base.html' %}
+{% load static %}
+{% block main %}
+    <main class="admin-template">
+        <section class="main">
+
+            <div class="container border-bottom-4">
+                <div class="content_name_block">
+                    <a href="{% url 'admin_page' %}" class="content_name_block_back">
+                        <span class="icon-arrow"></span>
+                    </a>
+                    <div class="content_name_block_text"><p> So'rovlar </p></div>
+                </div>
+            </div>
+
+
+            <div class="container">
+                <div class="content_favorite">
+                    <div class="row">
+                        <div class="col">
+                            <form data-request="onReqeustSearch"
+                                  data-request-update="'admin/requests-table': '#marketRequestList'"
+                                  data-request-flash class="request-search-form input-group mb-0 px-2">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-info" style="border: 1px solid #ddd" type="button"
+                                            onclick="$('.market-search-input').val(''); $('.request-search-form').submit()"
+                                            id="button-addon1">X
+                                    </button>
+                                </div>
+
+                                <input type="text" class="form-control market-search-input" name="search"
+                                       placeholder="So'rovlar bo'yicha qidiruv"
+                                       data-request-update="'admin/requests-table': '#marketRequestList'"
+                                       aria-describedby="button-addon2"
+                                       data-request="onReqeustSearch"
+                                       data-track-input="500"
+                                       data-request-flash/>
+
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" data-attach-loading type="submit"
+                                            id="button-addon2">
+                                        Izlash
+                                    </button>
+                                </div>
+                            </form>
+
+                            <div class="header_tab_menu">
+                                <div class="header_menu" style="overflow: auto">
+
+                                    <a href="/admin/requests/new" class="btn btn-default "> Yangi </a>
+
+                                    <a href="/admin/requests/accepted" class="btn btn-default "> Dostavkaga tayyor </a>
+
+                                    <a href="/admin/requests/sent" class="btn btn-default "> Yetkazilmoqda </a>
+
+                                    <a href="/admin/requests/delivered" class="btn btn-default "> Yetkazib berildi </a>
+
+                                    <a href="/admin/requests/cancelled" class="btn btn-default "> Qaytib keldi </a>
+
+                                    <a href="/admin/requests/pending" class="btn btn-default "> Keyin oladi </a>
+
+                                    <a href="/admin/requests/archived" class="btn btn-default "> Arxiv </a>
+
+                                    <a href="/admin/requests/spam" class="btn btn-default "> Spam </a>
+
+                                    <a href="{% url 'admin_requests' %}" class="btn btn-default active"> Barchasi </a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div id="marketRequestList" class="table-responsive">
+                        <table class="table">
+                            <thead class="thead-light">
+                            <tr class="text-center">
+                                <th scope="col">#</th>
+                                <th scope="col">Mahsulot</th>
+                                <th scope="col">Buyurtmachi / Manzil</th>
+                                <th scope="col">Holat</th>
+                                <th scope="col">Izoh</th>
+                                <th scope="col">Sana</th>
+                                <th scope="col">Oqim</th>
+                            </tr>
+                            </thead>
+
+                            <tbody class="text-center">
+                            <tr style="background-color: rgba(46, 204, 113, 0.3) ">
+                                <td> 1169887 <br> Operator: 53
+
+
+                                </td>
+
+                                <td>
+                                    VIBRA STICK
+
+                                </td>
+
+                                <td><strong>begzad - +9989****8877 </strong> <br> Toshkent shaxar, Mirobod, Oʻziga</td>
+
+                                <td>
+                                    <span class="badge badge-success">Yetqazib berildi</span><br>
+
+
+                                    <br><strong style="color: red">2022-09-08</strong>
+                                </td>
+                                <td>Oladi, #Kuryer: taymer belgiladi. (Mijoz buyurtmani vaqtincha saqlab turishini so&#039;radi),
+                                    #Kuryer: taymer belgiladi. (Mijoz buyurtmani vaqtincha saqlab turishini so&#039;radiMijoz
+                                    buyurtmani vaqtincha saqlab turishini so&#039;radiMijoz buyurtmani vaqtincha saql
+                                </td>
+                                <td><a href="/admin/request-timeline/1169887"> 2 месяца назад </a></td>
+
+                                <td>
+                                    Vibra arzon
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <div style="text-align: center">
+                            <a class="btn disabled " href=""> ← Oldingi sahifa </a>
+                            <strong> &nbsp;&nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp; </strong>
+                            <a class="btn btn-info" href="https://100k.uz/admin/requests?page=2"> Keyingi sahifa → </a>
+                            <hr>
+                            <p class="text-muted"> Ko'rsatilmoqda <strong>1</strong> dan <strong>50</strong> gacha,
+                                jami:
+                                <strong>220</strong> ta so'rov </p>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <style>
+            .header_menu {
+                padding: 12px;
+            }
+
+            .header_menu .btn-default {
+                border: 1px solid #ddd;
+                border-radius: 20px;
+                padding: 10px;
+                font-size: 15px;
+            }
+
+            .header_menu .btn-default.active, .header_menu .btn-default:hover {
+                background-color: #000;
+                color: #fff;
+            }
+        </style>
+    </main>
+{% endblock %}

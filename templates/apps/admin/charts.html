@@ -1,0 +1,293 @@
+{% extends 'apps/admin/admin_base.html' %}
+{% load static %}
+{% block main %}
+    <main class="admin-template">
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+
+        <div class="container" style="padding-top: 60px">
+            <br><br>
+
+            <figure class="highcharts-figure">
+                <div id="container"></div>
+            </figure>
+
+            <script>
+                Highcharts.chart('container', {
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text: 'Oxirgi 30 kunlik sorovlar holati'
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    accessibility: {
+                        point: {
+                            valueSuffix: '%'
+                        }
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.y} ta'
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Brands',
+                        colorByPoint: true,
+                        data: [
+                            {name: 'Yangi sorovlar', y: 0},
+                            {name: 'Qabul qilindi', y: 0},
+                            {name: 'Yetqazilmoqda', y: 0},
+                            {name: 'Yetqazib berildi', y: 0},
+                            {name: 'Qayta qongiroq', y: 0},
+                            {name: 'Arxivlandi', y: 0},
+                            {name: 'Spam', y: 0}
+                        ]
+                    }]
+                });
+            </script>
+
+
+            <style>
+                .highcharts-figure, .highcharts-data-table table {
+                    min-width: 320px;
+                    max-width: 800px;
+                    margin: 1em auto;
+                }
+
+                .highcharts-data-table table {
+                    font-family: Verdana, sans-serif;
+                    border-collapse: collapse;
+                    border: 1px solid #EBEBEB;
+                    margin: 10px auto;
+                    text-align: center;
+                    width: 100%;
+                    max-width: 500px;
+                }
+
+                .highcharts-data-table caption {
+                    padding: 1em 0;
+                    font-size: 1.2em;
+                    color: #555;
+                }
+
+                .highcharts-data-table th {
+                    font-weight: 600;
+                    padding: 0.5em;
+                }
+
+                .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+                    padding: 0.5em;
+                }
+
+                .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+                    background: #f8f8f8;
+                }
+
+                .highcharts-data-table tr:hover {
+                    background: #f1f7ff;
+                }
+
+
+                input[type="number"] {
+                    min-width: 50px;
+                }
+            </style>
+            <br>
+            <hr>
+            <br>
+
+            <figure class="highcharts-figure">
+                <div data-items="[{&quot;name&quot;:&quot;Fargona&quot;,&quot;y&quot;:18},{&quot;name&quot;:&quot;Toshkent viloyati&quot;,&quot;y&quot;:15},{&quot;name&quot;:&quot;Sirdaryo&quot;,&quot;y&quot;:3},{&quot;name&quot;:&quot;Surxondaryo&quot;,&quot;y&quot;:5},{&quot;name&quot;:&quot;Samarqand&quot;,&quot;y&quot;:17},{&quot;name&quot;:&quot;Namangan&quot;,&quot;y&quot;:20},{&quot;name&quot;:&quot;Navoiy&quot;,&quot;y&quot;:38},{&quot;name&quot;:&quot;Qashqadaryo&quot;,&quot;y&quot;:26},{&quot;name&quot;:&quot;Qoraqalpogiston&quot;,&quot;y&quot;:9},{&quot;name&quot;:&quot;Jizzax&quot;,&quot;y&quot;:5},{&quot;name&quot;:&quot;Buxoro&quot;,&quot;y&quot;:13},{&quot;name&quot;:&quot;Andijon&quot;,&quot;y&quot;:9},{&quot;name&quot;:&quot;Toshkent shaxar&quot;,&quot;y&quot;:32},{&quot;name&quot;:&quot;Xorazm&quot;,&quot;y&quot;:9}]"
+                     id="containerCountry"></div>
+            </figure>
+
+
+            <style>
+                .highcharts-figure, .highcharts-data-table table {
+                    min-width: 320px;
+                    max-width: 800px;
+                    margin: 1em auto;
+                }
+
+                .highcharts-data-table table {
+                    font-family: Verdana, sans-serif;
+                    border-collapse: collapse;
+                    border: 1px solid #EBEBEB;
+                    margin: 10px auto;
+                    text-align: center;
+                    width: 100%;
+                    max-width: 500px;
+                }
+
+                .highcharts-data-table caption {
+                    padding: 1em 0;
+                    font-size: 1.2em;
+                    color: #555;
+                }
+
+                .highcharts-data-table th {
+                    font-weight: 600;
+                    padding: 0.5em;
+                }
+
+                .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+                    padding: 0.5em;
+                }
+
+                .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+                    background: #f8f8f8;
+                }
+
+                .highcharts-data-table tr:hover {
+                    background: #f1f7ff;
+                }
+
+
+                input[type="number"] {
+                    min-width: 50px;
+                }
+            </style>
+            <br>
+            <hr>
+            <br>
+
+            <figure class="highcharts-figure">
+                <div data-items="[{&quot;name&quot;:&quot;12&quot;,&quot;y&quot;:5512},{&quot;name&quot;:&quot;13&quot;,&quot;y&quot;:5536},{&quot;name&quot;:&quot;14&quot;,&quot;y&quot;:5504},{&quot;name&quot;:&quot;15&quot;,&quot;y&quot;:5549},{&quot;name&quot;:&quot;16&quot;,&quot;y&quot;:5432},{&quot;name&quot;:&quot;17&quot;,&quot;y&quot;:5178},{&quot;name&quot;:&quot;18&quot;,&quot;y&quot;:5584},{&quot;name&quot;:&quot;19&quot;,&quot;y&quot;:6004},{&quot;name&quot;:&quot;20&quot;,&quot;y&quot;:6161},{&quot;name&quot;:&quot;21&quot;,&quot;y&quot;:5852},{&quot;name&quot;:&quot;22&quot;,&quot;y&quot;:5066},{&quot;name&quot;:&quot;23&quot;,&quot;y&quot;:3719},{&quot;name&quot;:&quot;00&quot;,&quot;y&quot;:3016},{&quot;name&quot;:&quot;01&quot;,&quot;y&quot;:1843},{&quot;name&quot;:&quot;02&quot;,&quot;y&quot;:1216},{&quot;name&quot;:&quot;03&quot;,&quot;y&quot;:747},{&quot;name&quot;:&quot;04&quot;,&quot;y&quot;:582},{&quot;name&quot;:&quot;05&quot;,&quot;y&quot;:667},{&quot;name&quot;:&quot;06&quot;,&quot;y&quot;:1113},{&quot;name&quot;:&quot;07&quot;,&quot;y&quot;:2798},{&quot;name&quot;:&quot;08&quot;,&quot;y&quot;:3479},{&quot;name&quot;:&quot;09&quot;,&quot;y&quot;:5313},{&quot;name&quot;:&quot;10&quot;,&quot;y&quot;:5960},{&quot;name&quot;:&quot;11&quot;,&quot;y&quot;:5700}]"
+                     id="containerHour"></div>
+            </figure>
+
+
+            <style>
+                .highcharts-figure, .highcharts-data-table table {
+                    min-width: 320px;
+                    max-width: 800px;
+                    margin: 1em auto;
+                }
+
+                .highcharts-data-table table {
+                    font-family: Verdana, sans-serif;
+                    border-collapse: collapse;
+                    border: 1px solid #EBEBEB;
+                    margin: 10px auto;
+                    text-align: center;
+                    width: 100%;
+                    max-width: 500px;
+                }
+
+                .highcharts-data-table caption {
+                    padding: 1em 0;
+                    font-size: 1.2em;
+                    color: #555;
+                }
+
+                .highcharts-data-table th {
+                    font-weight: 600;
+                    padding: 0.5em;
+                }
+
+                .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+                    padding: 0.5em;
+                }
+
+                .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+                    background: #f8f8f8;
+                }
+
+                .highcharts-data-table tr:hover {
+                    background: #f1f7ff;
+                }
+
+
+                input[type="number"] {
+                    min-width: 50px;
+                }
+            </style>
+        </div>
+    </main>
+    <script>
+        Highcharts.chart('containerCountry', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Barcha sorovlarning viloyatlar boyicha taqsimi'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.y} ta'
+                    }
+                }
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: $('#containerCountry').data('items')
+            }]
+        });
+    </script>
+    <script>
+        Highcharts.chart('containerHour', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Oxirgi 30 kunlik sorovlarning soat boyicha taqsimi'
+            },
+            tooltip: {
+                pointFormat: 'Soat {point.name} da: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name} da</b>: {point.y} ta'
+                    }
+                }
+            },
+            series: [{
+                name: '',
+                colorByPoint: true,
+                data: $('#containerHour').data('items')
+            }]
+        });
+    </script>
+{% endblock %}

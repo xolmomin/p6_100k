@@ -75,3 +75,7 @@ class Order(BaseModel):
 
     class Meta:
         ordering = ('-created_at',)
+
+    @property
+    def new_order(self):
+        return Order.objects.filter(status=self.Status.NEW).count()

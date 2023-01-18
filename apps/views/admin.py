@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, FormView
+from django.views.generic import ListView, DetailView, CreateView, FormView, TemplateView
 
 from apps.forms.products import CreateStreamForm
 from apps.models import Product, Category, Contact, Stream, Order
@@ -84,3 +84,19 @@ class AdminStatisticsPage(ListView):
                            'qaytdi': sum(k[7]), 'hold': sum(k[8]),
                            'arxivlandi': sum(k[9]), 'jami': sum(k[10])}
         return context
+
+
+class AdminRequestsView(TemplateView):
+    template_name = 'apps/admin/requests.html'
+
+
+class AdminDonateView(TemplateView):
+    template_name = 'apps/admin/donate.html'
+
+
+class AdminChartsView(TemplateView):
+    template_name = 'apps/admin/charts.html'
+
+
+class AdminPaymentHistoryView(TemplateView):
+    template_name = 'apps/admin/payment_history.html'

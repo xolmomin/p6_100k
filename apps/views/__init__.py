@@ -5,5 +5,5 @@ from apps.views.operator import OperatorPageView, MyOrderPageView
 from apps.views.payments import WithdrawView
 from apps.views.products import ProductDetailView, ProductDetailView, CategoryDetail, OrderView, GetStreamView, \
     FavoriteListView
-from apps.views.streams import MainPageView, StreamPageListView, StoreDetailView, StreamDeleteView
+from apps.views.streams import MainPageView, StreamPageListView, StoreDetailView, StreamDeleteView, StreamUpdateView
 from apps.views.users import SettingsView, ProfileLoginView, DistrictsView

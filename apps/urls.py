@@ -6,9 +6,7 @@ from apps.bot import UpdateBot
 from apps.views import (ExploreProductsView, CategoryDetail, DistrictsView, OrderView, GetStreamView,
                         StreamDeleteView, SearchPageView, FavoriteView, SettingsView, AdminStatisticsPage,
                         FavoriteListView, ProfileView, AdminProductDetailView, ProductDetailView, MainPageView,
-                        WithdrawView, OperatorPageView, MyOrderPageView, MarketListView, StreamPageListView,
-                        AdminPageView, ContactsView, StoreDetailView, ProfileLoginView, AdminRequestsView,
-                        AdminDonateView, AdminChartsView, AdminPaymentHistoryView)
+                        WithdrawView, OperatorPageView, MyOrderPageView, MarketListView, StreamPageListView, StreamUpdateView, AdminPageView, ContactsView, StoreDetailView, ProfileLoginView, AdminRequestsView, AdminDonateView, AdminChartsView, AdminPaymentHistoryView)
 
 operator_urls = [
     path('operator/main', OperatorPageView.as_view(), name='operator'),
@@ -19,7 +17,8 @@ admin_urls = [
     path('admin-page', AdminPageView.as_view(), name='admin_page'),
     path('admin/profile/get-destricts', csrf_exempt(DistrictsView.as_view()), name='get_districts'),
     path('admin/streams', StreamPageListView.as_view(), name='stream_page_view'),
-    path('admin/delete-stream', StreamDeleteView.as_view(), name='stream_deleteview'),
+    path('admin/delete-stream/<int:pk>', csrf_exempt(StreamDeleteView.as_view()), name='stream_deleteview'),
+    path('admin/update-stream/<int:pk>', csrf_exempt(StreamUpdateView.as_view()), name='stream_updateview'),
     path('admin/withdraw', csrf_exempt(WithdrawView.as_view()), name='withdraw'),
     path('admin/market', MarketListView.as_view(), name='market'),
     path('admin/product/<int:pk>', AdminProductDetailView.as_view(), name='admin_product_detailview'),

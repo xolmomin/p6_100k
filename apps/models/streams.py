@@ -13,6 +13,9 @@ class Stream(BaseModel):
     views = IntegerField(default=0)  # ko`rilgan oqimlar soni
     is_area = BooleanField(default=False)  # hududsiz qabul qilish
 
+    class Meta:
+        ordering = ('-id',)
+
 
 class Store(BaseModel):
     image = ResizedImageField(size=[300, 300], crop=['middle', 'center'], upload_to='shops')

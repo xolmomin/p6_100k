@@ -1,8 +1,9 @@
 from django.contrib.auth.models import AbstractUser
 from django.db.models import CharField, DecimalField, PositiveIntegerField, Model, EmailField, ForeignKey, CASCADE, \
-    BooleanField, TextChoices, PROTECT, TextField
+    BooleanField, TextChoices, PROTECT, TextField, ManyToManyField, SET_NULL
 from django_resized import ResizedImageField
 
+from apps.models.base import BaseModel
 from apps.models.payments import PaymentHistory
 
 
@@ -13,13 +14,13 @@ class User(AbstractUser):
     address = CharField(max_length=555, blank=True, null=True)
     telegram_id = CharField(max_length=55, null=True, blank=True)
     bot_is_activate = BooleanField(default=False)
-    bot_active_token = CharField(max_length=255, unique=True)
     balance = DecimalField(max_digits=30, decimal_places=2, default=0)  # main balance
     bonus = PositiveIntegerField(default=0)  # bonus balance
     deposit = DecimalField(max_digits=30, decimal_places=2, default=0)  # deposit balance
     coin = PositiveIntegerField(default=0)
-    region = CharField(max_length=255, null=True, blank=True)
-    district = CharField(max_length=255, null=True, blank=True)
+    region = ForeignKey('apps.Region', SET_NULL, null=True, blank=True)
+    district = ForeignKey('apps.District', SET_NULL, null=True, blank=True)
+    favourite = ManyToManyField('apps.Product', 'favourites')
 
     @property
     def payout(self):
@@ -27,6 +28,26 @@ class User(AbstractUser):
             status=PaymentHistory.StatusChoices.ACCEPTED
         ).values_list('amount', flat=True)
         return sum(amounts)
+
+    @property
+    def image_url(self):
+        try:
+            url = self.image.image.url
+        except (ValueError, AttributeError):
+            url = 'https://via.placeholder.com/100x100'
+        return url
+
+    @property
+    def favorites(self):
+        # if self.favorite_set.exists():
+        return self.favorite_set.all()
+        # return False
+
+    @property
+    def favorites_id(self):
+        if self.favorite_set.exists():
+            return self.favorite_set.values_list('product_id', flat=True)
+        return False
 
 
 class Contact(Model):
@@ -47,13 +68,13 @@ class Favorite(Model):
     product = ForeignKey('apps.Product', CASCADE)
 
 
-class Tickets(Model):
+class Ticket(BaseModel):
     class SenderTextChoice(TextChoices):
-        XARIDOR = 'customer', 'xaridor'
-        KURYER = 'kuryer', 'kuryer'
+        CUSTOMER = 'customer', 'xaridor'
+        COURIER = 'courier', 'kuryer'
         ADMIN = 'admin', 'admin'
-        SOTUVCHI = 'salesman', 'sotuvchi'
-        BOSHQA = 'other', 'boshqa'
+        SALESMAN = 'salesman', 'sotuvchi'
+        OTHER = 'other', 'boshqa'
 
     class PurposeTextChoice(TextChoices):
         ISSUE = 'issue', 'muammo'

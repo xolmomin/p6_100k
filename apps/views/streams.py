@@ -1,7 +1,9 @@
-from django.contrib.sites.shortcuts import get_current_site
-from django.db.models import F
-from django.views.generic import ListView, DetailView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Case, Value, When
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, TemplateView, UpdateView, DeleteView
 
+from apps.forms.products import UpdateStreamForm
 from apps.models import Stream, Store, Product, Category
 
 
@@ -16,20 +18,42 @@ class MainPageView(TemplateView):
         return context
 
 
-class StreamPageListView(ListView):
+class StreamPageListView(LoginRequiredMixin, ListView):
     template_name = 'apps/admin/stream.html'
-    model = Stream
+    queryset = Stream.objects.all()
     context_object_name = 'streams'
-    paginate_by = 9
+    paginate_by = 18
+
+
+class StreamUpdateView(UpdateView):
+    form_class = UpdateStreamForm
+    queryset = Stream.objects.all()
+    object = Stream
+    fields = ('is_area',)
+
+    # update qilish
+    def put(self, *args, **kwargs):
+        self.get_object().is_area = not self.get_object().is_area
+        return super().put(*args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        Stream.objects.filter(id=id).update(is_area=~F('is_area'))
+        id = int(request.POST['id'])
+        Stream.objects.filter(id=id).update(is_area=Case(
+            When(is_area=True, then=Value(False)),
+            default=Value(True)
+        ))
         return super().post(self, request, *args, **kwargs)
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(object_list=object_list, **kwargs)
-        context['url'] = get_current_site(self.request)
-        return context
+
+class StreamDeleteView(DeleteView):
+    model = Stream
+    context_object_name = 'stream'
+    success_url = reverse_lazy('stream_page_view')
+
+    def delete(self, request, *args, **kwargs):
+        self.get_object().delete()
+        return super().delete(request, *args, **kwargs)
+
 
 
 class StoreDetailView(DetailView):

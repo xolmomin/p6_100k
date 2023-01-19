@@ -1,0 +1,113 @@
+.profile {
+    margin-top: 5rem;
+    padding: 0 1rem;
+}
+
+
+.profile-info {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: center;
+    border-bottom: .125rem solid #26262620;
+    padding-bottom: 2rem;
+}
+.profile-info a {
+    color: #0056b3;
+}
+.profile-info a:hover {
+    text-decoration: underline;
+}
+
+.profile-info-avatar {
+display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 290px;
+    padding-right: 2rem;
+
+}
+.profile-info-avatar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 154px;
+    height: 154px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: radial-gradient(circle at 30% 107%, #FDF497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#fdf497 100%);
+}
+
+.profile-info-avatar img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: .125rem solid white;
+}
+
+.profile-info-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+.profile-info-name {
+    margin-bottom: 1.125rem;
+}
+.profile-info-name h1 {
+    color: #262626;
+    font-size: 2rem;
+    font-weight: 399;
+}
+
+
+.profile-info-stats {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.125rem;
+}
+
+.profile-info-stat {
+    margin-right: 1.5rem;
+    color: #262626;
+}
+
+.profile-info-stats > .profile-info-stat:last-of-type {
+    margin-right: 0;
+}
+
+
+@media only screen and (max-width: 768px)  {
+    .profile {
+        margin-top: 3.5rem
+    }
+    .profile-info-avatar {
+        width: auto;
+        padding-right: 0;
+    }
+    .profile-info-avatar-container {
+        width: 120px;
+        height: 120px
+    }
+
+    .profile-info-avatar-container img {
+        width: auto;
+        height: auto;
+    }
+
+    .profile-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center
+    }
+    .profile-info-name {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        text-align: center;
+    }
+
+}

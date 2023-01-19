@@ -1,4 +1,3 @@
-from django.contrib.auth.forms import AuthenticationForm
 from django.forms import ModelForm, IntegerField
 
 from apps.models import Comment, User, Region

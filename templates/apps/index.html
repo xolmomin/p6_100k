@@ -1,7 +1,6 @@
 {% extends 'apps/parts/base.html' %}
-
+{% load static %}
 {% block main %}
-
     <main class="client-template">
         <section class="main">
 
@@ -9,16 +8,18 @@
                 <div class="container">
                     <div class="row">
                         {% for category in categories %}
-                            <div class="col-md-2 col-4">
-                                <a class="siteCategories--item"
-                                   href="{% url 'category_detail' %}?category={{ category.slug }}">
-                                    <img alt="" height="100" style="width:100px;height:100px;"
-                                         src="{{ category.image.url }}"
-                                         width="100">
-                                    <span> {{ category.title }}  {% if category.product_count > 0 %}
-                                        <small>({{ category.product_count }})</small>{% endif %} </span>
-                                </a>
-                            </div>
+                            {% if category.product_count %}
+                                <div class="col-md-2 col-4">
+                                    <a class="siteCategories--item"
+                                       href="{% url 'category_detail' %}?category={{ category.slug }}">
+                                        <img alt="" height="100" style="width:100px;height:100px;"
+                                             src="{{ category.image.url }}"
+                                             width="100">
+                                        <span> {{ category.title }}  {% if category.product_count > 0 %}
+                                            <small>({{ category.product_count }})</small>{% endif %} </span>
+                                    </a>
+                                </div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
@@ -38,7 +39,7 @@
                     </div>
                     <div class="row">
                         {% for product in products %}
-                            <div class="col-md-3 col-sm-4 col-6">
+                            <div class="col-md-3 col-sm-3 col-3">
                                 <div class="productsList--item">
                                     <a href="{% url 'product_detail' product.slug %}"
                                        class="productsList--item--link"></a>

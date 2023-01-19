@@ -1,0 +1,54 @@
+{% extends 'apps/operator/operator_base.html' %}
+{% load static %}
+{% block main %}
+    <div class="inner-main">
+        <br>
+        <div class="inner-main-header">
+                        <span class="input-icon input-icon-sm ml-auto w-auto">
+                            <input type="text"
+                                   class="form-control form-control-sm bg-gray-200 border-gray-200 shadow-none mb-4 mt-4"
+                                   placeholder="Search order"/>
+                        </span>
+        </div>
+        <div class="inner-main-body p-2 p-sm-3 collapse forum-content show">
+            {% for order in orders %}
+                <div class="card mb-2">
+                    <div class="card-body p-2 p-sm-3">
+                        <div class="media forum-item">
+                            <a href="{% url 'product_detail' order.product.slug %}" data-toggle="collapse"
+                               data-target=".forum-content">
+                                <img src="{{ order.product.productimage_set.first.image.url }}"
+                                     class="mr-3 rounded-circle" width="50" alt="User"/>
+                            </a>
+                            <div class="media-body">
+                                <h6>
+                                    <a href="{% url 'product_detail' order.product.slug %}"
+                                       data-toggle="collapse" data-target=".forum-content"
+                                       class="text-body">
+                                        {{ order.product.title }}
+                                    </a>
+                                </h6>
+                                <p class="text-secondary">{{ order.phone }}</p>
+                                <p class="text-muted"> {{ order.region.name }}</p>
+                                <p>
+                                    <span class="text-success">{{ order.name }} </span>
+                                </p>
+                            </div>
+                            <div class="text-muted small text-center align-self-center">
+                                            <span class="d-none d-sm-inline-block"><i
+                                                    class="far fa-clock"></i> {{ order.created_at|timesince }} ago</span>
+                                <br>
+                                <form action="{% url 'operator' %}" method="post">
+                                    {% csrf_token %}
+                                    <input hidden value="{{ order.pk }}" name="order_id">
+                                    <button class="teal">Qabul qilish</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}

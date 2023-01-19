@@ -4,10 +4,10 @@ from django.views import View
 from telebot.types import ReplyKeyboardMarkup
 
 from apps.models import User
-from apps.models.users import Tickets
+from apps.models.users import Ticket
 from root import settings
 
-bot = telebot.TeleBot(settings.TELEGRAM_BOT_API_KEY)
+bot = telebot.TeleBot(settings.BOT_TOKEN)
 
 
 # https://api.telegram.org/bot{token}/setWebhook?url=https://b63f-178-218-201-17.eu.ngrok.io/bot/

@@ -1,0 +1,118 @@
+{% extends 'apps/admin/admin_base.html' %}
+{% load static %}
+{% block styles %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    {#    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>#}
+{% endblock %}
+{% block main %}
+    <main class="admin-template">
+        <section class="main">
+            <div class="container-xl px-4 mt-4">
+                <hr class="mt-5 mb-4">
+                <form method="post" action="{% url 'settings' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="content_profile_main">
+                        <div class="content_profile_name">
+                            <div class="content_profile_name_img"
+                                 style="background-image: url({{ user.image_url }})">
+                                <input class="input-upload" type="file" name="image" onchange="readURL(this);"/>
+                            </div>
+
+                            <div class="content_profile_name_text">
+                                <p> Rasmingizni tahrirlang! </p>
+                                <input type="file" id="img" name="image" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content_profile_form">
+                        <div class="form-group">
+                            <label>Telefon</label>
+                            <input type="text" name="phone" readonly class="form-control"
+                                   placeholder=" Telefon raqamingizni kiriting " value="{{ user.phone }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label> Ism</label>
+                            <input type="text" name="first_name" class="form-control"
+                                   placeholder=" Ismingizni kiriting "
+                                   value="{{ user.first_name }}">
+                        </div>
+                        <div class="form-group">
+                            <label> Familiya</label>
+                            <input type="text" name="last_name" class="form-control"
+                                   placeholder=" Familiyangizni kiriting "
+                                   value="{{ user.last_name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="region">Viloyatni tanlang:</label>
+                            <select class="form-select" name="region" id="region"
+                                    onchange="getDistricts(this.value)">
+                                <option selected disabled>Quyidagilardan birini tanlang</option>
+                                {% for region in regions %}
+                                    <option value="{{ region.id }}">{{ region.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="district">Tuman/Shahar</label>
+                            <select id="district" class="form-select" name="district">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label> Manzilingiz </label>
+                            <input typeis_active="text" name="address" class="form-control"
+                                   placeholder="Manzilingizni kiriting"
+                                   value="{{ user.address|default_if_none:'' }}">
+                        </div>
+                        <button onclick='FB.AppEvents.logEvent("settingsSave")' data-attach-loading
+                                type="submit"
+                                class="btn btn-block btn-primary"> Saqlash
+                        </button>
+                        <div class="text-center">
+                            <br>
+                            <a class="btn btn-block btn-danger btn-block btn-primary "
+                               href="" style="color:black;"> Doimiy parol kiritish </a>
+                        </div>
+                        <br>
+                        <p class="text-center">
+                            <a target="_blank" class="btn btn-block btn-primary"
+                               href="http://t.me/{{ bot_user }}?start={{ activation_token }}"> Telegram botni
+                                biriktirish </a>
+                            <br>
+                            <small> TG Aktivlashtirish kodi: </small> <br><strong> {{ activation_token }} </strong>
+                        </p> <br>
+                        <br><br>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <script type="text/javascript">
+        function getDistricts(regin_id) {
+            {#alert(regin_id)#}
+            fetch('{% url 'get_districts' %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({'region': regin_id})
+            })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    let districts = data
+                    console.log(data)
+                    let districtSelector = document.getElementById("district");
+                    districtSelector.innerHTML = '';
+                    for (let i = 0; i < districts.length; i++) {
+                        let opt = document.createElement('option');
+                        opt.value = districts[i];
+                        opt.innerHTML = districts[i];
+                        districtSelector.appendChild(opt);
+                    }
+                })
+        }
+    </script>
+{% endblock %}

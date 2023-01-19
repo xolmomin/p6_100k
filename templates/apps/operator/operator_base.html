@@ -1,0 +1,439 @@
+{% load admin_header %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="turbo-visit-control" content="disable"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" href="{% static 'apps/themes/stock/assets/owlcarousel/owl.carousel.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'apps/themes/stock/assets/owlcarousel/owl.theme.default.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'apps/themes/stock/assets/css/style.bundle.css' %}"/>
+    <link rel="stylesheet" href="{% static 'apps/themes/stock/assets/css/sk-custom.css' %}"/>
+    <style>
+        .oc-flash-message.succes {
+
+        }
+    </style>
+
+    <style>
+        .btn.active {
+            color: #fff;
+        }
+
+        .header_menu {
+            padding: 12px;
+        }
+
+        .header_menu .btn-default {
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 10px;
+            font-size: 15px;
+        }
+
+        .header_menu .btn-default.active, .header_menu .btn-default:hover {
+            background-color: #000;
+        }
+    </style>
+
+    <style>
+        .toast {
+            position: fixed;
+            z-index: 10300;
+            width: 500px;
+            left: 50%;
+            top: 50px;
+            margin-left: -250px;
+            color: #fff;
+            font-size: 1rem;
+            padding: 10px 30px 10px 15px;
+            border-radius: 5px;
+            opacity: 0;
+            transition: all 0.5s, width 0s;
+            transform: scale(0.9);
+        }
+
+        .toast--visible {
+            opacity: 1;
+            top: 60px;
+            visibility: visible;
+        }
+
+        .toast--succes {
+            background: #86c843;
+
+        }
+
+        .toast--error {
+            background: #cc3300;
+
+        }
+    </style>
+
+    <style type="text/css">
+        .teal {
+            padding: 5px;
+            background: teal;
+            color: white;
+        }
+
+        body {
+            margin-top: 20px;
+            color: #1a202c;
+            text-align: left;
+            background-color: #e2e8f0;
+        }
+
+        .inner-wrapper {
+            position: relative;
+            height: calc(100vh - 3.5rem);
+            transition: transform 0.3s;
+        }
+
+        @media (min-width: 992px) {
+            .sticky-navbar .inner-wrapper {
+                height: calc(100vh - 3.5rem - 48px);
+            }
+        }
+
+        .inner-main,
+        .inner-sidebar {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .inner-sidebar {
+            left: 0;
+            width: 235px;
+            border-right: 1px solid #cbd5e0;
+            background-color: #fff;
+            z-index: 1;
+        }
+
+        .inner-main {
+            right: 0;
+            left: 235px;
+        }
+
+        .inner-main-footer,
+        .inner-main-header,
+        .inner-sidebar-footer,
+        .inner-sidebar-header {
+            height: 3.5rem;
+            border-bottom: 1px solid #cbd5e0;
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            flex-shrink: 0;
+        }
+
+        .inner-main-body,
+        .inner-sidebar-body {
+            padding: 1rem;
+            overflow-y: auto;
+            position: relative;
+            flex: 1 1 auto;
+        }
+
+        .inner-main-body .sticky-top,
+        .inner-sidebar-body .sticky-top {
+            z-index: 999;
+        }
+
+        .inner-main-footer,
+        .inner-main-header {
+            background-color: #fff;
+        }
+
+        .inner-main-footer,
+        .inner-sidebar-footer {
+            border-top: 1px solid #cbd5e0;
+            border-bottom: 0;
+            height: auto;
+            min-height: 3.5rem;
+        }
+
+        @media (max-width: 767.98px) {
+            .inner-sidebar {
+                left: -235px;
+            }
+
+            .inner-main {
+                left: 0;
+            }
+
+            .inner-expand .main-body {
+                overflow: hidden;
+            }
+
+            .inner-expand .inner-wrapper {
+                transform: translate3d(235px, 0, 0);
+            }
+        }
+
+        .nav .show > .nav-link.nav-link-faded, .nav-link.nav-link-faded.active, .nav-link.nav-link-faded:active, .nav-pills .nav-link.nav-link-faded.active, .navbar-nav .show > .nav-link.nav-link-faded {
+            color: #3367b5;
+            background-color: #c9d8f0;
+        }
+
+        .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+            color: #fff;
+            background-color: #467bcb;
+        }
+
+        .nav-link.has-icon {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link.active {
+            color: #467bcb;
+        }
+
+        .nav-pills .nav-link {
+            border-radius: .25rem;
+        }
+
+        .nav-link {
+            color: #4a5568;
+        }
+
+        .card {
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+        }
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 0 solid rgba(0, 0, 0, .125);
+            border-radius: .25rem;
+        }
+
+        .card-body {
+            flex: 1 1 auto;
+            min-height: 1px;
+            padding: 1rem;
+        }
+    </style>
+
+    <title></title>
+    <meta name="description" content="">
+
+
+</head>
+<body>
+<header class="header" id="top">
+    <div class="container">
+        <nav class="header_navbar">
+            <a href="{% url 'main_page_view' %}" class="header_navbar_brand_logo d-none d-md-block ">100k.uz </a>
+            <div class="header_navbar_profile">
+                <div class="d-flex align-items-center dropdown">
+                    <a class="btn nav-link" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        <img src="{{ user.image_url }}"
+                             alt="profile"/>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right header_navbar_lang_menu_dropdown">
+                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" href="{% url 'admin_page' %}">Adminlar
+                            uchun</a>
+                        <a class="dropdown-item header_navbar_lang_menu_dropdown_item" style="color: inherit"
+                           href="{% url 'admin_page' %}"> Chiqish </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+    <div class="main-body p-0">
+        <div class="inner-wrapper">
+            <div class="inner-sidebar">
+                <div class="inner-sidebar-header justify-content-center">
+                </div>
+                <div class="inner-sidebar-body p-0">
+                    <div class="p-3 h-100" data-simplebar="init">
+                        <div class="simplebar-wrapper" style="margin: -16px;">
+                            <div class="simplebar-height-auto-observer-wrapper">
+                                <div class="simplebar-height-auto-observer"></div>
+                            </div>
+                            <div class="simplebar-mask">
+                                <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                                    <div class="simplebar-content-wrapper"
+                                         style="height: 100%; overflow: hidden scroll;">
+                                        <div class="simplebar-content" style="padding: 16px;">
+                                            <nav class="nav nav-pills nav-gap-y-1 flex-column">
+                                                <a href="{% url 'operator' %}"
+                                                   class="nav-link nav-link-faded has-icon {% if request.path|is_active:'main' %}active{% endif %}">Yangi
+                                                    buyurtmalar</a>
+                                                <a href="{% url 'my_order' %}"
+                                                   class="nav-link nav-link-faded has-icon {% if request.path|is_active:'my-order' %}active{% endif %}">Buyurtmalarim</a>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="simplebar-placeholder" style="width: 234px; height: 292px;"></div>
+                        </div>
+                        <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+                            <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
+                        </div>
+                        <div class="simplebar-track simplebar-vertical" style="visibility: visible;">
+                            <div class="simplebar-scrollbar"
+                                 style="height: 151px; display: block; transform: translate3d(0px, 0px, 0px);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% block main %}
+            {% endblock %}
+            <script src="https://kit.fontawesome.com/43236b6dfa.js" crossorigin="anonymous"></script>
+            <script src="https://unpkg.com/imask"></script>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+            <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+
+
+            <script src="{% static 'apps/themes/stock/assets/js/bundle.js' %}"></script>
+            <script src="{% static 'apps/themes/stock/assets/lazysizes/lazysizes.min.js' %}"></script>
+            <script src="{% static 'apps/themes/stock/assets/owlcarousel/owl.carousel.min.js' %}"></script>
+            <script src="{% static 'apps/themes/stock/assets/js/custom.js' %}"></script>
+            <script src="{% static 'apps/js/framework-extras.js' %}"></script>
+
+
+            <script>
+                function myFunction(id) {
+                    // Get the text field
+                    var title = document.getElementById(`product_title_${id}`).value;
+                    var price = document.getElementById(`product_price_${id}`).value;
+                    $('#title').html(title);
+                    $('#price').html(price);
+                    document.getElementById('product_id').value = id;
+                }
+            </script>
+
+            <script>
+                const myModal = new bootstrap.Modal('#exampleModalCenter')
+                myModal.hide();
+            </script>
+            <script>
+                const Toast = {
+                    init() {
+                        this.hideTimeout = null;
+                        this.el = document.createElement('div');
+                        this.el.className = 'toast';
+                        document.body.appendChild(this.el)
+                    },
+
+                    show(message, state) {
+                        clearTimeout(this.hideTimeout);
+                        this.el.textContent = message;
+                        this.el.className = 'toast toast--visible';
+                        if (state) {
+                            this.el.classList.add(`toast--${state}`);
+                        }
+                        this.hideTimeout = setTimeout(() => {
+                            {#this.el.classList.remove('toast-visible');#}
+                            this.el.className = `toast toast--${state}`;
+                        }, 3000);
+                    }
+                };
+
+                document.addEventListener('DOMContentLoaded', () => Toast.init());
+            </script>
+
+            <script>
+                $(".card-body .copy_ref_bn").on('click', function () {
+                    var copyText = $(this).parent().find('.ref_link').get(0);
+                    copyText.select();
+                    document.execCommand("copy");
+                    $(this).text('Nusxa olindi');
+                });
+            </script>
+
+            <script>
+                function myFunctionCopy(id) {
+                    // Get the text field
+                    var copyText = document.getElementById(id);
+                    // Select the text field
+                    copyText.select();
+                    copyText.setSelectionRange(0, 99999); // For mobile devices
+
+                    // Copy the text inside the text field
+                    navigator.clipboard.writeText(copyText.value);
+
+                }
+
+                function areaChange(id) {
+                    $.ajax({
+                        url: "",
+                        type: "POST",
+                        data: {
+                            id: id,
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                        },
+                        success: function () {
+                            console.log('Success')
+                        },
+                        error: function () {
+                            console.log("Ajax test failure")
+                            Toast.show('Hududni tanlash o`zgardi!', 'succes')
+                        }
+
+                    })
+                }
+
+                function areaDelete(id) {
+                    var result = confirm("Diqqat! Ochirilgan oqimni tiklab bo'lmaydi?");
+                    if (result) {
+                        $.ajax({
+                            url: "/admin/delete-stream",
+                            type: "GET",
+                            data: {
+                                id: id
+                            },
+                            success: function () {
+                                console.log('Success')
+                            },
+                            error: function () {
+                            }
+                        })
+                    }
+                }
+            </script>
+
+            <script>
+                function onClickLike(id) {
+                    $.ajax({
+                        type: "GET",
+                        url: '/my_def_in_view',
+                        data: {
+                            "id": id,
+                        },
+                        dataType: "json",
+                        success: function (data) {
+                            alert("successfull")
+                        },
+                        failure: function () {
+                            alert("failure");
+                        }
+                    });
+                }
+
+
+            </script>
+        </div>
+    </div>
+</div>
+</body>
+</html>

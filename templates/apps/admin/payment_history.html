@@ -1,0 +1,300 @@
+{% extends 'apps/admin/admin_base.html' %}
+{% load static %}
+{% block main %}
+    <main class="admin-template">
+        <section class="main">
+
+            <div class="container border-bottom-4">
+                <div class="content_name_block">
+                    <a href="{% url 'admin_page' %}" class="content_name_block_back"><span
+                            class="icon-arrow"></span></a>
+                    <div class="content_name_block_text"><p> Balans tarixi </p></div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="content_favorite">
+                    <div class="row">
+                        <div class="col">
+                            <form data-request="onTransactionsSearch"
+                                  data-request-update="'admin/transactions-table': '#userTransactions'"
+                                  data-request-flash class="request-search-form input-group mb-0 p-4">
+
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-info" style="border: 1px solid #ddd" type="button"
+                                            onclick="$('.market-search-input').val(''); $('.request-search-form').submit()"
+                                            id="button-addon1">X
+                                    </button>
+                                </div>
+
+                                <input type="text" class="form-control market-search-input" name="search"
+                                       placeholder="Tranzaksiyalar bo'yicha qidiruv"
+                                       data-request-update="'admin/transactions-table': '#userTransactions'"
+                                       aria-describedby="button-addon2"
+                                       data-request="onTransactionsSearch"
+                                       data-track-input="500"
+                                       data-request-flash/>
+
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" data-attach-loading type="submit"
+                                            id="button-addon2">
+                                        Izlash
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+
+                        <div id="userTransactions" class="table-responsive">
+                            <table class="table">
+                                <thead class="thead-light">
+                                <tr class="text-center">
+                                    <th scope="col">+ / -</th>
+                                    <th scope="col">Summa</th>
+                                    <th scope="col">Komment</th>
+                                    <th scope="col">Sana</th>
+                                </tr>
+                                </thead>
+                                <tbody class="text-center">
+
+                                <tr style="background-color: rgba(241, 196, 15, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-minus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 80000</td>
+                                    <td> 80000 bonus naqtlashtirildi. #73167 - pul yechish sorovi orqali</td>
+                                    <td> 2 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(46, 204, 113, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-plus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 50000</td>
+                                    <td> Id: 1283059
+                                        Mahsulot: Legend Samsung GUSTO 3 GSM
+                                        Narxi: 387000
+                                    </td>
+                                    <td> 2 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(46, 204, 113, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-plus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 30000</td>
+                                    <td> Id: 1300675
+                                        Mahsulot: gren mask
+                                        Narxi: 82000
+                                    </td>
+                                    <td> 3 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(241, 196, 15, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-minus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 95000</td>
+                                    <td> 95000 bonus naqtlashtirildi. #71098 - pul yechish sorovi orqali</td>
+                                    <td> 3 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(46, 204, 113, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-plus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 35000</td>
+                                    <td> Id: 1254858
+                                        Mahsulot: VIBRA STICK
+                                        Narxi: 127000
+                                    </td>
+                                    <td> 3 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(46, 204, 113, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-plus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 30000</td>
+                                    <td> Id: 1250787
+                                        Mahsulot: gren mask
+                                        Narxi: 82000
+                                    </td>
+                                    <td> 3 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(46, 204, 113, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-plus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 30000</td>
+                                    <td> Id: 1249537
+                                        Mahsulot: gren mask
+                                        Narxi: 82000
+                                    </td>
+                                    <td> 3 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(241, 196, 15, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-minus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 70000</td>
+                                    <td> 70000 bonus naqtlashtirildi. #70188 - pul yechish sorovi orqali</td>
+                                    <td> 3 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(46, 204, 113, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-plus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 30000</td>
+                                    <td> Id: 1244569
+                                        Mahsulot: gren mask
+                                        Narxi: 82000
+                                    </td>
+                                    <td> 3 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(46, 204, 113, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-plus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 40000</td>
+                                    <td> Id: 1238982
+                                        Mahsulot: VIBRA STICK
+                                        Narxi: 127000
+                                    </td>
+                                    <td> 3 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(241, 196, 15, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-minus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 155000</td>
+                                    <td> 155000 bonus naqtlashtirildi. #69419 - pul yechish sorovi orqali</td>
+                                    <td> 3 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(46, 204, 113, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-plus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 40000</td>
+                                    <td> Id: 1227977
+                                        Mahsulot: VIBRA STICK
+                                        Narxi: 127000
+                                    </td>
+                                    <td> 3 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(46, 204, 113, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-plus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 35000</td>
+                                    <td> Id: 1224239
+                                        Mahsulot: VIBRA STICK
+                                        Narxi: 127000
+                                    </td>
+                                    <td> 3 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(46, 204, 113, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-plus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 45000</td>
+                                    <td> Id: 1164169
+                                        Mahsulot: Mini elektrik dazmol
+                                        Narxi: 147000
+                                    </td>
+                                    <td> 3 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(46, 204, 113, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-plus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 35000</td>
+                                    <td> Id: 1224181
+                                        Mahsulot: VIBRA STICK
+                                        Narxi: 127000
+                                    </td>
+                                    <td> 3 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(241, 196, 15, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-minus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 65000</td>
+                                    <td> 65000 bonus naqtlashtirildi. #68664 - pul yechish sorovi orqali</td>
+                                    <td> 3 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(46, 204, 113, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-plus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 30000</td>
+                                    <td> Id: 1210780
+                                        Mahsulot: gren mask
+                                        Narxi: 82000
+                                    </td>
+                                    <td> 3 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(241, 196, 15, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-minus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 130000</td>
+                                    <td> 130000 bonus naqtlashtirildi. #68152 - pul yechish sorovi orqali</td>
+                                    <td> 3 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(46, 204, 113, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-plus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 35000</td>
+                                    <td> Id: 1200372
+                                        Mahsulot: gren mask
+                                        Narxi: 82000
+                                    </td>
+                                    <td> 3 месяца назад</td>
+                                </tr>
+                                <tr style="background-color: rgba(46, 204, 113, .5)">
+                                    <td><img style="width: 30px"
+                                             src="https://100k.uz/themes/stock/assets/icons/transaction-plus.png"
+                                             alt="">
+                                    </td>
+                                    <td> 50000</td>
+                                    <td> Id: 1153902
+                                        Mahsulot: Legend Samsung GUSTO 3 GSM
+                                        Narxi: 347000
+                                    </td>
+                                    <td> 3 месяца назад</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+
+                            <div style="text-align: center">
+                                <a class="btn disabled " href=""> ← Oldingi sahifa </a>
+                                <strong> &nbsp;&nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp; </strong>
+                                <a class="btn btn-info" href="https://100k.uz/admin/balance-history?page=2"> Keyingi
+                                    sahifa
+                                    → </a>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

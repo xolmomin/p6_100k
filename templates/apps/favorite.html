@@ -3,7 +3,6 @@
 {% block title %}
     Mening Sevimlilarim
 {% endblock %}
-
 {% block main %}
     <section class="main">
 
@@ -18,15 +17,39 @@
         <div class="container">
             <div class="content_favorite">
                 <div class="row">
-                    {% if user.favorite_set.count %}
-                    
-                    {% endif %} 
-                    <div class="content_single-product-nouser">
-                        <div class="content_single-product-nouser_info">
-                            <span class="icon-cart"></span>
-                            <p> Sevimlilar ro'yhati bo'sh </p>
+                    {% if not user.favorites %}
+
+                        <div class="content_single-product-nouser">
+                            <div class="content_single-product-nouser_info">
+                                <span class="icon-cart"></span>
+                                <p> Sevimlilar ro'yhati bo'sh </p>
+                            </div>
                         </div>
-                    </div>
+                    {% else %}
+                        {% for favourite in user.favorites %}
+                            <div class="col-md-3 col-sm-3 col-3">
+                                <div class="productsList--item">
+                                    <a href="{% url 'product_detail' favourite.product.slug %}"
+                                       class="productsList--item--link"></a>
+                                    <div class="productsList--item--image">
+                                        <img src="{{ favourite.product.image_url }}"
+                                             style="height: 200px; width: 200px;" alt="">
+                                    </div>
+                                    <div class="productsList--item--info">
+                                        <div class="productsList--item--title">
+                                            {{ favourite.product.title }}
+                                        </div>
+                                        <div class="productsList--item--price">
+                                            <strong class="font-weight-bold"> {{ favourite.product.price }} </strong>
+
+                                            <span class="small">so'm</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
 
                 </div>
             </div>

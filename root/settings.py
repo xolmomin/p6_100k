@@ -20,7 +20,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     # my apps
     'apps.apps.AppsConfig',
 ]
@@ -55,6 +54,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'root.wsgi.application'
 AUTH_USER_MODEL = 'apps.User'
+# AUTHENTICATION_BACKENDS = ['apps.backends.EmailBackend']
 
 DATABASES = {
     'default': {
@@ -84,7 +84,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 
@@ -103,6 +103,13 @@ DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'PNG'
 DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'PNG': ".png"}
 DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
 
-TELEGRAM_BOT_API_KEY = os.getenv('TELEGRAM_BOT_API_KEY')
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+BOT_USER = os.getenv('BOT_USER')
+LOGIN_URL = '/login'
 
-LOGIN_URL = '/login/'
+APPEND_SLASH = True
+
+FAKE_VERIFICATION = True  # to verify without sms service when the twilio api is not configured yet
+TWILIO_VERIFY_SERVICE_SID = os.getenv('TWILIO_VERIFY_SERVICE_SID')
+TWILIO_ACCOUNT_SID = os.getenv('TWILIO_ACCOUNT_SID')
+TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')

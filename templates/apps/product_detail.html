@@ -3,7 +3,6 @@
 {% block main %}
     <main class="client-template">
         <section class="main">
-
             <div class="container py-3">
                 <div class="row align-items-center">
                     <div class="col my-3 pr-3">
@@ -30,7 +29,8 @@
                             <div class="owl-carousel owl-theme content_linear_card_body_indicators owl-loaded owl-drag">
                                 <div class="item">
                                     {% if product.video %}
-                                        <video width="431.01" height="431.01" style="width:431.01px;height:431.01px;" controls>
+                                        <video width="431.01" height="431.01" style="width:431.01px;height:431.01px;"
+                                               controls>
                                             <source src="{{ product.video.url }}" type="video/mp4">
                                         </video>
                                     {% else %}
@@ -61,7 +61,8 @@
                                         </div>
                                     </div>
                                     <div class="col-auto">
-                                        <a href="/store/198" class="sk-btn sk-btn--hover">Do'konning sahifasi</a>
+                                        <a href="{% url 'store' product.pk %}" class="sk-btn sk-btn--hover">Do'konning
+                                            sahifasi</a>
                                     </div>
                                 </div>
                             </div>
@@ -95,22 +96,12 @@
 
                                     <div id="partialCountryState">
                                         <div class="form-group">
+
                                             <select required="true" class="form-control" name="region">
-                                                <option value="" selected="selected">Hududni tanlang ⬇</option>
-                                                <option value="Toshkent shahri">Toshkent shahri</option>
-                                                <option value="Andijon">Andijon</option>
-                                                <option value="Buxoro">Buxoro</option>
-                                                <option value="Fargona">Fargona</option>
-                                                <option value="Jizzax">Jizzax</option>
-                                                <option value="Namangan">Namangan</option>
-                                                <option value="Navoiy">Navoiy</option>
-                                                <option value="Qashqadaryo">Qashqadaryo</option>
-                                                <option value="Qoraqalpogiston">Qoraqalpogiston</option>
-                                                <option value="Samarqand">Samarqand</option>
-                                                <option value="Sirdaryo">Sirdaryo</option>
-                                                <option value="Surxondaryo">Surxondaryo</option>
-                                                <option value="Toshkent viloyati">Toshkent viloyati</option>
-                                                <option value="Xorazm">Xorazm</option>
+                                                <option value="1" selected="selected">Hududni tanlang ⬇</option>
+                                                {% for region in regions %}
+                                                    <option value="{{ region.pk }}">{{ region.name }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     </div>
@@ -126,17 +117,13 @@
                                                 </button>
                                             </div>
                                         </div>
-
                                         <div class="col-auto">
-                                            <a
-                                                    class="sk-btn sk-btn--secondary sk-btn--outlined"
-                                                    style="font-size:24px;"
-                                                    onclick='FB.AppEvents.logEvent("productMarked")'
-                                                    data-request="onBookmark"
-                                                    data-request-data="id: 1023"
-                                                    data-request-success="$(this).find('span').toggleClass('fa')"
-                                                    data-request-flash href="javascript:">
-                                                <span class="fa-heart far"></span>
+                                            <a class="sk-btn sk-btn--secondary sk-btn--outlined" style="font-size:24px;"
+                                               onclick='onClickLike({{ product.id }})'
+
+                                               data-request-flash href="javascript:">
+                                                <span class="fa-heart far {% if product.id in user.favorites_id %} fa {% endif %} "
+                                                      id="span"></span>
                                             </a>
                                         </div>
                                     </div>
@@ -144,7 +131,6 @@
                             </div>
                         </div>
                     </div>
-
                 </form>
             </div>
 
@@ -165,7 +151,7 @@
                         <div class="tab-pane fade show active" id="productDescription">
                             <div>
                                 <p style="margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-stretch: normal; font-size: 12px; line-height: normal; font-family: &quot;System Font&quot;;">
-                                    <span style="font-family: &quot;.SFUI-Regular&quot;;">{{ product.description }}</span>
+                                    <span style="font-family: &quot;.SFUI-Regular&quot;">{{ product.description }}</span>
                                 </p>
                             </div>
                         </div>
@@ -182,9 +168,9 @@
                             </div>
 
                             <ul id="productReviewsList" class="commentsList">
-                                {% for foo in comment %}
-                                    <h5>{{ foo.name }}</h5>
-                                    <p class="text-center text-muted" style="font-size: 19px;">{{ foo.content }}</p>
+                                {% for comment in product.comment_set.all %}
+                                    <h5>{{ comment.name }}</h5>
+                                    <p class="text-center text-muted" style="font-size: 19px;">{{ comment.content }}</p>
                                 {% endfor %}
                             </ul>
                         </div>
@@ -266,7 +252,7 @@
                 <h3 class="comment-title"><span>{{ post.comment_count }} comment</span></h3>
             {% endif %}
             <div class="post-footer__comment__detail">
-                {% for comment in comments|slice:3 %}
+                {% for comment in product.comment_set.all|slice:3 %}
                     <div class="comment__item">
                         <div class="comment__item__avatar">
                             <img src="{{ user.image.url }}"
@@ -307,4 +293,34 @@
             </style>
         </div>
     </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        function onClickLike(id) {
+            let url = '/favorites'
+            let data = {
+                'id': id
+            }
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    span = document.getElementById('span');
+                    if (data.b) {
+                        span.className = "fa-heart far";
+                    } else {
+                        span.className = "fa-heart far fa";
+                    }
+                });
+        }
+
+    </script>
 {% endblock %}

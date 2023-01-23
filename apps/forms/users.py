@@ -9,9 +9,9 @@ class ProfileModelForm(ModelForm):
         model = User
         fields = ('image', 'first_name', 'last_name', 'phone', 'address', 'region', 'district')
 
-    def clean_region(self):
-        region = Region.objects.get(id=self.cleaned_data.get('region'))
-        return region.name
+    # def clean_region(self):
+    #     region = Region.objects.get(id=self.cleaned_data.get('region'))
+    #     return region.name
 
 
 class CreateCommentForm(ModelForm):

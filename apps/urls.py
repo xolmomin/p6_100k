@@ -7,7 +7,7 @@ from apps.views import (ExploreProductsView, CategoryDetail, DistrictsView, Orde
                         StreamDeleteView, SearchPageView, FavoriteView, SettingsView, AdminStatisticsPage,
                         FavoriteListView, ProfileView, AdminProductDetailView, ProductDetailView, MainPageView,
                         WithdrawView, OperatorPageView, MyOrderPageView, MarketListView, StreamPageListView,
-                        AdminPageView, ContactsView, StoreDetailView, ProfileLoginView, AdminRequestsView,
+                        AdminPageView, ContactsView, StoreDetailView, ProfileLoginView, AdminRequestsView, AdminRequestFilterView,
                         AdminDonateView, AdminChartsView, AdminPaymentHistoryView, StreamUpdateView)
 
 operator_urls = [
@@ -26,6 +26,7 @@ admin_urls = [
     path('admin/product/<int:pk>', AdminProductDetailView.as_view(), name='admin_product_detailview'),
     path('admin/statistics', AdminStatisticsPage.as_view(), name='admin_statistics'),
     path('admin/requests', AdminRequestsView.as_view(), name='admin_requests'),
+    path('admin/requests/<str:slug>', AdminRequestFilterView.as_view(), name='admin_requests_filter'),
     path('admin/donate', AdminDonateView.as_view(), name='admin_donate'),
     path('admin/charts', AdminChartsView.as_view(), name='admin_charts'),
     path('admin/balance-history', AdminPaymentHistoryView.as_view(), name='admin_payments'),

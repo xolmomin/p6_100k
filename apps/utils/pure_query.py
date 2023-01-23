@@ -17,7 +17,7 @@ def statistic_query(f: str):
                         from (SELECT st.name, a.status, st.views, count(*)
                            FROM apps_stream st
                                     JOIN apps_product ap on ap.id = st.product_id
-                                    JOIN apps_productorders a on ap.id = a.product_id
+                                    JOIN apps_order a on ap.id = a.product_id
                             WHERE st.name ilike '{f}%'
                            GROUP BY st.name, st.views, a.status) as table1
                         GROUP BY table1.name

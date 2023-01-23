@@ -16,10 +16,6 @@ class OperatorPageView(ListView):
         Order.objects.filter(pk=order_id).update(operator=self.request.user, status=Order.Status.ACCEPTED)
         return redirect('operator')
 
-    def get_queryset(self):
-        qs = super().get_queryset()
-        return qs.filter(operator=self.request.user.pk)
-
 
 class MyOrderPageView(ListView, FormView):
     template_name = 'apps/operator/my_order.html'
@@ -27,6 +23,10 @@ class MyOrderPageView(ListView, FormView):
     context_object_name = 'orders'
     form_class = OrderEditStatus
     success_url = reverse_lazy('my_order')
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(operator=self.request.user.pk)
 
     def form_valid(self, form):
         form.save()

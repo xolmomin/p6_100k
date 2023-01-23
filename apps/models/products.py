@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db.models import Model, CharField, IntegerField, DateTimeField, SlugField, ForeignKey, CASCADE, \
     BooleanField, TextField, ImageField, TextChoices, FileField, SET_NULL, DecimalField
 from django.utils.text import slugify
@@ -54,6 +56,15 @@ class ProductImage(Model):
 
 
 class Order(BaseModel):
+    d = {'new': 'Yangi',
+        'accepted': 'Qabul qilindi',
+        'shipping': 'Yetkazilmoqda',
+        'delivered': 'Yetkazib berildi',
+        'callback': "Qayta qo'ng'iroq",
+        'spam': "Spam",
+        'hold': 'Hold',
+        'arxiv': 'Arxivlandi'}
+
     class Status(TextChoices):
         NEW = 'new', 'Yangi'
         ACCEPTED = 'accepted', 'Qabul qilindi'
@@ -72,6 +83,8 @@ class Order(BaseModel):
     product = ForeignKey('apps.Product', SET_NULL, null=True)
     operator = ForeignKey('apps.User', SET_NULL, null=True)
     stream = ForeignKey('apps.Stream', SET_NULL, null=True)
+    comnet = TextField(null=True, blank=True)
+    status_changed_date = DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ('-created_at',)
@@ -79,3 +92,34 @@ class Order(BaseModel):
     @property
     def new_order(self):
         return Order.objects.filter(status=self.Status.NEW).count()
+
+    @property
+    def status_order(self):
+        return Order.d[f'{self.status}']
+
+    @property
+    def status_date(self):
+        return f'{self.status_changed_date.day}.{self.status_changed_date.day}.{self.status_changed_date.year}.'
+
+    @property
+    def order_date(self):
+        now = datetime.now()
+        if now.year - self.created_at.year:
+            return f'{now.year - self.created_at.year} years ago'
+        if now.month - self.created_at.month:
+            return f'{now.month - self.created_at.month} months ago'
+        if now.day - self.created_at.day:
+            return f'{now.day - self.created_at.day} days ago'
+        if now.hour - self.created_at.hour:
+            return f'{now.hour - self.created_at.hour} hours ago'
+        if now.minutes - self.created_at.minutes:
+            return f'{now.minutes - self.created_at.minutes} minutess ago'
+        return 'now'
+
+    @property
+    def order_address(self):
+        return self.address if self.address else ''
+
+    @property
+    def order_operator(self):
+        return self.operator_id if self.operator_id else 'not answered'

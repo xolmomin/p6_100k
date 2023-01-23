@@ -18,9 +18,7 @@
                 <div class="content_favorite">
                     <div class="row">
                         <div class="col">
-                            <form data-request="onReqeustSearch"
-                                  data-request-update="'admin/requests-table': '#marketRequestList'"
-                                  data-request-flash class="request-search-form input-group mb-0 px-2">
+                            <form class="request-search-form input-group mb-0 px-2" method="get" action="{% url 'admin_requests' %}">
                                 <div class="input-group-prepend">
                                     <button class="btn btn-info" style="border: 1px solid #ddd" type="button"
                                             onclick="$('.market-search-input').val(''); $('.request-search-form').submit()"
@@ -32,7 +30,6 @@
                                        placeholder="So'rovlar bo'yicha qidiruv"
                                        data-request-update="'admin/requests-table': '#marketRequestList'"
                                        aria-describedby="button-addon2"
-                                       data-request="onReqeustSearch"
                                        data-track-input="500"
                                        data-request-flash/>
 
@@ -86,51 +83,66 @@
                             </thead>
 
                             <tbody class="text-center">
-                            <tr style="background-color: rgba(46, 204, 113, 0.3) ">
-                                <td> 1169887 <br> Operator: 53
+                            {% for order in orders %}
+                                <tr style="background-color:
+                                        {% if order.order_operator == 'not answered' %} #e24848 {% else %}rgba(46, 204, 113, 0.3){% endif %}">
+                                    <td> {{ order.id }} <br>
+                                        Operator: {{ order.order_operator }}
+                                    </td>
+                                    <td>
+                                        {{ order.product.title }}
+                                    </td>
+                                    <td><strong>{{ order.name }} - {{ order.phone }} </strong>
+                                        <br> {{ order.order_address }}
+                                        Oʻziga
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-success">{{ order.status }}</span><br>
+                                        <br><strong style="color: red">{{ order.status_date }}</strong>
+                                    </td>
+                                    <td>{{ order.coment }}
+                                    </td>
+                                    <td><strong><a
+                                            href="/admin/request-timeline/1169887"> {{ order.order_date }} </a></strong>
+                                    </td>
+                                    <td>
+                                        {{ order.stream.name }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
 
-
-                                </td>
-
-                                <td>
-                                    VIBRA STICK
-
-                                </td>
-
-                                <td><strong>begzad - +9989****8877 </strong> <br> Toshkent shaxar, Mirobod, Oʻziga</td>
-
-                                <td>
-                                    <span class="badge badge-success">Yetqazib berildi</span><br>
-
-
-                                    <br><strong style="color: red">2022-09-08</strong>
-                                </td>
-                                <td>Oladi, #Kuryer: taymer belgiladi. (Mijoz buyurtmani vaqtincha saqlab turishini so&#039;radi),
-                                    #Kuryer: taymer belgiladi. (Mijoz buyurtmani vaqtincha saqlab turishini so&#039;radiMijoz
-                                    buyurtmani vaqtincha saqlab turishini so&#039;radiMijoz buyurtmani vaqtincha saql
-                                </td>
-                                <td><a href="/admin/request-timeline/1169887"> 2 месяца назад </a></td>
-
-                                <td>
-                                    Vibra arzon
-                                </td>
-
-                            </tr>
                             </tbody>
                         </table>
 
-                        <div style="text-align: center">
-                            <a class="btn disabled " href=""> ← Oldingi sahifa </a>
-                            <strong> &nbsp;&nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp; </strong>
-                            <a class="btn btn-info" href="https://100k.uz/admin/requests?page=2"> Keyingi sahifa → </a>
-                            <hr>
-                            <p class="text-muted"> Ko'rsatilmoqda <strong>1</strong> dan <strong>50</strong> gacha,
-                                jami:
-                                <strong>220</strong> ta so'rov </p>
+                        <div class="pagination">
+                            <div style="text-align: center">
+                                <span class="step-links">
+                                    {% if page_obj.has_previous %}
+                                        <a class="btn btn-info"
+                                           href="?page={{ page_obj.previous_page_number }}">← Oldingi sahifa</a>
+                                    {% endif %}
+
+                                    <span class="current">
+                                        <strong> &nbsp;&nbsp;&nbsp; {{ page_obj.number }} &nbsp;&nbsp;&nbsp; </strong>
+                                    </span>
+
+                                    {% if page_obj.has_next %}
+                                        <a class="btn btn-info" href="?page={{ page_obj.next_page_number }}">Keyingi sahifa → </a>
+
+                                    {% endif %}
+                                </span>
+                            </div>
                         </div>
+
+
                         <hr>
+                        <p class="text-muted"> Ko'rsatilmoqda <strong>1</strong> dan <strong>50</strong> gacha,
+                            jami:
+                            <strong></strong> ta so'rov </p>
                     </div>
+                    <hr>
                 </div>
+            </div>
             </div>
         </section>
 

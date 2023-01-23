@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, FormView, TemplateView
 
 from apps.forms.products import CreateStreamForm
-from apps.models import Product, Category, Contact, Stream, Order
+from apps.models import Product, Category, Contact, Stream, Order, BalanceHistory
 from apps.utils import statistic_query
 
 
@@ -78,16 +78,52 @@ class AdminStatisticsPage(ListView):
             l.append(d)
         context['orders'] = l
         k = tuple(zip(*k))
-        context['jami'] = {'yangi': sum(k[1]), 'qabul': sum(k[2]),
-                           'yetkazilmoqda': sum(k[3]), 'yetqazib': sum(k[4]),
-                           'qayta_tel': sum(k[5]), 'spam': sum(k[6]),
-                           'qaytdi': sum(k[7]), 'hold': sum(k[8]),
-                           'arxivlandi': sum(k[9]), 'jami': sum(k[10])}
+        if k:
+            context['jami'] = {'yangi': sum(k[1]), 'qabul': sum(k[2]),
+                               'yetkazilmoqda': sum(k[3]), 'yetqazib': sum(k[4]),
+                               'qayta_tel': sum(k[5]), 'spam': sum(k[6]),
+                               'qaytdi': sum(k[7]), 'hold': sum(k[8]),
+                               'arxivlandi': sum(k[9]), 'jami': sum(k[10])}
+        else:
+            context['jami'] = {'yangi': 0, 'qabul': 0,
+                               'yetkazilmoqda': 0, 'yetqazib': 0,
+                               'qayta_tel': 0, 'spam': 0,
+                               'qaytdi': 0, 'hold': 0,
+                               'arxivlandi': 0, 'jami': 0}
         return context
 
 
-class AdminRequestsView(TemplateView):
+class AdminRequestsView(ListView):
     template_name = 'apps/admin/requests.html'
+    paginate_by = 50
+    queryset = Order.objects.all()
+    context_object_name = 'orders'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.filter(stream__user=self.request.user)
+        return qs
+
+    def get(self, request, *args, **kwargs):
+        if self.request.GET.get('search', False):
+            self.queryset = self.queryset.filter(product__title=self.request.GET['search'])
+        return super().get(request, *args, **kwargs)
+
+
+class AdminRequestFilterView(ListView):
+    template_name = 'apps/admin/requests.html'
+    paginate_by = 50
+    queryset = Order.objects.all()
+    context_object_name = 'orders'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.filter(stream__user=self.request.user)
+        return qs
+
+    def get(self, request, *args, **kwargs):
+        self.queryset = self.queryset.filter(status=self.request.path.split('/')[-1])
+        return super().get(request, *args, **kwargs)
 
 
 class AdminDonateView(TemplateView):
@@ -98,5 +134,13 @@ class AdminChartsView(TemplateView):
     template_name = 'apps/admin/charts.html'
 
 
-class AdminPaymentHistoryView(TemplateView):
+class AdminPaymentHistoryView(ListView):
     template_name = 'apps/admin/payment_history.html'
+    paginate_by = 30
+    queryset = BalanceHistory.objects.all()
+    context_object_name = 'histories'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.filter(user=self.request.user)
+        return qs

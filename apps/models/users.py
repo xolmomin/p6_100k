@@ -1,6 +1,8 @@
+from datetime import datetime
+
 from django.contrib.auth.models import AbstractUser
 from django.db.models import CharField, DecimalField, PositiveIntegerField, Model, EmailField, ForeignKey, CASCADE, \
-    BooleanField, TextChoices, PROTECT, TextField, ManyToManyField, SET_NULL
+    BooleanField, TextChoices, PROTECT, TextField, ManyToManyField, SET_NULL, DateTimeField, IntegerField
 from django_resized import ResizedImageField
 
 from apps.models.base import BaseModel
@@ -86,3 +88,33 @@ class Ticket(BaseModel):
     phone_number = CharField(max_length=20)
     ticket_purpose = CharField(max_length=55, choices=PurposeTextChoice.choices)
     message = TextField()
+
+
+class BalanceHistory(Model):
+    class BalanceStatusChoice(TextChoices):
+        PAID = 'came', 'tushdi'
+        CLEARED = 'cleared', 'yechildi'
+
+    class Meta:
+        ordering = ('-id',)
+
+    user = ForeignKey('apps.User', CASCADE)
+    summa = IntegerField()
+    status = CharField(max_length=50, choices=BalanceStatusChoice.choices)
+    coment = CharField(max_length=255)
+    created_at = DateTimeField(auto_now_add=True)
+
+    @property
+    def get_date(self):
+        now = datetime.now()
+        if now.year - self.created_at.year:
+            return f'{now.year - self.created_at.year} years ago'
+        if now.month - self.created_at.month:
+            return f'{now.month - self.created_at.month} months ago'
+        if now.day - self.created_at.day:
+            return f'{now.day - self.created_at.day} days ago'
+        if now.hour - self.created_at.hour:
+            return f'{now.hour - self.created_at.hour} hours ago'
+        if now.minute - self.created_at.minute:
+            return f'{now.minute - self.created_at.minute} minutess ago'
+        return 'now'
